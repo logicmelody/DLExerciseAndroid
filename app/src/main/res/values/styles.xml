@@ -1,11 +1,24 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!-- 設定Toolbar的style都統一修改Base theme，如果需要客製一些比較特別的Toolbar，才設定Toolbar裡面的theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/colorTextPrimary</item>
+        <item name="android:textColorSecondary">@color/colorTextSecondary</item>
     </style>
+
+    <!--<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >-->
+        <!--&lt;!&ndash; Customize color of navigation drawer icon and back arrow &ndash;&gt;-->
+        <!--<item name="android:background">@color/colorPrimary</item>-->
+        <!--<item name="colorControlNormal">@color/action_bar_up_button_color</item>-->
+        <!--<item name="colorControlHighlight">@color/action_bar_menu_item_color_control_highlight</item>-->
+        <!--<item name="actionMenuTextColor">@color/action_bar_menu_item_text_color</item>-->
+        <!--<item name="selectableItemBackground">?android:selectableItemBackground</item>-->
+        <!--<item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>-->
+    <!--</style>-->
 
 </resources>
