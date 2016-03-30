@@ -4,5 +4,8 @@
     <string name="all_app_name" translatable="false">DLExercise</string>
     <string name="all_app_version" translatable="false">v1.0</string>
     <string name="all_overview">Overview</string>
+    <string name="all_test">Test</string>
+    <string name="all_drawer_open">Open navigation drawer</string>
+    <string name="all_drawer_close">Close navigation drawer</string>
 
 </resources>

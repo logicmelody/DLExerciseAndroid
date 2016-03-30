@@ -1,8 +1,12 @@
 <resources>
 
     <!-- Base application theme. -->
-    <!-- 設定Toolbar的style都統一修改Base theme，如果需要客製一些比較特別的Toolbar，才設定Toolbar裡面的theme -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- 設定Toolbar的style都透過修改Base theme的方式來處理 -->
+    <!-- 如果要使用Toolbar，要套用這個NoActionBar的theme，
+         或是加入以下兩個屬性：
+         <item name="windowActionBar">false</item>
+         <item name="windowNoTitle">true</item>     -->
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -11,6 +15,10 @@
         <item name="android:textColorSecondary">@color/colorTextSecondary</item>
     </style>
 
+    <style name="AppTheme" parent="BaseAppTheme">
+    </style>
+
+    <!-- 如果需要客製一些比較特別的Toolbar，設定Toolbar裡面的theme屬性 -->
     <!--<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >-->
         <!--&lt;!&ndash; Customize color of navigation drawer icon and back arrow &ndash;&gt;-->
         <!--<item name="android:background">@color/colorPrimary</item>-->

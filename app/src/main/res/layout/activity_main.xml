@@ -1,29 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<!-- 如果要使用Navigation Drawer，DrawerLayout必須是layout的root -->
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true">
 
+    <!-- 主畫面的layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <!-- android:fitsSystemWindows="true"
+             如果這個屬性設成true，系統會在畫面上保留status bar與action bar的padding，從這之下才開始繪製我們的UI
+             如果沒有設這個屬性，view跟status bar或是action bar會產生重疊-->
         <android.support.v7.widget.Toolbar
             android:id="@+id/tool_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:fitsSystemWindows="true"
             android:background="?attr/colorPrimary" />
 
         <include layout="@layout/divider_all_horizontal" />
 
+        <!-- 主要來顯示內容的container，用來顯示不同的Fragment -->
+        <FrameLayout
+            android:id="@+id/frame_layout_main_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+
+    <!-- 從左邊滑出的drawer，android:layout_gravity必須設為start -->
+    <!-- 如果要使用Google提供的元件，就使用NavigationView -->
+    <!-- app:itemTextColor可以用來設定drawer上每一個item的text color -->
+    <!-- app:itemTextAppearance可以用來設定drawer上每一個item的text size -->
+    <!-- app:headerLayout可以用來設定drawer上的header -->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view_main_left_side_drawer"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:padding="@dimen/padding_main_window">
+        android:layout_gravity="start"
+        android:background="@android:color/white"
+        app:menu="@menu/drawer_left"
+        app:headerLayout="@layout/layout_main_left_drawer_header"
+        app:itemTextColor="@color/all_text_black"
+        app:itemTextAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
 
-    </RelativeLayout>
+    <!-- 從右邊滑出的drawer，android:layout_gravity必須設為end -->
+    <!-- 如果要自己客製drawer的UI，就必須要設一個container，然後用程式塞對應的drawer Fragment進去 -->
+    <!--
+    <FrameLayout
+        android:id="@+id/frame_layout_main_right_side_drawer"
+        android:layout_width="@dimen/message_menu_width"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:clickable="true"
+        android:layout_gravity="end"
+        android:background="@color/drawer_menu_background_color" />
+        -->
 
-</LinearLayout>
+</android.support.v4.widget.DrawerLayout>

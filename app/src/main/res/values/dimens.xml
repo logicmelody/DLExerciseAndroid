@@ -3,5 +3,9 @@
     <!-- Main -->
     <dimen name="padding_main_window">20dp</dimen>
 
+    <!-- Left drawer -->
+    <dimen name="height_main_left_drawer_header">100dp</dimen>
+    <dimen name="padding_main_left_drawer_header">20dp</dimen>
+
 
 </resources>
