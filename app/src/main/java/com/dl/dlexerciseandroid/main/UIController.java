@@ -145,13 +145,13 @@ public class UIController {
         });
     }
 
-    private void replaceFragmentTo(Class<?> fragmentClass, String fragmentTag) {
+    private void replaceFragmentTo(Class<? extends Fragment> fragmentClass, String fragmentTag) {
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
 
         Fragment fragment = mFragmentManager.findFragmentByTag(fragmentTag);
         if (fragment == null) {
             try {
-                fragment = (Fragment) fragmentClass.newInstance();
+                fragment = fragmentClass.newInstance();
                 fragmentTransaction.replace(R.id.frame_layout_main_container, fragment, fragmentTag);
 
             } catch (InstantiationException e) {
