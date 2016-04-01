@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!-- https://guides.codepath.com/android/Fragment-Navigation-Drawer -->
 <!-- 如果要使用Navigation Drawer，DrawerLayout必須是layout的root -->
 <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -34,7 +35,6 @@
             android:layout_height="match_parent" />
 
     </LinearLayout>
-
 
     <!-- 從左邊滑出的drawer，android:layout_gravity必須設為start -->
     <!-- 如果要使用Google提供的元件，就使用NavigationView -->

@@ -3,5 +3,6 @@
     <!-- All -->
     <string name="all_overview">總覽</string>
     <string name="all_test">測試</string>
+    <string name="all_consuming_restful_web_service">連線 Restful Web Service</string>
 
 </resources>

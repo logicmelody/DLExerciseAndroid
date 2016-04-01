@@ -17,6 +17,7 @@ import android.view.View;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.overview.OverviewFragment;
+import com.dl.dlexerciseandroid.spring.ConsumingRestfulWebServiceFragment;
 import com.dl.dlexerciseandroid.test.TestFragment;
 import com.dl.dlexerciseandroid.utility.Utils;
 
@@ -129,6 +130,11 @@ public class UIController {
                 switch (item.getItemId()) {
                     case R.id.menu_item_left_drawer_overview:
                         replaceFragmentTo(OverviewFragment.class, Utils.FragmentTag.OVERVIEW);
+                        break;
+
+                    case R.id.menu_item_left_drawer_consuming_restful_web_service:
+                        replaceFragmentTo(ConsumingRestfulWebServiceFragment.class,
+                                          Utils.FragmentTag.CONSUMING_RESTFUL_WEB_SERVICE);
                         break;
 
                     case R.id.menu_item_left_drawer_test:

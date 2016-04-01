@@ -7,6 +7,7 @@ public class Utils {
 
     public static final class FragmentTag {
         public static final String OVERVIEW = "com.dl.dlexerciseandroid.OVERVIEW_FRAGMENT";
+        public static final String CONSUMING_RESTFUL_WEB_SERVICE = "com.dl.dlexerciseandroid.CONSUMING_RESTFUL_WEB_SERVICE_FRAGMENT";
         public static final String TEST = "com.dl.dlexerciseandroid.TEST_FRAGMENT";
     }
 }
