@@ -4,8 +4,11 @@
     <color name="colorPrimary">#FF3F51B5</color>
     <color name="colorPrimaryDark">#FF303F9F</color>
     <color name="colorAccent">#FFFF4081</color>
-    <color name="colorTextPrimary">#FFFFFFFF</color>
-    <color name="colorTextSecondary">#FFFFFFFF</color>
+    <color name="colorTextPrimary">#FF000000</color>
+    <color name="colorTextSecondary">#FF000000</color>
+    <color name="colorControlNormal">#FFFFFFFF</color>
+    <color name="colorActionBarTitle">#FFFFFFFF</color>
+    <color name="colorActionBarSubtitle">#FFFFFFFF</color>
 
     <!-- All -->
     <color name="all_divider">#FF000000</color>

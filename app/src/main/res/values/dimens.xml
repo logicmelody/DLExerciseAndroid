@@ -1,11 +1,14 @@
 <resources>
 
-    <!-- Main -->
-    <dimen name="padding_main_window">20dp</dimen>
+    <!-- All -->
+    <dimen name="padding_all_window">20dp</dimen>
 
     <!-- Left drawer -->
     <dimen name="height_main_left_drawer_header">150dp</dimen>
     <dimen name="padding_main_left_drawer_header">20dp</dimen>
 
+    <!-- Consuming restful web service -->
+    <dimen name="min_width_consuming_restful_web_service_user_name">150dp</dimen>
+    <dimen name="text_size_all_consuming_restful_web_service">30dp</dimen>
 
 </resources>

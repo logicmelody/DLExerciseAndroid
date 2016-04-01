@@ -9,4 +9,7 @@
     <string name="all_drawer_open">Open navigation drawer</string>
     <string name="all_drawer_close">Close navigation drawer</string>
 
+    <!-- Consuming restful web service -->
+    <string name="consuming_restful_web_service_send_request">Send request</string>
+
 </resources>

@@ -11,22 +11,23 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textColorPrimary">@color/colorTextPrimary</item>
-        <item name="android:textColorSecondary">@color/colorTextSecondary</item>
+        <item name="android:textColorPrimary">@color/colorTextPrimary</item>  <!-- ActionBar title的顏色 -->
+        <item name="android:textColorSecondary">@color/colorTextSecondary</item>  <!-- ActionBar subtitle的顏色 -->
     </style>
 
     <style name="AppTheme" parent="BaseAppTheme">
     </style>
 
     <!-- 如果需要客製一些比較特別的Toolbar，設定Toolbar裡面的theme屬性 -->
-    <!--<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >-->
-        <!--&lt;!&ndash; Customize color of navigation drawer icon and back arrow &ndash;&gt;-->
-        <!--<item name="android:background">@color/colorPrimary</item>-->
-        <!--<item name="colorControlNormal">@color/action_bar_up_button_color</item>-->
-        <!--<item name="colorControlHighlight">@color/action_bar_menu_item_color_control_highlight</item>-->
-        <!--<item name="actionMenuTextColor">@color/action_bar_menu_item_text_color</item>-->
-        <!--<item name="selectableItemBackground">?android:selectableItemBackground</item>-->
-        <!--<item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>-->
-    <!--</style>-->
+    <!-- 最好將Toolbar跟app的主要theme切開來，Toolbar給他一個自己的theme會比較好 -->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@color/colorActionBarTitle</item>
+        <item name="android:textColorSecondary">@color/colorActionBarSubtitle</item>
+        <item name="colorControlNormal">@color/colorControlNormal</item>
+        <item name="selectableItemBackground">?android:selectableItemBackground</item>
+        <item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>
+    </style>
 
 </resources>
