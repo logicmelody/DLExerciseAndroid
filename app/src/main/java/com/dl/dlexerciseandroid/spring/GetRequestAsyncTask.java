@@ -3,6 +3,7 @@ package com.dl.dlexerciseandroid.spring;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,8 +32,23 @@ public class GetRequestAsyncTask extends AsyncTask<String, Void, Greeting> {
     @Override
     protected Greeting doInBackground(String... url) {
         try {
+            // Use Java object
             RestTemplate restTemplate = new RestTemplate();
+            // 要丟一個MessageConverter給RestTemplate
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+            // Get Json string from server
+            // Assign true給RestTemplate，代表使用default的MessageConverter：
+            // ByteArrayHttpMessageConverter, StringHttpMessageConverter, and ResourceHttpMessageConverter
+            // 預設已經註冊的MessageConverter會因為Android的版本而不同
+            //RestTemplate restTemplateString = new RestTemplate(true);
+            //String result = restTemplateString.getForObject("http://rest-service.guides.spring.io/greeting?name={query}",
+            //                                                String.class, "Danny");
+
+            RestTemplate restTemplateString = new RestTemplate(true);
+            String result = restTemplateString.getForObject(url[0], String.class);
+
+            Log.d("danny", result);
 
             return restTemplate.getForObject(url[0], Greeting.class);
 
