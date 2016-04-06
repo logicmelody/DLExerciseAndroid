@@ -4,16 +4,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/height_main_left_drawer_header"
-    android:padding="@dimen/padding_main_left_drawer_header"
-    android:background="@color/background_main_left_drawer_header">
+    android:padding="@dimen/padding_main_left_drawer_header">
 
     <TextView
         android:id="@+id/text_view_main_left_drawer_header_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:text="@string/all_app_version"
-        android:textColor="@color/text_color_main_left_drawer_header_version"/>
+        android:textColor="@color/text_color_main_left_drawer_header_version" />
 
 </RelativeLayout>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#FF3F51B5</color>
-    <color name="colorPrimaryDark">#FF303F9F</color>
-    <color name="colorAccent">#FFFF4081</color>
+    <color name="colorPrimary">@color/all_theme</color>
+    <color name="colorPrimaryDark">@color/all_theme</color>
+    <color name="colorAccent">@color/all_theme</color>
     <color name="colorTextPrimary">#FF000000</color>
     <color name="colorTextSecondary">#FF000000</color>
     <color name="colorControlNormal">#FFFFFFFF</color>
@@ -11,12 +11,12 @@
     <color name="colorActionBarSubtitle">#FFFFFFFF</color>
 
     <!-- All -->
+    <color name="all_theme">#FF3386FE</color>
     <color name="all_divider">#FF000000</color>
     <color name="all_text_black">#FF000000</color>
 
     <!-- Left drawer -->
     <color name="background_main_left_drawer">#FFFFFFFF</color>
-    <color name="background_main_left_drawer_header">#FF3386FE</color>
     <color name="text_color_main_left_drawer_header_version">#FFFFFFFF</color>
 
     <!-- Right drawer -->

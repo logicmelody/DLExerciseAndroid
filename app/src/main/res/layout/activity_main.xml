@@ -26,8 +26,6 @@
             android:theme="@style/AppTheme.AppBarOverlay"
             android:fitsSystemWindows="true" />
 
-        <include layout="@layout/divider_all_horizontal" />
-
         <!-- 主要來顯示內容的container，用來顯示不同的Fragment -->
         <FrameLayout
             android:id="@+id/frame_layout_main_container"
