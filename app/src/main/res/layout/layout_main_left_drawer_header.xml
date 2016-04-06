@@ -4,7 +4,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/height_main_left_drawer_header"
-    android:padding="@dimen/padding_main_left_drawer_header">
+    android:padding="@dimen/padding_main_left_drawer_header"
+    android:background="@color/background_main_left_drawer_header">
 
     <TextView
         android:id="@+id/text_view_main_left_drawer_header_version"
