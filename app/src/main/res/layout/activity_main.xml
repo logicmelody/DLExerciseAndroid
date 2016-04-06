@@ -43,10 +43,10 @@
     <!-- app:headerLayout可以用來設定drawer上的header -->
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view_main_left_side_drawer"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/width_main_left_drawer"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@android:color/white"
+        android:background="@color/background_main_left_drawer"
         app:menu="@menu/drawer_left"
         app:headerLayout="@layout/layout_main_left_drawer_header"
         app:itemTextColor="@color/all_text_black"
@@ -54,15 +54,11 @@
 
     <!-- 從右邊滑出的drawer，android:layout_gravity必須設為end -->
     <!-- 如果要自己客製drawer的UI，就必須要設一個container，然後用程式塞對應的drawer Fragment進去 -->
-    <!--
     <FrameLayout
         android:id="@+id/frame_layout_main_right_side_drawer"
-        android:layout_width="@dimen/message_menu_width"
+        android:layout_width="@dimen/width_main_right_drawer"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:clickable="true"
         android:layout_gravity="end"
-        android:background="@color/drawer_menu_background_color" />
-        -->
+        android:background="@color/background_main_right_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

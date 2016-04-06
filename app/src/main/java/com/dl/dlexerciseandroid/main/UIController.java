@@ -17,6 +17,7 @@ import android.view.View;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.overview.OverviewFragment;
+import com.dl.dlexerciseandroid.rightdrawer.RightDrawerFragment;
 import com.dl.dlexerciseandroid.spring.ConsumingRestfulWebServiceFragment;
 import com.dl.dlexerciseandroid.test.TestFragment;
 import com.dl.dlexerciseandroid.utility.Utils;
@@ -52,9 +53,10 @@ public class UIController {
     private void initialize() {
         findViews();
         setupActionBar();
-        setupInitFragment();
+        setupMainContent();
         setupDrawerLayout();
         setupLeftDrawer();
+        setupRightDrawer();
     }
 
     private void findViews() {
@@ -80,18 +82,8 @@ public class UIController {
         }
     }
 
-    private void setupInitFragment() {
-        FragmentTransaction transaction = mFragmentManager.beginTransaction();
-        Fragment fragment = mFragmentManager.findFragmentByTag(Utils.FragmentTag.OVERVIEW);
-
-        if (fragment == null) {
-            fragment = new OverviewFragment();
-            transaction.add(R.id.frame_layout_main_container, fragment, Utils.FragmentTag.OVERVIEW);
-        }
-
-        mCurrentFragment = fragment;
-
-        transaction.commit();
+    private void setupMainContent() {
+        addFragmentTo(OverviewFragment.class, R.id.frame_layout_main_container, Utils.FragmentTag.OVERVIEW);
     }
 
     private void setupDrawerLayout() {
@@ -129,16 +121,16 @@ public class UIController {
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_item_left_drawer_overview:
-                        replaceFragmentTo(OverviewFragment.class, Utils.FragmentTag.OVERVIEW);
+                        replaceFragmentTo(OverviewFragment.class, R.id.frame_layout_main_container, Utils.FragmentTag.OVERVIEW);
                         break;
 
                     case R.id.menu_item_left_drawer_consuming_restful_web_service:
-                        replaceFragmentTo(ConsumingRestfulWebServiceFragment.class,
+                        replaceFragmentTo(ConsumingRestfulWebServiceFragment.class, R.id.frame_layout_main_container,
                                           Utils.FragmentTag.CONSUMING_RESTFUL_WEB_SERVICE);
                         break;
 
                     case R.id.menu_item_left_drawer_test:
-                        replaceFragmentTo(TestFragment.class, Utils.FragmentTag.TEST);
+                        replaceFragmentTo(TestFragment.class, R.id.frame_layout_main_container, Utils.FragmentTag.TEST);
                         break;
                 }
 
@@ -151,14 +143,37 @@ public class UIController {
         });
     }
 
-    private void replaceFragmentTo(Class<? extends Fragment> fragmentClass, String fragmentTag) {
+    private void setupRightDrawer() {
+        addFragmentTo(RightDrawerFragment.class, R.id.frame_layout_main_right_side_drawer, Utils.FragmentTag.RIGHT_DRAWER);
+    }
+
+    private void addFragmentTo(Class<? extends Fragment> fragmentClass, int containerId, String fragmentTag) {
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        Fragment fragment = mFragmentManager.findFragmentByTag(fragmentTag);
+
+        if (fragment == null) {
+            try {
+                fragment = fragmentClass.newInstance();
+                transaction.add(containerId, fragment, fragmentTag);
+
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
+        transaction.commit();
+    }
+
+    private void replaceFragmentTo(Class<? extends Fragment> fragmentClass, int containerId, String fragmentTag) {
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
 
         Fragment fragment = mFragmentManager.findFragmentByTag(fragmentTag);
         if (fragment == null) {
             try {
                 fragment = fragmentClass.newInstance();
-                fragmentTransaction.replace(R.id.frame_layout_main_container, fragment, fragmentTag);
+                fragmentTransaction.replace(containerId, fragment, fragmentTag);
 
             } catch (InstantiationException e) {
                 e.printStackTrace();
