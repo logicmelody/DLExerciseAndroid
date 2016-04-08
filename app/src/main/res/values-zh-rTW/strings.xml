@@ -8,4 +8,8 @@
     <!-- Consuming restful web service -->
     <string name="consuming_restful_web_service_send_request">發送請求</string>
 
+    <!-- Facebook -->
+    <string name="facebook_public_profile">使用者資訊</string>
+    <string name="facebook_user_friends">朋友資訊</string>
+
 </resources>

@@ -1,15 +1,22 @@
 <resources>
 
+    <string name="app_name" translatable="false">DLExercise</string>
+    <string name="app_version" translatable="false">v1.0</string>
+    <string name="drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="facebook_app_id" translatable="false">489582227919200</string>
+
     <!-- All -->
-    <string name="all_app_name" translatable="false">DLExercise</string>
-    <string name="all_app_version" translatable="false">v1.0</string>
     <string name="all_overview">Overview</string>
     <string name="all_consuming_restful_web_service">Consuming Restful Web Service</string>
+    <string name="all_facebook" translatable="false">Facebook</string>
     <string name="all_test">Test</string>
-    <string name="all_drawer_open">Open navigation drawer</string>
-    <string name="all_drawer_close">Close navigation drawer</string>
 
     <!-- Consuming restful web service -->
     <string name="consuming_restful_web_service_send_request">Send request</string>
+
+    <!-- Facebook -->
+    <string name="facebook_public_profile">Profile</string>
+    <string name="facebook_user_friends">User friends</string>
 
 </resources>

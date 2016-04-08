@@ -15,4 +15,7 @@
     <dimen name="min_width_consuming_restful_web_service_user_name">150dp</dimen>
     <dimen name="text_size_all_consuming_restful_web_service">30dp</dimen>
 
+    <!-- Facebook -->
+    <dimen name="margin_top_facebook_switch_item">10dp</dimen>
+
 </resources>

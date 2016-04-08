@@ -13,6 +13,10 @@
             android:title="@string/all_consuming_restful_web_service" />
 
         <item
+            android:id="@+id/menu_item_left_drawer_facebook"
+            android:title="@string/all_facebook" />
+
+        <item
             android:id="@+id/menu_item_left_drawer_test"
             android:title="@string/all_test" />
     </group>

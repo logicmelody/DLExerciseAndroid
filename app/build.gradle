@@ -28,6 +28,10 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
@@ -37,4 +41,7 @@ dependencies {
     // For consuming restful web service with Spring
     compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
+
+    // For Facebook
+    compile 'com.facebook.android:facebook-android-sdk:4.+'
 }

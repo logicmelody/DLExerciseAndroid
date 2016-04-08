@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_all_window"
+    android:orientation="vertical" >
+
+    <!-- Text的size如果不想要自己設定大小，可以用系統預設的textAppearance style -->
+    <Switch
+        android:id="@+id/switch_facebook_user_friends"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_facebook_switch_item"
+        android:text="@string/facebook_user_friends"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</LinearLayout>
