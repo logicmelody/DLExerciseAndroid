@@ -230,9 +230,19 @@ public class UIController {
             Log.d("danny", "Approved permissions: " + token.getPermissions().toString());
             Log.d("danny", "Declined permissions: " + token.getDeclinedPermissions().toString());
 
-            setFbLoginButtonVisibility(false);
+            // 已經有token的狀況，user啟用app之後，我們更新token
+            AccessToken.refreshCurrentAccessTokenAsync(new AccessToken.AccessTokenRefreshCallback() {
+                @Override
+                public void OnTokenRefreshed(AccessToken accessToken) {
+                    Log.d("danny", "OnTokenRefreshed");
+                }
 
-            // Use token to login and get profile image
+                @Override
+                public void OnTokenRefreshFailed(FacebookException exception) {
+                    Log.d("danny", "OnTokenRefreshFailed");
+                }
+            });
+            setFbLoginButtonVisibility(false);
         }
     }
 
@@ -250,8 +260,6 @@ public class UIController {
 
                 AccessToken.setCurrentAccessToken(loginResult.getAccessToken());
                 Log.d("danny", AccessToken.getCurrentAccessToken().getToken());
-
-                // Use token to login and get profile image
             }
 
             @Override
@@ -317,6 +325,8 @@ public class UIController {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // 如果有跳出別的視窗或是Activity，一定要實作CallbackManager及這個method，才可以運作正常
+        // (保險起見，只要有用到Facebook API的地方，最後都要實作這步驟)
         // 必須要把onActivityResult()的結果傳給CallbackManager
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
