@@ -57,6 +57,9 @@ public class UIController {
     private CallbackManager mCallbackManager;
     private LoginButton mFbLoginButton;
 
+    private View mFbProfileContainer;
+    //private ProfilePictureView mProfilePictureView;
+
 
     public UIController(AppCompatActivity activity) {
         mActivity = activity;
@@ -69,12 +72,12 @@ public class UIController {
 
     private void initialize() {
         findViews();
+        setupFb();
         setupActionBar();
         setupMainContent();
         setupDrawerLayout();
         setupLeftDrawer();
         setupRightDrawer();
-        setupFacebook();
     }
 
     private void findViews() {
@@ -88,6 +91,97 @@ public class UIController {
         // We can use navigationView.getHeaderCount() to determine the total number.
         View headerLayout = mNavigationView.getHeaderView(0);
         mFbLoginButton = (LoginButton) headerLayout.findViewById(R.id.fb_login_button_left_drawer_header);
+        mFbProfileContainer = headerLayout.findViewById(R.id.linear_layout_left_drawer_header_profile_container);
+        //mProfilePictureView = (ProfilePictureView) headerLayout.findViewById(R.id.profile_picture_view_left_drawer_header_login_user_avatar);
+    }
+
+    private void setupFb() {
+        FacebookSdk.sdkInitialize(mActivity);
+        mCallbackManager = CallbackManager.Factory.create();
+
+        // Facebook SDK會在token要過期之前將token更新
+        // 頻率為一天一次，在user有用app向FB server發出request的時候更新token
+        // 但是如果超過60天沒有更新token，token就會過期，這時候就要重新再走一次login flow
+        AccessToken token = AccessToken.getCurrentAccessToken();
+        if (token == null || token.isExpired()) {
+            Log.d("danny", "token is null");
+
+            setupFbLoginButton();
+            setFbLoginContent(false);
+
+        } else {
+            Log.d("danny", token.getToken());
+            Log.d("danny", "Approved permissions: " + token.getPermissions().toString());
+            Log.d("danny", "Declined permissions: " + token.getDeclinedPermissions().toString());
+
+            // 已經有token的狀況，user啟用app之後，我們更新token
+            AccessToken.refreshCurrentAccessTokenAsync(new AccessToken.AccessTokenRefreshCallback() {
+                @Override
+                public void OnTokenRefreshed(AccessToken accessToken) {
+                    Log.d("danny", "OnTokenRefreshed");
+                    setFbProfileImage();
+                }
+
+                @Override
+                public void OnTokenRefreshFailed(FacebookException exception) {
+                    Log.d("danny", "OnTokenRefreshFailed");
+                }
+            });
+
+            setFbLoginContent(true);
+        }
+    }
+
+    private void setFbProfileImage() {
+        // Get profile image from server
+
+        // Profile image要拿剪裁過後的版本，還是原始版本
+        //mProfilePictureView.setCropped(true);
+        //mProfilePictureView.setProfileId(Profile.getCurrentProfile().getId());
+    }
+
+    private void setupFbLoginButton() {
+        // 如果LoginButton是在Fragment中，需要call以下這行
+        // mFbLoginButton.setFragment(this);
+
+        // Login時的permission設定，只要求app中必須用到的permission
+        mFbLoginButton.setReadPermissions(Arrays.asList(FbUtils.Permission.PUBLIC_PROFILE));
+        mFbLoginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // Login成功，拿到token
+                Log.d("danny", "FB login onSuccess");
+
+                AccessToken.setCurrentAccessToken(loginResult.getAccessToken());
+                Log.d("danny", AccessToken.getCurrentAccessToken().getToken());
+
+                setFbProfileImage();
+                setFbLoginContent(true);
+            }
+
+            @Override
+            public void onCancel() {
+                // user可能在permission頁面點選"Cancel"
+                Log.d("danny", "FB login onCancel");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.d("danny", "FB login onError");
+                Log.e("danny", error.toString());
+            }
+        });
+    }
+
+    private void setFbLoginContent(boolean isLogin) {
+        if (isLogin) {
+            mFbProfileContainer.setVisibility(View.VISIBLE);
+            mFbLoginButton.setVisibility(View.GONE);
+
+        } else {
+            mFbProfileContainer.setVisibility(View.GONE);
+            mFbLoginButton.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setupActionBar() {
@@ -209,75 +303,6 @@ public class UIController {
         mCurrentFragment = fragment;
 
         fragmentTransaction.commit();
-    }
-
-    private void setupFacebook() {
-        FacebookSdk.sdkInitialize(mActivity);
-        mCallbackManager = CallbackManager.Factory.create();
-
-        // Facebook SDK會在token要過期之前將token更新
-        // 頻率為一天一次，在user有用app向FB server發出request的時候更新token
-        // 但是如果超過60天沒有更新token，token就會過期，這時候就要重新再走一次login flow
-        AccessToken token = AccessToken.getCurrentAccessToken();
-        if (token == null || token.isExpired()) {
-            Log.d("danny", "token is null");
-
-            setupFbLoginButton();
-            setFbLoginButtonVisibility(true);
-
-        } else {
-            Log.d("danny", token.getToken());
-            Log.d("danny", "Approved permissions: " + token.getPermissions().toString());
-            Log.d("danny", "Declined permissions: " + token.getDeclinedPermissions().toString());
-
-            // 已經有token的狀況，user啟用app之後，我們更新token
-            AccessToken.refreshCurrentAccessTokenAsync(new AccessToken.AccessTokenRefreshCallback() {
-                @Override
-                public void OnTokenRefreshed(AccessToken accessToken) {
-                    Log.d("danny", "OnTokenRefreshed");
-                }
-
-                @Override
-                public void OnTokenRefreshFailed(FacebookException exception) {
-                    Log.d("danny", "OnTokenRefreshFailed");
-                }
-            });
-            setFbLoginButtonVisibility(false);
-        }
-    }
-
-    private void setupFbLoginButton() {
-        // 如果LoginButton是在Fragment中，需要call以下這行
-        // mFbLoginButton.setFragment(this);
-
-        // Login時的permission設定，只要求app中必須用到的permission
-        mFbLoginButton.setReadPermissions(Arrays.asList(FbUtils.Permission.PUBLIC_PROFILE));
-        mFbLoginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                // Login成功，拿到token
-                Log.d("danny", "FB login onSuccess");
-
-                AccessToken.setCurrentAccessToken(loginResult.getAccessToken());
-                Log.d("danny", AccessToken.getCurrentAccessToken().getToken());
-            }
-
-            @Override
-            public void onCancel() {
-                // user可能在permission頁面點選"Cancel"
-                Log.d("danny", "FB login onCancel");
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Log.d("danny", "FB login onError");
-                Log.e("danny", error.toString());
-            }
-        });
-    }
-
-    private void setFbLoginButtonVisibility(boolean isVisible) {
-
     }
 
     private void closeLeftDrawer() {

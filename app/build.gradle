@@ -37,11 +37,10 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
-
     // For consuming restful web service with Spring
     compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
-
     // For Facebook
     compile 'com.facebook.android:facebook-android-sdk:4.+'
+    compile project(':circularimageview')
 }

@@ -13,7 +13,8 @@
     <!-- All -->
     <color name="all_theme">#FF3386FE</color>
     <color name="all_divider">#FF000000</color>
-    <color name="all_text_black">#FF000000</color>
+    <color name="all_black">#FF000000</color>
+    <color name="all_white">#FFFFFFFF</color>
 
     <!-- Left drawer -->
     <color name="background_main_left_drawer">#FFFFFFFF</color>

@@ -49,7 +49,7 @@
         android:background="@color/background_main_left_drawer"
         app:menu="@menu/drawer_left"
         app:headerLayout="@layout/layout_main_left_drawer_header"
-        app:itemTextColor="@color/all_text_black"
+        app:itemTextColor="@color/all_black"
         app:itemTextAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
 
     <!-- 從右邊滑出的drawer，android:layout_gravity必須設為end -->

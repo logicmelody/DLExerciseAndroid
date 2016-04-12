@@ -2,6 +2,7 @@
 
 <!-- Drawer上的header可以自由設計，height也可以自己定義 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/height_main_left_drawer_header"
     android:padding="@dimen/padding_main_left_drawer_header"
@@ -14,13 +15,38 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
 
-    <TextView
-        android:id="@+id/text_view_main_left_drawer_header_version"
+    <LinearLayout
+        android:id="@+id/linear_layout_left_drawer_header_profile_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="@string/app_version"
-        android:textColor="@color/text_color_main_left_drawer_header_version" />
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <!-- Facebook SDK提供的顯示profile image的元件 -->
+        <!-- facebook:com_facebook_preset_size(最新版的SDK)：有small, normal, large可以選擇-->
+        <!--
+        <com.facebook.login.widget.ProfilePictureView
+            android:id="@+id/profile_picture_view_left_drawer_header_login_user_avatar"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            facebook:com_facebook_preset_size="normal" />
+        -->
+
+        <com.pkmmte.view.CircularImageView
+            android:id="@+id/circular_image_view_left_drawer_header_login_user_avatar"
+            android:layout_width="@dimen/width_height_left_drawer_header_login_user_avatar"
+            android:layout_height="@dimen/width_height_left_drawer_header_login_user_avatar"
+            android:src="@drawable/ic_left_drawer_header_login_avatar"/>
+
+        <TextView
+            android:id="@+id/text_view_left_drawer_header_login_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/all_white"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:text="Danny Lin"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

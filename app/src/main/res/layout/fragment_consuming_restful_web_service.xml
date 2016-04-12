@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/edit_text_consuming_restful_web_service_user_name"
-        android:textColor="@color/all_text_black"
+        android:textColor="@color/all_black"
         android:text="@string/consuming_restful_web_service_send_request"/>
 
 </RelativeLayout>
