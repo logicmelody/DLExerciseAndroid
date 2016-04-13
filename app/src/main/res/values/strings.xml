@@ -12,6 +12,9 @@
     <string name="all_facebook" translatable="false">Facebook</string>
     <string name="all_test">Test</string>
 
+    <!-- Left drawer -->
+    <string name="left_drawer_header_sure_to_logout">Sure to logout?</string>
+
     <!-- Consuming restful web service -->
     <string name="consuming_restful_web_service_send_request">Send request</string>
 

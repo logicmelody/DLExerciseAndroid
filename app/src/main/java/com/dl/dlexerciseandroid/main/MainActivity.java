@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.dl.dlexerciseandroid.R;
-import com.facebook.appevents.AppEventsLogger;
+import com.dl.dlexerciseandroid.dialog.AlertDialogFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AlertDialogFragment.OnClickAlertDialogListener {
 
     private UIController mUIController;
 
@@ -56,5 +56,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mUIController.onActivityResult(requestCode, resultCode, data);
+    }
+
+    // 呼叫Dialog的interface要實作在Activity或是Fragment
+    // Note: UIController不是Activity，他只是將Activity要做的事情拆出去，所以不能實作在UIController
+    @Override
+    public void onClickAlertDialogOk() {
+        mUIController.onClickAlertDialogOk();
+    }
+
+    @Override
+    public void onClickAlertDialogCancel() {
+        mUIController.onClickAlertDialogCancel();
     }
 }
