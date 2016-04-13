@@ -26,7 +26,6 @@ import com.dl.dlexerciseandroid.rightdrawer.RightDrawerFragment;
 import com.dl.dlexerciseandroid.spring.ConsumingRestfulWebServiceFragment;
 import com.dl.dlexerciseandroid.test.TestFragment;
 import com.dl.dlexerciseandroid.utility.FbUtils;
-import com.dl.dlexerciseandroid.utility.FragmentUtils;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -122,7 +121,7 @@ public class UIController implements View.OnClickListener {
     }
 
     private void setupMainContent() {
-        addFragmentTo(OverviewFragment.class, R.id.frame_layout_main_container, FragmentUtils.FragmentTag.OVERVIEW);
+        addFragmentTo(OverviewFragment.class, R.id.frame_layout_main_container, OverviewFragment.TAG);
     }
 
     private void setupDrawerLayout() {
@@ -160,21 +159,20 @@ public class UIController implements View.OnClickListener {
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_item_left_drawer_overview:
-                        replaceFragmentTo(OverviewFragment.class, R.id.frame_layout_main_container, FragmentUtils.FragmentTag.OVERVIEW);
+                        replaceFragmentTo(OverviewFragment.class, R.id.frame_layout_main_container, OverviewFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_consuming_restful_web_service:
                         replaceFragmentTo(ConsumingRestfulWebServiceFragment.class, R.id.frame_layout_main_container,
-                                FragmentUtils.FragmentTag.CONSUMING_RESTFUL_WEB_SERVICE);
+                                          ConsumingRestfulWebServiceFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_facebook:
-                        replaceFragmentTo(FacebookFragment.class, R.id.frame_layout_main_container,
-                                FragmentUtils.FragmentTag.FACEBOOK);
+                        replaceFragmentTo(FacebookFragment.class, R.id.frame_layout_main_container, FacebookFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:
-                        replaceFragmentTo(TestFragment.class, R.id.frame_layout_main_container, FragmentUtils.FragmentTag.TEST);
+                        replaceFragmentTo(TestFragment.class, R.id.frame_layout_main_container, TestFragment.TAG);
                         break;
                 }
 
@@ -188,7 +186,7 @@ public class UIController implements View.OnClickListener {
     }
 
     private void setupRightDrawer() {
-        addFragmentTo(RightDrawerFragment.class, R.id.frame_layout_main_right_side_drawer, FragmentUtils.FragmentTag.RIGHT_DRAWER);
+        addFragmentTo(RightDrawerFragment.class, R.id.frame_layout_main_right_side_drawer, RightDrawerFragment.TAG);
     }
 
     private void addFragmentTo(Class<? extends Fragment> fragmentClass, int containerId, String fragmentTag) {

@@ -32,6 +32,8 @@ import java.util.Arrays;
  */
 public class FacebookFragment extends Fragment {
 
+    public static final String TAG = "com.dl.dlexerciseandroid.FacebookFragment";
+
     private Context mContext;
 
     private CallbackManager mCallbackManager;

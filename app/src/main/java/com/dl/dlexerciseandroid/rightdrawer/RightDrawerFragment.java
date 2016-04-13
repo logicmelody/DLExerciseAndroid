@@ -15,6 +15,8 @@ import com.dl.dlexerciseandroid.R;
  */
 public class RightDrawerFragment extends Fragment {
 
+    public static final String TAG = "com.dl.dlexerciseandroid.RightDrawerFragment";
+
     private Context mContext;
 
 

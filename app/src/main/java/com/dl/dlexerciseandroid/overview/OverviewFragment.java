@@ -15,6 +15,8 @@ import com.dl.dlexerciseandroid.R;
  */
 public class OverviewFragment extends Fragment {
 
+    public static final String TAG = "com.dl.dlexerciseandroid.OverviewFragment";
+
     private Context mContext;
 
 

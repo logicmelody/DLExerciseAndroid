@@ -15,6 +15,8 @@ import com.dl.dlexerciseandroid.R;
  */
 public class TestFragment extends Fragment {
 
+    public static final String TAG = "com.dl.dlexerciseandroid.TestFragment";
+
     private Context mContext;
 
 
