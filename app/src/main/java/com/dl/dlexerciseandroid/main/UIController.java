@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.dialog.AlertDialogFragment;
@@ -38,6 +39,7 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.pkmmte.view.CircularImageView;
 
 import java.util.Arrays;
 
@@ -66,6 +68,8 @@ public class UIController implements View.OnClickListener {
     private LoginButton mFbLoginButton;
     private ImageView mFbLogoutButton;
     private View mFbProfileContainer;
+    private CircularImageView mLoginUserAvatar;
+    private TextView mLoginUserName;
     //private ProfilePictureView mProfilePictureView;
 
 
@@ -102,6 +106,10 @@ public class UIController implements View.OnClickListener {
         mFbLoginButton = (LoginButton) headerLayout.findViewById(R.id.fb_login_button_left_drawer_header);
         mFbLogoutButton = (ImageView) headerLayout.findViewById(R.id.image_view_left_drawer_header_logout_button);
         mFbProfileContainer = headerLayout.findViewById(R.id.linear_layout_left_drawer_header_profile_container);
+        mLoginUserAvatar =
+                (CircularImageView) headerLayout.findViewById(R.id.circular_image_view_left_drawer_header_login_user_avatar);
+        mLoginUserName = (TextView) headerLayout.findViewById(R.id.text_view_left_drawer_header_login_user_name);
+
         //mProfilePictureView = (ProfilePictureView) headerLayout.findViewById(R.id.profile_picture_view_left_drawer_header_login_user_avatar);
     }
 
@@ -350,6 +358,7 @@ public class UIController implements View.OnClickListener {
             return;
         }
 
+        mLoginUserName.setText(Profile.getCurrentProfile().getName());
         // Get profile image from server
 
 
