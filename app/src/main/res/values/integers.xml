@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Left drawer -->
+    <integer name="width_height_left_drawer_header_login_user_avatar_from_uri">200</integer>
+
+</resources>

@@ -40,6 +40,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.pkmmte.view.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
 
@@ -358,9 +359,15 @@ public class UIController implements View.OnClickListener {
             return;
         }
 
+        // Login user name
         mLoginUserName.setText(Profile.getCurrentProfile().getName());
-        // Get profile image from server
 
+        // Login user image
+        // Picasso: http://square.github.io/picasso/
+        int widthHeight =
+                mActivity.getResources().getInteger(R.integer.width_height_left_drawer_header_login_user_avatar_from_uri);
+        Picasso.with(mActivity).load(Profile.getCurrentProfile().getProfilePictureUri(widthHeight, widthHeight))
+                               .placeholder(R.drawable.ic_left_drawer_header_login_avatar).into(mLoginUserAvatar);
 
         // Profile image要拿剪裁過後的版本，還是原始版本
         //mProfilePictureView.setCropped(true);
