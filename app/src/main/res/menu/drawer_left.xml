@@ -17,6 +17,10 @@
             android:title="@string/all_facebook" />
 
         <item
+            android:id="@+id/menu_item_left_drawer_do_it_later"
+            android:title="@string/all_do_it_later" />
+
+        <item
             android:id="@+id/menu_item_left_drawer_test"
             android:title="@string/all_test" />
     </group>
