@@ -4,6 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- Permissions for provider -->
+    <uses-permission android:name="com.dl.dlexerciseandroid.provider.permission.READ" />
+    <uses-permission android:name="com.dl.dlexerciseandroid.provider.permission.WRITE" />
+
     <!-- 要把自己定義的Application class在AndroidManifest中進行設定  -->
     <application
         android:name=".main.MainApplication"
@@ -30,6 +34,18 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!-- Debug database  -->
+        <activity android:name=".database.debug.AndroidDatabaseManager"
+            android:theme="@style/Theme.AppCompat.Light"/>
+
+        <provider
+            android:name=".database.provider.DLExerciseContentProvider"
+            android:authorities="com.dl.dlexerciseandroid.provider"
+            android:exported="false"
+            android:multiprocess="false"
+            android:readPermission="com.dl.dlexerciseandroid.provider.permission.READ"
+            android:writePermission="com.dl.dlexerciseandroid.provider.permission.WRITE" />
 
     </application>
 

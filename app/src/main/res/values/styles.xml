@@ -20,14 +20,18 @@
 
     <!-- 如果需要客製一些比較特別的Toolbar，設定Toolbar裡面的theme屬性 -->
     <!-- 最好將Toolbar跟app的主要theme切開來，Toolbar給他一個自己的theme會比較好 -->
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+    <!-- 若是在style中加入android:background的屬性，也會一起影響option menu item的popup視窗顏色，
+         所以background的顏色最好還是設定在toolbar中 -->
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
         <!-- Customize color of navigation drawer icon and back arrow -->
-        <item name="android:background">@color/colorPrimary</item>
         <item name="android:textColorPrimary">@color/colorActionBarTitle</item>
         <item name="android:textColorSecondary">@color/colorActionBarSubtitle</item>
         <item name="colorControlNormal">@color/colorControlNormal</item>
         <item name="selectableItemBackground">?android:selectableItemBackground</item>
         <item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>
+    </style>
+    <!-- 用來設定tool bar上點選option menu時跳出來的popup menu樣式，這邊套用的parent是白底黑字 -->
+    <style name="AppBarPopupOverlay" parent="ThemeOverlay.AppCompat.Light">
     </style>
 
 </resources>

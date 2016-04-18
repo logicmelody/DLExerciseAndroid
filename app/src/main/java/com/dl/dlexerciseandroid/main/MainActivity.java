@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dl.dlexerciseandroid.R;
@@ -33,6 +34,11 @@ public class MainActivity extends AppCompatActivity implements AlertDialogFragme
     protected void onPause() {
         super.onPause();
         mUIController.onPause();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return mUIController.onCreateOptionsMenu(menu);
     }
 
     @Override

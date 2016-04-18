@@ -1,5 +1,6 @@
 package com.dl.dlexerciseandroid.main;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -14,12 +15,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.database.dbscheme.DLExerciseContract;
+import com.dl.dlexerciseandroid.database.debug.AndroidDatabaseManager;
 import com.dl.dlexerciseandroid.dialog.AlertDialogFragment;
 import com.dl.dlexerciseandroid.facebook.FacebookFragment;
 import com.dl.dlexerciseandroid.overview.OverviewFragment;
@@ -92,6 +96,13 @@ public class UIController implements View.OnClickListener {
         setupLeftDrawer();
         setupRightDrawer();
         setupFb();
+
+        // 如果要在開啟app的時候預先塞一些data到db中，設定好provider之後，可以在MainActivity的onCreate()ㄍ中加入
+        //ContentValues values = new ContentValues();
+        //values.put(DLExerciseContract.Task.TITLE, "123456");
+        //values.put(DLExerciseContract.Task.DESCRIPTION, "123456 description");
+        //values.put(DLExerciseContract.Task.TIME, System.currentTimeMillis());
+        //mActivity.getContentResolver().insert(DLExerciseContract.Task.CONTENT_URI, values);
     }
 
     private void findViews() {
@@ -401,6 +412,13 @@ public class UIController implements View.OnClickListener {
         mActionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        mActivity.getMenuInflater().inflate(R.menu.main, menu);
+
+        // 必須要return true，option menu才會show出來
+        return true;
+    }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         // 使用DrawerToggle一定要完成此步驟
         if (mActionBarDrawerToggle.onOptionsItemSelected(item)) {
@@ -408,6 +426,10 @@ public class UIController implements View.OnClickListener {
 
         } else {
             switch (item.getItemId()) {
+                case R.id.menu_item_main_debug_database:
+                    mActivity.startActivity(new Intent(mActivity, AndroidDatabaseManager.class));
+                    return true;
+
                 default:
                     return false;
             }
