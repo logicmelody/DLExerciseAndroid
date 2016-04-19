@@ -24,4 +24,8 @@
     <!-- Right drawer -->
     <color name="background_main_right_drawer">#FFFFFFFF</color>
 
+    <!-- Do It Later -->
+    <color name="stroke_color_task_item">#FF979797</color>
+    <color name="solid_color_task_item">@color/all_white</color>
+
 </resources>

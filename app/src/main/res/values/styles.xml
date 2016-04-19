@@ -13,6 +13,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/colorTextPrimary</item>  <!-- ActionBar title的顏色 -->
         <item name="android:textColorSecondary">@color/colorTextSecondary</item>  <!-- ActionBar subtitle的顏色 -->
+        <item name="android:windowBackground">@color/all_white</item>
     </style>
 
     <style name="AppTheme" parent="BaseAppTheme">

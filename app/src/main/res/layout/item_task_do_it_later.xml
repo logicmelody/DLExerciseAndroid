@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Item之間的margin：簡單的做法可以在這邊設定margin，可以做到讓item之間有空隙出來，
+     但如果想要畫divider或是其他比較複雜的設定，就需要實作RecyclerView.ItemDecoration
+     這邊的例子，我們只需要加margin即可-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_task_item"
+    android:layout_margin="@dimen/margin_do_it_later_between_task_item"
+    android:orientation="vertical"
+    android:background="@drawable/background_task_item">
+
+    <TextView
+        android:id="@+id/text_view_task_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/all_theme"/>
+
+    <TextView
+        android:id="@+id/text_view_task_item_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/text_view_task_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</LinearLayout>
