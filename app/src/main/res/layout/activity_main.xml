@@ -30,10 +30,12 @@
             android:fitsSystemWindows="true" />
 
         <!-- 主要來顯示內容的container，用來顯示不同的Fragment -->
+        <!-- android:clickable="true"：不加這行的話，drawer會有問題 -->
         <FrameLayout
             android:id="@+id/frame_layout_main_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:clickable="true"/>
 
     </LinearLayout>
 
@@ -43,6 +45,7 @@
     <!-- app:itemTextAppearance可以用來設定drawer上每一個item的text size -->
     <!-- app:headerLayout可以用來設定drawer上的header -->
     <!-- android:fitsSystemWindows="true" 如果要讓drawer的height可以擴展到整個screen，必須要加這個屬性 -->
+    <!-- android:clickable="true"：不加這行的話，drawer會有問題 -->
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view_main_left_side_drawer"
         android:layout_width="@dimen/width_main_left_drawer"
@@ -50,6 +53,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         android:background="@color/background_main_left_drawer"
+        android:clickable="true"
         app:menu="@menu/drawer_left"
         app:headerLayout="@layout/layout_main_left_drawer_header"
         app:itemTextColor="@color/all_black"
@@ -58,11 +62,13 @@
     <!-- 從右邊滑出的drawer，android:layout_gravity必須設為end -->
     <!-- 如果要自己客製drawer的UI，就必須要設一個container，然後用程式塞對應的drawer Fragment進去 -->
     <!-- android:fitsSystemWindows="true" 如果要讓drawer的height可以擴展到整個screen，必須要加這個屬性 -->
+    <!-- android:clickable="true"：不加這行的話，drawer會有問題 -->
     <FrameLayout
         android:id="@+id/frame_layout_main_right_side_drawer"
         android:layout_width="@dimen/width_main_right_drawer"
         android:layout_height="match_parent"
         android:layout_gravity="end"
+        android:clickable="true"
         android:fitsSystemWindows="true"
         android:background="@color/background_main_right_drawer" />
 

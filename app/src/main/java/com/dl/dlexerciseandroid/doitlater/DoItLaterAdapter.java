@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.datastructure.Task;
+import com.dl.dlexerciseandroid.utility.Utils;
 
 import java.util.List;
 
@@ -70,7 +71,7 @@ public class DoItLaterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         taskViewHolder.title.setText(mDataSet.get(position).title);
         taskViewHolder.description.setText(mDataSet.get(position).description);
-        taskViewHolder.time.setText(String.valueOf(mDataSet.get(position).time));
+        taskViewHolder.time.setText(Utils.timeToString(mDataSet.get(position).time, Utils.DataFormat.YYYYMMDDHHMM));
     }
 
     @Override
