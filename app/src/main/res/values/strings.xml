@@ -11,6 +11,7 @@
     <string name="all_consuming_restful_web_service">Consuming Restful Web Service</string>
     <string name="all_facebook" translatable="false">Facebook</string>
     <string name="all_do_it_later" translatable="false">Do It Later</string>
+    <string name="all_coordinator_layout" translatable="false">CoordinatorLayout</string>
     <string name="all_test">Test</string>
 
     <!-- Left drawer -->

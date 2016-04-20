@@ -14,8 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.utility.URIUtils;
-import com.dl.dlexerciseandroid.utility.Utils;
+import com.dl.dlexerciseandroid.utility.utils.URIUtils;
+import com.dl.dlexerciseandroid.utility.utils.Utils;
 
 import java.util.HashMap;
 

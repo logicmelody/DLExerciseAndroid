@@ -2,6 +2,7 @@
 
     <!-- All -->
     <dimen name="padding_all_window">20dp</dimen>
+    <dimen name="margin_all_floating_action_button">16dp</dimen>
 
     <!-- Left drawer -->
     <dimen name="width_main_left_drawer">250dp</dimen>
@@ -25,5 +26,8 @@
     <dimen name="margin_do_it_later_between_task_item">5dp</dimen>
     <dimen name="stroke_width_task_item">1dp</dimen>
     <dimen name="corners_radius_task_item">5dp</dimen>
+
+    <!-- CoordinatorLayout -->
+    <dimen name="height_coordinator_layout_number_item">50dp</dimen>
 
 </resources>

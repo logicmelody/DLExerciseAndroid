@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_coordinator_layout_number_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"/>
+
+    <!-- 中間icon的大小要跟menu item的icon一樣：24dp x 24dp -->
+    <!-- app:fabSize可以設normal或是mini -->
+    <!-- 建議的margin是phone: 16dp   tablet: 24dp -->
+    <!-- app:layout_behavior：assign我們實作的behavior -->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floating_action_button_coordinator_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_all_floating_action_button"
+        android:layout_gravity="bottom|right"
+        android:src="@drawable/ic_all_add_white"
+        app:fabSize="normal"
+        app:layout_behavior="com.dl.dlexerciseandroid.utility.component.FloatingActionButtonBehavior"/>
+
+</android.support.design.widget.CoordinatorLayout>

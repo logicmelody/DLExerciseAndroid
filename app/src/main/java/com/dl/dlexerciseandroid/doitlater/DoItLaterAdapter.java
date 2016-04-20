@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.datastructure.Task;
-import com.dl.dlexerciseandroid.utility.Utils;
+import com.dl.dlexerciseandroid.utility.utils.Utils;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.utility;
+package com.dl.dlexerciseandroid.utility.utils;
 
 import com.facebook.AccessToken;
 import com.facebook.Profile;

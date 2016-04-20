@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.utility;
+package com.dl.dlexerciseandroid.utility.utils;
 
 import java.util.HashMap;
 import java.util.Iterator;

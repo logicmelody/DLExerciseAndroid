@@ -1,6 +1,5 @@
 package com.dl.dlexerciseandroid.main;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -22,7 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.database.dbscheme.DLExerciseContract;
+import com.dl.dlexerciseandroid.coordinatorlayout.CoordinatorLayoutFragment;
 import com.dl.dlexerciseandroid.database.debug.AndroidDatabaseManager;
 import com.dl.dlexerciseandroid.dialog.AlertDialogFragment;
 import com.dl.dlexerciseandroid.doitlater.DoItLaterFragment;
@@ -31,7 +30,7 @@ import com.dl.dlexerciseandroid.overview.OverviewFragment;
 import com.dl.dlexerciseandroid.rightdrawer.RightDrawerFragment;
 import com.dl.dlexerciseandroid.spring.ConsumingRestfulWebServiceFragment;
 import com.dl.dlexerciseandroid.test.TestFragment;
-import com.dl.dlexerciseandroid.utility.FbUtils;
+import com.dl.dlexerciseandroid.utility.utils.FbUtils;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -194,6 +193,11 @@ public class UIController implements View.OnClickListener {
 
                     case R.id.menu_item_left_drawer_do_it_later:
                         replaceFragmentTo(DoItLaterFragment.class, R.id.frame_layout_main_container, DoItLaterFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_coordinator_layout:
+                        replaceFragmentTo(CoordinatorLayoutFragment.class, R.id.frame_layout_main_container,
+                                          CoordinatorLayoutFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:

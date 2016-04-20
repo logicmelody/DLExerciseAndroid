@@ -1,0 +1,6 @@
+<resources>
+
+    <!-- All -->
+    <dimen name="margin_all_floating_action_button">24dp</dimen>
+
+</resources>
