@@ -3,6 +3,7 @@ package com.dl.dlexerciseandroid.doitlater;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Created by logicmelody on 2016/4/18.
  */
-public class DoItLaterFragment extends Fragment {
+public class DoItLaterFragment extends Fragment implements View.OnClickListener {
 
     public static final String TAG = "com.dl.dlexerciseandroid.DoItLaterFragment";
 
@@ -29,6 +30,8 @@ public class DoItLaterFragment extends Fragment {
     private StaggeredGridLayoutManager mTaskListLayoutManager;
     private DoItLaterAdapter mDoItLaterAdapter;
     private List<Task> mTaskListDataSet = new ArrayList<>();
+
+    private FloatingActionButton mAddTaskButton;
 
 
     @Override
@@ -51,11 +54,17 @@ public class DoItLaterFragment extends Fragment {
 
     private void initialize() {
         findViews();
+        setupViews();
         setupTaskList();
     }
 
     private void findViews() {
         mTaskList = (RecyclerView) getView().findViewById(R.id.recyclerView_do_it_later_task_list);
+        mAddTaskButton = (FloatingActionButton) getView().findViewById(R.id.floating_action_button_do_it_later_add_task);
+    }
+
+    private void setupViews() {
+        mAddTaskButton.setOnClickListener(this);
     }
 
     private void setupTaskList() {
@@ -81,5 +90,25 @@ public class DoItLaterFragment extends Fragment {
         mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
         mTaskListDataSet.add(new Task("Good time Ya Ya", "Description", System.currentTimeMillis()));
         mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
+        mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
+        mTaskListDataSet.add(new Task("Good time Ya Ya", "Description", System.currentTimeMillis()));
+        mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
+        mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
+        mTaskListDataSet.add(new Task("Good time Ya Ya", "Description", System.currentTimeMillis()));
+        mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
+        mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
+        mTaskListDataSet.add(new Task("Good time Ya Ya", "Description", System.currentTimeMillis()));
+        mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
+        mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
+        mTaskListDataSet.add(new Task("Good time Ya Ya", "Description", System.currentTimeMillis()));
+        mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.floating_action_button_do_it_later_add_task:
+                break;
+        }
     }
 }
