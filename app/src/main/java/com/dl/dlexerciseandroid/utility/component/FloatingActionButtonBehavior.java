@@ -11,7 +11,7 @@ import android.view.View;
  * Created by logicmelody on 2016/4/20.
  */
 
-// 這個class要搭配CoordinatorLayout使用，實作當CoordinatorLayout中的anchor view發生某些特定事件的時候
+// 這個class要搭配CoordinatorLayout使用，實作當CoordinatorLayout中的某些view發生某些特定事件的時候
 // 對應的元件要做什麼動作
 
 // FloatingActionButton本來就有預設的behavior：當SnackBar跳出來的時候，FloatingActionButton會往上浮

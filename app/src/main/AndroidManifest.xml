@@ -8,7 +8,7 @@
     <uses-permission android:name="com.dl.dlexerciseandroid.provider.permission.READ" />
     <uses-permission android:name="com.dl.dlexerciseandroid.provider.permission.WRITE" />
 
-    <!-- 要把自己定義的Application class在AndroidManifest中進行設定  -->
+    <!-- 要把自己定義的Application class在AndroidManifest中進行設定 -->
     <application
         android:name=".main.MainApplication"
         android:allowBackup="true"
@@ -17,10 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- 要將Facebook app id設定在這邊  -->
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <!-- 要將Facebook app id設定在這邊 -->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
-        <activity android:name=".main.MainActivity"
+        <activity
+            android:name=".main.MainActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,16 +32,19 @@
             </intent-filter>
         </activity>
 
-        <!-- Facebook login activity  -->
+        <activity android:name=".coordinatorlayout.CoordinatorLayoutActivity"></activity>
+
+        <!-- Facebook login activity -->
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <!-- Debug database  -->
-        <activity android:name=".database.debug.AndroidDatabaseManager"
-            android:theme="@style/Theme.AppCompat.Light"/>
+        <!-- Debug database -->
+        <activity
+            android:name=".database.debug.AndroidDatabaseManager"
+            android:theme="@style/Theme.AppCompat.Light" />
 
         <provider
             android:name=".database.provider.DLExerciseContentProvider"

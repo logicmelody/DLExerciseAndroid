@@ -4,6 +4,11 @@
          但這個屬性是API Level 19以上才可以使用的功能，所以我們必須另外設定一個styles.xml(v19)-->
     <style name="AppTheme" parent="BaseAppTheme">
         <item name="android:windowTranslucentStatus">true</item>
+
+        <!-- 待研究
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        -->
     </style>
 
 </resources>

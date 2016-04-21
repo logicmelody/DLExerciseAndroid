@@ -21,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.coordinatorlayout.CoordinatorLayoutFragment;
 import com.dl.dlexerciseandroid.database.debug.AndroidDatabaseManager;
 import com.dl.dlexerciseandroid.dialog.AlertDialogFragment;
 import com.dl.dlexerciseandroid.doitlater.DoItLaterFragment;
@@ -195,11 +194,6 @@ public class UIController implements View.OnClickListener {
                         replaceFragmentTo(DoItLaterFragment.class, R.id.frame_layout_main_container, DoItLaterFragment.TAG);
                         break;
 
-                    case R.id.menu_item_left_drawer_coordinator_layout:
-                        replaceFragmentTo(CoordinatorLayoutFragment.class, R.id.frame_layout_main_container,
-                                          CoordinatorLayoutFragment.TAG);
-                        break;
-
                     case R.id.menu_item_left_drawer_test:
                         replaceFragmentTo(TestFragment.class, R.id.frame_layout_main_container, TestFragment.TAG);
                         break;
@@ -258,8 +252,20 @@ public class UIController implements View.OnClickListener {
         fragmentTransaction.commit();
     }
 
+    private boolean isLeftDrawerOpened() {
+        return mDrawerLayout.isDrawerOpen(GravityCompat.START);
+    }
+
+    private boolean isRightDrawerOpened() {
+        return mDrawerLayout.isDrawerOpen(GravityCompat.END);
+    }
+
     private void closeLeftDrawer() {
         mDrawerLayout.closeDrawer(GravityCompat.START);
+    }
+
+    private void closeRightDrawer() {
+        mDrawerLayout.closeDrawer(GravityCompat.END);
     }
 
     private void setupFb() {
@@ -478,5 +484,13 @@ public class UIController implements View.OnClickListener {
 
     public void onClickAlertDialogCancel() {
 
+    }
+
+    public void onCloseRightDrawer() {
+        if (!isRightDrawerOpened()) {
+            return;
+        }
+
+        closeRightDrawer();
     }
 }

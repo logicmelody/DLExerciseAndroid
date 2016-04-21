@@ -10,8 +10,10 @@ import android.view.MenuItem;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.dialog.AlertDialogFragment;
+import com.dl.dlexerciseandroid.rightdrawer.RightDrawerFragment;
 
-public class MainActivity extends AppCompatActivity implements AlertDialogFragment.OnClickAlertDialogListener {
+public class MainActivity extends AppCompatActivity implements AlertDialogFragment.OnClickAlertDialogListener,
+        RightDrawerFragment.OnRightDrawerListener {
 
     private UIController mUIController;
 
@@ -74,5 +76,11 @@ public class MainActivity extends AppCompatActivity implements AlertDialogFragme
     @Override
     public void onClickAlertDialogCancel() {
         mUIController.onClickAlertDialogCancel();
+    }
+
+    // Fragment要與Activity溝通必須要透過interface，所以將RightDrawerFragment的interface實作在這裡
+    @Override
+    public void onCloseRightDrawer() {
+        mUIController.onCloseRightDrawer();
     }
 }

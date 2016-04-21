@@ -2,6 +2,7 @@
 
 <!-- https://guides.codepath.com/android/Fragment-Navigation-Drawer -->
 <!-- 如果要使用Navigation Drawer，DrawerLayout必須是layout的root -->
+<!-- 只需要在root view設定android:fitsSystemWindows="true"，但如果是drawer，則滑出來的container也必須設定-->
 <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -26,8 +27,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:theme="@style/AppBarOverlay"
-            app:popupTheme="@style/AppBarPopupOverlay"
-            android:fitsSystemWindows="true" />
+            app:popupTheme="@style/AppBarPopupOverlay" />
 
         <!-- 主要來顯示內容的container，用來顯示不同的Fragment -->
         <!-- android:clickable="true"：不加這行的話，drawer會有問題 -->
@@ -51,9 +51,9 @@
         android:layout_width="@dimen/width_main_left_drawer"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
         android:background="@color/background_main_left_drawer"
         android:clickable="true"
+        android:fitsSystemWindows="true"
         app:menu="@menu/drawer_left"
         app:headerLayout="@layout/layout_main_left_drawer_header"
         app:itemTextColor="@color/all_black"
