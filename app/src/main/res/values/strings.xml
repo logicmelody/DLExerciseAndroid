@@ -24,4 +24,7 @@
     <string name="facebook_public_profile">Profile</string>
     <string name="facebook_user_friends">User friends</string>
 
+    <!-- Do It Later -->
+    <string name="do_it_later_no_task">No task</string>
+
 </resources>

@@ -15,4 +15,7 @@
     <string name="facebook_public_profile">使用者資訊</string>
     <string name="facebook_user_friends">朋友資訊</string>
 
+    <!-- Do It Later -->
+    <string name="do_it_later_no_task">無工作</string>
+
 </resources>

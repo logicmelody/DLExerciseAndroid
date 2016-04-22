@@ -1,17 +1,24 @@
 package com.dl.dlexerciseandroid.doitlater;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.database.dbscheme.DLExerciseContract;
 import com.dl.dlexerciseandroid.datastructure.Task;
 
 import java.util.ArrayList;
@@ -20,9 +27,31 @@ import java.util.List;
 /**
  * Created by logicmelody on 2016/4/18.
  */
-public class DoItLaterFragment extends Fragment implements View.OnClickListener {
+
+// 利用LoaderManager.LoaderCallbacks跟ContentProvider，可以將顯示data的UI(RecyclerView)跟load db裡的資料分開
+// RecyclerView: 只需要bind好Adapter就好
+// LoaderManager.LoaderCallbacks: load資料的部分就交給LoaderManager.LoaderCallbacks，只要DB的資料有更新
+// 就會呼叫onLoadFinished()這個callback method，我們可以在這個method裡面拿到最新的data
+public class DoItLaterFragment extends Fragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<Cursor> {
 
     public static final String TAG = "com.dl.dlexerciseandroid.DoItLaterFragment";
+
+    private static int LOADER_ID = 12;
+
+    private static final String[] mProjection = new String[] {
+            DLExerciseContract.Task._ID,
+            DLExerciseContract.Task.TITLE,
+            DLExerciseContract.Task.DESCRIPTION,
+            DLExerciseContract.Task.TIME
+    };
+    private static final int ID = 0;
+    private static final int TITLE = 1;
+    private static final int DESCRIPTION = 2;
+    private static final int TIME = 3;
+
+    private static String mSelection;
+    protected static String[] mSelectionArgs;
+    private static final String mSortOrder = DLExerciseContract.Task.TIME;
 
     private Context mContext;
 
@@ -30,6 +59,8 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener 
     private StaggeredGridLayoutManager mTaskListLayoutManager;
     private DoItLaterAdapter mDoItLaterAdapter;
     private List<Task> mTaskListDataSet = new ArrayList<>();
+
+    private TextView mNoTaskText;
 
     private FloatingActionButton mAddTaskButton;
 
@@ -50,6 +81,7 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initialize();
+        getLoaderManager().initLoader(LOADER_ID, null, this);
     }
 
     private void initialize() {
@@ -60,6 +92,7 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener 
 
     private void findViews() {
         mTaskList = (RecyclerView) getView().findViewById(R.id.recyclerView_do_it_later_task_list);
+        mNoTaskText = (TextView) getView().findViewById(R.id.text_view_do_it_later_task_list_no_task);
         mAddTaskButton = (FloatingActionButton) getView().findViewById(R.id.floating_action_button_do_it_later_add_task);
     }
 
@@ -68,8 +101,6 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener 
     }
 
     private void setupTaskList() {
-        setTaskListData();
-
         mTaskListLayoutManager =
                 new StaggeredGridLayoutManager(getResources().getInteger(R.integer.span_count_do_it_later_task_list),
                                                StaggeredGridLayoutManager.VERTICAL);
@@ -86,29 +117,49 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener 
         mTaskList.setAdapter(mDoItLaterAdapter);
     }
 
-    private void setTaskListData() {
-        mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
-        mTaskListDataSet.add(new Task("Good time Ya Ya", "Description", System.currentTimeMillis()));
-        mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
-        mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
-        mTaskListDataSet.add(new Task("Good time Ya Ya", "Description", System.currentTimeMillis()));
-        mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
-        mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
-        mTaskListDataSet.add(new Task("Good time Ya Ya", "Description", System.currentTimeMillis()));
-        mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
-        mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
-        mTaskListDataSet.add(new Task("Good time Ya Ya", "Description", System.currentTimeMillis()));
-        mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
-        mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
-        mTaskListDataSet.add(new Task("Good time Ya Ya", "Description", System.currentTimeMillis()));
-        mTaskListDataSet.add(new Task("Good", "Description", System.currentTimeMillis()));
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.floating_action_button_do_it_later_add_task:
                 break;
         }
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new CursorLoader(mContext, DLExerciseContract.Task.CONTENT_URI, mProjection, null, null, mSortOrder);
+    }
+
+    // 在這個method裡面使用完cursor之後，不需要去把cursor關掉，LoaderManager會自動處理掉這件事
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        Log.d("danny", "Do It Later onLoadFinished()");
+
+        if (data == null) {
+            return;
+        }
+
+        setTaskListData(data);
+    }
+
+    private void setTaskListData(Cursor data) {
+        mTaskListDataSet.clear();
+
+        while (data.moveToNext()) {
+            int id = data.getInt(ID);
+            String title = data.getString(TITLE);
+            String description = data.getString(DESCRIPTION);
+            long time = data.getLong(TIME);
+
+            mTaskListDataSet.add(new Task(title, description, time));
+        }
+
+        mDoItLaterAdapter.notifyDataSetChanged();
+        mNoTaskText.setVisibility(mTaskListDataSet.size() == 0 ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
     }
 }
