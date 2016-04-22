@@ -39,7 +39,7 @@
             android:theme="@style/AppDialogTheme.NoActionBar" />
 
         <!-- 此Activity用來接收別的app share過來的intent，一定要用Activity才收的到 -->
-        <!-- 我們邊的目的，是希望別的app share過來的intent，我們解析其資訊之後就存到db，所以我們不需要Activity的UI
+        <!-- 我們這邊的目的，是希望別的app share過來的intent，我們解析其資訊之後就存到db，所以我們不需要Activity的UI
              可以套上@android:style/Theme.NoDisplay，如此一來就可以啟動Activity，但是不會看到任何畫面 -->
         <activity
             android:name=".doitlater.share.DoItLaterShareActivity"
@@ -77,6 +77,7 @@
             </intent-filter>
         </receiver>
         -->
+        <service android:name=".background.service.DoItLaterService" />
 
         <provider
             android:name=".database.provider.DLExerciseContentProvider"
