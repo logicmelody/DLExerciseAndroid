@@ -1,6 +1,7 @@
 package com.dl.dlexerciseandroid.doitlater;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,6 +21,8 @@ import android.widget.TextView;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.database.dbscheme.DLExerciseContract;
 import com.dl.dlexerciseandroid.datastructure.Task;
+import com.dl.dlexerciseandroid.dialog.activity.AddTaskActivity;
+import com.dl.dlexerciseandroid.dialog.dialogfragment.test.AddTaskDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,8 +124,13 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.floating_action_button_do_it_later_add_task:
+                addTask();
                 break;
         }
+    }
+
+    private void addTask() {
+        startActivity(new Intent(mContext, AddTaskActivity.class));
     }
 
     @Override

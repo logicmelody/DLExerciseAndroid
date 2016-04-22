@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.dialog.AlertDialogFragment;
+import com.dl.dlexerciseandroid.dialog.dialogfragment.alert.AlertDialogFragment;
 import com.dl.dlexerciseandroid.rightdrawer.RightDrawerFragment;
 
 public class MainActivity extends AppCompatActivity implements AlertDialogFragment.OnClickAlertDialogListener,

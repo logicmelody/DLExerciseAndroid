@@ -22,14 +22,14 @@ import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.database.debug.AndroidDatabaseManager;
-import com.dl.dlexerciseandroid.dialog.AlertDialogFragment;
-import com.dl.dlexerciseandroid.doitlater.DoItLaterFragment;
+import com.dl.dlexerciseandroid.dialog.dialogfragment.alert.AlertDialogFragment;
 import com.dl.dlexerciseandroid.facebook.FacebookFragment;
 import com.dl.dlexerciseandroid.overview.OverviewFragment;
 import com.dl.dlexerciseandroid.rightdrawer.RightDrawerFragment;
 import com.dl.dlexerciseandroid.spring.ConsumingRestfulWebServiceFragment;
 import com.dl.dlexerciseandroid.test.TestFragment;
 import com.dl.dlexerciseandroid.utility.utils.FbUtils;
+import com.dl.dlexerciseandroid.doitlater.DoItLaterFragment;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;

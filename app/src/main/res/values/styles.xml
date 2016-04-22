@@ -35,4 +35,24 @@
     <style name="AppBarPopupOverlay" parent="ThemeOverlay.AppCompat.Light">
     </style>
 
+    <!-- Theme.AppCompat.Light.DialogWhenLarge這個theme，可以讓Activity在小的device上全螢幕顯示，
+         但是在比較大的device會以dialog的方式出現，Activity的實作方式跟一般的Activity一樣 -->
+    <style name="BaseAppDialogTheme" parent="Theme.AppCompat.Light.DialogWhenLarge">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/colorTextPrimary</item>  <!-- ActionBar title的顏色 -->
+        <item name="android:textColorSecondary">@color/colorTextSecondary</item>  <!-- ActionBar subtitle的顏色 -->
+        <item name="android:windowBackground">@color/all_white</item>
+    </style>
+
+    <style name="AppDialogTheme" parent="@style/BaseAppDialogTheme">
+    </style>
+
+    <style name="AppDialogTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 </resources>

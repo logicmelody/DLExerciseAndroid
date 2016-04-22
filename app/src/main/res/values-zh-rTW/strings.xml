@@ -18,4 +18,9 @@
     <!-- Do It Later -->
     <string name="do_it_later_no_task">無工作</string>
 
+    <!-- Add task dialog -->
+    <string name="add_task_dialog_title">新增工作</string>
+    <string name="add_task_task_title_hint">工作名稱</string>
+    <string name="add_task_task_description_hint">工作描述</string>
+
 </resources>

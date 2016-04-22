@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.dialog;
+package com.dl.dlexerciseandroid.dialog.dialogfragment.alert;
 
 import android.app.Activity;
 import android.app.Dialog;

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- android:fitsSystemWindows="true"
+     如果這個屬性設成true，系統會在畫面上保留status bar與action bar的padding，從這之下才開始繪製我們的UI
+     如果沒有設這個屬性，view跟status bar或是action bar會產生重疊-->
+<!-- 要用app:theme and app:popupTheme設定theme才可以正常運作 -->
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tool_bar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    app:popupTheme="@style/AppBarPopupOverlay"
+    app:theme="@style/AppBarOverlay"/>

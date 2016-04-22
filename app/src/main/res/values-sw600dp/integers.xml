@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Do It Later -->
+    <integer name="span_count_do_it_later_task_list">3</integer>
+
+</resources>
