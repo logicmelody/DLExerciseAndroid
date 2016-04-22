@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.doitlater;
+package com.dl.dlexerciseandroid.doitlater.tasklist;
 
 import android.content.Context;
 import android.graphics.Rect;

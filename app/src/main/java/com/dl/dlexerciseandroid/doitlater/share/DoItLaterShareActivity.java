@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.doitlater;
+package com.dl.dlexerciseandroid.doitlater.share;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

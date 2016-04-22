@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.doitlater;
+package com.dl.dlexerciseandroid.doitlater.share;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

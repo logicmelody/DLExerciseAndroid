@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.doitlater;
+package com.dl.dlexerciseandroid.doitlater.tasklist;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,7 +22,6 @@ import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.database.dbscheme.DLExerciseContract;
 import com.dl.dlexerciseandroid.datastructure.Task;
 import com.dl.dlexerciseandroid.dialog.activity.AddTaskActivity;
-import com.dl.dlexerciseandroid.dialog.dialogfragment.test.AddTaskDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;

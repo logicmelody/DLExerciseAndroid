@@ -29,7 +29,7 @@ import com.dl.dlexerciseandroid.rightdrawer.RightDrawerFragment;
 import com.dl.dlexerciseandroid.spring.ConsumingRestfulWebServiceFragment;
 import com.dl.dlexerciseandroid.test.TestFragment;
 import com.dl.dlexerciseandroid.utility.utils.FbUtils;
-import com.dl.dlexerciseandroid.doitlater.DoItLaterFragment;
+import com.dl.dlexerciseandroid.doitlater.tasklist.DoItLaterFragment;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
