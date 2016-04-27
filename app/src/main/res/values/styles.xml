@@ -19,6 +19,9 @@
     <style name="AppTheme" parent="BaseAppTheme">
     </style>
 
+    <style name="AppTheme.Drawer">
+    </style>
+
     <!-- 如果需要客製一些比較特別的Toolbar，設定Toolbar裡面的theme屬性 -->
     <!-- 最好將Toolbar跟app的主要theme切開來，Toolbar給他一個自己的theme會比較好 -->
     <!-- 若是在style中加入android:background的屬性，也會一起影響option menu item的popup視窗顏色，

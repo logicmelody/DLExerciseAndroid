@@ -24,26 +24,28 @@
 
         <activity
             android:name=".main.MainActivity"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.Drawer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".coordinatorlayout.CoordinatorLayoutActivity" />
-
         <activity
             android:name=".dialog.activity.AddTaskActivity"
             android:theme="@style/AppDialogTheme.NoActionBar" />
 
         <!-- 此Activity用來接收別的app share過來的intent，一定要用Activity才收的到 -->
-        <!-- 我們這邊的目的，是希望別的app share過來的intent，我們解析其資訊之後就存到db，所以我們不需要Activity的UI
-             可以套上@android:style/Theme.NoDisplay，如此一來就可以啟動Activity，但是不會看到任何畫面 -->
+        <!--
+             我們這邊的目的，是希望別的app share過來的intent，我們解析其資訊之後就存到db，所以我們不需要Activity的UI
+             可以套上@android:style/Theme.NoDisplay，如此一來就可以啟動Activity，但是不會看到任何畫面
+        -->
         <activity
             android:name=".doitlater.share.DoItLaterShareActivity"
             android:theme="@android:style/Theme.NoDisplay">
+
             <!-- 設定接收share intent的filter記得要加action, category, data -->
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -51,6 +53,13 @@
                 <data android:mimeType="image/*" />
                 <data android:mimeType="video/*" />
                 <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".intent.ReceiveIntentActivity">
+            <intent-filter>
+                <action android:name="com.dl.dlexerciseandroid.ACTION_RECEIVE_INTENT" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
@@ -66,7 +75,8 @@
             android:name=".database.debug.AndroidDatabaseManager"
             android:theme="@style/Theme.AppCompat.Light" />
 
-        <!-- 用receiver沒有辦法收到來自別的app的shared intent
+        <!--
+        用receiver沒有辦法收到來自別的app的shared intent
         <receiver android:name=".doitlater.DoItLaterShareReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />

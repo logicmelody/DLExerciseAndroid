@@ -24,6 +24,7 @@ import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.database.debug.AndroidDatabaseManager;
 import com.dl.dlexerciseandroid.dialog.dialogfragment.alert.AlertDialogFragment;
 import com.dl.dlexerciseandroid.facebook.FacebookFragment;
+import com.dl.dlexerciseandroid.intent.IntentFragment;
 import com.dl.dlexerciseandroid.overview.OverviewFragment;
 import com.dl.dlexerciseandroid.rightdrawer.RightDrawerFragment;
 import com.dl.dlexerciseandroid.spring.ConsumingRestfulWebServiceFragment;
@@ -192,6 +193,10 @@ public class UIController implements View.OnClickListener {
 
                     case R.id.menu_item_left_drawer_do_it_later:
                         replaceFragmentTo(DoItLaterFragment.class, R.id.frame_layout_main_container, DoItLaterFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_intent:
+                        replaceFragmentTo(IntentFragment.class, R.id.frame_layout_main_container, IntentFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:

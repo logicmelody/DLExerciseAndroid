@@ -21,6 +21,10 @@
             android:title="@string/all_do_it_later" />
 
         <item
+            android:id="@+id/menu_item_left_drawer_intent"
+            android:title="@string/all_intent" />
+
+        <item
             android:id="@+id/menu_item_left_drawer_test"
             android:title="@string/all_test" />
     </group>

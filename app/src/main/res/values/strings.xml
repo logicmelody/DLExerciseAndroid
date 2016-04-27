@@ -11,6 +11,7 @@
     <string name="all_consuming_restful_web_service">Consuming Restful Web Service</string>
     <string name="all_facebook" translatable="false">Facebook</string>
     <string name="all_do_it_later" translatable="false">Do It Later</string>
+    <string name="all_intent" translatable="false">Intent</string>
     <string name="all_coordinator_layout" translatable="false">CoordinatorLayout</string>
     <string name="all_test">Test</string>
 
@@ -31,5 +32,12 @@
     <string name="add_task_dialog_title">Add Task</string>
     <string name="add_task_task_title_hint">Task title</string>
     <string name="add_task_task_description_hint">Task description</string>
+
+    <!-- Intent -->
+    <string name="intent_fire_component_intent" translatable="false">Fire component intent</string>
+    <string name="intent_fire_action_intent" translatable="false">Fire action intent</string>
+
+    <!-- Receive intent -->
+    <string name="receive_intent" translatable="false">Receive Intent</string>
 
 </resources>

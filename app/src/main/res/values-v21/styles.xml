@@ -2,13 +2,16 @@
 
     <!-- 如果想要讓Drawer slide出來時，status bar可以有一點透明的效果，需要將android:windowTranslucentStatus的屬性設為true，
          但這個屬性是API Level 19以上才可以使用的功能，所以我們必須另外設定一個styles.xml(v19)-->
-    <style name="AppTheme" parent="BaseAppTheme">
+    <style name="AppTheme.Drawer">
+        <!-- v19 只有在套用Drawer layout的Activity我們才使用此style，這兩個屬性可以讓status bar變成透明，
+                 搭配Drawer layout，還是可以保有status bar的color
         <item name="android:windowTranslucentStatus">true</item>
+        -->
 
-        <!-- 待研究
+        <!-- v21 只有在套用Drawer layout的Activity我們才使用此style，這兩個屬性可以讓status bar變成透明，
+                 搭配Drawer layout，還是可以保有status bar的color -->
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-        -->
     </style>
 
 </resources>
