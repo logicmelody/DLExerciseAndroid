@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,16 +75,25 @@ public class IntentFragment extends Fragment implements View.OnClickListener {
     private void fireActionIntent() {
         // 只有設定action，讓系統尋找最適合的Activity開啟
         Intent intent = new Intent(ReceiveIntentActivity.ACTION_RECEIVE_INTENT);
+
+        // category通常不用設定，系統會指定預設的category：android.intent.category.DEFAULT
+
         startActivity(intent);
     }
 
     private void fireComponentIntent() {
         Intent intent = new Intent();
 
+        Log.d("danny", "fireComponentIntent() package name = " + mContext.getPackageName());
+        Log.d("danny", "fireComponentIntent() class name = " + ReceiveIntentActivity.class.getName());
+
         // Intent除了可以設定action, category, data交由系統自己決定要用哪個Activity開啟之外，
         // 也可以經由setClassName()這種設定package name跟class name的方式，明確指定此intent要由哪一個component開啟
-        intent.setClassName("com.dl.dlexerciseandroid", "com.dl.dlexerciseandroid.intent.ReceiveIntentActivity");
+        // setClassName("com.dl.dlexerciseandroid", "com.dl.dlexerciseandroid.intent.ReceiveIntentActivity")
+        intent.setClassName(mContext.getPackageName(), ReceiveIntentActivity.class.getName());
         intent.setAction(ReceiveIntentActivity.ACTION_RECEIVE_INTENT);
+        intent.putExtra("EXTRA_STRING", "This is a string");
+        intent.putExtra("EXTRA_INT", 100);
 
         startActivity(intent);
     }
