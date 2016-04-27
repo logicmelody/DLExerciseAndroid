@@ -27,6 +27,8 @@
 
     <!-- Do It Later -->
     <string name="do_it_later_no_task">No task</string>
+    <string name="do_it_later_save_task_completed">Save task completed</string>
+    <string name="do_it_later_save_task_failed">Save task failed</string>
 
     <!-- Add task dialog -->
     <string name="add_task_dialog_title">Add Task</string>

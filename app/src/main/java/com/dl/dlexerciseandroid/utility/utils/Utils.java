@@ -1,7 +1,10 @@
 package com.dl.dlexerciseandroid.utility.utils;
 
 import android.app.Activity;
+import android.content.Context;
+import android.os.Handler;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -53,5 +56,14 @@ public class Utils {
         c.setTimeInMillis(milliseconds);
 
         return new SimpleDateFormat(format).format(c.getTime());
+    }
+
+    public static void showToastInNonUIThread(Handler handler, final Context context, final String text) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

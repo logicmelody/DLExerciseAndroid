@@ -13,13 +13,26 @@ public class DbUtils {
 
     public static void insertTask(Context context, String title, String description, long time) {
         if (TextUtils.isEmpty(title)) {
-
+            return;
         }
 
         ContentValues values = new ContentValues();
         values.put(DLExerciseContract.Task.TITLE, title);
         values.put(DLExerciseContract.Task.DESCRIPTION, description);
         values.put(DLExerciseContract.Task.TIME, time);
+
+        context.getContentResolver().insert(DLExerciseContract.Task.CONTENT_URI, values);
+    }
+
+    public static void insertDoItLaterTask(Context context, String title, String description, long time,
+                                           String laterPackageName, String laterCallback) {
+
+        ContentValues values = new ContentValues();
+        values.put(DLExerciseContract.Task.TITLE, title);
+        values.put(DLExerciseContract.Task.DESCRIPTION, description);
+        values.put(DLExerciseContract.Task.TIME, time);
+        values.put(DLExerciseContract.Task.LATER_PACKAGE_NAME, laterPackageName);
+        values.put(DLExerciseContract.Task.LATER_CALL_BACK, laterCallback);
 
         context.getContentResolver().insert(DLExerciseContract.Task.CONTENT_URI, values);
     }

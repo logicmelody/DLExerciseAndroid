@@ -17,6 +17,8 @@
 
     <!-- Do It Later -->
     <string name="do_it_later_no_task">無工作</string>
+    <string name="do_it_later_save_task_completed">儲存工作成功</string>
+    <string name="do_it_later_save_task_failed">儲存工作失敗</string>
 
     <!-- Add task dialog -->
     <string name="add_task_dialog_title">新增工作</string>

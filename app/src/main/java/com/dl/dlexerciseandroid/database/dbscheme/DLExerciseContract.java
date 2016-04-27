@@ -20,5 +20,7 @@ public class DLExerciseContract {
         public static final String TITLE = "title";
         public static final String DESCRIPTION = "description";
         public static final String TIME = "time";
+        public static final String LATER_PACKAGE_NAME = "later_package_name";
+        public static final String LATER_CALL_BACK = "later_call_back";
     }
 }

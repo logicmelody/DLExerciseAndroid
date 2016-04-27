@@ -43,7 +43,7 @@
              可以套上@android:style/Theme.NoDisplay，如此一來就可以啟動Activity，但是不會看到任何畫面
         -->
         <activity
-            android:name=".doitlater.share.DoItLaterShareActivity"
+            android:name=".doitlater.share.DoItLaterReceiverActivity"
             android:theme="@android:style/Theme.NoDisplay">
 
             <!-- 設定接收share intent的filter記得要加action, category, data -->
@@ -53,6 +53,11 @@
                 <data android:mimeType="image/*" />
                 <data android:mimeType="video/*" />
                 <data android:mimeType="text/plain" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="com.dl.dlexerciseandroid.ACTION_DO_IT_LATER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 

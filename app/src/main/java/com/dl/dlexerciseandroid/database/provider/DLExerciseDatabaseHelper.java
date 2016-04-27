@@ -22,10 +22,11 @@ public class DLExerciseDatabaseHelper extends SQLiteOpenHelper {
     // 設定現在的DB version，當user已經安裝了app之後，就只能利用update db的方式來修改或是更新db的欄位
     // user安裝了更新版的app之後，如果DB version比舊的高，就會呼叫onUpgrade()
     // Version必須要 >= 1，所以初始只能從1開始
-    private static final int DB_VERSION = DbVersion.VERSION_1;
+    private static final int DB_VERSION = DbVersion.VERSION_2;
 
     public static final class DbVersion {
         public static final int VERSION_1 = 1;
+        public static final int VERSION_2 = 2;
     }
 
     private volatile static DLExerciseDatabaseHelper sDLExerciseDatabaseHelper;
@@ -54,7 +55,16 @@ public class DLExerciseDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if (newVersion <= oldVersion) {
+            return;
+        }
 
+        int version = oldVersion;
+
+        if (version < DbVersion.VERSION_2) {
+            TaskTable.onUpgrade(db, version, DB_VERSION);
+            version = DbVersion.VERSION_2;
+        }
     }
 
     public ArrayList<Cursor> getData(String Query){

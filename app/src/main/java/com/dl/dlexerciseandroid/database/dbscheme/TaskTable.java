@@ -3,6 +3,8 @@ package com.dl.dlexerciseandroid.database.dbscheme;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.dl.dlexerciseandroid.database.provider.DLExerciseDatabaseHelper;
+
 /**
  * Created by logicmelody on 2016/4/14.
  */
@@ -30,6 +32,15 @@ public class TaskTable {
     }
 
     public static void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
+        if (oldVersion < DLExerciseDatabaseHelper.DbVersion.VERSION_2) {
+            String updateDb = "ALTER TABLE " + DLExerciseContract.Task.TABLE_NAME +
+                    " ADD COLUMN " + DLExerciseContract.Task.LATER_PACKAGE_NAME + " TEXT;";
 
+            String updateDb2 = "ALTER TABLE " + DLExerciseContract.Task.TABLE_NAME +
+                    " ADD COLUMN " + DLExerciseContract.Task.LATER_CALL_BACK + " TEXT;";
+
+            database.execSQL(updateDb);
+            database.execSQL(updateDb2);
+        }
     }
 }
