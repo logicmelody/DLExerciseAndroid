@@ -26,6 +26,7 @@
 
     <!-- Do It Later -->
     <color name="stroke_color_task_item">#FF979797</color>
-    <color name="solid_color_task_item">@color/all_white</color>
+    <color name="background_task_item">@color/all_white</color>
+    <color name="background_later_task_item">#FFFFFF00</color>
 
 </resources>

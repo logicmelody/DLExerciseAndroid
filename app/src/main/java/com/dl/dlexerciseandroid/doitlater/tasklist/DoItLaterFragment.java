@@ -12,6 +12,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,12 +45,16 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
             DLExerciseContract.Task._ID,
             DLExerciseContract.Task.TITLE,
             DLExerciseContract.Task.DESCRIPTION,
-            DLExerciseContract.Task.TIME
+            DLExerciseContract.Task.TIME,
+            DLExerciseContract.Task.LATER_PACKAGE_NAME,
+            DLExerciseContract.Task.LATER_CALL_BACK
     };
     private static final int ID = 0;
     private static final int TITLE = 1;
     private static final int DESCRIPTION = 2;
     private static final int TIME = 3;
+    private static final int LATER_PACKAGE_NAME = 4;
+    private static final int LATER_CALL_BACK = 5;
 
     private static String mSelection;
     protected static String[] mSelectionArgs;
@@ -60,7 +65,7 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
     private RecyclerView mTaskList;
     private StaggeredGridLayoutManager mTaskListLayoutManager;
     private DoItLaterAdapter mDoItLaterAdapter;
-    private List<Task> mTaskListDataSet = new ArrayList<>();
+    private List<DoItLaterViewItem> mTaskListDataSet = new ArrayList<>();
 
     private TextView mNoTaskText;
 
@@ -156,9 +161,15 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
             int id = data.getInt(ID);
             String title = data.getString(TITLE);
             String description = data.getString(DESCRIPTION);
+            String laterPackageName = data.getString(LATER_PACKAGE_NAME);
+            String laterCallback = data.getString(LATER_CALL_BACK);
             long time = data.getLong(TIME);
+            int viewType = TextUtils.isEmpty(laterCallback) ?
+                    DoItLaterViewItem.ViewType.NORMAL : DoItLaterViewItem.ViewType.LATER;
 
-            mTaskListDataSet.add(new Task(title, description, time));
+            Task task = new Task(title, description, laterPackageName, laterCallback, time);
+
+            mTaskListDataSet.add(new DoItLaterViewItem(task, viewType));
         }
 
         mDoItLaterAdapter.notifyDataSetChanged();

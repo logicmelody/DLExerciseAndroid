@@ -8,7 +8,7 @@
             <corners android:radius="@dimen/corners_radius_task_item" />
 
             <!-- 如果想要有ripple的效果，一定要設定solid，就算background的顏色跟parent的background一樣，還是需要設定solid -->
-            <solid android:color="@color/background_task_item" />
+            <solid android:color="@color/background_later_task_item" />
         </shape>
     </item>
 

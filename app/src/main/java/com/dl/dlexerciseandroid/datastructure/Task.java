@@ -7,12 +7,16 @@ public class Task {
 
     public String title;
     public String description;
+    public String laterPackageName;
+    public String laterCallback;
     public long time = 0L;
 
 
-    public Task(String title, String description, long time) {
+    public Task(String title, String description, String laterPackageName, String laterCallback, long time) {
         this.title = title;
         this.description = description;
+        this.laterPackageName = laterPackageName;
+        this.laterCallback = laterCallback;
         this.time = time;
     }
 }
