@@ -63,7 +63,7 @@ public class DoItLaterService extends IntentService {
         DoItLaterTask doItLaterTask = null;
 
         if (DoItLaterUtils.ACTION_DO_IT_LATER.equals(from)) {
-            doItLaterTask = new InHouseDoItLaterTask(intentFromOtherApp);
+            doItLaterTask = new InHouseDoItLaterTask(this, intentFromOtherApp);
 
         } else if (Intent.ACTION_SEND.equals(from)) {
 

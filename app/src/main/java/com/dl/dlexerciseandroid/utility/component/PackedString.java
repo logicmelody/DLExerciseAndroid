@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 
 /**
  * A utility class for creating and modifying Strings that are tagged and packed together.
@@ -23,7 +24,7 @@ import android.util.Base64;
  *
  * Binary compatible with Address.pack() format, which should migrate to use this code.
  */
-public class TaskPackedString {
+public class PackedString {
 
     public static final class Key {
         public static final String ACTION = "action";
@@ -66,7 +67,7 @@ public class TaskPackedString {
      * Create a packed string using an already-packed string (e.g. from database)
      * @param string packed string
      */
-    public TaskPackedString(String string, Context context) {
+    public PackedString(String string, Context context) {
         mContext = context;
         mString = string;
         mExploded = null;
@@ -93,7 +94,7 @@ public class TaskPackedString {
         if (mExploded == null) {
             mExploded = explode(mString);
         }
-        return new HashMap<String,Object>(mExploded);
+        return new HashMap<>(mExploded);
     }
 
     /**
@@ -152,16 +153,16 @@ public class TaskPackedString {
 
         if(sTypeMap.containsKey(_class)) {
             result = sTypeMap.get(_class) + DELIMITER_TYPE + value.toString();
+
         } else {
             try {
-                bo = new ByteArrayOutputStream();
-
                 bo = new ByteArrayOutputStream();
                 out = new ObjectOutputStream(bo);
                 out.writeObject(value);
 
                 result = Builder.mPackagename + DELIMITER_TYPE + Base64
                         .encodeToString(bo.toByteArray(), Base64.DEFAULT);
+
                 bo.close();
                 out.close();
             } catch (java.io.NotSerializableException e) {
@@ -179,18 +180,21 @@ public class TaskPackedString {
     private static Object convertStringToObject(String s) {
         Object result = new Object();
         ByteArrayInputStream bi;
-        TaskInputStream in;
+        PackedInputStream in;
         String[] array = s.split(DELIMITER_TYPE);
         String typeString = array[0];
+
         // value could be null, only type existed
         if(array.length < 2 || TextUtils.isEmpty(array[1])){
             return null;
         }
+
         try {
             if (sTypeMap.containsValue(typeString)) {
                 Class<?> _class = getKeyByValue(sTypeMap, typeString);
                 result = array[1];
                 if (_class != String.class) {
+                    // 如果object的class是primitive type，我們可以用Reflection的方式將String data轉成正確的data type
                     result = _class.getMethod("valueOf", new Class[] {String.class})
                                 .invoke(null, new Object[] {result});
                 }
@@ -201,6 +205,7 @@ public class TaskPackedString {
                 Context remote1 = null;
 
                 try {
+                    // 利用別的app的package name取回那個app環境的class loader
                     remote1 = mContext.createPackageContext(typeString,
                             Context.CONTEXT_INCLUDE_CODE | Context.CONTEXT_IGNORE_SECURITY);
 
@@ -208,7 +213,8 @@ public class TaskPackedString {
                     // TODO Auto-generated catch block
                     throw new IllegalArgumentException(e.getMessage());
                 }
-                in = new TaskInputStream(bi, remote1.getClassLoader());
+
+                in = new PackedInputStream(bi, remote1.getClassLoader());
                 result = in.readObject();
 
                 bi.close();
@@ -297,6 +303,7 @@ public class TaskPackedString {
                 if (sb.length() > 0) {
                     sb.append(DELIMITER_ELEMENT);
                 }
+
                 sb.append(convertObjectToString(entry.getValue()));
                 sb.append(DELIMITER_TAG);
                 sb.append(entry.getKey());

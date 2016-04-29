@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dl.dlexerciseandroid">
+    package="com.dl.dlexerciseandroid"
+    android:sharedUserId="android.uid.latertask">
+    <!-- 如果多個app有共同的android:sharedUserId，而且都sign同樣的key，那麼這些app的resources跟class可以彼此共用 -->
 
     <uses-permission android:name="android.permission.INTERNET" />
 

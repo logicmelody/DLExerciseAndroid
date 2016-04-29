@@ -1,5 +1,6 @@
 package com.dl.dlexerciseandroid.doitlater.share;
 
+import android.content.Context;
 import android.content.Intent;
 
 /**
@@ -14,10 +15,10 @@ public abstract class DoItLaterTask {
     protected long mTime;
 
 
-    public abstract void retrieveIntent(Intent intent);
+    public abstract void retrieveIntent(Context context, Intent intent);
 
-    public DoItLaterTask(Intent intent) {
-        retrieveIntent(intent);
+    public DoItLaterTask(Context context, Intent intent) {
+        retrieveIntent(context, intent);
     }
 
     public String getTitle() {
