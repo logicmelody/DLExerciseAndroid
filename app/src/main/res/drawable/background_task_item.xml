@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="?colorControlHighlight">
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <stroke
+        android:width="@dimen/stroke_width_task_item"
+        android:color="@color/stroke_color_task_item" />
+    <corners android:radius="@dimen/corners_radius_task_item" />
 
-    <item>
-        <shape android:shape="rectangle">
-            <stroke android:width="@dimen/stroke_width_task_item" android:color="@color/stroke_color_task_item" />
-            <corners android:radius="@dimen/corners_radius_task_item" />
-
-            <!-- 如果想要有ripple的效果，一定要設定solid，就算background的顏色跟parent的background一樣，還是需要設定solid -->
-            <solid android:color="@color/background_task_item" />
-        </shape>
-    </item>
-
-</ripple>
+    <!-- 如果想要有ripple的效果，一定要設定solid，就算background的顏色跟parent的background一樣，還是需要設定solid -->
+    <solid android:color="@color/background_task_item" />
+</shape>

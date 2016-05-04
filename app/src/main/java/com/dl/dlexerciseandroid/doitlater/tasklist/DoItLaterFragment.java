@@ -58,7 +58,9 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
 
     private static String mSelection;
     protected static String[] mSelectionArgs;
-    private static final String mSortOrder = DLExerciseContract.Task.TIME;
+
+    // 在order欄位的後面加上"ASC" or "DESC"，可以指定要由小到大 or 由大到小排序
+    private static final String mSortOrder = DLExerciseContract.Task.TIME + " DESC";
 
     private Context mContext;
 

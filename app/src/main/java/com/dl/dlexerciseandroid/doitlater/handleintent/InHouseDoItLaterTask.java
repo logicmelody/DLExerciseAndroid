@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.doitlater.share;
+package com.dl.dlexerciseandroid.doitlater.handleintent;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,17 +22,17 @@ public class InHouseDoItLaterTask extends DoItLaterTask {
     }
 
     @Override
-    public void retrieveIntent(Context context, Intent intent) {
-        Intent callBackIntent = intent.getParcelableExtra(DoItLaterUtils.ExtraKey.CALL_BACK);
+    public void retrieveIntent() {
+        Intent callBackIntent = mIntent.getParcelableExtra(DoItLaterUtils.ExtraKey.CALL_BACK);
 
-        mTitle = intent.getStringExtra(DoItLaterUtils.ExtraKey.TITLE);
-        mDescription = intent.getStringExtra(DoItLaterUtils.ExtraKey.DESCRIPTION);
+        mTitle = mIntent.getStringExtra(DoItLaterUtils.ExtraKey.TITLE);
+        mDescription = mIntent.getStringExtra(DoItLaterUtils.ExtraKey.DESCRIPTION);
         mTime = System.currentTimeMillis();
 
-        retrieveCallbackIntent(context, callBackIntent);
+        retrieveCallbackIntent(callBackIntent);
     }
 
-    private void retrieveCallbackIntent(Context context, Intent callBackIntent) {
+    private void retrieveCallbackIntent(Intent callBackIntent) {
         // 以下資訊可能不會有
         String action = callBackIntent.getAction();
         String type = callBackIntent.getType();
@@ -88,7 +88,7 @@ public class InHouseDoItLaterTask extends DoItLaterTask {
                 // 1. 在AndroidManifest中要加入android:sharedUserId="android.uid.latertask"，如此一來有加入這個property的
                 //    app彼此的resources或是class才可以共用
                 // 2. 彼此app都要sign相同的key
-                Context remote = context.createPackageContext(packageName,
+                Context remote = mContext.createPackageContext(packageName,
                         Context.CONTEXT_INCLUDE_CODE | Context.CONTEXT_IGNORE_SECURITY);
 
                 // 因為我們要擷取別的app傳來的intent資訊，所以必須要assign那個app環境底下的class loader

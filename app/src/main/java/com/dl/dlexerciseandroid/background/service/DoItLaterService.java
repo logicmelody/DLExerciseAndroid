@@ -6,8 +6,9 @@ import android.content.Intent;
 import android.os.Handler;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.doitlater.share.DoItLaterTask;
-import com.dl.dlexerciseandroid.doitlater.share.InHouseDoItLaterTask;
+import com.dl.dlexerciseandroid.doitlater.handleintent.DoItLaterTask;
+import com.dl.dlexerciseandroid.doitlater.handleintent.InHouseDoItLaterTask;
+import com.dl.dlexerciseandroid.doitlater.handleintent.OtherDoItLaterTask;
 import com.dl.dlexerciseandroid.utility.utils.DbUtils;
 import com.dl.dlexerciseandroid.utility.utils.DoItLaterUtils;
 import com.dl.dlexerciseandroid.utility.utils.Utils;
@@ -66,7 +67,7 @@ public class DoItLaterService extends IntentService {
             doItLaterTask = new InHouseDoItLaterTask(this, intentFromOtherApp);
 
         } else if (Intent.ACTION_SEND.equals(from)) {
-
+            doItLaterTask = new OtherDoItLaterTask(this, intentFromOtherApp);
         }
 
         if (doItLaterTask != null) {

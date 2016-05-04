@@ -6,6 +6,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- 如果要使用getRunningTasks()，就必須要加此permission，但此permission只有在Lollipop之前才有作用 -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
     <!-- Permissions for provider -->
     <uses-permission android:name="com.dl.dlexerciseandroid.provider.permission.READ" />
     <uses-permission android:name="com.dl.dlexerciseandroid.provider.permission.WRITE" />
@@ -63,10 +66,20 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".intent.ReceiveIntentActivity">
+        <activity
+            android:name=".intent.ReceiveIntentActivity"
+            android:label="ReceiveIntentActivity">
             <intent-filter>
                 <action android:name="com.dl.dlexerciseandroid.ACTION_RECEIVE_INTENT" />
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+                <data android:mimeType="video/*" />
+                <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
 

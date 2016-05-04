@@ -1,5 +1,8 @@
 package com.dl.dlexerciseandroid.intent;
 
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningAppProcessInfo;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -7,13 +10,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.dl.dlexerciseandroid.R;
 
 import java.util.Iterator;
+import java.util.List;
 
 public class ReceiveIntentActivity extends AppCompatActivity {
 
@@ -22,36 +23,66 @@ public class ReceiveIntentActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private ActionBar mActionBar;
 
+    private Intent mIntent;
+
+    private List<RunningAppProcessInfo> mRunningAppProcessInfoList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receive_intent);
-        retrieveIntentInfo();
         initialize();
+        retrieveIntentInfo();
+    }
+
+    private void initialize() {
+        mIntent = getIntent();
+        findViews();
+        setupActionBar();
+    }
+
+    private void findViews() {
+        mToolbar = (Toolbar) findViewById(R.id.tool_bar);
+    }
+
+    private void setupActionBar() {
+        setSupportActionBar(mToolbar);
+        mActionBar = getSupportActionBar();
+
+        if (mActionBar != null) {
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+            mActionBar.setTitle(ReceiveIntentActivity.class.getSimpleName());
+        }
     }
 
     private void retrieveIntentInfo() {
-        if (getIntent() == null) {
+        if (mIntent == null) {
             return;
         }
 
-        Intent intent = getIntent();
+        String action = mIntent.getAction();
+
+        retrieveIntentFromAction();
+    }
+
+    private void retrieveIntentFromAction() {
+        Log.d("danny", "=== retrieveIntentFromAction ===");
 
         // 可以取得所有intent中的extra data
-        Bundle bundle = intent.getExtras();
+        Bundle bundle = mIntent.getExtras();
 
         // 以下資訊可能不會有
-        String action = intent.getAction();
-        String type = intent.getType();
-        String data = intent.getData() != null ? intent.getData().toString() : null;
-        String flag = String.valueOf(intent.getFlags());
+        String action = mIntent.getAction();
+        String type = mIntent.getType();
+        String data = mIntent.getData() != null ? mIntent.getData().toString() : null;
+        String flag = String.valueOf(mIntent.getFlags());
 
         // 一定會有此資訊
-        String packageName = intent.getComponent().getPackageName();
+        String packageName = mIntent.getComponent().getPackageName();
 
         // 一定會有此資訊
-        String className = intent.getComponent().getClassName();
+        String className = mIntent.getComponent().getClassName();
 
         Log.d("danny", "Receive intent action = " + action);
         Log.d("danny", "Receive intent packageName = " + packageName);
@@ -70,21 +101,14 @@ public class ReceiveIntentActivity extends AppCompatActivity {
         }
     }
 
-    private void initialize() {
-        findViews();
-        setupActionBar();
-    }
+    private void retrieveIntentFromShare() {
+        Log.d("danny", "=== retrieveIntentFromShare ===");
 
-    private void findViews() {
-        mToolbar = (Toolbar) findViewById(R.id.tool_bar);
-    }
+        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        mRunningAppProcessInfoList = am.getRunningAppProcesses();
 
-    private void setupActionBar() {
-        setSupportActionBar(mToolbar);
-        mActionBar = getSupportActionBar();
-
-        if (mActionBar != null) {
-            mActionBar.setDisplayHomeAsUpEnabled(true);
+        for (RunningAppProcessInfo info : mRunningAppProcessInfoList) {
+            Log.d("danny", info.processName);
         }
     }
 

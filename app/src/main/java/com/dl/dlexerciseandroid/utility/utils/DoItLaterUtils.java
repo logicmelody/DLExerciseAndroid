@@ -2,13 +2,16 @@ package com.dl.dlexerciseandroid.utility.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.text.TextUtils;
 
 import com.dl.dlexerciseandroid.utility.component.PackedString;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,6 +28,26 @@ public class DoItLaterUtils {
         public static final String CALL_BACK = "extra_do_it_later_call_back";
     }
 
+    // White list package name
+    private static String YOUTUBE_PACKAGE_NAME = "com.google.android.youtube";
+    private static String YOUTUBE_CLASS_NAME = "com.google.android.apps.youtube.app.WatchWhileActivity";
+    private static String GOOGLE_PLAY_PACKAGE_NAME = "com.android.vending";
+    private static String GOOGLE_MAPS_PACKAGE_NAME = "com.google.android.apps.maps";
+    private static String IMDB_PACKAGE_NAME = "com.imdb.mobile";
+    private static String CHROME_PACKAGE_NAME = "com.android.chrome";
+    private static String ASUS_BROWSER_PACKAGE_NAME = "com.asus.browser";
+
+    public static List<String> sWhiteList;
+    static {
+        sWhiteList = new ArrayList<>();
+        sWhiteList.add(YOUTUBE_PACKAGE_NAME);
+        sWhiteList.add(GOOGLE_PLAY_PACKAGE_NAME);
+        sWhiteList.add(GOOGLE_MAPS_PACKAGE_NAME);
+        sWhiteList.add(IMDB_PACKAGE_NAME);
+        sWhiteList.add(CHROME_PACKAGE_NAME);
+        sWhiteList.add(ASUS_BROWSER_PACKAGE_NAME);
+    }
+
     // 用來將從db取出的packed string重組成一個intent
     // 要重組以下資訊：
     // Action, PackageName, ClassName, Data(Uri), Flag, Type, Extra datas
@@ -35,13 +58,14 @@ public class DoItLaterUtils {
 
         String packageName = null;
         String className = null;
+        String action = null;
 
         Iterator<String> iterator = map.keySet().iterator();
         while (iterator.hasNext()) {
             String key = iterator.next();
 
             if (PackedString.Key.ACTION.equals(key)) {
-                String action = (String) map.get(key);
+                action = (String) map.get(key);
 
                 if (!TextUtils.isEmpty(action)) {
                     intent.setAction(action);
@@ -82,11 +106,22 @@ public class DoItLaterUtils {
         }
 
         if (!TextUtils.isEmpty(packageName)) {
+
+            // 有class name，就設定class name，這樣可以傳回本來的Activity
             if (!TextUtils.isEmpty(className)) {
                 intent.setClassName(packageName, className);
 
-            } else {
+            } else if (sWhiteList.contains(packageName)) {
                 intent.setPackage(packageName);
+
+            // Lollipop之後，因為沒有辦法取得class name，所以我們藉由丟出ACTION_VIEW的intent，讓系統自己選擇適當的Activity開啟
+            // Note:
+            // act=android.intent.action.VIEW dat=content://media/external/images/media/140 pkg=com.asus.launcher
+            // 上面這個例子，會因為找不到適合的Activity處理intent而crash，所以如果我們藉由丟出ACTION_VIEW的intent，
+            // 讓系統自己選擇適當的Activity開啟時，不能setPackage()
+            } else if (!Intent.ACTION_VIEW.equals(action)) {
+                PackageManager pm = context.getPackageManager();
+                intent = pm.getLaunchIntentForPackage(packageName);
             }
         }
 
