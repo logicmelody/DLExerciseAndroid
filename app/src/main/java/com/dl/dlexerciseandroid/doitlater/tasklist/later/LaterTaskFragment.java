@@ -57,7 +57,7 @@ public class LaterTaskFragment extends Fragment implements LoaderManager.LoaderC
     private static final int LATER_PACKAGE_NAME = 4;
     private static final int LATER_CALL_BACK = 5;
 
-    private static String mSelection;
+    private static String mSelection = DLExerciseContract.Task.LATER_CALL_BACK + " IS NOT NULL";
     protected static String[] mSelectionArgs;
 
     // 在order欄位的後面加上"ASC" or "DESC"，可以指定要由小到大 or 由大到小排序
@@ -126,7 +126,7 @@ public class LaterTaskFragment extends Fragment implements LoaderManager.LoaderC
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(mContext, DLExerciseContract.Task.CONTENT_URI, mProjection, null, null, mSortOrder);
+        return new CursorLoader(mContext, DLExerciseContract.Task.CONTENT_URI, mProjection, mSelection, null, mSortOrder);
     }
 
     // 在這個method裡面使用完cursor之後，不需要去把cursor關掉，LoaderManager會自動處理掉這件事

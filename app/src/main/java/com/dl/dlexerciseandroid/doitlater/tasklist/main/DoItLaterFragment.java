@@ -109,7 +109,7 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
 
         // 設定要保留幾個在idle狀態下的Fragment，如果Fragment的數量是固定的，
         // 設定這個值可以讓animation順暢，不用再花時間重新new一個Fragment
-        mTaskListViewPager.setOffscreenPageLimit(1);
+        mTaskListViewPager.setOffscreenPageLimit(2);
         mTaskListViewPager.setOnPageChangeListener(this);
     }
 
@@ -140,7 +140,10 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onPageSelected(int position) {
-
+        // 有可能其中一個Fragment scroll之後讓Floating action button消失，但是切換到另外一個Fragment之後，
+        // 因為item個數太少，無法scroll，造成Floating action button沒有辦法再出現，
+        // 所以我們這邊強制讓Floating action button在切換Fragment的時候出現
+        mAddTaskButton.show();
     }
 
     @Override
@@ -150,7 +153,8 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
-
+        mTaskListViewPager.setCurrentItem(tab.getPosition());
+        mAddTaskButton.show();
     }
 
     @Override
