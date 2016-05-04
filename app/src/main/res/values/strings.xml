@@ -14,6 +14,8 @@
     <string name="all_intent" translatable="false">Intent</string>
     <string name="all_coordinator_layout" translatable="false">CoordinatorLayout</string>
     <string name="all_test">Test</string>
+    <string name="all_normal">normal</string>
+    <string name="all_later">Later</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">Sure to logout?</string>

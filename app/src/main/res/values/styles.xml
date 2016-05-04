@@ -58,4 +58,14 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!-- 如果要改變TabLayout的style，可以套一個自己定義的style -->
+    <style name="AppTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/all_white</item>
+        <item name="tabTextAppearance">@style/AppTabTextAppearance</item>
+        <item name="tabSelectedTextColor">@color/all_white</item>
+    </style>
+    <style name="AppTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textColor">@color/all_white</item>
+    </style>
+
 </resources>

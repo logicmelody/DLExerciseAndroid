@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.doitlater.tasklist;
+package com.dl.dlexerciseandroid.doitlater.tasklist.later;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +23,7 @@ import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.database.dbscheme.DLExerciseContract;
 import com.dl.dlexerciseandroid.datastructure.Task;
 import com.dl.dlexerciseandroid.dialog.activity.AddTaskActivity;
+import com.dl.dlexerciseandroid.doitlater.tasklist.main.DoItLaterViewItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +36,9 @@ import java.util.List;
 // RecyclerView: 只需要bind好Adapter就好
 // LoaderManager.LoaderCallbacks: load資料的部分就交給LoaderManager.LoaderCallbacks，只要DB的資料有更新
 // 就會呼叫onLoadFinished()這個callback method，我們可以在這個method裡面拿到最新的data
-public class DoItLaterFragment extends Fragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<Cursor> {
+public class LaterTaskFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    public static final String TAG = "com.dl.dlexerciseandroid.DoItLaterFragment";
+    public static final String TAG = "com.dl.dlexerciseandroid.LaterTaskFragment";
 
     private static int LOADER_ID = 12;
 
@@ -66,12 +67,10 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
 
     private RecyclerView mTaskList;
     private StaggeredGridLayoutManager mTaskListLayoutManager;
-    private DoItLaterAdapter mDoItLaterAdapter;
+    private LaterTaskAdapter mLaterTaskAdapter;
     private List<DoItLaterViewItem> mTaskListDataSet = new ArrayList<>();
 
     private TextView mNoTaskText;
-
-    private FloatingActionButton mAddTaskButton;
 
 
     @Override
@@ -83,7 +82,7 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_do_it_later, container, false);
+        return inflater.inflate(R.layout.fragment_later_task, container, false);
     }
 
     @Override
@@ -102,11 +101,10 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
     private void findViews() {
         mTaskList = (RecyclerView) getView().findViewById(R.id.recyclerView_do_it_later_task_list);
         mNoTaskText = (TextView) getView().findViewById(R.id.text_view_do_it_later_task_list_no_task);
-        mAddTaskButton = (FloatingActionButton) getView().findViewById(R.id.floating_action_button_do_it_later_add_task);
     }
 
     private void setupViews() {
-        mAddTaskButton.setOnClickListener(this);
+
     }
 
     private void setupTaskList() {
@@ -116,27 +114,14 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
 
         // 這個地方就先將要顯示的data儲存List與Adapter bind在一起，之後要clear或是delete或是add資料，
         // 都在這裡對mTaskListDataSet進行操作
-        mDoItLaterAdapter = new DoItLaterAdapter(mContext, mTaskListDataSet);
+        mLaterTaskAdapter = new LaterTaskAdapter(mContext, mTaskListDataSet);
 
         // RecyclerView必須要設定的三個元件：
         // LayoutManager
         // RecyclerView.Adapter
         // Data List
         mTaskList.setLayoutManager(mTaskListLayoutManager);
-        mTaskList.setAdapter(mDoItLaterAdapter);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.floating_action_button_do_it_later_add_task:
-                addTask();
-                break;
-        }
-    }
-
-    private void addTask() {
-        startActivity(new Intent(mContext, AddTaskActivity.class));
+        mTaskList.setAdapter(mLaterTaskAdapter);
     }
 
     @Override
@@ -174,7 +159,7 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
             mTaskListDataSet.add(new DoItLaterViewItem(task, viewType));
         }
 
-        mDoItLaterAdapter.notifyDataSetChanged();
+        mLaterTaskAdapter.notifyDataSetChanged();
         mNoTaskText.setVisibility(mTaskListDataSet.size() == 0 ? View.VISIBLE : View.GONE);
     }
 

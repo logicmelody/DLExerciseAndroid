@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.doitlater.tasklist;
+package com.dl.dlexerciseandroid.doitlater.tasklist.later;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.doitlater.tasklist.main.DoItLaterViewItem;
 import com.dl.dlexerciseandroid.utility.utils.DoItLaterUtils;
 import com.dl.dlexerciseandroid.utility.utils.Utils;
 
@@ -17,7 +18,7 @@ import java.util.List;
 /**
  * Created by logicmelody on 2016/4/18.
  */
-public class DoItLaterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class LaterTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
 
@@ -96,7 +97,7 @@ public class DoItLaterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     // 在Adapter的constructor中將需要顯示在RecyclerView上的data bind起來，
     // 要注意的是，之後這個List所指的記憶體空間就不能更動，不然會有不可預期的問題
-    public DoItLaterAdapter(Context context, List<DoItLaterViewItem> dataSet) {
+    public LaterTaskAdapter(Context context, List<DoItLaterViewItem> dataSet) {
         mContext = context;
         mDataSet = dataSet;
     }

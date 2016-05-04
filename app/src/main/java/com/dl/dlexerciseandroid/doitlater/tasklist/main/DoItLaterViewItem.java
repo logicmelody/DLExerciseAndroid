@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.doitlater.tasklist;
+package com.dl.dlexerciseandroid.doitlater.tasklist.main;
 
 import com.dl.dlexerciseandroid.datastructure.Task;
 

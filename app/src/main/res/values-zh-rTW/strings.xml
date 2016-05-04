@@ -4,6 +4,8 @@
     <string name="all_overview">總覽</string>
     <string name="all_test">測試</string>
     <string name="all_consuming_restful_web_service">連線 Restful Web Service</string>
+    <string name="all_normal">一般</string>
+    <string name="all_later">稍後</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">確定要登出？</string>
