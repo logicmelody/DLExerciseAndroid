@@ -1,17 +1,16 @@
 package com.dl.dlexerciseandroid.doitlater.tasklist.later;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,7 +21,6 @@ import android.widget.TextView;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.database.dbscheme.DLExerciseContract;
 import com.dl.dlexerciseandroid.datastructure.Task;
-import com.dl.dlexerciseandroid.dialog.activity.AddTaskActivity;
 import com.dl.dlexerciseandroid.doitlater.tasklist.main.DoItLaterViewItem;
 
 import java.util.ArrayList;
@@ -120,7 +118,7 @@ public class LaterTaskFragment extends Fragment implements LoaderManager.LoaderC
 
         // 這個地方就先將要顯示的data儲存List與Adapter bind在一起，之後要clear或是delete或是add資料，
         // 都在這裡對mTaskListDataSet進行操作
-        mLaterTaskAdapter = new LaterTaskAdapter(mContext, mTaskListDataSet);
+        mLaterTaskAdapter = new LaterTaskAdapter(mContext, mTaskList, mTaskListDataSet);
 
         // RecyclerView必須要設定的三個元件：
         // LayoutManager
@@ -128,6 +126,11 @@ public class LaterTaskFragment extends Fragment implements LoaderManager.LoaderC
         // Data List
         mTaskList.setLayoutManager(mTaskListLayoutManager);
         mTaskList.setAdapter(mLaterTaskAdapter);
+
+        // Swipe to delete
+        ItemTouchHelper.Callback callback = new LaterTaskItemTouchHelper(mLaterTaskAdapter);
+        ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(mTaskList);
     }
 
     @Override
@@ -151,7 +154,7 @@ public class LaterTaskFragment extends Fragment implements LoaderManager.LoaderC
         mTaskListDataSet.clear();
 
         while (data.moveToNext()) {
-            int id = data.getInt(ID);
+            long id = data.getLong(ID);
             String title = data.getString(TITLE);
             String description = data.getString(DESCRIPTION);
             String laterPackageName = data.getString(LATER_PACKAGE_NAME);
@@ -160,7 +163,7 @@ public class LaterTaskFragment extends Fragment implements LoaderManager.LoaderC
             int viewType = TextUtils.isEmpty(laterCallback) ?
                     DoItLaterViewItem.ViewType.NORMAL : DoItLaterViewItem.ViewType.LATER;
 
-            Task task = new Task(title, description, laterPackageName, laterCallback, time);
+            Task task = new Task(id, title, description, laterPackageName, laterCallback, time);
 
             mTaskListDataSet.add(new DoItLaterViewItem(task, viewType));
         }

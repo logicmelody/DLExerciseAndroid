@@ -6,6 +6,7 @@
     <string name="all_consuming_restful_web_service">連線 Restful Web Service</string>
     <string name="all_normal">一般</string>
     <string name="all_later">稍後</string>
+    <string name="all_undo">復原</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">確定要登出？</string>
@@ -21,6 +22,7 @@
     <string name="do_it_later_no_task">無工作</string>
     <string name="do_it_later_save_task_completed">儲存工作成功</string>
     <string name="do_it_later_save_task_failed">儲存工作失敗</string>
+    <string name="do_it_later_delete_task">工作已被刪除</string>
 
     <!-- Add task dialog -->
     <string name="add_task_dialog_title">新增工作</string>

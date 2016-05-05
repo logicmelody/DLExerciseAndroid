@@ -127,14 +127,14 @@ public class NormalTaskFragment extends Fragment implements LoaderManager.Loader
         mTaskData.clear();
 
         while (data.moveToNext()) {
-            int id = data.getInt(ID);
+            long id = data.getLong(ID);
             String title = data.getString(TITLE);
             String description = data.getString(DESCRIPTION);
             String laterPackageName = data.getString(LATER_PACKAGE_NAME);
             String laterCallback = data.getString(LATER_CALL_BACK);
             long time = data.getLong(TIME);
 
-            mTaskData.add(new Task(title, description, laterPackageName, laterCallback, time));
+            mTaskData.add(new Task(id, title, description, laterPackageName, laterCallback, time));
         }
 
         mNormalTaskAdapter.notifyDataSetChanged();

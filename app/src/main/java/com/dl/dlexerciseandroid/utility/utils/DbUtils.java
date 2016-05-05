@@ -36,4 +36,13 @@ public class DbUtils {
 
         context.getContentResolver().insert(DLExerciseContract.Task.CONTENT_URI, values);
     }
+
+    public static void deleteTask(Context context, long id) {
+        String selection = DLExerciseContract.Task._ID + " = ?";
+        String[] selectionArgs = {
+                String.valueOf(id)
+        };
+
+        context.getContentResolver().delete(DLExerciseContract.Task.CONTENT_URI, selection, selectionArgs);
+    }
 }

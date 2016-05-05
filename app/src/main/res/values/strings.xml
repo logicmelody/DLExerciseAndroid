@@ -16,6 +16,7 @@
     <string name="all_test">Test</string>
     <string name="all_normal">normal</string>
     <string name="all_later">Later</string>
+    <string name="all_undo">Undo</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">Sure to logout?</string>
@@ -31,6 +32,7 @@
     <string name="do_it_later_no_task">No task</string>
     <string name="do_it_later_save_task_completed">Save task completed</string>
     <string name="do_it_later_save_task_failed">Save task failed</string>
+    <string name="do_it_later_delete_task">Task has been deleted</string>
 
     <!-- Add task dialog -->
     <string name="add_task_dialog_title">Add Task</string>
