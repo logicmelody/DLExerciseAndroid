@@ -80,7 +80,13 @@ public class NormalTaskFragment extends Fragment implements LoaderManager.Loader
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initialize();
-        getLoaderManager().initLoader(LOADER_ID, null, this);
+
+        if (savedInstanceState == null) {
+            getLoaderManager().initLoader(LOADER_ID, null, this);
+
+        } else {
+            getLoaderManager().restartLoader(LOADER_ID, null, this);
+        }
     }
 
     private void initialize() {
