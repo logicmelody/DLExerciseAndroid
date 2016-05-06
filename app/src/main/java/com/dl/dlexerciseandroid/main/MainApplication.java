@@ -1,7 +1,9 @@
 package com.dl.dlexerciseandroid.main;
 
 import android.app.Application;
+import android.view.animation.AnimationUtils;
 
+import com.dl.dlexerciseandroid.utility.utils.Utils;
 import com.facebook.FacebookSdk;
 
 /**
@@ -16,7 +18,20 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        initialize();
+    }
 
+    private void initialize() {
+        initAnimation();
+        initFacebookSdk();
+    }
+
+    private void initAnimation() {
+        Utils.sFadeInAnimation = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
+        Utils.sFadeOutAnimation = AnimationUtils.loadAnimation(this, android.R.anim.fade_out);
+    }
+
+    private void initFacebookSdk() {
         // 初始化Facebook SDK元件
         // Initialize the SDK before executing any other operations,
         // especially, if you're using Facebook UI elements.

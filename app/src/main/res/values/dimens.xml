@@ -22,10 +22,11 @@
     <dimen name="margin_top_facebook_switch_item">10dp</dimen>
 
     <!-- Do It Later -->
-    <dimen name="padding_task_item">10dp</dimen>
+    <dimen name="padding_task_item">15dp</dimen>
     <dimen name="margin_do_it_later_between_task_item">5dp</dimen>
     <dimen name="stroke_width_task_item">1dp</dimen>
     <dimen name="corners_radius_task_item">5dp</dimen>
+    <dimen name="min_height_normal_task_item">80dp</dimen>
 
     <!-- CoordinatorLayout -->
     <dimen name="height_coordinator_layout_number_item">50dp</dimen>

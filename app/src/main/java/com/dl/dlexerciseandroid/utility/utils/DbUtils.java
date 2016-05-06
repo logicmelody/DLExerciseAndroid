@@ -2,8 +2,10 @@ package com.dl.dlexerciseandroid.utility.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.os.Handler;
 import android.text.TextUtils;
 
+import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.database.dbscheme.DLExerciseContract;
 
 /**
@@ -44,5 +46,6 @@ public class DbUtils {
         };
 
         context.getContentResolver().delete(DLExerciseContract.Task.CONTENT_URI, selection, selectionArgs);
+        Utils.showToastInNonUIThread(new Handler(), context, context.getString(R.string.do_it_later_delete_task));
     }
 }

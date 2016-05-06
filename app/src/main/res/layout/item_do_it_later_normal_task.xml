@@ -3,31 +3,78 @@
 <!-- Item之間的margin：簡單的做法可以在這邊設定margin，可以做到讓item之間有空隙出來，
      但如果想要畫divider或是其他比較複雜的設定，就需要實作RecyclerView.ItemDecoration
      這邊的例子，我們只需要加margin即可-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/padding_task_item"
-    android:layout_margin="@dimen/margin_do_it_later_between_task_item"
-    android:orientation="vertical"
-    android:background="@drawable/background_task_item">
+    android:minHeight="@dimen/min_height_normal_task_item">
 
-    <TextView
-        android:id="@+id/text_view_task_item_title"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/view_group_normal_task_content_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/all_theme"/>
+        android:padding="@dimen/padding_task_item"
+        android:orientation="vertical"
+        android:background="@drawable/background_task_item">
 
-    <TextView
-        android:id="@+id/text_view_task_item_description"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/text_view_task_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/all_theme"/>
+
+        <TextView
+            android:id="@+id/text_view_task_item_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/text_view_task_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    </LinearLayout>
+
+    <!-- 這裡的background顏色，我們設定的跟divider的顏色一樣，這樣就不會有色差的問題，效果也還不錯 -->
+    <RelativeLayout
+        android:id="@+id/view_group_normal_task_deleted_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_alignTop="@+id/view_group_normal_task_content_container"
+        android:layout_alignBottom="@+id/view_group_normal_task_content_container"
+        android:padding="@dimen/padding_task_item"
+        android:background="@color/background_normal_task_swiped"
+        android:visibility="gone">
 
-    <TextView
-        android:id="@+id/text_view_task_item_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:text="@string/do_it_later_delete_task"
+            android:textColor="@color/all_white"/>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/text_view_normal_task_undo_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/colorAccent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/all_undo"
+            android:background="?selectableItemBackgroundBorderless"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/all_divider" />
+
+</RelativeLayout>
+
+

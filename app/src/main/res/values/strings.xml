@@ -16,7 +16,7 @@
     <string name="all_test">Test</string>
     <string name="all_normal">normal</string>
     <string name="all_later">Later</string>
-    <string name="all_undo">Undo</string>
+    <string name="all_undo">UNDO</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">Sure to logout?</string>

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.view.WindowManager;
+import android.view.animation.Animation;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -21,6 +22,9 @@ public class Utils {
     public static final class DataFormat {
         public static final String YYYYMMDDHHMM = "yyyy/MM/dd HH:mm";
     }
+
+    public static Animation sFadeInAnimation;
+    public static Animation sFadeOutAnimation;
 
 
     public static void setStatusBarTranslucent(Activity activity, boolean makeTranslucent) {

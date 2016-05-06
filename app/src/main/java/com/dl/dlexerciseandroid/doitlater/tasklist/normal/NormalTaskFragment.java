@@ -10,8 +10,10 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -103,8 +105,55 @@ public class NormalTaskFragment extends Fragment implements LoaderManager.Loader
         mTaskListLayoutManager = new LinearLayoutManager(mContext);
         mNormalTaskAdapter = new NormalTaskAdapter(mContext, mTaskData);
 
+//        mTaskList.addItemDecoration(new DividerItemDecoration(
+//                getResources().getDrawable(R.drawable.divider_all_vertical_list), false, true, false, 0));
         mTaskList.setLayoutManager(mTaskListLayoutManager);
         mTaskList.setAdapter(mNormalTaskAdapter);
+
+        // 當某一個item已經被swipe，我們想要touch到別的item的時候，就把已經swiped的item刪掉，
+        // 所以需要此listener
+        mTaskList.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                if (mNormalTaskAdapter.getPendingRemovePosition() == -1) {
+                    return false;
+                }
+
+                View touchedView = rv.findChildViewUnder(e.getX(), e.getY());
+
+                if (touchedView != null) {
+                    int adapterPosition = rv.getChildAdapterPosition(touchedView);
+                    //Log.d("danny", "Touch position = " + adapterPosition);
+
+                    if (adapterPosition != mNormalTaskAdapter.getPendingRemovePosition()) {
+                        mNormalTaskAdapter.remove();
+                    }
+                }
+
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
+
+        // 處理swipe to delete或是drag and drop事件
+        ItemTouchHelper.Callback callback = new NormalTaskItemTouchHelper(mContext, mNormalTaskAdapter);
+        ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(mTaskList);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        //mNormalTaskAdapter.deleteTaskFromDb();
     }
 
     @Override

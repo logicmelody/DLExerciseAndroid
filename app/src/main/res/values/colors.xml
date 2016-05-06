@@ -12,7 +12,7 @@
 
     <!-- All -->
     <color name="all_theme">#FF3386FE</color>
-    <color name="all_divider">#FF000000</color>
+    <color name="all_divider">#FF979797</color>
     <color name="all_black">#FF000000</color>
     <color name="all_white">#FFFFFFFF</color>
 
@@ -28,5 +28,6 @@
     <color name="stroke_color_task_item">#FF979797</color>
     <color name="background_task_item">@color/all_white</color>
     <color name="background_later_task_item">#FFFFFF00</color>
+    <color name="background_normal_task_swiped">@color/all_divider</color>
 
 </resources>
