@@ -43,7 +43,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity implements View
 
     private void findViews() {
         mToolBar = (Toolbar) findViewById(R.id.tool_bar);
-        mNumberList = (RecyclerView) findViewById(R.id.recyclerView_coordinator_layout_number_list);
+        mNumberList = (RecyclerView) findViewById(R.id.recycler_view_coordinator_layout_number_list);
         mFloatingActionButton =
                 (FloatingActionButton) findViewById(R.id.floating_action_button_coordinator_layout);
     }

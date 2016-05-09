@@ -15,6 +15,7 @@
     <color name="all_divider">#FF979797</color>
     <color name="all_black">#FF000000</color>
     <color name="all_white">#FFFFFFFF</color>
+    <color name="all_gray">#FF868788</color>
 
     <!-- Left drawer -->
     <color name="background_main_left_drawer">#FFFFFFFF</color>

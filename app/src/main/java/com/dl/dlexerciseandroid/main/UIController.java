@@ -25,6 +25,7 @@ import com.dl.dlexerciseandroid.database.debug.AndroidDatabaseManager;
 import com.dl.dlexerciseandroid.dialog.dialogfragment.alert.AlertDialogFragment;
 import com.dl.dlexerciseandroid.facebook.FacebookFragment;
 import com.dl.dlexerciseandroid.intent.IntentFragment;
+import com.dl.dlexerciseandroid.musicplayer.MusicPlayerFragment;
 import com.dl.dlexerciseandroid.overview.OverviewFragment;
 import com.dl.dlexerciseandroid.rightdrawer.RightDrawerFragment;
 import com.dl.dlexerciseandroid.spring.ConsumingRestfulWebServiceFragment;
@@ -199,6 +200,10 @@ public class UIController implements View.OnClickListener {
                         replaceFragmentTo(IntentFragment.class, R.id.frame_layout_main_container, IntentFragment.TAG);
                         break;
 
+                    case R.id.menu_item_left_drawer_music_player:
+                        replaceFragmentTo(MusicPlayerFragment.class, R.id.frame_layout_main_container, MusicPlayerFragment.TAG);
+                        break;
+
                     case R.id.menu_item_left_drawer_test:
                         replaceFragmentTo(TestFragment.class, R.id.frame_layout_main_container, TestFragment.TAG);
                         break;
@@ -243,7 +248,6 @@ public class UIController implements View.OnClickListener {
         if (fragment == null) {
             try {
                 fragment = fragmentClass.newInstance();
-                fragmentTransaction.replace(containerId, fragment, fragmentTag);
 
             } catch (InstantiationException e) {
                 e.printStackTrace();
@@ -252,6 +256,7 @@ public class UIController implements View.OnClickListener {
             }
         }
 
+        fragmentTransaction.replace(containerId, fragment, fragmentTag);
         mCurrentFragment = fragment;
 
         fragmentTransaction.commit();

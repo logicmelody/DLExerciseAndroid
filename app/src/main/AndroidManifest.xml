@@ -9,6 +9,12 @@
     <!-- 如果要使用getRunningTasks()，就必須要加此permission，但此permission只有在Lollipop之前才有作用 -->
     <uses-permission android:name="android.permission.GET_TASKS" />
 
+    <!-- 我們希望當device idle的時候，music player可以繼續播放音樂，所以需要加此permission -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Music player會需要讀取device上的音樂檔案，所以需要加此permission -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <!-- Permissions for provider -->
     <uses-permission android:name="com.dl.dlexerciseandroid.provider.permission.READ" />
     <uses-permission android:name="com.dl.dlexerciseandroid.provider.permission.WRITE" />
@@ -108,6 +114,7 @@
         </receiver>
         -->
         <service android:name=".background.service.DoItLaterService" />
+        <service android:name=".background.service.MusicService" />
 
         <provider
             android:name=".database.provider.DLExerciseContentProvider"

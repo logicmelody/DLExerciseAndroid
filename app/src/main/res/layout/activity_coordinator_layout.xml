@@ -32,7 +32,7 @@
          app:layout_behavior="@string/appbar_scrolling_view_behavior"，對應到AppBarLayout.ScrollingViewBehavior，
          用來通知AppBarLayout這個view已經產生scroll event -->
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView_coordinator_layout_number_list"
+        android:id="@+id/recycler_view_coordinator_layout_number_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
@@ -49,7 +49,7 @@
         android:layout_margin="@dimen/margin_all_floating_action_button"
         android:src="@drawable/ic_all_add_white"
         app:fabSize="normal"
-        app:layout_anchor="@+id/recyclerView_coordinator_layout_number_list"
+        app:layout_anchor="@+id/recycler_view_coordinator_layout_number_list"
         app:layout_anchorGravity="bottom|right"
         app:layout_behavior="com.dl.dlexerciseandroid.utility.component.FloatingActionButtonBehavior" />
 

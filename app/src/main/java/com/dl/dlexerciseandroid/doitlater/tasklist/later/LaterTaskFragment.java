@@ -103,7 +103,7 @@ public class LaterTaskFragment extends Fragment implements LoaderManager.LoaderC
     }
 
     private void findViews() {
-        mTaskList = (RecyclerView) getView().findViewById(R.id.recyclerView_do_it_later_task_list);
+        mTaskList = (RecyclerView) getView().findViewById(R.id.recycler_view_do_it_later_task_list);
         mNoTaskText = (TextView) getView().findViewById(R.id.text_view_do_it_later_task_list_no_task);
     }
 
