@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dl.dlexerciseandroid"
     android:sharedUserId="android.uid.latertask">
+
     <!-- 如果多個app有共同的android:sharedUserId，而且都sign同樣的key，那麼這些app的resources跟class可以彼此共用 -->
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -60,29 +61,32 @@
             <!-- 設定接收share intent的filter記得要加action, category, data -->
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="image/*" />
                 <data android:mimeType="video/*" />
                 <data android:mimeType="text/plain" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="com.dl.dlexerciseandroid.ACTION_DO_IT_LATER" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".intent.ReceiveIntentActivity"
             android:label="ReceiveIntentActivity">
             <intent-filter>
                 <action android:name="com.dl.dlexerciseandroid.ACTION_RECEIVE_INTENT" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="image/*" />
                 <data android:mimeType="video/*" />
                 <data android:mimeType="text/plain" />
@@ -124,6 +128,7 @@
             android:readPermission="com.dl.dlexerciseandroid.provider.permission.READ"
             android:writePermission="com.dl.dlexerciseandroid.provider.permission.WRITE" />
 
+        <activity android:name=".musicplayer.musiccontroller.MusicControllerActivity"></activity>
     </application>
 
 </manifest>

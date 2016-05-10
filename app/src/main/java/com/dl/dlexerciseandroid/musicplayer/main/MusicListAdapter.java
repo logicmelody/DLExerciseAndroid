@@ -1,15 +1,20 @@
-package com.dl.dlexerciseandroid.musicplayer;
+package com.dl.dlexerciseandroid.musicplayer.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.background.service.MusicService;
 import com.dl.dlexerciseandroid.datastructure.Music;
+import com.dl.dlexerciseandroid.musicplayer.musiccontroller.MusicControllerActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,15 +22,37 @@ import java.util.List;
  */
 public class MusicListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private class MusicViewHolder extends RecyclerView.ViewHolder {
+    private class MusicViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView title;
         public TextView artist;
 
         public MusicViewHolder(View itemView) {
             super(itemView);
+            findViews();
+            setupViews();
+        }
+
+        private void findViews() {
             title = (TextView) itemView.findViewById(R.id.text_view_music_item_title);
             artist = (TextView) itemView.findViewById(R.id.text_view_music_item_artist);
+        }
+
+        private void setupViews() {
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (v == itemView) {
+                Log.d("danny", "Start MusicService from MusicListAdapter");
+
+                // 在每次user choose一首歌的時候，我們就把最新的music list和chosen music的position透過intent傳給Service
+                // Note: startService()
+                mContext.startService(MusicService.generateStartPlayingMusicIntent(mContext,
+                                      (ArrayList<Music>) mDataList, getAdapterPosition()));
+                mContext.startActivity(new Intent(mContext, MusicControllerActivity.class));
+            }
         }
     }
 
