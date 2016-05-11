@@ -51,7 +51,13 @@ public class MusicListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 // Note: startService()
                 mContext.startService(MusicService.generateStartPlayingMusicIntent(mContext,
                                       (ArrayList<Music>) mDataList, getAdapterPosition()));
-                mContext.startActivity(new Intent(mContext, MusicControllerActivity.class));
+
+                // 我們把user choose的music資訊也傳給MusicControllerActivity，
+                // 這樣在UI顯示上就不需要等到與service bind成功才show出一些歌名, 作者等基本資訊
+                Intent intent = new Intent(mContext, MusicControllerActivity.class);
+                intent.putExtra(MusicControllerActivity.EXTRA_PLAYING_MUSIC, mDataList.get(getAdapterPosition()));
+
+                mContext.startActivity(intent);
             }
         }
     }

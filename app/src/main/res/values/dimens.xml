@@ -40,5 +40,6 @@
 
     <!-- Music Player -->
     <dimen name="padding_music_item">15dp</dimen>
+    <dimen name="height_playing_music_item">60dp</dimen>
 
 </resources>
