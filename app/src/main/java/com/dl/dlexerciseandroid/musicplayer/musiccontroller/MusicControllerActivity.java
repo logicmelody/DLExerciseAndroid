@@ -52,7 +52,7 @@ public class MusicControllerActivity extends AppCompatActivity implements View.O
 
     private boolean mIsMusicServiceBound = false;
 
-    // 與MusicService建立連線來取得binder物件
+    // 與MusicService建立連線來取得binder物件，用此資訊來顯示在UI上
     private ServiceConnection mMusicConnection = new ServiceConnection() {
 
         @Override
@@ -150,7 +150,7 @@ public class MusicControllerActivity extends AppCompatActivity implements View.O
     protected void onStart() {
         super.onStart();
 
-        // Register從MusicService來的change music broadcast intent
+        // Register從MusicService來的change music broadcast intent和stop playing music broadcast intent
         IntentFilter intentFilter = new IntentFilter(MusicService.Action.CHANGE_MUSIC);
         IntentFilter intentFilter2 = new IntentFilter(MusicService.Action.STOP_PLAYING_MUSIC);
 
