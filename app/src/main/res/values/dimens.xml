@@ -42,4 +42,7 @@
     <dimen name="padding_music_item">15dp</dimen>
     <dimen name="height_playing_music_item">60dp</dimen>
 
+    <!-- Notification for playing music -->
+    <dimen name="padding_notification_playing_music">15dp</dimen>
+
 </resources>

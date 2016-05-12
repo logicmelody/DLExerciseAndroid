@@ -151,8 +151,11 @@ public class MusicControllerActivity extends AppCompatActivity implements View.O
         super.onStart();
 
         // Register從MusicService來的change music broadcast intent
-        IntentFilter intentFilter = new IntentFilter(MusicControlReceiver.Action.CHANGE_MUSIC);
+        IntentFilter intentFilter = new IntentFilter(MusicService.Action.CHANGE_MUSIC);
+        IntentFilter intentFilter2 = new IntentFilter(MusicService.Action.STOP_PLAYING_MUSIC);
+
         registerReceiver(mMusicControlReceiver, intentFilter);
+        registerReceiver(mMusicControlReceiver, intentFilter2);
 
         // 這個MusicControllerActivity當作client來與MusicService做bind的動作，來取得現在正在播放music的一些資訊，顯示在UI上
         // Note: 在執行到這步以前，MusicService已經在choose music的時候startService()了，所以這個Activity unbind之後，
@@ -163,17 +166,28 @@ public class MusicControllerActivity extends AppCompatActivity implements View.O
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("danny", "Unbind MusicService from MusicControllerActivity");
 
         unregisterReceiver(mMusicControlReceiver);
-
-        // 當此Activity消失的時候要記得與MusicService unbind
-        unbindService(mMusicConnection);
+        unbindMusicService();
 
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
         editor.putBoolean(PREFERENCE_SHUFFLE, (boolean) mShuffle.getTag());
         editor.putBoolean(PREFERENCE_LOOP, (boolean) mLoop.getTag());
         editor.apply();
+    }
+
+    // 因為unbind service可能會走onStopPlayingMusic()這條路，而不是一般正常的onStop()，
+    // 如果在onStopPlayingMusic()已經unbind，而在onStop()又unbind一次，app會crash
+    // 所以我們寫一個method：在unbind之前會先檢查component有沒有跟service bind在一起
+    private void unbindMusicService() {
+        if (!mIsMusicServiceBound) {
+            return;
+        }
+
+        Log.d("danny", "Unbind MusicService from MusicControllerActivity");
+
+        mIsMusicServiceBound = false;
+        unbindService(mMusicConnection);
     }
 
     @Override
@@ -259,7 +273,7 @@ public class MusicControllerActivity extends AppCompatActivity implements View.O
 
         // Pause -> play
         } else {
-            mMusicService.goMusic();
+            mMusicService.resumeMusic();
         }
 
         setPlayOrPauseIcon();
@@ -307,5 +321,13 @@ public class MusicControllerActivity extends AppCompatActivity implements View.O
     @Override
     public void onChangeMusic() {
         setPlayingMusicInfo();
+    }
+
+    // 如果是從notification關掉MusicService，會呼叫這個callback
+    // 在這邊我們將MusicControllerActivity與service unbind，並且把Activity關掉
+    @Override
+    public void onStopPlayingMusic() {
+        unbindMusicService();
+        finish();
     }
 }

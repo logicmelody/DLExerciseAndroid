@@ -1,5 +1,8 @@
 package com.dl.dlexerciseandroid.background.service;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ContentUris;
 import android.content.Context;
@@ -12,9 +15,10 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.widget.RemoteViews;
 
+import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.datastructure.Music;
-import com.dl.dlexerciseandroid.musicplayer.musiccontroller.MusicControlReceiver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +32,20 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     public static final class Action {
         public static final String START_PLAYING_MUSIC = "com.dl.dlexerciseandroid.ACTION_START_PLAYING_MUSIC";
+        public static final String STOP_PLAYING_MUSIC = "com.dl.dlexerciseandroid.ACTION_STOP_PLAYING_MUSIC";
+        public static final String CHANGE_MUSIC = "com.dl.dlexerciseandroid.ACTION_CHANGE_MUSIC";
+        public static final String PREVIOUS_MUSIC = "com.dl.dlexerciseandroid.ACTION_PREVIOUS_MUSIC";
+        public static final String NEXT_MUSIC = "com.dl.dlexerciseandroid.ACTION_NEXT_MUSIC";
+        public static final String PAUSE_MUSIC = "com.dl.dlexerciseandroid.ACTION_PAUSE_MUSIC";
+        public static final String RESUME_MUSIC = "com.dl.dlexerciseandroid.ACTION_RESUME_MUSIC";
     }
 
     public static final class ExtraKey {
         public static final String EXTRA_MUSIC_LIST = "com.dl.dlexerciseandroid.EXTRA_MUSIC_LIST";
         public static final String EXTRA_CURRENT_MUSIC_POSITION = "com.dl.dlexerciseandroid.EXTRA_CURRENT_MUSIC_POSITION";
     }
+
+    public static final int MUSIC_NOTIFICATION_ID = 100;
 
     // 用來與其他component做溝通的class，其他component可以藉由這個class得到MusicService的instance，
     // 進而使用我們定義好的一些屬於MusicService的public method
@@ -43,6 +55,8 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
             return MusicService.this;
         }
     }
+
+    NotificationManager mNotificationManager;
 
     // 要回傳給component的Binder物件
     private final IBinder mMusicBinder = new MusicBinder();
@@ -151,7 +165,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     // Pause -> play
-    public void goMusic(){
+    public void resumeMusic(){
         mPlayer.start();
     }
 
@@ -180,6 +194,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     }
 
     private void initialize() {
+        mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mPlayer = new MediaPlayer();
         setupMusicPlayer();
     }
@@ -197,13 +212,36 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         mPlayer.setOnErrorListener(this);
     }
 
+    // 用這個method來指定service要執行哪件工作
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         String action = intent.getAction();
 
-        // 在每次user choose一首歌的時候，我們就把最新的music list和chosen music的position透過intent傳給Service
         if (Action.START_PLAYING_MUSIC.equals(action)) {
+            // 在每次user choose一首歌的時候，我們就把最新的music list和chosen music的position透過intent傳給Service
+            // 會走到onPrepared()
             startPlayingMusic(intent);
+
+        } else if (Action.STOP_PLAYING_MUSIC.equals(action)) {
+            stopPlayingMusic();
+
+        } else if (Action.PREVIOUS_MUSIC.equals(action)) {
+            // 會走到onPrepared()
+            playPreviousMusic();
+
+        } else if (Action.RESUME_MUSIC.equals(action)) {
+            // 不會走到onPrepared()
+            resumeMusic();
+            setNotification();
+
+        } else if (Action.PAUSE_MUSIC.equals(action)) {
+            // 不會走到onPrepared()
+            pauseMusic();
+            setNotification();
+
+        } else if (Action.NEXT_MUSIC.equals(action)) {
+            // 會走到onPrepared()
+            playNextMusic();
         }
 
         return super.onStartCommand(intent, flags, startId);
@@ -227,6 +265,14 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         playMusic();
     }
 
+    private void stopPlayingMusic() {
+        Log.d("danny", "MusicService stopPlayingMusic()");
+
+        stopSelf();
+        sendBroadcast(new Intent(Action.STOP_PLAYING_MUSIC));
+    }
+
+    // 用這個method回傳binder給component，讓component可以拿到一些service的information
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -250,6 +296,8 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
         mPlayer.stop();
         mPlayer.release();
+        mCurrentMusicPosition = -1;
+        mMusicList = null;
 
         super.onDestroy();
     }
@@ -263,10 +311,86 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         // 都一定會執行onPrepared()這段code，所以我們在這裡面發送change music的broadcast intent通知MusicControllerActivity
         // 要更新顯示的music information
         sendChangeMusicBroadcast();
+
+        // 在onPrepared()結束要開始播放音樂時，更新notification，
+        setNotification();
     }
 
     private void sendChangeMusicBroadcast() {
-        sendBroadcast(new Intent(MusicControlReceiver.Action.CHANGE_MUSIC));
+        sendBroadcast(new Intent(Action.CHANGE_MUSIC));
+    }
+
+    private void setNotification() {
+        // 用來建造notification的builder
+        Notification.Builder builder = new Notification.Builder(this);
+
+        // 一個notification一定要有以下三個資訊：
+        // 1. setSmallIcon()：在status bar上出現的小icon
+        // 2. setContentTitle()
+        // 3. setContentText()
+        // Note: 如果使用setContent()來使用customized layout的話，2跟3項可以不需要
+        builder.setSmallIcon(R.drawable.ic_statuc_bar_playing_music)
+                .setOngoing(true)
+                .setPriority(Notification.PRIORITY_MAX)
+
+                // 用setContent()可以定義自己的notification layout
+                .setContent(generatePlayingMusicNotificationView());
+
+        // Notification要送出時，如果都是用同一個notification id，這樣舊的會被新的update
+        // 我們希望MusicService可以一直在background與user互動，可以用startForeground()與setOngoing(true)搭配
+        startForeground(MUSIC_NOTIFICATION_ID, builder.build());
+    }
+
+    private RemoteViews generatePlayingMusicNotificationView() {
+        RemoteViews remoteViews = new RemoteViews(getPackageName(),
+                                                  R.layout.layout_notification_playing_music);
+
+        // Previous music
+        Intent previousMusicIntent = new Intent(this, MusicService.class);
+        previousMusicIntent.setAction(Action.PREVIOUS_MUSIC);
+        setOnClickPendingIntent(remoteViews, R.id.image_view_notification_previous_music, previousMusicIntent);
+
+        if (isPlaying()) {
+            // Pause music
+            Intent pauseMusicIntent = new Intent(this, MusicService.class);
+            pauseMusicIntent.setAction(Action.PAUSE_MUSIC);
+            setOnClickPendingIntent(remoteViews, R.id.image_view_notification_resume_or_pause, pauseMusicIntent);
+
+        } else {
+            // Resume music
+            Intent resumeMusicIntent = new Intent(this, MusicService.class);
+            resumeMusicIntent.setAction(Action.RESUME_MUSIC);
+            setOnClickPendingIntent(remoteViews, R.id.image_view_notification_resume_or_pause, resumeMusicIntent);
+        }
+
+        // Next music
+        Intent nextMusicIntent = new Intent(this, MusicService.class);
+        nextMusicIntent.setAction(Action.NEXT_MUSIC);
+        setOnClickPendingIntent(remoteViews, R.id.image_view_notification_next_music, nextMusicIntent);
+
+        // Stop playing music
+        Intent stopPlayingMusicIntent = new Intent(this, MusicService.class);
+        stopPlayingMusicIntent.setAction(Action.STOP_PLAYING_MUSIC);
+        setOnClickPendingIntent(remoteViews, R.id.image_view_notification_stop_playing_music, stopPlayingMusicIntent);
+
+        // Playing music title
+        remoteViews.setTextViewText(R.id.text_view_notification_playing_music_title,
+                                    mMusicList.get(mCurrentMusicPosition).title);
+
+        if (isPlaying()) {
+            remoteViews.setImageViewResource(R.id.image_view_notification_resume_or_pause,
+                                             R.drawable.ic_music_controller_pause);
+
+        } else {
+            remoteViews.setImageViewResource(R.id.image_view_notification_resume_or_pause,
+                                             R.drawable.ic_music_controller_play);
+        }
+
+        return remoteViews;
+    }
+
+    private void setOnClickPendingIntent(RemoteViews remoteViews, int id, Intent intent) {
+        remoteViews.setOnClickPendingIntent(id, PendingIntent.getService(this, 0, intent, 0));
     }
 
     // Media source已經播放完畢時

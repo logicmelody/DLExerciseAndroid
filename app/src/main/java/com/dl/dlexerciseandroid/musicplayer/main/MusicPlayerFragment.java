@@ -3,6 +3,7 @@ package com.dl.dlexerciseandroid.musicplayer.main;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.net.Uri;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.background.service.MusicService;
 import com.dl.dlexerciseandroid.datastructure.Music;
+import com.dl.dlexerciseandroid.musicplayer.musiccontroller.MusicControlReceiver;
 import com.dl.dlexerciseandroid.musicplayer.musiccontroller.MusicControllerActivity;
 
 import java.io.FileDescriptor;
@@ -34,7 +36,8 @@ import java.util.List;
 /**
  * Created by logicmelody on 2016/5/9.
  */
-public class MusicPlayerFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener {
+public class MusicPlayerFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>,
+        View.OnClickListener, MusicControlReceiver.OnMusicControlListener {
 
     public static final String TAG = "com.dl.dlexerciseandroid.MusicPlayerFragment";
 
@@ -49,6 +52,8 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
 
     private ViewGroup mPlayingMusicContainer;
     private TextView mPlayingMusicTitle;
+
+    private MusicControlReceiver mMusicControlReceiver;
 
     private boolean mIsMusicServiceBound = false;
 
@@ -104,6 +109,8 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
     }
 
     private void initialize() {
+        mMusicControlReceiver = new MusicControlReceiver(this);
+
         findViews();
         setupViews();
         setupMusicList();
@@ -129,19 +136,25 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
     @Override
     public void onStart() {
         super.onStart();
+
+        IntentFilter intentFilter = new IntentFilter(MusicService.Action.STOP_PLAYING_MUSIC);
+
+        mContext.registerReceiver(mMusicControlReceiver, intentFilter);
         mContext.bindService(new Intent(mContext, MusicService.class), mMusicConnection, Context.BIND_AUTO_CREATE);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        mContext.unbindService(mMusicConnection);
+
+        mContext.unregisterReceiver(mMusicControlReceiver);
+        unbindMusicService();
     }
 
     @Override
     public void onDestroy() {
-        Log.d("danny", "Destroy MusicService from MusicPlayerFragment");
-        mContext.stopService(new Intent(mContext, MusicService.class));
+        //Log.d("danny", "Destroy MusicService from MusicPlayerFragment");
+        //mContext.stopService(new Intent(mContext, MusicService.class));
 
         super.onDestroy();
     }
@@ -199,5 +212,32 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
 
                 break;
         }
+    }
+
+    @Override
+    public void onChangeMusic() {
+
+    }
+
+    // 如果是從notification關掉MusicService，會呼叫這個callback
+    // 我們這邊做的事情是把service unbind，並且將playing music item hide起來
+    @Override
+    public void onStopPlayingMusic() {
+        unbindMusicService();
+        mPlayingMusicContainer.setVisibility(View.GONE);
+    }
+
+    // 因為unbind service可能會走onStopPlayingMusic()這條路，而不是一般正常的onStop()，
+    // 如果在onStopPlayingMusic()已經unbind，而在onStop()又unbind一次，app會crash
+    // 所以我們寫一個method：在unbind之前會先檢查component有沒有跟service bind在一起
+    private void unbindMusicService() {
+        if (!mIsMusicServiceBound) {
+            return;
+        }
+
+        Log.d("danny", "Unbind MusicService from MusicPlayerFragment");
+
+        mIsMusicServiceBound = false;
+        mContext.unbindService(mMusicConnection);
     }
 }
