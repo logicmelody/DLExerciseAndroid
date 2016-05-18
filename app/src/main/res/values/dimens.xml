@@ -31,6 +31,7 @@
     <dimen name="stroke_width_task_item">1dp</dimen>
     <dimen name="corners_radius_task_item">5dp</dimen>
     <dimen name="min_height_normal_task_item">80dp</dimen>
+    <dimen name="margin_left_right_undo_toast_divider">15dp</dimen>
 
     <!-- CoordinatorLayout -->
     <dimen name="height_coordinator_layout_number_item">50dp</dimen>

@@ -68,4 +68,10 @@
         <item name="android:textColor">@color/all_white</item>
     </style>
 
+    <!-- 因為TextAppearance.Toast不是開放的style，所以我們要手動把這些property做成自己的style -->
+    <style name="UndoToastTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/all_white</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+
 </resources>

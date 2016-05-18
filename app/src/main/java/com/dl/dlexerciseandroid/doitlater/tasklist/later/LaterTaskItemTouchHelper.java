@@ -45,7 +45,8 @@ public class LaterTaskItemTouchHelper extends ItemTouchHelper.SimpleCallback {
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-        mLaterTaskAdapter.remove(viewHolder.getAdapterPosition());
+        mLaterTaskAdapter.removeWithSnackBar(viewHolder.getAdapterPosition());
+        //mLaterTaskAdapter.removeWithToast(viewHolder.getAdapterPosition());
     }
 
     /**

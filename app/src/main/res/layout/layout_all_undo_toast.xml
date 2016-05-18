@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@android:drawable/toast_frame">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/UndoToastTextAppearance"
+        android:text="@string/do_it_later_delete_task"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_left_right_undo_toast_divider"
+        android:layout_marginRight="@dimen/margin_left_right_undo_toast_divider"
+        android:background="@color/all_white" />
+
+    <TextView
+        android:id="@+id/text_view_undo_toast_undo_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/UndoToastTextAppearance"
+        android:textColor="@color/all_theme"
+        android:text="@string/all_undo"
+        android:background="?selectableItemBackgroundBorderless"/>
+
+</LinearLayout>

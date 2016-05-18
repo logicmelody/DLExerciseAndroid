@@ -1,13 +1,16 @@
 package com.dl.dlexerciseandroid.doitlater.tasklist.later;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.doitlater.tasklist.main.DoItLaterViewItem;
@@ -23,6 +26,7 @@ import java.util.List;
 public class LaterTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
+    private Handler mHandler;
 
     private RecyclerView mRecyclerView;
 
@@ -103,6 +107,7 @@ public class LaterTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     // 要注意的是，之後這個List所指的記憶體空間就不能更動，不然會有不可預期的問題
     public LaterTaskAdapter(Context context, RecyclerView recyclerView, List<DoItLaterViewItem> dataSet) {
         mContext = context;
+        mHandler = new Handler();
         mRecyclerView = recyclerView;
         mDataSet = dataSet;
     }
@@ -113,7 +118,7 @@ public class LaterTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      *
      * @param position
      */
-    public void remove(int position) {
+    public void removeWithSnackBar(int position) {
         final long removedTaskId = mDataSet.get(position).task.id;
         final int removedPosition = position;
         final DoItLaterViewItem removedTaskItem = mDataSet.get(position);
@@ -150,6 +155,58 @@ public class LaterTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         });
 
         snackbar.show();
+    }
+
+    public void removeWithToast(int position) {
+        final long removedTaskId = mDataSet.get(position).task.id;
+        final int removedPosition = position;
+        final DoItLaterViewItem removedTaskItem = mDataSet.get(position);
+
+        mDataSet.remove(position);
+
+        // 跟notifyDataSetChanged()不一樣，不會rebind全部的data，只會通知被刪除的那筆資料，然後其他存在的data的position會變動
+        // 這是RecyclerView強大的地方，使用這個method，其他的item移到新的position會有動畫
+        notifyItemRemoved(position);
+
+        // 因為我們想要模擬出系統toast的樣子，所以new一個sample toast來取出他的一些property，並且指定給PopupWindow
+        final Toast sampleToast = new Toast(mContext);
+        final PopupWindow undoToast = new PopupWindow(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        final Runnable deleteTaskRunnable = new Runnable() {
+            @Override
+            public void run() {
+                DbUtils.deleteTask(mContext, removedTaskId);
+                undoToast.dismiss();
+            }
+        };
+
+        ViewGroup undoToastView = (ViewGroup) LayoutInflater.from(mContext).inflate(R.layout.layout_all_undo_toast, null);
+        TextView undoButton = (TextView) undoToastView.findViewById(R.id.text_view_undo_toast_undo_button);
+        undoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 如果按下Undo button，記得要把deleteTaskRunnable從message queue中給remove掉，
+                // 不然那個thread三秒之後還是會把task從db中刪除
+                mHandler.removeCallbacks(deleteTaskRunnable);
+
+                mDataSet.add(removedPosition, removedTaskItem);
+                notifyItemInserted(removedPosition);
+                undoToast.dismiss();
+            }
+        });
+
+        // PopupWindow可以指定自己的layout
+        undoToast.setContentView(undoToastView);
+        undoToast.setAnimationStyle(android.R.style.Animation_Toast);
+        undoToast.showAtLocation(mRecyclerView.getRootView(), sampleToast.getGravity(),
+                                 sampleToast.getXOffset(), sampleToast.getYOffset());
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // 將刪除task的runnable塞到message queue中，3秒之後會執行
+                mHandler.postDelayed(deleteTaskRunnable, 3000);
+            }
+        }).start();
     }
 
     @Override
