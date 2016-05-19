@@ -6,6 +6,7 @@
     <!-- 如果多個app有共同的android:sharedUserId，而且都sign同樣的key，那麼這些app的resources跟class可以彼此共用 -->
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- 如果要使用getRunningTasks()，就必須要加此permission，但此permission只有在Lollipop之前才有作用 -->
     <uses-permission android:name="android.permission.GET_TASKS" />
@@ -104,6 +105,20 @@
         <activity
             android:name=".database.debug.AndroidDatabaseManager"
             android:theme="@style/Theme.AppCompat.Light" />
+
+        <!--  Preview activity for Google Tag Manager -->
+        <activity
+            android:name="com.google.android.gms.tagmanager.PreviewActivity"
+            android:label="@string/app_name"
+            android:noHistory="true">  <!-- optional, removes the previewActivity from the activity stack. -->
+            <intent-filter>
+                <!-- 這行要改成自己app的package name: tagmanager.c.<app's package name> -->
+                <data android:scheme="tagmanager.c.com.dl.dlexerciseandroid" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+        </activity>
 
         <!--
         用receiver沒有辦法收到來自別的app的shared intent
