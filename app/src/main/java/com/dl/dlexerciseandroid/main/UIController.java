@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.database.debug.AndroidDatabaseManager;
 import com.dl.dlexerciseandroid.dialog.dialogfragment.alert.AlertDialogFragment;
+import com.dl.dlexerciseandroid.dlsdk.DLSdkFragment;
 import com.dl.dlexerciseandroid.facebook.FacebookFragment;
 import com.dl.dlexerciseandroid.intent.IntentFragment;
 import com.dl.dlexerciseandroid.musicplayer.main.MusicPlayerFragment;
@@ -202,6 +203,10 @@ public class UIController implements View.OnClickListener {
 
                     case R.id.menu_item_left_drawer_music_player:
                         replaceFragmentTo(MusicPlayerFragment.class, R.id.frame_layout_main_container, MusicPlayerFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_dl_sdk:
+                        replaceFragmentTo(DLSdkFragment.class, R.id.frame_layout_main_container, DLSdkFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:
