@@ -46,4 +46,8 @@
     <!-- Notification for playing music -->
     <dimen name="padding_notification_playing_music">15dp</dimen>
 
+    <!-- DL SKD -->
+    <dimen name="text_size_dl_text_main_text">20dp</dimen>
+    <dimen name="text_size_dl_text_sub_text">5dp</dimen>
+
 </resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 設定custom view有哪些額外的屬性可以在xml裡設定，name要跟我們客製view的名字一樣 -->
+    <declare-styleable name="DLButton">
+        <attr name="showDL" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="DLText">
+        <attr name="mainText" format="string" />
+        <attr name="mainTextSize" format="dimension" />
+        <attr name="subText" format="string" />
+        <attr name="subTextSize" format="dimension" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,7 @@
+<resources>
+
+    <!-- DLText -->
+    <dimen name="text_size_dl_text_default_main_text">30dp</dimen>
+    <dimen name="text_size_dl_text_default_sub_text">10dp</dimen>
+
+</resources>
