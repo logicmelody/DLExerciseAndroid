@@ -12,6 +12,7 @@ import android.widget.TextView;
  * Created by logicmelody on 2016/5/20.
  */
 
+// Compound views：合成幾個Android原生view的custom view
 // 如果要客製自己的view，我們也可以extend Android本來就有的一些view class，這樣可以讓開發變得比較簡單
 public class DLText extends LinearLayout {
 

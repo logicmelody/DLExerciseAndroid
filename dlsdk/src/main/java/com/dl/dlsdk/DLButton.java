@@ -10,6 +10,7 @@ import android.view.View;
  * Created by logicmelody on 2016/5/19.
  */
 
+// Custom view：完全自己客製的view
 // 如果要客製自己的view，一定要extend View這個class，或是一些Android提供的View，e.g. TextView or Button
 public class DLButton extends View {
 
@@ -50,13 +51,19 @@ public class DLButton extends View {
 
     }
 
-    // 用來畫view的外貌
+    // 用來畫view的外貌，e.g. draw lines, circle, text or bitmaps
     // What to draw, handled by Canvas
     // How to draw, handled by Paint.
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+    }
+
+    // 每一個view在screen上都會是一塊rectangle，這個method就是計算出這個rectangle的width和height
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     // 當view的size有改變的時候，就會call這個method
