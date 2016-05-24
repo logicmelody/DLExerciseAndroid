@@ -151,9 +151,16 @@ public class FacebookFragment extends Fragment {
     }
 
     private void setSwitch(Switch s, String permission) {
+        if (AccessToken.getCurrentAccessToken() == null) {
+            mUserFriendsSwitch.setEnabled(false);
+
+            return;
+        }
+
         boolean hasPermission = FbUtils.hasPermission(permission);
         Log.d("danny", "setSwitch " + permission + " " + hasPermission);
 
+        mUserFriendsSwitch.setEnabled(true);
         s.setChecked(hasPermission);
     }
 
