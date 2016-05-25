@@ -87,6 +87,7 @@ public class DLExerciseContentProvider extends ContentProvider {
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
 
+        // 必須要加這一行才可以跟LoaderManager連動
         getContext().getContentResolver().notifyChange(uri, null);
 
         return ContentUris.withAppendedId(DLExerciseContract.Task.CONTENT_URI, id);
@@ -106,6 +107,7 @@ public class DLExerciseContentProvider extends ContentProvider {
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
 
+        // 必須要加這一行才可以跟LoaderManager連動
         getContext().getContentResolver().notifyChange(uri, null);
 
         return rowsDeleted;
@@ -125,6 +127,7 @@ public class DLExerciseContentProvider extends ContentProvider {
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
 
+        // 必須要加這一行才可以跟LoaderManager連動
         getContext().getContentResolver().notifyChange(uri, null);
 
         return rowsUpdated;
