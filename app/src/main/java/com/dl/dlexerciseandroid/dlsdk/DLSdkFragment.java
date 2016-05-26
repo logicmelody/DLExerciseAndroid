@@ -15,7 +15,7 @@ import com.dl.dlexerciseandroid.R;
  */
 public class DLSdkFragment extends Fragment {
 
-    public static final String TAG = "com.dl.dlexerciseandroid.DLSdkFragment";
+    public static final String TAG = DLSdkFragment.class.getName();
 
     private Context mContext;
 

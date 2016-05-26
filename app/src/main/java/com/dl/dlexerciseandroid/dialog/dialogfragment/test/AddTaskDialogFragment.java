@@ -10,7 +10,7 @@ import android.support.v4.app.DialogFragment;
  */
 public class AddTaskDialogFragment extends DialogFragment {
 
-    public static final String TAG = "com.dl.dlexerciseandroid.AddTaskDialogFragment";
+    public static final String TAG = AddTaskDialogFragment.class.getName();
 
 
     @NonNull

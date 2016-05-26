@@ -30,7 +30,7 @@ import java.util.List;
  */
 public class NormalTaskFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    public static final String TAG = "com.dl.dlexerciseandroid.NormalTaskFragment";
+    public static final String TAG = NormalTaskFragment.class.getName();
 
     private static final int LOADER_ID = 66;
 

@@ -49,6 +49,12 @@ public class MainActivity extends AppCompatActivity implements AlertDialogFragme
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mUIController.onSaveInstanceState(outState);
+    }
+
+    @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mUIController.onPostCreate(savedInstanceState);

@@ -18,7 +18,7 @@ import com.dl.dlexerciseandroid.R;
  */
 public class IntentFragment extends Fragment implements View.OnClickListener {
 
-    public static final String TAG = "com.dl.dlexerciseandroid.IntentFragment";
+    public static final String TAG = IntentFragment.class.getName();
 
     private Context mContext;
 

@@ -27,7 +27,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class OverviewFragment extends Fragment {
 
-    public static final String TAG = "com.dl.dlexerciseandroid.OverviewFragment";
+    // 以後Fragment的tag name都用此class的name來命名比較方便
+    // e.g. com.dl.dlexerciseandroid.musicplayer.main.MusicPlayerFragment
+    public static final String TAG = OverviewFragment.class.getName();
 
     private Context mContext;
 

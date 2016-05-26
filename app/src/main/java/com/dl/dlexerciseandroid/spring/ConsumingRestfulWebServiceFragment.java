@@ -28,7 +28,7 @@ import java.util.HashMap;
 public class ConsumingRestfulWebServiceFragment extends Fragment implements View.OnClickListener,
         GetRequestAsyncTask.FinishedGetRequestListener {
 
-    public static final String TAG = "com.dl.dlexerciseandroid.ConsumingRestfulWebServiceFragment";
+    public static final String TAG = ConsumingRestfulWebServiceFragment.class.getName();
 
     private Context mContext;
 

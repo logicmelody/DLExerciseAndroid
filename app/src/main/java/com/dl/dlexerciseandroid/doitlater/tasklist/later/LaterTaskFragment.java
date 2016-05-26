@@ -36,7 +36,7 @@ import java.util.List;
 // 就會呼叫onLoadFinished()這個callback method，我們可以在這個method裡面拿到最新的data
 public class LaterTaskFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    public static final String TAG = "com.dl.dlexerciseandroid.LaterTaskFragment";
+    public static final String TAG = LaterTaskFragment.class.getName();
 
     private static int LOADER_ID = 12;
 

@@ -27,7 +27,7 @@ import java.util.List;
 public class DoItLaterFragment extends Fragment implements View.OnClickListener, ViewPager.OnPageChangeListener,
         TabLayout.OnTabSelectedListener {
 
-    public static final String TAG = "com.dl.dlexerciseandroid.DoItLaterFragment";
+    public static final String TAG = DoItLaterFragment.class.getName();
 
     private Context mContext;
 

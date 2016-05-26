@@ -18,7 +18,7 @@ import com.dl.dlexerciseandroid.coordinatorlayout.CoordinatorLayoutActivity;
  */
 public class RightDrawerFragment extends Fragment implements View.OnClickListener {
 
-    public static final String TAG = "com.dl.dlexerciseandroid.RightDrawerFragment";
+    public static final String TAG = RightDrawerFragment.class.getName();
 
     public interface OnRightDrawerListener {
         void onCloseRightDrawer();

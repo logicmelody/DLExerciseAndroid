@@ -56,10 +56,16 @@ import java.util.Arrays;
  */
 public class UIController implements View.OnClickListener {
 
+    public static final class SavedStateKey {
+        public static final String TAG_CURRENT_FRAGMENT = "com.dl.dlexerciseandroid.SavedStateKey.TAG_CURRENT_FRAGMENT";
+        public static final String CURRENT_TITLE = "com.dl.dlexerciseandroid.SavedStateKey.CURRENT_TITLE";
+    }
+
     private AppCompatActivity mActivity;
     private FragmentManager mFragmentManager;
 
-    private Fragment mCurrentFragment;
+    //private Fragment mCurrentFragment;
+    private String mCurrentFragmentClassName;
 
     private Toolbar mToolBar;
     private ActionBar mActionBar;
@@ -86,18 +92,18 @@ public class UIController implements View.OnClickListener {
     }
 
     public void onCreate(Bundle savedInstanceState) {
-        initialize();
+        initialize(savedInstanceState);
     }
 
-    private void initialize() {
+    private void initialize(Bundle savedInstanceState) {
         findViews();
-        setupActionBar();
+        setupActionBar(savedInstanceState);
         setupViews();
-        setupMainContent();
+        setupMainContent(savedInstanceState);
         setupDrawerLayout();
         setupLeftDrawer();
         setupRightDrawer();
-        setupFb();
+        setupFacebook();
 
         // 如果要在開啟app的時候預先塞一些data到db中，設定好provider之後，可以在MainActivity的onCreate()ㄍ中加入
         //ContentValues values = new ContentValues();
@@ -127,13 +133,15 @@ public class UIController implements View.OnClickListener {
         //mProfilePictureView = (ProfilePictureView) headerLayout.findViewById(R.id.profile_picture_view_left_drawer_header_login_user_avatar);
     }
 
-    private void setupActionBar() {
+    private void setupActionBar(Bundle savedState) {
         mActivity.setSupportActionBar(mToolBar);
         mActionBar = mActivity.getSupportActionBar();
 
         if (mActionBar != null) {
             mActionBar.setDisplayHomeAsUpEnabled(true);
-            mActionBar.setTitle(mActivity.getString(R.string.all_overview));
+            mActionBar.setTitle(savedState == null ?
+                    mActivity.getString(R.string.all_overview) :
+                    savedState.getString(SavedStateKey.CURRENT_TITLE));
             //mActionBar.setSubtitle(mActivity.getString(R.string.all_app_version));
         }
     }
@@ -142,8 +150,28 @@ public class UIController implements View.OnClickListener {
         mFbLogoutButton.setOnClickListener(this);
     }
 
-    private void setupMainContent() {
-        addFragmentTo(OverviewFragment.class, R.id.frame_layout_main_container, OverviewFragment.TAG);
+    private void setupMainContent(Bundle savedState) {
+        if (savedState == null) {
+            mCurrentFragmentClassName = OverviewFragment.TAG;
+
+        } else {
+            mCurrentFragmentClassName =
+                    savedState.getString(SavedStateKey.TAG_CURRENT_FRAGMENT, OverviewFragment.TAG);
+        }
+
+        Log.d("danny", "Main content fragment class name = " + mCurrentFragmentClassName);
+
+        try {
+            // 以後Fragment的tag name都用此class的name來命名比較方便
+            // e.g. com.dl.dlexerciseandroid.musicplayer.main.MusicPlayerFragment
+            //
+            // 所以這邊我們可以直接拿Fragment Tag來new出一個Class object
+            addFragmentTo((Class<? extends Fragment>) Class.forName(mCurrentFragmentClassName),
+                    R.id.frame_layout_main_container, mCurrentFragmentClassName);
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setupDrawerLayout() {
@@ -262,7 +290,9 @@ public class UIController implements View.OnClickListener {
         }
 
         fragmentTransaction.replace(containerId, fragment, fragmentTag);
-        mCurrentFragment = fragment;
+
+        //mCurrentFragment = fragment;
+        mCurrentFragmentClassName = fragmentTag;
 
         fragmentTransaction.commit();
     }
@@ -283,7 +313,7 @@ public class UIController implements View.OnClickListener {
         mDrawerLayout.closeDrawer(GravityCompat.END);
     }
 
-    private void setupFb() {
+    private void setupFacebook() {
         FacebookSdk.sdkInitialize(mActivity);
         mCallbackManager = CallbackManager.Factory.create();
 
@@ -464,6 +494,11 @@ public class UIController implements View.OnClickListener {
                     return false;
             }
         }
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString(SavedStateKey.TAG_CURRENT_FRAGMENT, mCurrentFragmentClassName);
+        outState.putString(SavedStateKey.CURRENT_TITLE, String.valueOf(mActionBar.getTitle()));
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

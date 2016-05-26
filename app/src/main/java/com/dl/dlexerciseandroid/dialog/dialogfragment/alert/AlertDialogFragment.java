@@ -15,7 +15,7 @@ import android.support.v7.app.AlertDialog;
 // 在Android我們呼叫一個Dialog的方式，都要借助DialogFragment來呼叫我們需要使用的Dialog
 public class AlertDialogFragment extends DialogFragment {
 
-    public static final String TAG = "com.dl.dlexerciseandroid.AlertDialogFragment";
+    public static final String TAG = AlertDialogFragment.class.getName();
 
     public static final String EXTRA_MESSAGE = "AlertDialogFragment_extra_message";
 

@@ -39,7 +39,7 @@ import java.util.List;
 public class MusicPlayerFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>,
         View.OnClickListener, MusicControlReceiver.OnMusicControlListener {
 
-    public static final String TAG = "com.dl.dlexerciseandroid.MusicPlayerFragment";
+    public static final String TAG = MusicPlayerFragment.class.getName();
 
     private static final int LOADER_ID = 47;
 
@@ -105,7 +105,15 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initialize();
-        getLoaderManager().initLoader(LOADER_ID, null, this);
+
+        if (savedInstanceState == null) {
+            // 正常打開此Fragment
+            getLoaderManager().initLoader(LOADER_ID, null, this);
+
+        } else {
+            // 此Fragment經過旋轉重新create
+            getLoaderManager().restartLoader(LOADER_ID, null, this);
+        }
     }
 
     private void initialize() {

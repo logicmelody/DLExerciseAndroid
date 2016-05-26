@@ -32,7 +32,7 @@ import java.util.Arrays;
  */
 public class FacebookFragment extends Fragment {
 
-    public static final String TAG = "com.dl.dlexerciseandroid.FacebookFragment";
+    public static final String TAG = FacebookFragment.class.getName();
 
     private Context mContext;
 
