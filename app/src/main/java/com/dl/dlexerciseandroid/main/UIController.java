@@ -57,8 +57,8 @@ import java.util.Arrays;
 public class UIController implements View.OnClickListener {
 
     public static final class SavedStateKey {
-        public static final String TAG_CURRENT_FRAGMENT = "com.dl.dlexerciseandroid.SavedStateKey.TAG_CURRENT_FRAGMENT";
-        public static final String CURRENT_TITLE = "com.dl.dlexerciseandroid.SavedStateKey.CURRENT_TITLE";
+        public static final String FRAGMENT_CLASS_NAME = "com.dl.dlexerciseandroid.SavedStateKey.FRAGMENT_CLASS_NAME";
+        public static final String TITLE = "com.dl.dlexerciseandroid.SavedStateKey.TITLE";
     }
 
     private AppCompatActivity mActivity;
@@ -141,7 +141,7 @@ public class UIController implements View.OnClickListener {
             mActionBar.setDisplayHomeAsUpEnabled(true);
             mActionBar.setTitle(savedState == null ?
                     mActivity.getString(R.string.all_overview) :
-                    savedState.getString(SavedStateKey.CURRENT_TITLE));
+                    savedState.getString(SavedStateKey.TITLE));
             //mActionBar.setSubtitle(mActivity.getString(R.string.all_app_version));
         }
     }
@@ -156,7 +156,7 @@ public class UIController implements View.OnClickListener {
 
         } else {
             mCurrentFragmentClassName =
-                    savedState.getString(SavedStateKey.TAG_CURRENT_FRAGMENT, OverviewFragment.TAG);
+                    savedState.getString(SavedStateKey.FRAGMENT_CLASS_NAME, OverviewFragment.TAG);
         }
 
         Log.d("danny", "Main content fragment class name = " + mCurrentFragmentClassName);
@@ -497,8 +497,8 @@ public class UIController implements View.OnClickListener {
     }
 
     public void onSaveInstanceState(Bundle outState) {
-        outState.putString(SavedStateKey.TAG_CURRENT_FRAGMENT, mCurrentFragmentClassName);
-        outState.putString(SavedStateKey.CURRENT_TITLE, String.valueOf(mActionBar.getTitle()));
+        outState.putString(SavedStateKey.FRAGMENT_CLASS_NAME, mCurrentFragmentClassName);
+        outState.putString(SavedStateKey.TITLE, String.valueOf(mActionBar.getTitle()));
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
