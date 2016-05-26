@@ -111,7 +111,7 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
             getLoaderManager().initLoader(LOADER_ID, null, this);
 
         } else {
-            // 此Fragment經過旋轉重新create
+            // 此Fragment經過旋轉後重新create
             getLoaderManager().restartLoader(LOADER_ID, null, this);
         }
     }
