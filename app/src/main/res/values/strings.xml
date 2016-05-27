@@ -48,4 +48,7 @@
     <!-- Receive intent -->
     <string name="receive_intent" translatable="false">Receive Intent</string>
 
+    <!-- Music player -->
+    <string name="music_player_no_music">Drag some musics to device</string>
+
 </resources>

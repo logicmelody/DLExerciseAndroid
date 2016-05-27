@@ -29,4 +29,7 @@
     <string name="add_task_task_title_hint">工作名稱</string>
     <string name="add_task_task_description_hint">工作描述</string>
 
+    <!-- Music player -->
+    <string name="music_player_no_music">放些音樂到裝置上吧</string>
+
 </resources>

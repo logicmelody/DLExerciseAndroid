@@ -3,11 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_music_player_list"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/view_group_music_player_playing_item"/>
+        android:layout_above="@+id/view_group_music_player_playing_item">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_music_player_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/text_view_music_player_no_music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/music_player_no_music"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+            android:visibility="gone"/>
+
+    </FrameLayout>
 
     <!-- 需要有一個現在正在播放的UI在music player中，主要利用這個item來返回MusicController -->
     <LinearLayout

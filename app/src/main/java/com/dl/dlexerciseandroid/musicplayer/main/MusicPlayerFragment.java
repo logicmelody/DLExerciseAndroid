@@ -50,6 +50,8 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
     private RecyclerView mMusicList;
     private MusicListAdapter mMusicListAdapter;
 
+    private TextView mNoMusicText;
+
     private ViewGroup mPlayingMusicContainer;
     private TextView mPlayingMusicTitle;
 
@@ -126,6 +128,7 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
 
     private void findViews() {
         mMusicList = (RecyclerView) getView().findViewById(R.id.recycler_view_music_player_list);
+        mNoMusicText = (TextView) getView().findViewById(R.id.text_view_music_player_no_music);
         mPlayingMusicContainer = (ViewGroup) getView().findViewById(R.id.view_group_music_player_playing_item);
         mPlayingMusicTitle = (TextView) getView().findViewById(R.id.text_view_music_player_playing_title);
     }
@@ -189,16 +192,25 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
     private void setMusicListData(Cursor cursor) {
         mMusicDataList.clear();
 
-        while (cursor.moveToNext()) {
-            int idIndex = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media._ID);
-            int titleIndex = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media.TITLE);
-            int artistIndex = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media.ARTIST);
+        if (cursor.getCount() == 0) {
+            mNoMusicText.setVisibility(View.VISIBLE);
+            mMusicList.setVisibility(View.GONE);
 
-            long id = cursor.getLong(idIndex);
-            String title = cursor.getString(titleIndex);
-            String artist = cursor.getString(artistIndex);
+        } else {
+            mNoMusicText.setVisibility(View.GONE);
+            mMusicList.setVisibility(View.VISIBLE);
 
-            mMusicDataList.add(new Music(id, title, artist));
+            while (cursor.moveToNext()) {
+                int idIndex = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media._ID);
+                int titleIndex = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media.TITLE);
+                int artistIndex = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media.ARTIST);
+
+                long id = cursor.getLong(idIndex);
+                String title = cursor.getString(titleIndex);
+                String artist = cursor.getString(artistIndex);
+
+                mMusicDataList.add(new Music(id, title, artist));
+            }
         }
 
         mMusicListAdapter.notifyDataSetChanged();
