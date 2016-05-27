@@ -1,6 +1,7 @@
 package com.dl.dlexerciseandroid.musicplayer.main;
 
 import android.content.ComponentName;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -27,9 +28,8 @@ import com.dl.dlexerciseandroid.background.service.MusicService;
 import com.dl.dlexerciseandroid.datastructure.Music;
 import com.dl.dlexerciseandroid.musicplayer.musiccontroller.MusicControlReceiver;
 import com.dl.dlexerciseandroid.musicplayer.musiccontroller.MusicControllerActivity;
+import com.dl.dlexerciseandroid.utility.utils.MusicUtils;
 
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +40,7 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
         View.OnClickListener, MusicControlReceiver.OnMusicControlListener {
 
     public static final String TAG = MusicPlayerFragment.class.getName();
+    public static final Uri sAudioContentUri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
 
     private static final int LOADER_ID = 47;
 
@@ -174,10 +175,9 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         // 擷取在device中音樂檔案的資訊，一樣可以用LoaderManager來處理，只是Uri的部分要用
         // android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-        Uri uri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         String order = android.provider.MediaStore.Audio.Media.TITLE;
 
-        return new CursorLoader(mContext, uri, null, null, null, order);
+        return new CursorLoader(mContext, sAudioContentUri, null, null, null, order);
     }
 
     @Override
@@ -192,25 +192,30 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
     private void setMusicListData(Cursor cursor) {
         mMusicDataList.clear();
 
-        if (cursor.getCount() == 0) {
+        while (cursor.moveToNext()) {
+            int idIndex = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media._ID);
+            int titleIndex = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media.TITLE);
+            int artistIndex = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media.ARTIST);
+
+            long id = cursor.getLong(idIndex);
+            String title = cursor.getString(titleIndex);
+            String artist = cursor.getString(artistIndex);
+            String musicFilePath = MusicUtils.getAudioFilePath(mContext,
+                    ContentUris.withAppendedId(sAudioContentUri, id));
+
+            // 判斷music是不是mp3檔
+            if (MusicUtils.isMusicFile(musicFilePath)) {
+                mMusicDataList.add(new Music(id, title, artist));
+            }
+        }
+
+        if (mMusicDataList.size() == 0) {
             mNoMusicText.setVisibility(View.VISIBLE);
             mMusicList.setVisibility(View.GONE);
 
         } else {
             mNoMusicText.setVisibility(View.GONE);
             mMusicList.setVisibility(View.VISIBLE);
-
-            while (cursor.moveToNext()) {
-                int idIndex = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media._ID);
-                int titleIndex = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media.TITLE);
-                int artistIndex = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media.ARTIST);
-
-                long id = cursor.getLong(idIndex);
-                String title = cursor.getString(titleIndex);
-                String artist = cursor.getString(artistIndex);
-
-                mMusicDataList.add(new Music(id, title, artist));
-            }
         }
 
         mMusicListAdapter.notifyDataSetChanged();

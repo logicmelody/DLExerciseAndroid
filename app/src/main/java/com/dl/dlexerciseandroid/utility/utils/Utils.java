@@ -2,7 +2,11 @@ package com.dl.dlexerciseandroid.utility.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Handler;
+import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.widget.Toast;
@@ -69,5 +73,15 @@ public class Utils {
                 Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public static String getExtensionFrom(String filePath) {
+        if (TextUtils.isEmpty(filePath)) {
+            return null;
+        }
+
+        int dotPosition = filePath.lastIndexOf(".");
+
+        return dotPosition == -1 ? null : filePath.substring(dotPosition + 1, filePath.length());
     }
 }
