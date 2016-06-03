@@ -20,7 +20,7 @@
         <include layout="@layout/toolbar" />
 
         <!-- 主要來顯示內容的container，用來顯示不同的Fragment -->
-        <!-- android:clickable="true"：不加這行的話，drawer會有問題 -->
+        <!-- android:clickable="true"：不加這行的話，drawer會有問題(有時候滑出drawer時會卡住) -->
         <FrameLayout
             android:id="@+id/frame_layout_main_container"
             android:layout_width="match_parent"
