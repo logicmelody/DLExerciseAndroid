@@ -36,14 +36,24 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.1'
+
     // For consuming restful web service with Spring
     compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
+
     // For Facebook
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.android.support:design:23.3.0'
-    compile 'com.google.android.gms:play-services-analytics:9.0.0'
+    compile 'com.google.android.gms:play-services-analytics:9.0.1'
+
+    // For using Firebase
+    compile 'com.google.firebase:firebase-core:9.0.1'
+
     compile project(':dlsdk')
 }
+
+// For using Firebase: 這行要加在最後一行
+apply plugin: 'com.google.gms.google-services'
