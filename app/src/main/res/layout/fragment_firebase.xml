@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_all_window"
+    android:orientation="vertical" >
+
+    <Switch
+        android:id="@+id/switch_firebase_subscribe_topic_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_firebase_switch_item"
+        android:text="@string/firebase_switch_subscribe_topic_test"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</LinearLayout>

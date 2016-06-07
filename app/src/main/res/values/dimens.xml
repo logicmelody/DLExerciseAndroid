@@ -50,4 +50,7 @@
     <dimen name="text_size_dl_text_main_text">20dp</dimen>
     <dimen name="text_size_dl_text_sub_text">5dp</dimen>
 
+    <!-- Firebase -->
+    <dimen name="margin_top_firebase_switch_item">10dp</dimen>
+
 </resources>

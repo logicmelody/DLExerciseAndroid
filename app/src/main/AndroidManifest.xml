@@ -120,6 +120,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".musicplayer.musiccontroller.MusicControllerActivity"></activity>
+
         <!--
         用receiver沒有辦法收到來自別的app的shared intent
         <receiver android:name=".doitlater.DoItLaterShareReceiver">
@@ -132,8 +134,16 @@
             </intent-filter>
         </receiver>
         -->
+
         <service android:name=".background.service.DoItLaterService" />
         <service android:name=".background.service.MusicService" />
+
+        <service
+            android:name=".background.service.FCMService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
 
         <provider
             android:name=".database.provider.DLExerciseContentProvider"
@@ -143,7 +153,6 @@
             android:readPermission="com.dl.dlexerciseandroid.provider.permission.READ"
             android:writePermission="com.dl.dlexerciseandroid.provider.permission.WRITE" />
 
-        <activity android:name=".musicplayer.musiccontroller.MusicControllerActivity"></activity>
     </application>
 
 </manifest>

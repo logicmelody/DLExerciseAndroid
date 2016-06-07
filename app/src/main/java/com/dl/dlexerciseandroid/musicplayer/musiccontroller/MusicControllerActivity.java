@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.background.service.MusicService;
 import com.dl.dlexerciseandroid.datastructure.Music;
+import com.dl.dlexerciseandroid.utility.utils.PreferenceUtils;
 
 // 這個class主要用來顯示現在正在播放音樂的一些基本資訊：歌名, 歌手
 // 與service bind完成之後，也可以經由controller的一些button操作MusicService：上一首, 下一首, play, pause, ......
@@ -28,9 +29,6 @@ public class MusicControllerActivity extends AppCompatActivity implements View.O
         MusicControlReceiver.OnMusicControlListener {
 
     public static final String EXTRA_PLAYING_MUSIC = "com.dl.dlexerciseandroid.EXTRA_PLAYING_MUSIC";
-
-    private static final String PREFERENCE_SHUFFLE = "com.dl.dlexerciseandroid.PREFERENCE_SHUFFLE";
-    private static final String PREFERENCE_LOOP = "com.dl.dlexerciseandroid.PREFERENCE_LOOP";
 
     private Toolbar mToolbar;
     private ActionBar mActionBar;
@@ -134,8 +132,10 @@ public class MusicControllerActivity extends AppCompatActivity implements View.O
     }
 
     private void setupMusicController() {
-        mShuffle.setTag(PreferenceManager.getDefaultSharedPreferences(this).getBoolean(PREFERENCE_SHUFFLE, false));
-        mLoop.setTag(PreferenceManager.getDefaultSharedPreferences(this).getBoolean(PREFERENCE_LOOP, true));
+        mShuffle.setTag(PreferenceManager.getDefaultSharedPreferences(this).
+                getBoolean(PreferenceUtils.PREFERENCE_SHUFFLE, false));
+        mLoop.setTag(PreferenceManager.getDefaultSharedPreferences(this).
+                getBoolean(PreferenceUtils.PREFERENCE_LOOP, true));
         setShuffleIcon((boolean) mShuffle.getTag());
         setLoopIcon((boolean) mLoop.getTag());
 
@@ -171,8 +171,8 @@ public class MusicControllerActivity extends AppCompatActivity implements View.O
         unbindMusicService();
 
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-        editor.putBoolean(PREFERENCE_SHUFFLE, (boolean) mShuffle.getTag());
-        editor.putBoolean(PREFERENCE_LOOP, (boolean) mLoop.getTag());
+        editor.putBoolean(PreferenceUtils.PREFERENCE_SHUFFLE, (boolean) mShuffle.getTag());
+        editor.putBoolean(PreferenceUtils.PREFERENCE_LOOP, (boolean) mLoop.getTag());
         editor.apply();
     }
 

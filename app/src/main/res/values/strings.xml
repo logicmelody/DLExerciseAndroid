@@ -16,6 +16,7 @@
     <string name="all_test">Test</string>
     <string name="all_music_player" translatable="false">Music Player</string>
     <string name="all_dl_sdk" translatable="false">DL SDK</string>
+    <string name="all_firebase" translatable="false">Firebase</string>
     <string name="all_normal">normal</string>
     <string name="all_later">Later</string>
     <string name="all_undo">UNDO</string>
@@ -50,5 +51,8 @@
 
     <!-- Music player -->
     <string name="music_player_no_music">Drag some musics to device</string>
+
+    <!-- Firebase -->
+    <string name="firebase_switch_subscribe_topic_test" translatable="false">Subscribe Topic Test</string>
 
 </resources>
