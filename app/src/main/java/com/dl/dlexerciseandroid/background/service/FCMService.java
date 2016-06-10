@@ -1,7 +1,15 @@
 package com.dl.dlexerciseandroid.background.service;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
+import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.main.MainActivity;
+import com.dl.dlexerciseandroid.utility.utils.Utils;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -21,7 +29,48 @@ public class FCMService extends FirebaseMessagingService {
         // If the application is in the foreground handle both data and notification messages here.
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
+
+        // onMessageReceived()這個callback，只有在app在foreground執行的時候才會呼叫，若是app在background或是closed的狀態，
+        // 則只會在device上跳出notification並且顯示body跟title而已
+
+        // app在foreground的時候並不會跳出notification，但是可以經由onMessageReceived()拿到完整的資訊，
+        // 我們也可以在onMessageReceived()中自己顯示notification
+
+        // getFrom()可以知道message是用哪種方式傳過來
+        // /topics/test：Send to a topic
+        // 682672505333(id)：Send to a user
         Log.d("danny", "From: " + remoteMessage.getFrom());
+
+        // getBody()可以拿到notification的內容
         Log.d("danny", "Notification Message Body: " + remoteMessage.getNotification().getBody());
+
+        // getTitle()可以拿到notification的title
+        Log.d("danny", "Notification Message title: " + remoteMessage.getNotification().getTitle());
+
+        // 使用console中的進階選項，可以設定key/value
+        Log.d("danny", "Notification Message data(key/value): " + remoteMessage.getData().get("title"));
+
+        sendNotification(remoteMessage);
+    }
+
+    private void sendNotification(RemoteMessage remoteMessage) {
+        // 用來建造notification的builder
+        Notification.Builder builder = new Notification.Builder(this);
+        Intent backIntent = new Intent(this, MainActivity.class);
+        PendingIntent backPendingIntent = PendingIntent.getActivity(this, 0, backIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        // 一個notification一定要有以下三個資訊：
+        // 1. setSmallIcon()：在status bar上出現的小icon
+        // 2. setContentTitle()
+        // 3. setContentText()
+        // Note: 如果使用setContent()來使用customized layout的話，2跟3項可以不需要
+        builder.setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(remoteMessage.getNotification().getTitle())
+                .setContentText(remoteMessage.getNotification().getBody())
+                .setContentIntent(backPendingIntent)
+                .setAutoCancel(true);
+
+        ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).
+                notify(Utils.getNotificationId(), builder.build());
     }
 }

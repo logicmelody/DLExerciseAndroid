@@ -27,6 +27,8 @@ public class Utils {
         public static final String YYYYMMDDHHMM = "yyyy/MM/dd HH:mm";
     }
 
+    private static int sNotificationId = 0;
+
     public static Animation sFadeInAnimation;
     public static Animation sFadeOutAnimation;
 
@@ -83,5 +85,9 @@ public class Utils {
         int dotPosition = filePath.lastIndexOf(".");
 
         return dotPosition == -1 ? null : filePath.substring(dotPosition + 1, filePath.length());
+    }
+
+    public static int getNotificationId() {
+        return sNotificationId++;
     }
 }
