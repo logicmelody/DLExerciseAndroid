@@ -103,6 +103,9 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
                 getString(R.string.all_normal),
                 getString(R.string.all_later)
         };
+
+        // 這邊第一個參數如果用getFragmentManager()會有問題，因為我們是在DoItLaterFragment中的ViewPager再加Fragment
+        // 所以應該要使用getChildFragmentManager()
         mDoItLaterPagerAdapter = new DoItLaterPagerAdapter(getChildFragmentManager(), mFragmentList, tabTitleList);
 
         mTaskListViewPager.setAdapter(mDoItLaterPagerAdapter);
