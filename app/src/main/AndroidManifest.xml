@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.dl.dlexerciseandroid"
     android:sharedUserId="android.uid.latertask">
 
@@ -29,6 +30,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- 在<application>的tag中加入
+             android:debuggable="true"
+             tools:ignore="HardcodedDebugMode"
+             這兩個屬性，可以讓signed apk進行debug-->
 
         <!-- 要將Facebook app id設定在這邊 -->
         <meta-data
