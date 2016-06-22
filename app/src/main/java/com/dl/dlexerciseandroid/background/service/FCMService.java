@@ -32,6 +32,9 @@ public class FCMService extends FirebaseMessagingService {
 
         // onMessageReceived()這個callback，只有在app在foreground執行的時候才會呼叫，若是app在background或是closed的狀態，
         // 則只會在device上跳出notification並且顯示body跟title而已
+        //
+        // Note: 當app被close掉的時候(user進到recent app的頁面，然後把app swipe掉)，
+        //       有些device會收不到Firebase傳來的notification(e.g. Zenfone 2)，但是Nexus 7正常可以收到
 
         // app在foreground的時候並不會跳出notification，但是可以經由onMessageReceived()拿到完整的資訊，
         // 我們也可以在onMessageReceived()中自己顯示notification
@@ -42,9 +45,11 @@ public class FCMService extends FirebaseMessagingService {
         Log.d("danny", "From: " + remoteMessage.getFrom());
 
         // getBody()可以拿到notification的內容
+        // 會顯示在notification的第二行
         Log.d("danny", "Notification Message Body: " + remoteMessage.getNotification().getBody());
 
         // getTitle()可以拿到notification的title
+        // 會顯示在notification的第一行
         Log.d("danny", "Notification Message title: " + remoteMessage.getNotification().getTitle());
 
         // 使用console中的進階選項，可以設定key/value
