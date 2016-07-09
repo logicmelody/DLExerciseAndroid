@@ -37,6 +37,10 @@
             android:title="@string/all_firebase" />
 
         <item
+            android:id="@+id/menu_item_left_drawer_bitmap"
+            android:title="@string/all_bitmap" />
+
+        <item
             android:id="@+id/menu_item_left_drawer_test"
             android:title="@string/all_test" />
     </group>

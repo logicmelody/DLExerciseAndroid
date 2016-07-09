@@ -53,4 +53,7 @@
     <!-- Firebase -->
     <dimen name="margin_top_firebase_switch_item">10dp</dimen>
 
+    <!-- Bitmap -->
+    <dimen name="margin_top_bitmap_between_images">10dp</dimen>
+
 </resources>
