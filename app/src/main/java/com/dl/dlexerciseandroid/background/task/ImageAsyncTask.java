@@ -21,7 +21,15 @@ import java.lang.ref.WeakReference;
 // 有了這個AsyncTask，可以讓load image的時候，UI thread不會被block住
 public class ImageAsyncTask extends AsyncTask<Void, Void, Bitmap> {
 
-    // Use a WeakReference to ensure the ImageView can be garbage collected
+    // Use a WeakReference to ensure the ImageView can be garbage collected.
+    //
+    // The WeakReference to the ImageView ensures that the AsyncTask does not prevent the ImageView
+    // and anything it references from being garbage collected.
+    // There’s no guarantee the ImageView is still around when the task finishes,
+    // so you must also check the reference in onPostExecute().
+    // The ImageView may no longer exist,
+    // if for example, the user navigates away from the activity or if a configuration change happens before
+    // the task finishes.
     private final WeakReference<ImageView> mTargetImageViewReference;
 
     private Resources mResources;
