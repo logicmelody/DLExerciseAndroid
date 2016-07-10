@@ -5,14 +5,14 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.utility.utils.BitmapUtils;
+import com.dl.dlexerciseandroid.background.task.ImageAsyncTask;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by logicmelody on 2016/6/27.
@@ -57,26 +57,26 @@ public class BitmapFragment extends Fragment {
     }
 
     private void setupOriginalImage() {
-        BitmapFactory.Options options = new BitmapFactory.Options();
+        ImageAsyncTask imageAsyncTask =
+                new ImageAsyncTask(getResources(), R.drawable.poster_iron_man, mOriginalImageCenterScale);
+        imageAsyncTask.setPlaceHolder(BitmapFactory.decodeResource(getResources(), R.drawable.image_placeholder));
+        imageAsyncTask.execute();
 
-        // 將這個option設定為true的時候，在decode一張image的時候，不會真的allocate memory，但是可以得到這張image的width, height
-        // 或一些其他的資訊
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeResource(getResources(), R.drawable.poster_iron_man, options);
+        // TODO
+        // 1. Where dose image resource come from?
+        // 2. Should we resize the image?
 
-        int imageWidth = options.outWidth;
-        int imageHeight = options.outHeight;
-        String imageType = options.outMimeType;
-
-        Log.d("danny", "Original image width = " + imageWidth);
-        Log.d("danny", "Original image height = " + imageHeight);
-        Log.d("danny", "Original image type = " + imageType);
-
-        mOriginalImageCenterScale.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.poster_iron_man));
+        // 用Picasso可以達到一樣的效果
+        //Picasso.with(mContext).load(R.drawable.poster_iron_man).into(mOriginalImageCenterScale);
     }
 
     private void setupResizedImage() {
-        mResizedImage.setImageBitmap(BitmapUtils.
-                decodeSampledBitmapFromResource(getResources(), R.drawable.poster_iron_man, 200, 200));
+        ImageAsyncTask imageAsyncTask = new ImageAsyncTask(getResources(), R.drawable.poster_iron_man, mResizedImage);
+        imageAsyncTask.setPlaceHolder(BitmapFactory.decodeResource(getResources(), R.drawable.image_placeholder));
+        imageAsyncTask.setReqWidthHeight(400, 400);
+        imageAsyncTask.execute();
+
+//        mResizedImage.setImageBitmap(BitmapUtils.
+//                decodeSampledBitmapFromResource(getResources(), R.drawable.poster_iron_man, 200, 200));
     }
 }
