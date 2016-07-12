@@ -36,6 +36,7 @@ import com.dl.dlexerciseandroid.spring.ConsumingRestfulWebServiceFragment;
 import com.dl.dlexerciseandroid.test.TestFragment;
 import com.dl.dlexerciseandroid.utility.utils.FbUtils;
 import com.dl.dlexerciseandroid.doitlater.tasklist.main.DoItLaterFragment;
+import com.dl.dlexerciseandroid.utility.utils.Utils;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -293,18 +294,7 @@ public class UIController implements View.OnClickListener {
     private void replaceFragmentTo(Class<? extends Fragment> fragmentClass, int containerId, String fragmentTag) {
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
 
-        Fragment fragment = mFragmentManager.findFragmentByTag(fragmentTag);
-        if (fragment == null) {
-            try {
-                fragment = fragmentClass.newInstance();
-
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-
+        Fragment fragment = Utils.getFragment(mFragmentManager, fragmentClass, fragmentTag);
         fragmentTransaction.replace(containerId, fragment, fragmentTag);
 
         //mCurrentFragment = fragment;
