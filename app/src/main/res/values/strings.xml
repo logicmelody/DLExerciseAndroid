@@ -18,9 +18,12 @@
     <string name="all_dl_sdk" translatable="false">DL SDK</string>
     <string name="all_firebase" translatable="false">Firebase</string>
     <string name="all_bitmap" translatable="false">Bitmap</string>
+    <string name="all_load_image_from_internet" translatable="false">Load Image From Internet</string>
     <string name="all_normal">normal</string>
     <string name="all_later">Later</string>
     <string name="all_undo">UNDO</string>
+    <string name="all_picasso" translatable="false">Picasso</string>
+    <string name="all_lru" translatable="false">LRU</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">Sure to logout?</string>

@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -89,5 +91,22 @@ public class Utils {
 
     public static int getNotificationId() {
         return sNotificationId++;
+    }
+
+    public static Fragment getFragment(FragmentManager fm, Class<? extends Fragment> fragmentClass, String tag) {
+        Fragment fragment = fm.findFragmentByTag(tag);
+
+        if (fragment == null) {
+            try {
+                fragment = fragmentClass.newInstance();
+
+            } catch (java.lang.InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return fragment;
     }
 }

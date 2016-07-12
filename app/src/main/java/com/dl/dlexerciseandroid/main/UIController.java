@@ -28,6 +28,7 @@ import com.dl.dlexerciseandroid.dlsdk.DLSdkFragment;
 import com.dl.dlexerciseandroid.facebook.FacebookFragment;
 import com.dl.dlexerciseandroid.firebase.FirebaseFragment;
 import com.dl.dlexerciseandroid.intent.IntentFragment;
+import com.dl.dlexerciseandroid.loadimagefrominternet.main.LoadImageFromInternetFragment;
 import com.dl.dlexerciseandroid.musicplayer.main.MusicPlayerFragment;
 import com.dl.dlexerciseandroid.overview.OverviewFragment;
 import com.dl.dlexerciseandroid.rightdrawer.RightDrawerFragment;
@@ -245,6 +246,11 @@ public class UIController implements View.OnClickListener {
 
                     case R.id.menu_item_left_drawer_bitmap:
                         replaceFragmentTo(BitmapFragment.class, R.id.frame_layout_main_container, BitmapFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_load_image_from_internet:
+                        replaceFragmentTo(LoadImageFromInternetFragment.class,
+                                          R.id.frame_layout_main_container, LoadImageFromInternetFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:

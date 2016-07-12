@@ -41,6 +41,10 @@
             android:title="@string/all_bitmap" />
 
         <item
+            android:id="@+id/menu_item_left_drawer_load_image_from_internet"
+            android:title="@string/all_load_image_from_internet" />
+
+        <item
             android:id="@+id/menu_item_left_drawer_test"
             android:title="@string/all_test" />
     </group>
