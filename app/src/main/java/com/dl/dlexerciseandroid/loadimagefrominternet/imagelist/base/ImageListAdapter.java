@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.loadimagefrominternet.picasso;
+package com.dl.dlexerciseandroid.loadimagefrominternet.imagelist.base;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -15,9 +15,9 @@ import java.util.List;
 /**
  * Created by logicmelody on 2016/7/12.
  */
-public class PicassoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ImageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private class ImageViewHolder extends RecyclerView.ViewHolder {
+    protected class ImageViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView image;
 
@@ -27,12 +27,12 @@ public class PicassoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    private Context mContext;
+    protected Context mContext;
 
-    private List<String> mImageUriList;
+    protected List<String> mImageUriList;
 
 
-    public PicassoAdapter(Context context, List<String> imageUriList) {
+    public ImageListAdapter(Context context, List<String> imageUriList) {
         mContext = context;
         mImageUriList = imageUriList;
     }
@@ -45,17 +45,7 @@ public class PicassoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ImageViewHolder vh = (ImageViewHolder) holder;
 
-        // 使用Picasso來load image已經處理掉以下這些問題
-        // Many common pitfalls of image loading on Android are handled automatically by Picasso:
-        // 1. Handling ImageView recycling and download cancelation in an adapter.
-        // 2. Complex image transformations with minimal memory use.
-        // 3. Automatic memory and disk caching.
-        Picasso.with(mContext)
-                .load(mImageUriList.get(position))
-                //.load(R.drawable.poster_iron_man)
-                .placeholder(R.drawable.image_placeholder).into(vh.image);
     }
 
     @Override

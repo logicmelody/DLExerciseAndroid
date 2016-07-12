@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.loadimagefrominternet.lru.LruFragment;
-import com.dl.dlexerciseandroid.loadimagefrominternet.picasso.PicassoFragment;
+import com.dl.dlexerciseandroid.loadimagefrominternet.imagelist.lru.LruFragment;
+import com.dl.dlexerciseandroid.loadimagefrominternet.imagelist.picasso.PicassoFragment;
 import com.dl.dlexerciseandroid.utility.utils.Utils;
 
 import java.util.ArrayList;

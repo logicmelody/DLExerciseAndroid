@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.loadimagefrominternet.main;
+package com.dl.dlexerciseandroid.loadimagefrominternet.imagelist.base;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.loadimagefrominternet.picasso.PicassoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +20,14 @@ import java.util.List;
  */
 abstract public class ImageListFragment extends Fragment {
 
-    protected abstract void setupImageList();
+    protected abstract ImageListAdapter getImageListAdapter(Context context, List<String> imageDataList);
 
-    protected Context mContext;
+    private Context mContext;
 
-    protected RecyclerView mImageList;
+    private RecyclerView mImageList;
+    private ImageListAdapter mImageListAdapter;
 
-    protected List<String> mImageDataList = new ArrayList<>();
+    private List<String> mImageDataList = new ArrayList<>();
 
 
     @Override
@@ -62,5 +62,12 @@ abstract public class ImageListFragment extends Fragment {
         for (int i = 0 ; i < 100 ; i++) {
             mImageDataList.add("http://i.imgur.com/DvpvklR.png");
         }
+    }
+
+    private void setupImageList() {
+        mImageListAdapter = getImageListAdapter(mContext, mImageDataList);
+
+        mImageList.setLayoutManager(new LinearLayoutManager(mContext));
+        mImageList.setAdapter(mImageListAdapter);
     }
 }
