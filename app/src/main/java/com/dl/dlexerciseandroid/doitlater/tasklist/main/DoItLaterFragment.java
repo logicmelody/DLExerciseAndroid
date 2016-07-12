@@ -101,8 +101,7 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
     }
 
     private void setupTabLayout() {
-        // 將ViewPager跟TabLayout連動，如此一來在OnPageChangeListener跟OnTabSelectedListener不需要做任何設定
-        // 就可以讓ViewPager跟TabLayout的行為一致
+        // 將ViewPager跟TabLayout連動
         mTabLayout.setupWithViewPager(mTaskListViewPager);
         mTabLayout.setOnTabSelectedListener(this);
     }
@@ -140,7 +139,9 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
+        // 當點選到某一個tab的時候，要將ViewPager設定到正確的Fragment
         mTaskListViewPager.setCurrentItem(tab.getPosition());
+
         mAddTaskButton.show();
     }
 

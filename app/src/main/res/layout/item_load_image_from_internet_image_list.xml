@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_load_image_from_internet_item">
+
+    <ImageView
+        android:id="@+id/image_view_load_image_from_internet_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true" />
+
+    <!-- 以下做縮放的時候，都是會從原始大小開始縮放，所以有時候會看到結果多出很多空白 -->
+    <!-- android:scaleType -->
+    <!-- android:scaleType="center": 按照圖片原尺寸顯示，居中顯示。 -->
+    <!-- android:scaleType="centerCrop": 按照比例擴大或縮小圖片居中顯示，比較長的寬或高會被裁到。 -->
+    <!-- android:scaleType="centerInside": 按照圖片完整居中顯示，並維持原本長寬比例。 -->
+
+    <!-- fitXXX：整張圖會按照比例縮放到可以放進這個ImageView -->
+    <!-- (所以如果是fitStart，會看到一個縮好的Iron Man在最上方，下面會有很多空白) -->
+    <!-- android:scaleType="fitCenter": 按照圖片比例縮放到ImageView的寬度，居中顯示。 -->
+    <!-- android:scaleType="fitEnd": 按照圖片比例縮放到ImageView的寬度，以圖片的底部顯示。 -->
+    <!-- android:scaleType="fitStart": 按照圖片比例縮放到ImageView的寬度，以圖片的頂部顯示。 -->
+    <!-- android:scaleType="fitXY": 不按照圖片比例縮放到ImageView的大小。 -->
+
+    <!-- android:adjustViewBounds若是設定為true，則scaleType會自動設為fitCenter
+         但是如果有另外設定scaleType的話，新設定的會把預設的覆蓋掉
+         這邊要設定android:adjustViewBounds="true"才可以達到我們想要的結果 -->
+
+</RelativeLayout>

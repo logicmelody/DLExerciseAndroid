@@ -113,7 +113,7 @@ public class LoadImageFromInternetFragment extends Fragment implements ViewPager
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
-
+        mImageListViewPager.setCurrentItem(tab.getPosition());
     }
 
     @Override

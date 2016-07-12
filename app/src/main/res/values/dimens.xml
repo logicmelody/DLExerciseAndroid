@@ -56,4 +56,7 @@
     <!-- Bitmap -->
     <dimen name="margin_top_bitmap_between_images">10dp</dimen>
 
+    <!-- Load image from internet -->
+    <dimen name="margin_load_image_from_internet_item">10dp</dimen>
+
 </resources>

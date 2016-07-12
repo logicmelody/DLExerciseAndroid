@@ -17,6 +17,7 @@
             android:text="@string/bitmap_original_image"/>
 
         <!-- ImageView預設的scale type: fitCenter -->
+
         <!-- center: Center the image in the view, but perform no scaling. -->
         <ImageView
             android:id="@+id/image_view_bitmap_original_image_center_scale"
