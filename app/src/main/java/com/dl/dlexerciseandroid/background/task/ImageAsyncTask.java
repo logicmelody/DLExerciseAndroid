@@ -33,7 +33,6 @@ public class ImageAsyncTask extends AsyncTask<Void, Void, Bitmap> {
     private final WeakReference<ImageView> mTargetImageViewReference;
 
     private Resources mResources;
-    private Bitmap mPlaceHolder;
 
     private String mUri;
     private int mResId;

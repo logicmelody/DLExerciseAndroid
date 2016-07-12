@@ -62,10 +62,6 @@ public class BitmapFragment extends Fragment {
         imageAsyncTask.setPlaceHolder(BitmapFactory.decodeResource(getResources(), R.drawable.image_placeholder));
         imageAsyncTask.execute();
 
-        // TODO
-        // 1. Where dose image resource come from?
-        // 2. Should we resize the image?
-
         // 用Picasso可以達到一樣的效果
         //Picasso.with(mContext).load(R.drawable.poster_iron_man).into(mOriginalImageCenterScale);
     }
