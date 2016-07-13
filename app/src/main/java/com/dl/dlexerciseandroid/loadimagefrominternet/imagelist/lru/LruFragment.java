@@ -19,4 +19,9 @@ public class LruFragment extends ImageListFragment {
     protected ImageListAdapter getImageListAdapter(Context context, List<String> imageDataList) {
         return new LruAdapter(context, imageDataList);
     }
+
+    @Override
+    protected String getImageUri() {
+        return "http://herogamesworld.com/images/iron%20man%20games.jpg";
+    }
 }

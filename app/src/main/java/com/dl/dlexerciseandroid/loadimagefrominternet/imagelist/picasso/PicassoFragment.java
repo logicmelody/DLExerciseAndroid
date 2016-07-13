@@ -19,4 +19,10 @@ public class PicassoFragment extends ImageListFragment {
     protected ImageListAdapter getImageListAdapter(Context context, List<String> imageDataList) {
         return new PicassoAdapter(context, imageDataList);
     }
+
+    @Override
+    protected String getImageUri() {
+        return "http://i.imgur.com/DvpvklR.png";
+        //return "http://herogamesworld.com/images/iron%20man%20games.jpg";
+    }
 }

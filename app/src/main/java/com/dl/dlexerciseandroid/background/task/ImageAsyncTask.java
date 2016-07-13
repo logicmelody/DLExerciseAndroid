@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.utility.utils.BitmapUtils;
+import com.dl.dlexerciseandroid.utility.utils.HttpUtils;
 
 import java.lang.ref.WeakReference;
 
@@ -110,9 +111,8 @@ public class ImageAsyncTask extends AsyncTask<Void, Void, Bitmap> {
         }
     }
 
-    // TODO: loadBitmapFromUri()
     private Bitmap loadBitmapFromUri() {
-        return null;
+        return HttpUtils.downloadBitmap(mUri);
     }
 
     @Override

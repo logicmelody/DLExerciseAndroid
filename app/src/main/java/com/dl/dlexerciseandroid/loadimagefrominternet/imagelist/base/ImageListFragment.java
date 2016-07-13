@@ -21,6 +21,7 @@ import java.util.List;
 abstract public class ImageListFragment extends Fragment {
 
     protected abstract ImageListAdapter getImageListAdapter(Context context, List<String> imageDataList);
+    protected abstract String getImageUri();
 
     private Context mContext;
 
@@ -60,7 +61,7 @@ abstract public class ImageListFragment extends Fragment {
 
     private void setImageData() {
         for (int i = 0 ; i < 100 ; i++) {
-            mImageDataList.add("http://i.imgur.com/DvpvklR.png");
+            mImageDataList.add(getImageUri());
         }
     }
 
