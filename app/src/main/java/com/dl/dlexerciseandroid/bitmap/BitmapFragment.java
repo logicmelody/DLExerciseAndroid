@@ -11,8 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.background.task.ImageAsyncTask;
-import com.squareup.picasso.Picasso;
+import com.dl.dlexerciseandroid.background.task.loadimage.ImageLoader;
 
 /**
  * Created by logicmelody on 2016/6/27.
@@ -57,20 +56,16 @@ public class BitmapFragment extends Fragment {
     }
 
     private void setupOriginalImage() {
-        ImageAsyncTask imageAsyncTask =
-                new ImageAsyncTask(getResources(), R.drawable.poster_iron_man, mOriginalImageCenterScale);
-        imageAsyncTask.setPlaceHolder(BitmapFactory.decodeResource(getResources(), R.drawable.image_placeholder));
-        imageAsyncTask.execute();
+        new ImageLoader(mContext.getResources()).load(R.drawable.poster_iron_man, mOriginalImageCenterScale);
 
         // 用Picasso可以達到一樣的效果
         //Picasso.with(mContext).load(R.drawable.poster_iron_man).into(mOriginalImageCenterScale);
     }
 
     private void setupResizedImage() {
-        ImageAsyncTask imageAsyncTask = new ImageAsyncTask(getResources(), R.drawable.poster_iron_man, mResizedImage);
-        imageAsyncTask.setPlaceHolder(BitmapFactory.decodeResource(getResources(), R.drawable.image_placeholder));
-        imageAsyncTask.setReqWidthHeight(400, 400);
-        imageAsyncTask.execute();
+        ImageLoader imageLoader = new ImageLoader(mContext.getResources());
+        imageLoader.setReqWidthHeight(400, 400);
+        imageLoader.load(R.drawable.poster_iron_man, mResizedImage);
 
 //        mResizedImage.setImageBitmap(BitmapUtils.
 //                decodeSampledBitmapFromResource(getResources(), R.drawable.poster_iron_man, 200, 200));

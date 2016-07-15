@@ -1,13 +1,12 @@
 package com.dl.dlexerciseandroid.loadimagefrominternet.imagelist.lru;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.background.task.ImageAsyncTask;
+import com.dl.dlexerciseandroid.background.task.loadimage.ImageLoader;
 import com.dl.dlexerciseandroid.loadimagefrominternet.imagelist.base.ImageListAdapter;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -24,8 +23,6 @@ public class LruAdapter extends ImageListAdapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ImageViewHolder vh = (ImageViewHolder) holder;
 
-        ImageAsyncTask imageAsyncTask = new ImageAsyncTask(mContext.getResources(), mImageUriList.get(position), vh.image);
-        imageAsyncTask.setPlaceHolder(BitmapFactory.decodeResource(mContext.getResources(), R.drawable.image_placeholder));
-        imageAsyncTask.execute();
+        new ImageLoader(mContext.getResources()).load(mImageUriList.get(position), vh.image);
     }
 }
