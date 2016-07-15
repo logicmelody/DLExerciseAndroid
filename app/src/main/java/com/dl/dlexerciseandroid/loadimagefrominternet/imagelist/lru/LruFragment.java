@@ -22,6 +22,7 @@ public class LruFragment extends ImageListFragment {
 
     @Override
     protected String getImageUri() {
-        return "http://herogamesworld.com/images/iron%20man%20games.jpg";
+        return "http://i.imgur.com/DvpvklR.png";
+        //return "http://herogamesworld.com/images/iron%20man%20games.jpg";
     }
 }

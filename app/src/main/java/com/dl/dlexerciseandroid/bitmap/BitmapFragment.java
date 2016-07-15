@@ -56,14 +56,14 @@ public class BitmapFragment extends Fragment {
     }
 
     private void setupOriginalImage() {
-        new ImageLoader(mContext.getResources()).load(R.drawable.poster_iron_man, mOriginalImageCenterScale);
+        new ImageLoader(mContext.getResources(), true).load(R.drawable.poster_iron_man, mOriginalImageCenterScale);
 
         // 用Picasso可以達到一樣的效果
         //Picasso.with(mContext).load(R.drawable.poster_iron_man).into(mOriginalImageCenterScale);
     }
 
     private void setupResizedImage() {
-        ImageLoader imageLoader = new ImageLoader(mContext.getResources());
+        ImageLoader imageLoader = new ImageLoader(mContext.getResources(), true);
         imageLoader.setReqWidthHeight(400, 400);
         imageLoader.load(R.drawable.poster_iron_man, mResizedImage);
 

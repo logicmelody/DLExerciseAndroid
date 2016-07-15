@@ -3,6 +3,8 @@ package com.dl.dlexerciseandroid.background.task.loadimage;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,12 +19,24 @@ import java.lang.ref.WeakReference;
 /**
  * Created by logicmelody on 2016/7/15.
  */
+
+// 使用AsyncTask load image搭配RecyclerView顯示images，我們每次在onBindViewHolder()的時候，都會啟動一個新的AsyncTask來load圖，
+// 但RecyclerView的特性是，每一個item會重複利用，這樣有可能會發生一個情況：
+//
+// 1. A item已經在load一張a image，但是還沒有load完成
+// 2. 使用者快速滑動RecyclerView的list，導致A item又被重複利用，這時候在load b image
+// 3. b image先load完成，之後a image才load完成
+// => 這會導致最後出來的結果是顯示a image，而不是最新的b image
+//
+// 所以我們實作了這個ImageLoader用來解決Multithreading的問題
 public class ImageLoader {
 
     private Resources mResources;
 
     private int mReqWidth = 0;
     private int mReqHeight = 0;
+
+    private boolean mUsePlaceHolder = false;
 
     // AsyncTask一定要extends之後才可以使用
     // 有了這個AsyncTask，可以讓load image的時候，UI thread不會被block住
@@ -61,18 +75,6 @@ public class ImageLoader {
         public ImageLoaderAsyncTask(String uri, ImageView targetImageView) {
             mUri = uri;
             mTargetImageViewReference = new WeakReference<>(targetImageView);
-        }
-
-        public void setPlaceHolder(Bitmap placeHolder) {
-            if (mTargetImageViewReference == null || placeHolder == null) {
-                return;
-            }
-
-            ImageView imageView = mTargetImageViewReference.get();
-
-            if (imageView != null) {
-                imageView.setImageBitmap(placeHolder);
-            }
         }
 
         // Void...代表我們在new一個ImageAsyncTask出來的時候，可以傳入多個變數
@@ -125,40 +127,115 @@ public class ImageLoader {
             }
 
             ImageView imageView = mTargetImageViewReference.get();
+            ImageLoaderAsyncTask imageLoaderAsyncTask = getImageLoaderAsyncTask(imageView);
 
-            if (imageView != null) {
+            if (imageView != null && this == imageLoaderAsyncTask) {
                 imageView.setImageBitmap(bitmap);
             }
         }
     }
 
-//    private class DownloadedDrawable extends BitmapDrawable {
-//
-//        private WeakReference<ImageDownloaderAsyncTask> mImageDownloaderAsyncTaskReference;
-//
-//
-//        public DownloadedDrawable(Resources res, Bitmap bitmap, ImageDownloaderAsyncTask task) {
-//            super(res, bitmap);
-//            mImageDownloaderAsyncTaskReference = new WeakReference<>(task);
-//        }
-//
-//        public ImageDownloaderAsyncTask getImageDownloaderAsyncTask() {
-//            return mImageDownloaderAsyncTaskReference.get();
-//        }
-//    }
+    // 我們用一個Drawable，並且把他assign給ImageView
+    // Drawable的class裡面會包一個load image的AsyncTask，用這個Drawable的class來與ImageView產生連結
+    private class DownloadedDrawable extends BitmapDrawable {
 
-    public ImageLoader(Resources resources) {
+        private WeakReference<ImageLoaderAsyncTask> mImageLoaderAsyncTaskReference;
+
+
+        public DownloadedDrawable(Bitmap bitmap, ImageLoaderAsyncTask task) {
+            super(mResources, bitmap);
+            mImageLoaderAsyncTaskReference = new WeakReference<>(task);
+        }
+
+        public ImageLoaderAsyncTask getImageLoaderAsyncTask() {
+            return mImageLoaderAsyncTaskReference.get();
+        }
+    }
+
+    public ImageLoader(Resources resources, boolean usePlaceHolder) {
         mResources = resources;
+        mUsePlaceHolder = usePlaceHolder;
     }
 
     public void load(String url, ImageView imageView) {
+        if (!cancelPotentialLoad(url, imageView)) {
+            return;
+        }
+
         ImageLoaderAsyncTask task = new ImageLoaderAsyncTask(url, imageView);
+        DownloadedDrawable downloadedDrawable =
+                new DownloadedDrawable(mUsePlaceHolder ?
+                        BitmapFactory.decodeResource(mResources, R.drawable.image_placeholder) : null, task);
+
+        imageView.setImageDrawable(downloadedDrawable);
         task.execute();
     }
 
     public void load(int resId, ImageView imageView) {
+        if (!cancelPotentialLoad(resId, imageView)) {
+            return;
+        }
+
         ImageLoaderAsyncTask task = new ImageLoaderAsyncTask(resId, imageView);
+        DownloadedDrawable downloadedDrawable =
+                new DownloadedDrawable(mUsePlaceHolder ?
+                        BitmapFactory.decodeResource(mResources, R.drawable.image_placeholder) : null, task);
+
+        imageView.setImageDrawable(downloadedDrawable);
         task.execute();
+    }
+
+    // 判斷目前的AsyncTask需不需要cancel
+    private boolean cancelPotentialLoad(String uri, ImageView imageView) {
+        ImageLoaderAsyncTask imageLoaderAsyncTask = getImageLoaderAsyncTask(imageView);
+
+        if (imageLoaderAsyncTask != null) {
+            String imageUri = imageLoaderAsyncTask.getImageUri();
+
+            if (TextUtils.isEmpty(imageUri) || !imageUri.equals(uri)) {
+                imageLoaderAsyncTask.cancel(true);
+
+            } else {
+                // The same URL is already being downloaded.
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean cancelPotentialLoad(int resId, ImageView imageView) {
+        ImageLoaderAsyncTask imageLoaderAsyncTask = getImageLoaderAsyncTask(imageView);
+
+        if (imageLoaderAsyncTask != null) {
+            int imageResId = imageLoaderAsyncTask.getResourceId();
+
+            if (imageResId != resId) {
+                imageLoaderAsyncTask.cancel(true);
+
+            } else {
+                // The same URL is already being downloaded.
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // 取得與ImageView產生連結的Drawable -> 取得Drawable中的AsyncTask
+    private ImageLoaderAsyncTask getImageLoaderAsyncTask(ImageView imageView) {
+        if (imageView == null) {
+            return null;
+        }
+
+        Drawable drawable = imageView.getDrawable();
+
+        if (drawable instanceof DownloadedDrawable) {
+            DownloadedDrawable downloadedDrawable = (DownloadedDrawable) drawable;
+            return downloadedDrawable.getImageLoaderAsyncTask();
+        }
+
+        return null;
     }
 
     public void setReqWidthHeight(int reqWidth, int reqHeight) {

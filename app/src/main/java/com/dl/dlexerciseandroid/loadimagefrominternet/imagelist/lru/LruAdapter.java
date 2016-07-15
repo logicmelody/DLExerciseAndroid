@@ -23,6 +23,6 @@ public class LruAdapter extends ImageListAdapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ImageViewHolder vh = (ImageViewHolder) holder;
 
-        new ImageLoader(mContext.getResources()).load(mImageUriList.get(position), vh.image);
+        new ImageLoader(mContext.getResources(), true).load(mImageUriList.get(position), vh.image);
     }
 }
