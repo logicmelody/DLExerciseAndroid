@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.support.v4.util.LruCache;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ImageView;
@@ -32,6 +33,7 @@ import java.lang.ref.WeakReference;
 public class ImageLoader {
 
     private Resources mResources;
+    private LruCache<String, Bitmap> mMemoryCache;
 
     private int mReqWidth = 0;
     private int mReqHeight = 0;
@@ -83,12 +85,18 @@ public class ImageLoader {
         // 但是這邊我們使用的情況是一次只傳入一個image的resource
         @Override
         protected Bitmap doInBackground(Void... params) {
+            Bitmap bitmap;
+
             if (TextUtils.isEmpty(mUri)) {
-                return loadBitmapFromResources();
+                bitmap = loadBitmapFromResources();
+                addBitmapToMemoryCache(String.valueOf(mResId), bitmap);
 
             } else {
-                return loadBitmapFromUri();
+                bitmap = loadBitmapFromUri();
+                addBitmapToMemoryCache(mUri, bitmap);
             }
+
+            return bitmap;
         }
 
         private Bitmap loadBitmapFromResources() {
@@ -158,6 +166,12 @@ public class ImageLoader {
     }
 
     public void load(String url, ImageView imageView) {
+        Bitmap bitmapFromCache = getBitmapFromMemCache(url);
+        if (bitmapFromCache != null) {
+            imageView.setImageBitmap(bitmapFromCache);
+            return;
+        }
+
         if (!cancelPotentialLoad(url, imageView)) {
             return;
         }
@@ -172,6 +186,12 @@ public class ImageLoader {
     }
 
     public void load(int resId, ImageView imageView) {
+        Bitmap bitmapFromCache = getBitmapFromMemCache(String.valueOf(resId));
+        if (bitmapFromCache != null) {
+            imageView.setImageBitmap(bitmapFromCache);
+            return;
+        }
+
         if (!cancelPotentialLoad(resId, imageView)) {
             return;
         }
@@ -241,6 +261,28 @@ public class ImageLoader {
     public void setReqWidthHeight(int reqWidth, int reqHeight) {
         mReqWidth = reqWidth;
         mReqHeight = reqHeight;
+    }
+
+    public void setMemoryCache(LruCache<String, Bitmap> memoryCache) {
+        mMemoryCache = memoryCache;
+    }
+
+    private void addBitmapToMemoryCache(String key, Bitmap bitmap) {
+        if (mMemoryCache == null) {
+            return;
+        }
+
+        if (getBitmapFromMemCache(key) == null) {
+            mMemoryCache.put(key, bitmap);
+        }
+    }
+
+    private Bitmap getBitmapFromMemCache(String key) {
+        if (mMemoryCache == null) {
+            return null;
+        }
+
+        return mMemoryCache.get(key);
     }
 
 //    private boolean cancelPotentialDownload(String url, ImageView imageView) {
