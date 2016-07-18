@@ -7,6 +7,7 @@
     <string name="facebook_app_id" translatable="false">489582227919200</string>
 
     <!-- All -->
+    <string name="all_right_drawer" translatable="false">Right drawer</string>
     <string name="all_overview">Overview</string>
     <string name="all_consuming_restful_web_service">Consuming Restful Web Service</string>
     <string name="all_facebook" translatable="false">Facebook</string>

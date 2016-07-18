@@ -312,11 +312,35 @@ public class UIController implements View.OnClickListener {
     }
 
     private void closeLeftDrawer() {
+        if (!isLeftDrawerOpened()) {
+            return;
+        }
+
         mDrawerLayout.closeDrawer(GravityCompat.START);
     }
 
     private void closeRightDrawer() {
+        if (!isRightDrawerOpened()) {
+            return;
+        }
+
         mDrawerLayout.closeDrawer(GravityCompat.END);
+    }
+
+    private void openLeftDrawer() {
+        if (isLeftDrawerOpened()) {
+            return;
+        }
+
+        mDrawerLayout.openDrawer(GravityCompat.START);
+    }
+
+    private void openRightDrawer() {
+        if (isRightDrawerOpened()) {
+            return;
+        }
+
+        mDrawerLayout.openDrawer(GravityCompat.END);
     }
 
     private void setupFacebook() {
@@ -492,6 +516,10 @@ public class UIController implements View.OnClickListener {
 
         } else {
             switch (item.getItemId()) {
+                case R.id.menu_item_main_open_right_drawer:
+                    openRightDrawer();
+                    return true;
+
                 case R.id.menu_item_main_debug_database:
                     mActivity.startActivity(new Intent(mActivity, AndroidDatabaseManager.class));
                     return true;
@@ -543,10 +571,6 @@ public class UIController implements View.OnClickListener {
     }
 
     public void onCloseRightDrawer() {
-        if (!isRightDrawerOpened()) {
-            return;
-        }
-
         closeRightDrawer();
     }
 }
