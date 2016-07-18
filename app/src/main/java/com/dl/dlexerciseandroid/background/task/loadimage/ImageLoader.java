@@ -87,6 +87,7 @@ public class ImageLoader {
         protected Bitmap doInBackground(Void... params) {
             Bitmap bitmap;
 
+            // Background load image完成之後，我們要將<key, value> = <Image Uri, Bitmap>塞到LruCache中
             if (TextUtils.isEmpty(mUri)) {
                 bitmap = loadBitmapFromResources();
                 addBitmapToMemoryCache(String.valueOf(mResId), bitmap);
@@ -166,6 +167,9 @@ public class ImageLoader {
     }
 
     public void load(String url, ImageView imageView) {
+        // Load一張image之前，會先拿這張image的uri去LruCache中檢查是不是已經有load好的bitmap可以直接使用
+        // 有：就可以直接拿來使用
+        // 沒有：才會啟動一個AsyncTask去load image
         Bitmap bitmapFromCache = getBitmapFromMemCache(url);
         if (bitmapFromCache != null) {
             imageView.setImageBitmap(bitmapFromCache);
@@ -186,6 +190,9 @@ public class ImageLoader {
     }
 
     public void load(int resId, ImageView imageView) {
+        // Load一張image之前，會先拿這張image的uri去LruCache中檢查是不是已經有load好的bitmap可以直接使用
+        // 有：就可以直接拿來使用
+        // 沒有：才會啟動一個AsyncTask去load image
         Bitmap bitmapFromCache = getBitmapFromMemCache(String.valueOf(resId));
         if (bitmapFromCache != null) {
             imageView.setImageBitmap(bitmapFromCache);
@@ -284,22 +291,4 @@ public class ImageLoader {
 
         return mMemoryCache.get(key);
     }
-
-//    private boolean cancelPotentialDownload(String url, ImageView imageView) {
-//        ImageDownloaderAsyncTask task = getImageDownloaderAsyncTask(imageView);
-//
-//        if (task != null) {
-//            String imageUri = task.getImageUri();
-//
-//            if (TextUtils.isEmpty(imageUri) || !imageUri.equals(url)) {
-//                task.cancel(true);
-//
-//            } else {
-//                // The same URL is already being downloaded.
-//                return false;
-//            }
-//        }
-//
-//        return true;
-//    }
 }
