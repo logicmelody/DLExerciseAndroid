@@ -189,7 +189,7 @@ public class UIController implements View.OnClickListener {
         // public ActionBarDrawerToggle (Activity activity, DrawerLayout drawerLayout,
         //                               int openDrawerContentDescRes, int closeDrawerContentDescRes)
         //
-        // 差別在於有沒有傳Toolbar的object，如果這個Activity有用Toolbar取代掉原本的Action bar，記得要用有傳Toolbar的他有兩種constructor
+        // 差別在於有沒有傳Toolbar的object，如果這個Activity有用Toolbar取代掉原本的Action bar，記得要用有傳Toolbar的這種constructor
         mActionBarDrawerToggle = new ActionBarDrawerToggle(mActivity, mDrawerLayout, mToolBar,
                                                            R.string.drawer_open, R.string.drawer_close) {
             @Override
