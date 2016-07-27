@@ -6,6 +6,7 @@ package com.dl.dlexerciseandroid.utility.utils;
 public class NdkUtils {
 
     static {
+        // Library的名稱記得要跟build.gradle中的一樣
         System.loadLibrary("dl-exercise-jni");
     }
 
