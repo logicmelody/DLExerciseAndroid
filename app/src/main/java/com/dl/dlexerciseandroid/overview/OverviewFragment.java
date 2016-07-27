@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.utility.gtm.ContainerHolderSingleton;
 import com.dl.dlexerciseandroid.utility.utils.GtmUtils;
+import com.dl.dlexerciseandroid.utility.utils.NdkUtils;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.tagmanager.Container;
@@ -36,6 +37,7 @@ public class OverviewFragment extends Fragment {
     private TagManager mTagManager;
 
     private TextView mGtmText;
+    private TextView mNdkText;
 
 
     @Override
@@ -61,11 +63,17 @@ public class OverviewFragment extends Fragment {
         mTagManager.setVerboseLoggingEnabled(true);
 
         findViews();
+        setupNdkText();
         loadTextFromGtm();
     }
 
     private void findViews() {
         mGtmText = (TextView) getView().findViewById(R.id.text_view_overview_gtm_text);
+        mNdkText = (TextView) getView().findViewById(R.id.text_view_overview_ndk_string);
+    }
+
+    private void setupNdkText() {
+        mNdkText.setText(NdkUtils.getMsgFromJni());
     }
 
     private void loadTextFromGtm() {

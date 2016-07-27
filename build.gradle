@@ -5,7 +5,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.2'
+        // 如果要使用Android NDK，gradle tool必須要更改
+        classpath 'com.android.tools.build:gradle-experimental:0.7.2'
 
         // For using Firebase
         classpath 'com.google.gms:google-services:3.0.0'
