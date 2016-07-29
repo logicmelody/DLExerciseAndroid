@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppBarPopupOverlay"
+        app:theme="@style/AppBarOverlay.MovieSearcher">
+
+        <EditText
+            android:id="@+id/edit_text_movie_searcher_search_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_right_movie_searcher_search_box"
+            android:paddingLeft="@dimen/padding_left_right_movie_searcher_search_box"
+            android:paddingRight="@dimen/padding_left_right_movie_searcher_search_box"
+            android:layout_gravity="center_vertical"
+            android:hint="@string/movie_searcher_search_movie"/>
+
+    </android.support.v7.widget.Toolbar>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/padding_all_window">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="MovieSearcher"/>
 
     </RelativeLayout>
 

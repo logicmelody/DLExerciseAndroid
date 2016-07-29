@@ -34,6 +34,10 @@
         <item name="selectableItemBackground">?android:selectableItemBackground</item>
         <item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>
     </style>
+    <style name="AppBarOverlay.MovieSearcher">
+        <item name="colorAccent">@color/color_accent_movie_searcher</item>
+    </style>
+
     <!-- 用來設定tool bar上點選option menu時跳出來的popup menu樣式，這邊套用的parent是白底黑字 -->
     <style name="AppBarPopupOverlay" parent="ThemeOverlay.AppCompat.Light">
     </style>

@@ -65,4 +65,7 @@
     <string name="bitmap_original_image" translatable="false">Original Image</string>
     <string name="bitmap_resized_image" translatable="false">Resized Image</string>
 
+    <!-- Movie Searcher -->
+    <string name="movie_searcher_search_movie">Please input a movie name...</string>
+
 </resources>

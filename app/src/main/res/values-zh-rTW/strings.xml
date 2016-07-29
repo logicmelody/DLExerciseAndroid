@@ -32,4 +32,7 @@
     <!-- Music player -->
     <string name="music_player_no_music">放些音樂到裝置上吧</string>
 
+    <!-- Movie Searcher -->
+    <string name="movie_searcher_search_movie">請輸入電影名稱...</string>
+
 </resources>

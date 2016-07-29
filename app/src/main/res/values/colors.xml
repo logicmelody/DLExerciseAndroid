@@ -31,4 +31,7 @@
     <color name="background_later_task_item">#FFFFFF00</color>
     <color name="background_normal_task_swiped">@color/all_divider</color>
 
+    <!-- Movie Searcher -->
+    <color name="color_accent_movie_searcher">#FFFFFFFF</color>
+
 </resources>

@@ -19,7 +19,7 @@ public class MovieSearcherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_searcher);
         initialize();
-        startService(MovieInfoService.generateSearchMoviesByTextIntent(this, "ghost"));
+        //startService(MovieInfoService.generateSearchMoviesByTextIntent(this, "ghost"));
     }
 
     private void initialize() {
@@ -37,6 +37,7 @@ public class MovieSearcherActivity extends AppCompatActivity {
 
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(false);
         }
     }
 

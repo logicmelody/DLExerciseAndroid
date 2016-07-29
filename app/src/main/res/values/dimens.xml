@@ -59,4 +59,8 @@
     <!-- Load image from internet -->
     <dimen name="margin_load_image_from_internet_item">10dp</dimen>
 
+    <!-- Movie Searcher -->
+    <dimen name="margin_right_movie_searcher_search_box">20dp</dimen>
+    <dimen name="padding_left_right_movie_searcher_search_box">10dp</dimen>
+
 </resources>
