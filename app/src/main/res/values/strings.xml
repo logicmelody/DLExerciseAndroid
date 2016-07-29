@@ -14,6 +14,7 @@
     <string name="all_do_it_later" translatable="false">Do It Later</string>
     <string name="all_intent" translatable="false">Intent</string>
     <string name="all_coordinator_layout" translatable="false">CoordinatorLayout</string>
+    <string name="all_movie_searcher" translatable="false">MovieSearcher</string>
     <string name="all_test">Test</string>
     <string name="all_music_player" translatable="false">Music Player</string>
     <string name="all_dl_sdk" translatable="false">DL SDK</string>

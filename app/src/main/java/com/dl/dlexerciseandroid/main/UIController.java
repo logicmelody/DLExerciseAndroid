@@ -506,6 +506,7 @@ public class UIController implements View.OnClickListener {
         mActivity.getMenuInflater().inflate(R.menu.main, menu);
 
         // 必須要return true，option menu才會show出來
+        // return false可以將option menu hide起來
         return true;
     }
 

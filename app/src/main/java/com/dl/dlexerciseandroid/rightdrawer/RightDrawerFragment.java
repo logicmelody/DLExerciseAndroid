@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.coordinatorlayout.CoordinatorLayoutActivity;
+import com.dl.dlexerciseandroid.moviesearcher.MovieSearcherActivity;
 
 /**
  * Created by logicmelody on 2016/4/4.
@@ -28,6 +29,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
     private OnRightDrawerListener mOnRightDrawerListener;
 
     private Button mCoordinatorLayoutButton;
+    private Button mMovieSearcherButton;
 
 
     @Override
@@ -56,10 +58,12 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
 
     private void findViews() {
         mCoordinatorLayoutButton = (Button) getView().findViewById(R.id.button_right_drawer_coordinator_layout);
+        mMovieSearcherButton = (Button) getView().findViewById(R.id.button_right_drawer_movie_searcher);
     }
 
     private void setupViews() {
         mCoordinatorLayoutButton.setOnClickListener(this);
+        mMovieSearcherButton.setOnClickListener(this);
     }
 
     @Override
@@ -67,6 +71,12 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
         switch (v.getId()) {
             case R.id.button_right_drawer_coordinator_layout:
                 startActivity(new Intent(mContext, CoordinatorLayoutActivity.class));
+                mOnRightDrawerListener.onCloseRightDrawer();
+
+                break;
+
+            case R.id.button_right_drawer_movie_searcher:
+                startActivity(new Intent(mContext, MovieSearcherActivity.class));
                 mOnRightDrawerListener.onCloseRightDrawer();
 
                 break;
