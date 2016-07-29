@@ -149,8 +149,9 @@
         </receiver>
         -->
 
-        <service android:name=".background.service.DoItLaterService" />
-        <service android:name=".background.service.MusicService" />
+        <service android:name=".background.service.DoItLaterService" android:exported="false" />
+        <service android:name=".background.service.MusicService" android:exported="false" />
+        <service android:name=".background.service.MovieInfoService" android:exported="false" />
         <service android:name=".background.service.FCMService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

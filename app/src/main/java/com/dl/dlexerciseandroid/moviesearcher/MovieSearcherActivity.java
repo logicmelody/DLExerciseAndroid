@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.background.service.MovieInfoService;
 
 public class MovieSearcherActivity extends AppCompatActivity {
 
@@ -18,6 +19,7 @@ public class MovieSearcherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_searcher);
         initialize();
+        startService(MovieInfoService.generateSearchMoviesByTextIntent(this, "ghost"));
     }
 
     private void initialize() {

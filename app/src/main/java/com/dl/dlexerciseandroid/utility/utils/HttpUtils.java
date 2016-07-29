@@ -18,6 +18,17 @@ public class HttpUtils {
     private static final OkHttpClient sHttpClient = new OkHttpClient();
 
 
+    public static String getJsonStringFromUrl(String url) throws IOException {
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .build();
+
+        Response response = sHttpClient.newCall(request).execute();
+
+        return response.body().string();
+    }
+
     public static Bitmap downloadBitmap(String uri) {
         Request request = new Request.Builder()
                 .url(uri)
