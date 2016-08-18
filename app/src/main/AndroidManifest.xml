@@ -24,7 +24,7 @@
 
     <!-- 要把自己定義的Application class在AndroidManifest中進行設定 -->
     <application
-        android:name=".main.MainApplication"
+        android:name=".ui.main.MainApplication"
         android:allowBackup="true"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
@@ -47,7 +47,7 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".main.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.Drawer">
             <intent-filter>
@@ -56,7 +56,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".coordinatorlayout.CoordinatorLayoutActivity" />
+        <activity android:name=".ui.coordinatorlayout.CoordinatorLayoutActivity" />
         <activity
             android:name=".dialog.activity.AddTaskActivity"
             android:theme="@style/AppDialogTheme.NoActionBar" />
@@ -67,7 +67,7 @@
              可以套上@android:style/Theme.NoDisplay，如此一來就可以啟動Activity，但是不會看到任何畫面
         -->
         <activity
-            android:name=".doitlater.share.DoItLaterReceiverActivity"
+            android:name=".ui.doitlater.share.DoItLaterReceiverActivity"
             android:theme="@android:style/Theme.NoDisplay">
 
             <!-- 設定接收share intent的filter記得要加action, category, data -->
@@ -87,7 +87,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".intent.ReceiveIntentActivity"
+            android:name=".ui.intent.ReceiveIntentActivity"
             android:label="ReceiveIntentActivity">
             <intent-filter>
                 <action android:name="com.dl.dlexerciseandroid.ACTION_RECEIVE_INTENT" />
@@ -133,8 +133,8 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
-        <activity android:name=".musicplayer.musiccontroller.MusicControllerActivity" />
-        <activity android:name=".moviesearcher.MovieSearcherActivity" />
+        <activity android:name=".ui.musicplayer.musiccontroller.MusicControllerActivity" />
+        <activity android:name=".ui.moviesearcher.MovieSearcherActivity" />
 
         <!--
         用receiver沒有辦法收到來自別的app的shared intent
@@ -149,10 +149,10 @@
         </receiver>
         -->
 
-        <service android:name=".background.service.DoItLaterService" android:exported="false" />
-        <service android:name=".background.service.MusicService" android:exported="false" />
-        <service android:name=".background.service.MovieInfoService" android:exported="false" />
-        <service android:name=".background.service.FCMService">
+        <service android:name=".backgroundtask.service.DoItLaterService" android:exported="false" />
+        <service android:name=".backgroundtask.service.MusicService" android:exported="false" />
+        <service android:name=".backgroundtask.service.MovieInfoService" android:exported="false" />
+        <service android:name=".backgroundtask.service.FCMService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
