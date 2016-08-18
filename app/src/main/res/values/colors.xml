@@ -34,4 +34,8 @@
     <!-- Movie Searcher -->
     <color name="color_accent_movie_searcher">#FFFFFFFF</color>
 
+    <!-- Line Chart View -->
+    <color name="stroke_color_line_chart_view_line">#FF33B5E5</color>
+    <color name="stroke_color_line_chart_view_foreground_dot">#FFFFFF00</color>
+
 </resources>

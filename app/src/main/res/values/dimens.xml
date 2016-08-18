@@ -63,4 +63,9 @@
     <dimen name="margin_right_movie_searcher_search_box">20dp</dimen>
     <dimen name="padding_left_right_movie_searcher_search_box">10dp</dimen>
 
+    <!-- CustomizedView -->
+    <dimen name="margin_top_customized_view_between_each_view">20dp</dimen>
+    <dimen name="height_customized_view_line_chart_view">100dp</dimen>
+    <dimen name="padding_customized_view_line_chart_view">10dp</dimen>
+
 </resources>

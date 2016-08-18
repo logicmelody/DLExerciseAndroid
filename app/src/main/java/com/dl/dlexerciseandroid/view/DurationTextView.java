@@ -7,8 +7,6 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import com.dl.dlexerciseandroid.R;
-
 /**
  * Created by logicmelody on 2016/8/18.
  */
@@ -41,6 +39,7 @@ public class DurationTextView extends TextView {
                 attrs,
                 com.dl.dlexerciseandroid.R.styleable.DurationTextView,
                 0, 0);
+
         try {
             mTemplate = a.getString(com.dl.dlexerciseandroid.R.styleable.DurationTextView_template);
 
