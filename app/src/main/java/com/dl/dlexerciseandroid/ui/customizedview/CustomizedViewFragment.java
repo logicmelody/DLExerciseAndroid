@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.view.DurationTextView;
 
 /**
  * Created by logicmelody on 2016/8/18.
@@ -18,6 +19,8 @@ public class CustomizedViewFragment extends Fragment {
     public static final String TAG = CustomizedViewFragment.class.getName();
 
     private Context mContext;
+
+    private DurationTextView mDuration;
 
 
     @Override
@@ -39,6 +42,16 @@ public class CustomizedViewFragment extends Fragment {
     }
 
     private void initialize() {
+        findViews();
+        setupDuration();
+    }
 
+    private void findViews() {
+        mDuration = (DurationTextView) getView().findViewById(R.id.duration_text_view_duration);
+    }
+
+    private void setupDuration() {
+        // About 2 hrs 48 mins
+        mDuration.setDuration(10000);
     }
 }

@@ -69,4 +69,7 @@
     <!-- Movie Searcher -->
     <string name="movie_searcher_search_movie">Please input a movie name...</string>
 
+    <!-- Duration TextView -->
+    <string name="duration_text_view_time" translatable="false">Duration: %s</string>
+
 </resources>

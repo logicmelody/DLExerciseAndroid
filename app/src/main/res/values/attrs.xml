@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 設定custom view有哪些額外的屬性可以在xml裡設定，name要跟我們客製view的名字一樣 -->
+    <declare-styleable name="DurationTextView">
+        <attr name="template" format="string" />
+    </declare-styleable>
+
+</resources>
