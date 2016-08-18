@@ -26,6 +26,7 @@
     <string name="all_undo">UNDO</string>
     <string name="all_picasso" translatable="false">Picasso</string>
     <string name="all_lru" translatable="false">LRU</string>
+    <string name="all_customized_view" translatable="false">Customized View</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">Sure to logout?</string>

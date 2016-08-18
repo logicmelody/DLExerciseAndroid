@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.bitmap.BitmapFragment;
+import com.dl.dlexerciseandroid.customizedview.CustomizedViewFragment;
 import com.dl.dlexerciseandroid.database.debug.AndroidDatabaseManager;
 import com.dl.dlexerciseandroid.dialog.dialogfragment.alert.AlertDialogFragment;
 import com.dl.dlexerciseandroid.dlsdk.DLSdkFragment;
@@ -252,6 +253,11 @@ public class UIController implements View.OnClickListener {
                     case R.id.menu_item_left_drawer_load_image_from_internet:
                         replaceFragmentTo(LoadImageFromInternetFragment.class,
                                           R.id.frame_layout_main_container, LoadImageFromInternetFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_customized_view:
+                        replaceFragmentTo(CustomizedViewFragment.class,
+                                R.id.frame_layout_main_container, CustomizedViewFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:
