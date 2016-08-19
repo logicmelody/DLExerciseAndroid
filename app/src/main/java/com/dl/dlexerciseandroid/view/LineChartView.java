@@ -56,11 +56,12 @@ public class LineChartView extends View {
         // Unsupported Drawing Operations
         // setShadowLayer(): works with text only
         // Use a software layer type to force a view to be rendered in software.
-        // If a view that is hardware accelerated (for instance, if your whole application is hardware acclerated),
+        // If a view that is hardware accelerated (for instance, if your whole application is hardware accelerated),
         // is having rendering problems, this is an easy way to work around limitations of the hardware rendering pipeline.
         // 如果我們想要我們畫出來的曲線可以有陰影的效果，必須要將這個View設定在Software層render，不然會沒有效果
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
+        // 設定Paint物件，所有要畫東西的元件
         setupPaints();
     }
 
@@ -89,7 +90,7 @@ public class LineChartView extends View {
     }
 
     // 在這個View所在的rectangle進行draw的動作，我們可以將我們想要的東西畫在canvas上
-    // 關鍵method！
+    // (關鍵method！)
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -162,6 +163,6 @@ public class LineChartView extends View {
         int bottom = getHeight() - getPaddingBottom();
 
         // Draw circle
-        canvas.drawCircle((left + right) / 2, (top + bottom) / 2, 50, mYellowPaint);
+        canvas.drawCircle((left + right) / 2, (top + bottom) / 2, 30, mYellowPaint);
     }
 }

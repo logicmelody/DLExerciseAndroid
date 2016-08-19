@@ -34,6 +34,7 @@ public class DurationTextView extends TextView {
         mContext = context;
     }
 
+    // 從xml中設定的property中get數值
     private void getAttributes(AttributeSet attrs) {
         TypedArray a = mContext.getTheme().obtainStyledAttributes(
                 attrs,
