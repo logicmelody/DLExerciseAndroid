@@ -25,6 +25,11 @@
             android:padding="@dimen/padding_customized_view_line_chart_view"
             android:background="@color/all_gray"/>
 
+        <com.dl.dlexerciseandroid.view.ValueSelectorView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_customized_view_between_each_view"/>
+
     </LinearLayout>
 
 </ScrollView>

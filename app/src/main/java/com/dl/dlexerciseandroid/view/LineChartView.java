@@ -34,6 +34,8 @@ public class LineChartView extends View {
      */
     public void setChartData(float[] dataPoints) {
         mDataPoints = dataPoints.clone();
+
+        // 資料已經改變，所以需要通知View重新onDraw()
         invalidate();
     }
 

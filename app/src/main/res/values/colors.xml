@@ -38,4 +38,8 @@
     <color name="stroke_color_line_chart_view_line">#FF33B5E5</color>
     <color name="stroke_color_line_chart_view_foreground_dot">#FFFFFF00</color>
 
+    <!-- Value Selector View -->
+    <color name="text_color_value_selector_view_value_text">@android:color/black</color>
+    <color name="text_color_value_selector_view_label_text">#FF7D7D7D</color>
+
 </resources>
