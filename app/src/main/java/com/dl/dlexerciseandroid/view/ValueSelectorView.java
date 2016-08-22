@@ -1,8 +1,10 @@
 package com.dl.dlexerciseandroid.view;
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -15,9 +17,40 @@ import com.dl.dlexerciseandroid.R;
  */
 
 // 這個customized view，我們要用來做合成View
-public class ValueSelectorView extends RelativeLayout implements View.OnClickListener {
+public class ValueSelectorView extends RelativeLayout implements View.OnClickListener, View.OnLongClickListener {
+
+    private static final int REPEAT_INTERVAL_MS = 100;
+
+    // 控制長壓plus button，讓value可以自動往上加
+    private class AutoPlus implements Runnable {
+
+        @Override
+        public void run() {
+            if (!mIsPlusButtonPressed) {
+                return;
+            }
+
+            plusValue();
+            mHandler.postDelayed(new AutoPlus(), REPEAT_INTERVAL_MS);
+        }
+    }
+
+    // 控制長壓minus button，讓value可以自動往下減
+    private class AutoMinus implements Runnable {
+
+        @Override
+        public void run() {
+            if (!mIsMinusButtonPressed) {
+                return;
+            }
+
+            minusValue();
+            mHandler.postDelayed(new AutoMinus(), REPEAT_INTERVAL_MS);
+        }
+    }
 
     private Context mContext;
+    private Handler mHandler;
 
     private View mRootView;
     private ImageView mMinusButton;
@@ -27,6 +60,9 @@ public class ValueSelectorView extends RelativeLayout implements View.OnClickLis
     private int mCurrentValue = 0;
     private int mMinValue = Integer.MIN_VALUE;
     private int mMaxValue = Integer.MAX_VALUE;
+
+    private boolean mIsPlusButtonPressed = false;
+    private boolean mIsMinusButtonPressed = false;
 
 
     // 在程式中動態生成View
@@ -51,6 +87,7 @@ public class ValueSelectorView extends RelativeLayout implements View.OnClickLis
     }
 
     private void initialize() {
+        mHandler = new Handler(mContext.getMainLooper());
         findViews();
         setupViews();
     }
@@ -67,7 +104,34 @@ public class ValueSelectorView extends RelativeLayout implements View.OnClickLis
 
     private void setupViews() {
         mMinusButton.setOnClickListener(this);
+        mMinusButton.setOnLongClickListener(this);
+
+        // 要有一個listener來偵測什麼時候user release minus button
+        mMinusButton.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if ((event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL)) {
+                    mIsMinusButtonPressed = false;
+                }
+
+                return false;
+            }
+        });
+
         mPlusButton.setOnClickListener(this);
+        mPlusButton.setOnLongClickListener(this);
+
+        // 要有一個listener來偵測什麼時候user release plus button
+        mPlusButton.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if ((event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL)) {
+                    mIsPlusButtonPressed = false;
+                }
+
+                return false;
+            }
+        });
     }
 
     @Override
@@ -83,6 +147,21 @@ public class ValueSelectorView extends RelativeLayout implements View.OnClickLis
         }
     }
 
+    @Override
+    public boolean onLongClick(View v) {
+        switch (v.getId()) {
+            case R.id.image_view_value_selector_view_plus_button:
+                autoPlusValue();
+                break;
+
+            case R.id.image_view_value_selector_view_minus_button:
+                autoMinusValue();
+                break;
+        }
+
+        return false;
+    }
+
     private void plusValue() {
         if (mCurrentValue >= mMaxValue) {
             return;
@@ -92,6 +171,12 @@ public class ValueSelectorView extends RelativeLayout implements View.OnClickLis
         mValueText.setText(String.valueOf(mCurrentValue));
     }
 
+    // 偵測到長壓event之後，就讓Handler重複執行AutoPlus這個Runnable object
+    private void autoPlusValue() {
+        mIsPlusButtonPressed = true;
+        mHandler.post(new AutoPlus());
+    }
+
     private void minusValue() {
         if (mCurrentValue <= mMinValue) {
             return;
@@ -99,6 +184,12 @@ public class ValueSelectorView extends RelativeLayout implements View.OnClickLis
 
         mCurrentValue--;
         mValueText.setText(String.valueOf(mCurrentValue));
+    }
+
+    // 偵測到長壓event之後，就讓Handler重複執行AutoMinus這個Runnable object
+    private void autoMinusValue() {
+        mIsMinusButtonPressed = true;
+        mHandler.post(new AutoMinus());
     }
 
     // 為了讓customized view有彈性，記得要定義一些public method
