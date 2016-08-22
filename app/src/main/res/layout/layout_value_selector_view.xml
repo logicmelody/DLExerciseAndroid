@@ -3,6 +3,8 @@
 <!-- The <merge /> tag helps eliminate redundant view groups in your view hierarchy
      when including one layout within another. -->
 <!-- 因為ValueSelectorView已經繼承了RelativeLayout，用merge的方式來合成所有的View，可以讓view hierarchy少一層 -->
+<!-- 通常我們要include xml layout的時候，都可以將要include的layout的root設為merge，內容的部份就看parent是用LinearLayout或是
+     RelativeLayout採用對應的寫法-->
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
