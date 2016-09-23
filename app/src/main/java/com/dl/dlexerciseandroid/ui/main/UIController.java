@@ -27,6 +27,7 @@ import com.dl.dlexerciseandroid.database.debug.AndroidDatabaseManager;
 import com.dl.dlexerciseandroid.dialog.dialogfragment.alert.AlertDialogFragment;
 import com.dl.dlexerciseandroid.ui.dlsdk.DLSdkFragment;
 import com.dl.dlexerciseandroid.ui.facebook.FacebookFragment;
+import com.dl.dlexerciseandroid.ui.file.FileFragment;
 import com.dl.dlexerciseandroid.ui.firebase.FirebaseFragment;
 import com.dl.dlexerciseandroid.ui.intent.IntentFragment;
 import com.dl.dlexerciseandroid.ui.loadimagefrominternet.main.LoadImageFromInternetFragment;
@@ -258,6 +259,11 @@ public class UIController implements View.OnClickListener {
                     case R.id.menu_item_left_drawer_customized_view:
                         replaceFragmentTo(CustomizedViewFragment.class,
                                 R.id.frame_layout_main_container, CustomizedViewFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_file:
+                        replaceFragmentTo(FileFragment.class,
+                                R.id.frame_layout_main_container, FileFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:

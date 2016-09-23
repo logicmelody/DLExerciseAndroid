@@ -49,6 +49,10 @@
             android:title="@string/all_customized_view" />
 
         <item
+            android:id="@+id/menu_item_left_drawer_file"
+            android:title="@string/all_file" />
+
+        <item
             android:id="@+id/menu_item_left_drawer_test"
             android:title="@string/all_test" />
     </group>

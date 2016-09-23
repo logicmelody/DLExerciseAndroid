@@ -29,6 +29,7 @@
     <string name="all_customized_view" translatable="false">Customized View</string>
     <string name="all_value" translatable="false">VALUE</string>
     <string name="all_0" translatable="false">0</string>
+    <string name="all_file" translatable="false">File</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">Sure to logout?</string>
