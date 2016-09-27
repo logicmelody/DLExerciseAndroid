@@ -35,4 +35,7 @@
     <!-- Movie Searcher -->
     <string name="movie_searcher_search_movie">請輸入電影名稱...</string>
 
+    <!-- File -->
+    <string name="file_write_data">寫入資料</string>
+
 </resources>

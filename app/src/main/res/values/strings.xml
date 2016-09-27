@@ -75,4 +75,7 @@
     <!-- Duration TextView -->
     <string name="duration_text_view_time" translatable="false">Duration: %s</string>
 
+    <!-- File -->
+    <string name="file_write_data">Write data</string>
+
 </resources>

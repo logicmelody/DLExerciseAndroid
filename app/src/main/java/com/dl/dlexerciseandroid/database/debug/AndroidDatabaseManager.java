@@ -835,7 +835,7 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
       	  crudadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
      
           crud_dropdown.setAdapter(crudadapter);
-          lcrud.setId(getResources().getInteger(R.integer.lcrud_id));
+          //lcrud.setId(getResources().getInteger(R.integer.lcrud_id));
           lcrud.addView(crud_dropdown,paramcrudtext);
 
           RelativeLayout.LayoutParams rlcrudparam = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
