@@ -26,12 +26,10 @@
     <application
         android:name=".ui.main.MainApplication"
         android:allowBackup="true"
-        android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:ignore="HardcodedDebugMode">
+        android:theme="@style/AppTheme">
 
         <!--
              在<application>的tag中加入
