@@ -29,7 +29,6 @@ model {
         }
     }
 
-    // 這邊可以設定自己的jni shared lib，但是要寫在android.buildTypes {}的後面
     android.ndk {
         moduleName "dl-exercise-jni"
     }
