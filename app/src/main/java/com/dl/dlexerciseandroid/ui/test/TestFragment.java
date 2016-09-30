@@ -18,6 +18,7 @@ public class TestFragment extends Fragment {
     public static final String TAG = TestFragment.class.getName();
 
     private Context mContext;
+    private int mTest = 0;
 
 
     @Override
