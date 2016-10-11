@@ -15,7 +15,7 @@
     <string name="all_intent" translatable="false">Intent</string>
     <string name="all_coordinator_layout" translatable="false">CoordinatorLayout</string>
     <string name="all_movie_searcher" translatable="false">MovieSearcher</string>
-    <string name="all_test">Test</string>
+    <string name="all_testing">Testing</string>
     <string name="all_music_player" translatable="false">Music Player</string>
     <string name="all_dl_sdk" translatable="false">DL SDK</string>
     <string name="all_firebase" translatable="false">Firebase</string>
@@ -30,6 +30,7 @@
     <string name="all_value" translatable="false">VALUE</string>
     <string name="all_0" translatable="false">0</string>
     <string name="all_file" translatable="false">File</string>
+    <string name="all_input">Input</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">Sure to logout?</string>
@@ -77,5 +78,8 @@
 
     <!-- File -->
     <string name="file_write_data">Write data</string>
+
+    <!-- Testing -->
+    <string name="testing_please_enter_testing_text" translatable="false">Please enter testing text</string>
 
 </resources>

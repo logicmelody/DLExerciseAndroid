@@ -5,9 +5,23 @@
     android:padding="@dimen/padding_all_window"
     android:orientation="vertical" >
 
-    <TextView
+    <EditText
+        android:id="@+id/edit_text_testing_input_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test"/>
+        android:hint="@string/testing_please_enter_testing_text"/>
+
+    <Button
+        android:id="@+id/button_testing_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/all_input"/>
+
+    <TextView
+        android:id="@+id/text_view_testing_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textStyle="bold"/>
 
 </LinearLayout>

@@ -54,7 +54,7 @@
 
         <item
             android:id="@+id/menu_item_left_drawer_test"
-            android:title="@string/all_test" />
+            android:title="@string/all_testing" />
     </group>
 
 </menu>
