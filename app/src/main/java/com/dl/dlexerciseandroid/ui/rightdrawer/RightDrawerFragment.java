@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.ui.coordinatorlayout.CoordinatorLayoutActivity;
+import com.dl.dlexerciseandroid.ui.espressotest.EspressoTestActivity;
 import com.dl.dlexerciseandroid.ui.moviesearcher.MovieSearcherActivity;
 
 /**
@@ -30,6 +31,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
 
     private Button mCoordinatorLayoutButton;
     private Button mMovieSearcherButton;
+    private Button mEspressoTestButton;
 
 
     @Override
@@ -59,11 +61,13 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
     private void findViews() {
         mCoordinatorLayoutButton = (Button) getView().findViewById(R.id.button_right_drawer_coordinator_layout);
         mMovieSearcherButton = (Button) getView().findViewById(R.id.button_right_drawer_movie_searcher);
+        mEspressoTestButton = (Button) getView().findViewById(R.id.button_right_drawer_espresso_test);
     }
 
     private void setupViews() {
         mCoordinatorLayoutButton.setOnClickListener(this);
         mMovieSearcherButton.setOnClickListener(this);
+        mEspressoTestButton.setOnClickListener(this);
     }
 
     @Override
@@ -77,6 +81,12 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
 
             case R.id.button_right_drawer_movie_searcher:
                 startActivity(new Intent(mContext, MovieSearcherActivity.class));
+                mOnRightDrawerListener.onCloseRightDrawer();
+
+                break;
+
+            case R.id.button_right_drawer_espresso_test:
+                startActivity(new Intent(mContext, EspressoTestActivity.class));
                 mOnRightDrawerListener.onCloseRightDrawer();
 
                 break;

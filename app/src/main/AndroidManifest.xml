@@ -109,7 +109,7 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            tools:replace="android:theme"/>
+            tools:replace="android:theme" />
 
         <!-- Debug database -->
         <activity
@@ -134,6 +134,7 @@
         </activity>
         <activity android:name=".ui.musicplayer.musiccontroller.MusicControllerActivity" />
         <activity android:name=".ui.moviesearcher.MovieSearcherActivity" />
+        <activity android:name=".ui.espressotest.EspressoTestActivity" />
 
         <!--
         用receiver沒有辦法收到來自別的app的shared intent
@@ -148,9 +149,15 @@
         </receiver>
         -->
 
-        <service android:name=".backgroundtask.service.DoItLaterService" android:exported="false" />
-        <service android:name=".backgroundtask.service.MusicService" android:exported="false" />
-        <service android:name=".backgroundtask.service.MovieInfoService" android:exported="false" />
+        <service
+            android:name=".backgroundtask.service.DoItLaterService"
+            android:exported="false" />
+        <service
+            android:name=".backgroundtask.service.MusicService"
+            android:exported="false" />
+        <service
+            android:name=".backgroundtask.service.MovieInfoService"
+            android:exported="false" />
         <service android:name=".backgroundtask.service.FCMService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
