@@ -30,6 +30,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_top_customized_view_between_each_view"/>
 
+        <com.dl.dlexerciseandroid.view.SoundSettingView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_customized_view_between_each_view"
+            app:title="This is title"
+            app:subtitle="This is subtitle"/>
+
     </LinearLayout>
 
 </ScrollView>
