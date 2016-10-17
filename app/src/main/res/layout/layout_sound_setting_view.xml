@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/textview_sound_setting_view_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/textcolor_sound_setting_view_title"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/textview_sound_setting_view_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textview_sound_setting_view_title"
+        android:textColor="@color/textcolor_sound_setting_view_subtitle"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/textview_sound_setting_view_reset_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="?selectableItemBackgroundBorderless"
+        android:text="@string/all_reset"
+        android:textColor="@color/textcolor_sound_setting_view_reset_button"
+        android:visibility="gone"/>
+
+</merge>

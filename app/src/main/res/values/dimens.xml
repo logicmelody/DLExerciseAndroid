@@ -68,4 +68,8 @@
     <dimen name="height_customized_view_line_chart_view">100dp</dimen>
     <dimen name="padding_customized_view_line_chart_view">10dp</dimen>
 
+    <!-- SettingItem -->
+    <dimen name="padding_setting_item">20dp</dimen>
+    <dimen name="margin_between_setting_item">10dp</dimen>
+
 </resources>

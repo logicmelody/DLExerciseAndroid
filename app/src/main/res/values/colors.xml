@@ -42,4 +42,10 @@
     <color name="text_color_value_selector_view_value_text">@android:color/black</color>
     <color name="text_color_value_selector_view_label_text">#FF7D7D7D</color>
 
+    <!-- SoundSettingView -->
+    <color name="background_setting_item">@android:color/white</color>
+    <color name="textcolor_sound_setting_view_title">#FF858585</color>
+    <color name="textcolor_sound_setting_view_subtitle">@android:color/black</color>
+    <color name="textcolor_sound_setting_view_reset_button">#FF2E8ADF</color>
+
 </resources>

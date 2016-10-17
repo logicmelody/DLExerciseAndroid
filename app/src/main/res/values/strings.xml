@@ -32,6 +32,7 @@
     <string name="all_0" translatable="false">0</string>
     <string name="all_file" translatable="false">File</string>
     <string name="all_input">Input</string>
+    <string name="all_reset" translatable="false">Reset</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">Sure to logout?</string>
