@@ -48,4 +48,11 @@
     <color name="textcolor_sound_setting_view_subtitle">@android:color/black</color>
     <color name="textcolor_sound_setting_view_reset_button">#FF2E8ADF</color>
 
+    <!-- ValueBar -->
+    <color name="base_color_value_bar">#FF324058</color>
+    <color name="circle_text_color_value_bar">@android:color/white</color>
+    <color name="fill_color_value_bar">@color/all_theme</color>
+    <color name="label_text_color_value_bar">#FF324058</color>
+    <color name="max_value_text_color_value_bar">#FF324058</color>
+
 </resources>

@@ -39,6 +39,26 @@
             app:title="This is title"
             app:subtitle="This is subtitle"/>
 
+        <!-- 這邊大部分都是使用自己定義的attribute -->
+        <com.dl.dlexerciseandroid.view.ValueBar
+            android:id="@+id/valueBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_customized_view_between_each_view"
+            app:value="50"
+            app:barHeight="@dimen/bar_height_value_bar"
+            app:baseColor="@color/base_color_value_bar"
+            app:circleRadius="@dimen/circle_radius_value_bar"
+            app:spaceAfterBar="@dimen/space_after_bar_value_bar"
+            app:circleTextColor="@color/circle_text_color_value_bar"
+            app:circleTextSize="@dimen/circle_text_size_value_bar"
+            app:fillColor="@color/fill_color_value_bar"
+            app:labelText="@string/value_bar_current_value"
+            app:labelTextColor="@color/label_text_color_value_bar"
+            app:labelTextSize="@dimen/label_text_size_value_bar"
+            app:maxValueTextColor="@color/max_value_text_color_value_bar"
+            app:maxValueTextSize="@dimen/max_value_text_size_value_bar"/>
+
     </LinearLayout>
 
 </ScrollView>

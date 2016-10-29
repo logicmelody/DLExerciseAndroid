@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- 設定custom view有哪些額外的屬性可以在xml裡設定，name要跟我們客製view的名字一樣 -->
+    <!-- 設定customized view有哪些額外的屬性可以在xml裡設定，name要跟我們customized view的名字一樣 -->
     <declare-styleable name="DurationTextView">
         <attr name="template" format="string" />
     </declare-styleable>
@@ -9,6 +9,22 @@
     <declare-styleable name="SoundSettingView">
         <attr name="title" format="string" />
         <attr name="subtitle" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ValueBar">
+        <attr name="value" format="integer" />
+        <attr name="barHeight" format="dimension" />
+        <attr name="circleRadius" format="dimension" />
+        <attr name="spaceAfterBar" format="dimension" />
+        <attr name="circleTextSize" format="dimension" />
+        <attr name="maxValueTextSize" format="dimension" />
+        <attr name="labelTextSize" format="dimension" />
+        <attr name="labelTextColor" format="color" />
+        <attr name="maxValueTextColor" format="color" />
+        <attr name="circleTextColor" format="color" />
+        <attr name="baseColor" format="color" />
+        <attr name="fillColor" format="color" />
+        <attr name="labelText" format="string" />
     </declare-styleable>
 
 </resources>

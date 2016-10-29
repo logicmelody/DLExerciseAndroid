@@ -84,4 +84,7 @@
     <!-- Testing -->
     <string name="testing_please_enter_testing_text" translatable="false">Please enter testing text</string>
 
+    <!-- ValueBar -->
+    <string name="value_bar_current_value" translatable="false">Current Value</string>
+
 </resources>

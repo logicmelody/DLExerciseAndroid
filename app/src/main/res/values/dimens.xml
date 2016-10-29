@@ -74,4 +74,12 @@
     <!-- SettingItem -->
     <dimen name="padding_sound_setting_view">20dp</dimen>
 
+    <!-- ValueBar -->
+    <dimen name="bar_height_value_bar">20dp</dimen>
+    <dimen name="circle_radius_value_bar">20dp</dimen>
+    <dimen name="space_after_bar_value_bar">10dp</dimen>
+    <dimen name="circle_text_size_value_bar">20dp</dimen>
+    <dimen name="label_text_size_value_bar">20dp</dimen>
+    <dimen name="max_value_text_size_value_bar">20dp</dimen>
+
 </resources>
