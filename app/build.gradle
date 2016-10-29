@@ -3,8 +3,8 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
     }
-    compileSdkVersion 24
-    buildToolsVersion '24.0.2'
+    compileSdkVersion 25
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.dl.dlexerciseandroid"
         minSdkVersion 18
@@ -50,13 +50,13 @@ dependencies {
     // For OkHttp
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile project(':dlsdk')
-    compile 'com.android.support:appcompat-v7:24.1.0'
-    compile 'com.android.support:design:24.1.0'
+    compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.android.support:design:25.0.0'
     // Required -- JUnit 4 framework, for 一般的unit tests
     testCompile 'junit:junit:4.12'
     // Optional -- Mockito framework, for 跟Android framework有一點相依性的unit tests
     testCompile 'org.mockito:mockito-core:1.10.19'
-    androidTestCompile 'com.android.support:support-annotations:24.1.0'
+    androidTestCompile 'com.android.support:support-annotations:25.0.0'
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
     // Optional -- Hamcrest library, which lets you create more flexible assertions using the Hamcrest matcher APIs
