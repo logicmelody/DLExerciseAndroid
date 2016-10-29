@@ -68,6 +68,9 @@
     <dimen name="height_customized_view_line_chart_view">100dp</dimen>
     <dimen name="padding_customized_view_line_chart_view">10dp</dimen>
 
+    <!-- ValueSelectorView -->
+    <dimen name="padding_left_right_value_selector_view_value">10dp</dimen>
+
     <!-- SettingItem -->
     <dimen name="padding_sound_setting_view">20dp</dimen>
 

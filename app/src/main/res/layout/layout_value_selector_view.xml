@@ -7,11 +7,18 @@
      RelativeLayout採用對應的寫法-->
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <ImageView
+        android:id="@+id/image_view_value_selector_view_minus_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/selector_value_selector_minus_button"/>
+
     <LinearLayout
         android:id="@+id/view_group_value_selector_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:paddingLeft="@dimen/padding_left_right_value_selector_view_value"
+        android:paddingRight="@dimen/padding_left_right_value_selector_view_value"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -34,20 +41,11 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/image_view_value_selector_view_minus_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:src="@drawable/selector_value_selector_minus_button"/>
 
     <ImageView
         android:id="@+id/image_view_value_selector_view_plus_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
         android:src="@drawable/selector_value_selector_plus_button"/>
 
 </merge>

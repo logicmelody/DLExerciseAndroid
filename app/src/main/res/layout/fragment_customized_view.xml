@@ -28,6 +28,8 @@
         <com.dl.dlexerciseandroid.view.ValueSelectorView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:layout_marginTop="@dimen/margin_top_customized_view_between_each_view"/>
 
         <com.dl.dlexerciseandroid.view.SoundSettingView

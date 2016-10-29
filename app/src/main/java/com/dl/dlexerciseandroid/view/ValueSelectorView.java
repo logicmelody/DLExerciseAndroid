@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,7 +18,7 @@ import com.dl.dlexerciseandroid.R;
  */
 
 // 這個customized view，我們要用來做合成View
-public class ValueSelectorView extends RelativeLayout implements View.OnClickListener, View.OnLongClickListener {
+public class ValueSelectorView extends LinearLayout implements View.OnClickListener, View.OnLongClickListener {
 
     private static final int REPEAT_INTERVAL_MS = 100;
 
@@ -87,14 +88,16 @@ public class ValueSelectorView extends RelativeLayout implements View.OnClickLis
     }
 
     private void initialize() {
-        mHandler = new Handler(mContext.getMainLooper());
+        mHandler = new Handler();
         findViews();
         setupViews();
     }
 
     private void findViews() {
-        // 我們在實作合成customized view的時候，會利用這種方法將已經定義好的xml layout assign給這個View
+        // 我們在實作合成customized view的時候，會利用這種方法將已經定義好的xml layout assign給這個View，
         // 最後一個this的參數是關鍵
+        // Note: 因為最後一個parameter我們有設定this，所以mRootView會是root view。
+        //       若是沒有設定的話，這個return回來的view就單純只是這個inflated view的root
         mRootView = LayoutInflater.from(mContext).inflate(R.layout.layout_value_selector_view, this);
 
         mMinusButton = (ImageView) mRootView.findViewById(R.id.image_view_value_selector_view_minus_button);
