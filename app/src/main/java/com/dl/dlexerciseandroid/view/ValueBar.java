@@ -203,6 +203,9 @@ public class ValueBar extends View {
         setMeasuredDimension(measureWidth(widthMeasureSpec), measureHeight(heightMeasureSpec));
     }
 
+    // 如何決定text的width and height：
+    // width: 用Paint object去取text的bound，利用bound來得到text的width
+    // height: 用getFontSpacing()來取得text的height
     private int measureWidth(int measureSpec) {
         // 左右padding
         int size = getPaddingLeft() + getPaddingRight();
@@ -241,6 +244,8 @@ public class ValueBar extends View {
         int size = getPaddingTop() + getPaddingBottom();
 
         // Current value text
+        // getFontSpacing(): Return the recommended line spacing based on the current typeface and text size.
+        // 用這個可以決定text的height
         size += mLabelPaint.getFontSpacing();
 
         // 第二部分的那一群物件
