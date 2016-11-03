@@ -8,7 +8,8 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
-import android.text.TextUtils;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -47,6 +48,41 @@ public class ValueBar extends View {
     private Paint mCirclePaint;
     private Paint mCurrentValuePaint;
 
+
+    private class SavedState extends View.BaseSavedState {
+
+        public int value;
+
+
+        public SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        private SavedState(Parcel source) {
+            super(source);
+
+            // 把值在restore的時候讀取回來
+            value = source.readInt();
+        }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+
+            // 將值save起來
+            out.writeInt(value);
+        }
+
+        public final Parcelable.Creator<ValueBar.SavedState> CREATOR = new Parcelable.Creator<ValueBar.SavedState>() {
+            public ValueBar.SavedState createFromParcel(Parcel in) {
+                return new ValueBar.SavedState(in);
+            }
+
+            public ValueBar.SavedState[] newArray(int size) {
+                return new ValueBar.SavedState[size];
+            }
+        };
+    }
 
     public void setMaxValue(int maxValue) {
         mMaxValue = maxValue;
@@ -106,7 +142,7 @@ public class ValueBar extends View {
 
         try {
             // R.styleable.ValueBar_barHeight這個id名字是自動產生的
-            mCurrentValue = a.getInteger(R.styleable.ValueBar_value, 0);
+            mCurrentValue = a.getInteger(R.styleable.ValueBar_barValue, 0);
             mBarHeight = a.getDimensionPixelSize(R.styleable.ValueBar_barHeight, 0);
             mCircleRadius = a.getDimensionPixelSize(R.styleable.ValueBar_circleRadius, 0);
             mSpaceAfterBar = a.getDimensionPixelSize(R.styleable.ValueBar_spaceAfterBar, 0);
@@ -177,6 +213,36 @@ public class ValueBar extends View {
         mCurrentValuePaint.setTextAlign(Paint.Align.CENTER);
     }
 
+    /**
+     * 選轉後的順序：
+     * onSaveInstanceState()
+     * onRestoreInstanceState()
+     * onMeasure()
+     * onDraw()
+     */
+    // Customized view若是想要在旋轉的時候可以保留原來View上面的狀態，需要把狀態用
+    // onSaveInstanceState()存起來
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Log.d("danny", "ValueBar onSaveInstanceState()");
+
+        Parcelable superState = super.onSaveInstanceState();
+        SavedState ss = new SavedState(superState);
+        ss.value = mCurrentValue;
+
+        return ss;
+    }
+
+    // 然後在onRestoreInstanceState()把狀態復原
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        Log.d("danny", "ValueBar onRestoreInstanceState()");
+
+        SavedState ss = (SavedState) state;
+        super.onRestoreInstanceState(ss.getSuperState());
+        mCurrentValue = ss.value;
+    }
+
     // Mode分為三種：
     // 1. EXACTLY: Parent view告訴我們這個customized view的準確大小
     // 2. AT_MOST:
@@ -198,7 +264,7 @@ public class ValueBar extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        Log.d("danny", "onMeasure");
+        Log.d("danny", "ValueBar onMeasure()");
 
         setMeasuredDimension(measureWidth(widthMeasureSpec), measureHeight(heightMeasureSpec));
     }
@@ -260,7 +326,7 @@ public class ValueBar extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        Log.d("danny", "onDraw");
+        Log.d("danny", "ValueBar onDraw()");
 
         drawLabel(canvas);
         drawBar(canvas);

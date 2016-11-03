@@ -11,8 +11,13 @@
         <attr name="subtitle" format="string" />
     </declare-styleable>
 
+    <!-- 就算是不同的Customized View也不可以有相同的自定義attribute -->
+    <declare-styleable name="ValueSelectorView">
+        <attr name="selectorValue" format="integer" />
+    </declare-styleable>
+
     <declare-styleable name="ValueBar">
-        <attr name="value" format="integer" />
+        <attr name="barValue" format="integer" />
         <attr name="barHeight" format="dimension" />
         <attr name="circleRadius" format="dimension" />
         <attr name="spaceAfterBar" format="dimension" />

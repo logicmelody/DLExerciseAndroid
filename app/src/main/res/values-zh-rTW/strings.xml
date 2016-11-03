@@ -8,6 +8,7 @@
     <string name="all_later">稍後</string>
     <string name="all_undo">復原</string>
     <string name="all_input">輸入</string>
+    <string name="all_update">更新</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">確定要登出？</string>
