@@ -24,6 +24,7 @@ public class IntentFragment extends Fragment implements View.OnClickListener {
 
     private Button mFireComponentIntentButton;
     private Button mFireActionIntentButton;
+    private Button mFireTextShareIntentButton;
 
 
     @Override
@@ -52,11 +53,13 @@ public class IntentFragment extends Fragment implements View.OnClickListener {
     private void findViews() {
         mFireComponentIntentButton = (Button) getView().findViewById(R.id.button_intent_fire_component_intent);
         mFireActionIntentButton = (Button) getView().findViewById(R.id.button_intent_fire_action_intent);
+        mFireTextShareIntentButton = (Button) getView().findViewById(R.id.button_intent_fire_text_share_intent);
     }
 
     private void setupViews() {
         mFireComponentIntentButton.setOnClickListener(this);
         mFireActionIntentButton.setOnClickListener(this);
+        mFireTextShareIntentButton.setOnClickListener(this);
     }
 
     @Override
@@ -68,6 +71,10 @@ public class IntentFragment extends Fragment implements View.OnClickListener {
 
             case R.id.button_intent_fire_component_intent:
                 fireComponentIntent();
+                break;
+
+            case R.id.button_intent_fire_text_share_intent:
+                fireTextShareIntent();
                 break;
         }
     }
@@ -94,6 +101,20 @@ public class IntentFragment extends Fragment implements View.OnClickListener {
         intent.setAction(ReceiveIntentActivity.ACTION_RECEIVE_INTENT);
         intent.putExtra("EXTRA_STRING", "This is a string");
         intent.putExtra("EXTRA_INT", 100);
+
+        startActivity(intent);
+    }
+
+    private void fireTextShareIntent() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+
+        // 如果要share一段text給別的app，e.g. Email, Google Keep, Message
+        // 要將文字塞到Android定義的EXTRA_TEXT中
+        // EXTRA_SUBJECT: 標題
+        // EXTRA_TEXT: 文字內容
+        intent.putExtra(Intent.EXTRA_SUBJECT, "筆記這個是標題");
+        intent.putExtra(Intent.EXTRA_TEXT, "筆記今天是晴天");
+        intent.setType("text/plain");
 
         startActivity(intent);
     }

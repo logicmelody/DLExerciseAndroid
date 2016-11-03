@@ -17,4 +17,10 @@
         android:layout_height="wrap_content"
         android:text="@string/intent_fire_action_intent"/>
 
+    <Button
+        android:id="@+id/button_intent_fire_text_share_intent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/intent_fire_text_share_intent"/>
+
 </LinearLayout>

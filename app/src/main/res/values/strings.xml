@@ -58,6 +58,7 @@
     <!-- Intent -->
     <string name="intent_fire_component_intent" translatable="false">Fire component intent</string>
     <string name="intent_fire_action_intent" translatable="false">Fire action intent</string>
+    <string name="intent_fire_text_share_intent" translatable="false">Fire text share intent</string>
 
     <!-- Receive intent -->
     <string name="receive_intent" translatable="false">Receive Intent</string>
