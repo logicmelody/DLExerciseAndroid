@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.ui.bitmap.BitmapFragment;
-import com.dl.dlexerciseandroid.ui.chat.ChatFragment;
+import com.dl.dlexerciseandroid.ui.chat.main.ChatFragment;
 import com.dl.dlexerciseandroid.ui.customizedview.CustomizedViewFragment;
 import com.dl.dlexerciseandroid.database.debug.AndroidDatabaseManager;
 import com.dl.dlexerciseandroid.dialog.dialogfragment.alert.AlertDialogFragment;

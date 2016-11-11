@@ -35,6 +35,7 @@
     <string name="all_reset" translatable="false">Reset</string>
     <string name="all_update">Update</string>
     <string name="all_chat">Chat</string>
+    <string name="all_send">Send</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">Sure to logout?</string>

@@ -1,12 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/padding_all_window">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_chat_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/view_group_chat_panel"
+        android:padding="@dimen/padding_all_window"
+        android:scrollbars="vertical"
+        android:background="@color/background_chat_list"/>
+
+    <LinearLayout
+        android:id="@+id/view_group_chat_panel"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ChatFragment"/>
+        android:layout_alignParentBottom="true"
+        android:padding="@dimen/padding_chat_panel"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/image_view_chat_panel_ying_speak_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_ying_speak"
+            android:background="?selectableItemBackgroundBorderless"/>
+
+        <EditText
+            android:id="@+id/edit_text_chat_panel_text_box"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/button_chat_panel_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/all_send"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

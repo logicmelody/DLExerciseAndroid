@@ -82,4 +82,13 @@
     <dimen name="label_text_size_value_bar">20dp</dimen>
     <dimen name="max_value_text_size_value_bar">20dp</dimen>
 
+    <!-- Chat -->
+    <dimen name="padding_chat_list">10dp</dimen>
+    <dimen name="padding_chat_panel">10dp</dimen>
+    <dimen name="padding_message_item">10dp</dimen>
+    <dimen name="height_message_item">20dp</dimen>
+    <dimen name="margin_bottom_message_item">10dp</dimen>
+    <dimen name="max_width_message_item">200dp</dimen>
+    <dimen name="min_height_message_item">20dp</dimen>
+
 </resources>

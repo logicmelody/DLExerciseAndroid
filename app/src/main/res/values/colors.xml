@@ -55,4 +55,7 @@
     <color name="label_text_color_value_bar">#FF324058</color>
     <color name="max_value_text_color_value_bar">#FF324058</color>
 
+    <!-- Chat -->
+    <color name="background_chat_list">#FFE1E2E7</color>
+
 </resources>

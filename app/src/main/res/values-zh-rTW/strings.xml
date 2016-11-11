@@ -10,6 +10,7 @@
     <string name="all_input">輸入</string>
     <string name="all_update">更新</string>
     <string name="all_chat">聊天</string>
+    <string name="all_send">送出</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">確定要登出？</string>
