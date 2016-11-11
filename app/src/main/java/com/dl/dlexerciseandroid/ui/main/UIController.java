@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.ui.bitmap.BitmapFragment;
+import com.dl.dlexerciseandroid.ui.chat.ChatFragment;
 import com.dl.dlexerciseandroid.ui.customizedview.CustomizedViewFragment;
 import com.dl.dlexerciseandroid.database.debug.AndroidDatabaseManager;
 import com.dl.dlexerciseandroid.dialog.dialogfragment.alert.AlertDialogFragment;
@@ -264,6 +265,11 @@ public class UIController implements View.OnClickListener {
                     case R.id.menu_item_left_drawer_file:
                         replaceFragmentTo(FileFragment.class,
                                 R.id.frame_layout_main_container, FileFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_chat:
+                        replaceFragmentTo(ChatFragment.class,
+                                R.id.frame_layout_main_container, ChatFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:
