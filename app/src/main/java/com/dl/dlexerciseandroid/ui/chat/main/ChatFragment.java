@@ -19,6 +19,7 @@ import com.dl.dlexerciseandroid.datastructure.Message;
 import com.dl.dlexerciseandroid.ui.chat.chatlist.ChatListAdapter;
 import com.dl.dlexerciseandroid.ui.chat.chatlist.ChatListAdapter.ChatViewType;
 import com.dl.dlexerciseandroid.ui.chat.chatlist.ChatListItem;
+import com.dl.dlexerciseandroid.ui.chat.chatlist.MessageItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,11 +92,11 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
 
     private void setupChatList() {
         setChatListData();
-
         mLinearLayoutManager = new LinearLayoutManager(mContext);
         mChatListAdapter = new ChatListAdapter(mContext, mDataList);
 
         mChatList.setLayoutManager(mLinearLayoutManager);
+        mChatList.addItemDecoration(new MessageItemDecoration(mContext));
         mChatList.setAdapter(mChatListAdapter);
     }
 

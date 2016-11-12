@@ -85,10 +85,14 @@
     <!-- Chat -->
     <dimen name="padding_chat_list">10dp</dimen>
     <dimen name="padding_chat_panel">10dp</dimen>
-    <dimen name="padding_message_item">10dp</dimen>
-    <dimen name="height_message_item">20dp</dimen>
-    <dimen name="margin_bottom_message_item">10dp</dimen>
-    <dimen name="max_width_message_item">200dp</dimen>
-    <dimen name="min_height_message_item">20dp</dimen>
+    <dimen name="padding_chat_message_item">10dp</dimen>
+    <dimen name="height_chat_message_item">20dp</dimen>
+    <dimen name="max_width_chat_message_item">200dp</dimen>
+    <dimen name="min_height_chat_message_item">20dp</dimen>
+    <dimen name="margin_between_chat_message_item">5dp</dimen>
+    <dimen name="margin_boundary_chat_list">10dp</dimen>
+    <dimen name="text_size_chat_message_item">18dp</dimen>
+    <dimen name="corners_radius_chat_message_item">10dp</dimen>
+
 
 </resources>
