@@ -19,11 +19,13 @@ public class Message {
 
     private int mOwner;
     private String mMessage;
+    private long mTime;
 
 
-    public Message(int owner, String message) {
+    public Message(int owner, String message, long time) {
         mOwner = owner;
         mMessage = message;
+        mTime = time;
     }
 
     public int getOwner() {
@@ -32,5 +34,9 @@ public class Message {
 
     public String getMessage() {
         return mMessage;
+    }
+
+    public long getTime() {
+        return mTime;
     }
 }

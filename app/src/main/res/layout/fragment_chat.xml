@@ -3,13 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_chat_list"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/view_group_chat_panel"
-        android:scrollbars="vertical"
-        android:background="@color/background_chat_list"/>
+        android:layout_above="@+id/view_group_chat_panel">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_chat_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:background="@color/background_chat_list"/>
+
+        <TextView
+            android:id="@+id/text_view_chat_list_no_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/chat_chat_list_no_message"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:visibility="gone"/>
+
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/view_group_chat_panel"

@@ -91,4 +91,7 @@
     <!-- ValueBar -->
     <string name="value_bar_current_value" translatable="false">Current Value</string>
 
+    <!-- ValueBar -->
+    <string name="chat_chat_list_no_message">Start chatting!</string>
+
 </resources>

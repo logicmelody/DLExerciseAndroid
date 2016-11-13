@@ -94,5 +94,4 @@
     <dimen name="text_size_chat_message_item">18dp</dimen>
     <dimen name="corners_radius_chat_message_item">10dp</dimen>
 
-
 </resources>

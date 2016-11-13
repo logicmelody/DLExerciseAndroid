@@ -20,6 +20,7 @@ public class DLExerciseContentProvider extends ContentProvider {
 
     private static final class UriMatcherIndex {
         public static final int TASK = 0;
+        public static final int MESSAGE = 1;
     }
 
     private static final UriMatcher sUriMatcher;
@@ -27,6 +28,7 @@ public class DLExerciseContentProvider extends ContentProvider {
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
         sUriMatcher.addURI(DLExerciseContract.AUTHORITY, DLExerciseContract.Task.TABLE_NAME, UriMatcherIndex.TASK);
+        sUriMatcher.addURI(DLExerciseContract.AUTHORITY, DLExerciseContract.Message.TABLE_NAME, UriMatcherIndex.MESSAGE);
     }
 
     private DLExerciseDatabaseHelper mDLExerciseDatabaseHelper;
@@ -52,6 +54,10 @@ public class DLExerciseContentProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
             case UriMatcherIndex.TASK:
                 queryBuilder.setTables(DLExerciseContract.Task.TABLE_NAME);
+                break;
+
+            case UriMatcherIndex.MESSAGE:
+                queryBuilder.setTables(DLExerciseContract.Message.TABLE_NAME);
                 break;
 
             default:
@@ -83,6 +89,10 @@ public class DLExerciseContentProvider extends ContentProvider {
                 id = db.insert(DLExerciseContract.Task.TABLE_NAME, null, values);
                 break;
 
+            case UriMatcherIndex.MESSAGE:
+                id = db.insert(DLExerciseContract.Message.TABLE_NAME, null, values);
+                break;
+
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
@@ -103,6 +113,10 @@ public class DLExerciseContentProvider extends ContentProvider {
                 rowsDeleted = db.delete(DLExerciseContract.Task.TABLE_NAME, selection, selectionArgs);
                 break;
 
+            case UriMatcherIndex.MESSAGE:
+                rowsDeleted = db.delete(DLExerciseContract.Message.TABLE_NAME, selection, selectionArgs);
+                break;
+
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
@@ -121,6 +135,10 @@ public class DLExerciseContentProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
             case UriMatcherIndex.TASK:
                 rowsUpdated = db.update(DLExerciseContract.Task.TABLE_NAME, values, selection, selectionArgs);
+                break;
+
+            case UriMatcherIndex.MESSAGE:
+                rowsUpdated = db.update(DLExerciseContract.Message.TABLE_NAME, values, selection, selectionArgs);
                 break;
 
             default:

@@ -42,4 +42,7 @@
     <!-- File -->
     <string name="file_write_data">寫入資料</string>
 
+    <!-- ValueBar -->
+    <string name="chat_chat_list_no_message">開始聊天吧!</string>
+
 </resources>

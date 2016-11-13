@@ -143,6 +143,8 @@ public class LaterTaskFragment extends Fragment implements LoaderManager.LoaderC
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         Log.d("danny", "Do It Later onLoadFinished()");
 
+        // Cursor的data count=0，代表沒有data符合我們下的query SQL語法
+        // Cursor若是null，代表在query的時候發生錯誤，也有可能會丟出Exception
         if (data == null) {
             return;
         }
