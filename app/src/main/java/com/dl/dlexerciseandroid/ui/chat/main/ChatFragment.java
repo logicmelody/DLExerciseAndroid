@@ -1,6 +1,7 @@
 package com.dl.dlexerciseandroid.ui.chat.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,10 +22,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.backgroundtask.service.MessageService;
 import com.dl.dlexerciseandroid.database.dbscheme.DLExerciseContract;
 import com.dl.dlexerciseandroid.datastructure.Message;
+import com.dl.dlexerciseandroid.datastructure.Message.ChatViewType;
 import com.dl.dlexerciseandroid.ui.chat.chatlist.ChatListAdapter;
-import com.dl.dlexerciseandroid.ui.chat.chatlist.ChatListItem;
 import com.dl.dlexerciseandroid.ui.chat.chatlist.MessageItemDecoration;
 
 import java.util.ArrayList;
@@ -73,7 +75,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
     private EditText mMessageBox;
     private Button mSendButton;
 
-    private List<ChatListItem> mDataList = new ArrayList<>();
+    private List<Message> mDataList = new ArrayList<>();
 
 
     @Override
@@ -139,14 +141,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
     }
 
     private void yingSpeak() {
-        //mDataList.add(new ChatListItem(new Message(Message.Owner.YING, "小影說話"), ChatViewType.YING_NORMAL));
-
-        /**
-         * 每次當我們的data有更新的時候，e.g. 新增一筆data or 刪除一筆data
-         * 需要update我們的RecyclerView，方法是用Adapter call notifyDataSetChanged()
-         */
-        mChatListAdapter.notifyDataSetChanged();
-        scrollChatListToBottom();
+        saveMessage(new Message(Message.Owner.YING, "小影說話", ChatViewType.YING_NORMAL, System.currentTimeMillis()));
     }
 
     private void sendMessage() {
@@ -156,10 +151,13 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
             return;
         }
 
+        saveMessage(new Message(Message.Owner.ME, messageText, ChatViewType.NORMAL, System.currentTimeMillis()));
+
         mMessageBox.setText("");
-        //mDataList.add(new ChatListItem(new Message(Message.Owner.ME, messageText), ChatViewType.NORMAL));
-        mChatListAdapter.notifyDataSetChanged();
-        scrollChatListToBottom();
+    }
+
+    private void saveMessage(Message message) {
+        mContext.startService(MessageService.generateSaveMessageIntent(mContext, message));
     }
 
     @Override
@@ -190,11 +188,13 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
             int viewType = data.getInt(VIEW_TYPE);
             long time = data.getLong(TIME);
 
-            Message message = new Message(owner, text, time);
-
-            mDataList.add(new ChatListItem(message, viewType));
+            mDataList.add(new Message(owner, text, viewType, time));
         }
 
+        /**
+         * 每次當我們的data有更新的時候，e.g. 新增一筆data or 刪除一筆data
+         * 需要update我們的RecyclerView，方法是用Adapter call notifyDataSetChanged()
+         */
         mChatListAdapter.notifyDataSetChanged();
         scrollChatListToBottom();
 

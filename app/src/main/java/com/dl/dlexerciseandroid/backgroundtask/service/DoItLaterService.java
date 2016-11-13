@@ -18,7 +18,7 @@ import com.dl.dlexerciseandroid.utility.utils.Utils;
  */
 public class DoItLaterService extends IntentService {
 
-    private static final String TAG = "com.dl.dlexerciseandroid.DoItLaterService";
+    private static final String TAG = DoItLaterService.class.getName();
 
     private static final class Action {
         public static final String SAVE_DO_IT_LATER_TASK = "com.dl.dlexerciseandroid.SAVE_DO_IT_LATER_TASK";

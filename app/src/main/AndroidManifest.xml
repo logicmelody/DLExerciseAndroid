@@ -153,6 +153,9 @@
             android:name=".backgroundtask.service.DoItLaterService"
             android:exported="false" />
         <service
+            android:name=".backgroundtask.service.MessageService"
+            android:exported="false" />
+        <service
             android:name=".backgroundtask.service.MusicService"
             android:exported="false" />
         <service

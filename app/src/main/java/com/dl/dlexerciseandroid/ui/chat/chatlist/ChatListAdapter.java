@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.datastructure.Message;
+import com.dl.dlexerciseandroid.datastructure.Message.ChatViewType;
 
 import java.util.List;
 
@@ -20,11 +22,6 @@ import java.util.List;
  * 需要自己實作並且extends RecyclerView.Adapter<RecyclerView.ViewHolder>
  */
 public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-    public static final class ChatViewType {
-        public static final int NORMAL = 0;
-        public static final int YING_NORMAL = 1;
-    }
 
     /**
      * 每一個list item都需要一個view holder去記錄這個view中包含的元件
@@ -50,10 +47,10 @@ public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private Context mContext;
-    private List<ChatListItem> mDataList;
+    private List<Message> mDataList;
 
 
-    public ChatListAdapter(Context context, List<ChatListItem> dataList) {
+    public ChatListAdapter(Context context, List<Message> dataList) {
         mContext = context;
         mDataList = dataList;
     }
@@ -87,7 +84,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return;
         }
 
-        switch (mDataList.get(position).viewType) {
+        switch (mDataList.get(position).getViewType()) {
             case ChatViewType.NORMAL:
                 bindNormalMessageView((NormalMessageViewHolder) holder, position);
                 break;
@@ -99,11 +96,11 @@ public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void bindNormalMessageView(NormalMessageViewHolder vh, int position) {
-        vh.messageText.setText(mDataList.get(position).message.getMessage());
+        vh.messageText.setText(mDataList.get(position).getMessage());
     }
 
     private void bindYingNormalMessage(YingNormalMessageViewHolder vh, int position) {
-        vh.messageText.setText(mDataList.get(position).message.getMessage());
+        vh.messageText.setText(mDataList.get(position).getMessage());
     }
 
     /**
@@ -123,6 +120,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     @Override
     public int getItemViewType(int position) {
-        return mDataList.get(position).viewType;
+        return mDataList.get(position).getViewType();
     }
 }
