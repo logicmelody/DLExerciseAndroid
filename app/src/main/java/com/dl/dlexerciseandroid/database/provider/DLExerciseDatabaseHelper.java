@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.dl.dlexerciseandroid.database.dbscheme.MessageTable;
 import com.dl.dlexerciseandroid.database.dbscheme.TaskTable;
 
 import java.util.ArrayList;
@@ -22,11 +23,12 @@ public class DLExerciseDatabaseHelper extends SQLiteOpenHelper {
     // 設定現在的DB version，當user已經安裝了app之後，就只能利用update db的方式來修改或是更新db的欄位
     // user安裝了更新版的app之後，如果DB version比舊的高，就會呼叫onUpgrade()
     // Version必須要 >= 1，所以初始只能從1開始
-    private static final int DB_VERSION = DbVersion.VERSION_2;
+    private static final int DB_VERSION = DbVersion.VERSION_3;
 
     public static final class DbVersion {
         public static final int VERSION_1 = 1;
         public static final int VERSION_2 = 2;
+        public static final int VERSION_3 = 3;
     }
 
     private volatile static DLExerciseDatabaseHelper sDLExerciseDatabaseHelper;
@@ -50,7 +52,10 @@ public class DLExerciseDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d("danny", "onCreate DB");
+
         TaskTable.onCreate(db);
+        MessageTable.onCreate(db);
     }
 
     @Override
@@ -62,8 +67,17 @@ public class DLExerciseDatabaseHelper extends SQLiteOpenHelper {
         int version = oldVersion;
 
         if (version < DbVersion.VERSION_2) {
+            Log.d("danny", "onUpgrade DB VERSION_2");
+
             TaskTable.onUpgrade(db, version, DB_VERSION);
             version = DbVersion.VERSION_2;
+        }
+
+        if (version < DbVersion.VERSION_3) {
+            Log.d("danny", "onUpgrade DB VERSION_3");
+
+            MessageTable.onCreate(db);
+            version = DbVersion.VERSION_3;
         }
     }
 

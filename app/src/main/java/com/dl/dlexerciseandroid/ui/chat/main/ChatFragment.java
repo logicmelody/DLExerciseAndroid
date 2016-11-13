@@ -104,9 +104,9 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         mDataList.add(new ChatListItem(new Message(Message.Owner.ME, "我說話"), ChatViewType.NORMAL));
         mDataList.add(new ChatListItem(new Message(Message.Owner.ME, "我說話"), ChatViewType.NORMAL));
         mDataList.add(new ChatListItem(new Message(Message.Owner.ME, "我說話"), ChatViewType.NORMAL));
-        mDataList.add(new ChatListItem(new Message(Message.Owner.YING, "小影說話"), ChatViewType.YING));
-        mDataList.add(new ChatListItem(new Message(Message.Owner.YING, "小影說話"), ChatViewType.YING));
-        mDataList.add(new ChatListItem(new Message(Message.Owner.YING, "小影說話"), ChatViewType.YING));
+        mDataList.add(new ChatListItem(new Message(Message.Owner.YING, "小影說話"), ChatViewType.YING_NORMAL));
+        mDataList.add(new ChatListItem(new Message(Message.Owner.YING, "小影說話"), ChatViewType.YING_NORMAL));
+        mDataList.add(new ChatListItem(new Message(Message.Owner.YING, "小影說話"), ChatViewType.YING_NORMAL));
         mDataList.add(new ChatListItem(new Message(Message.Owner.ME, "我說話"), ChatViewType.NORMAL));
         mDataList.add(new ChatListItem(new Message(Message.Owner.ME, "我說話"), ChatViewType.NORMAL));
         mDataList.add(new ChatListItem(new Message(Message.Owner.ME, "我說話"), ChatViewType.NORMAL));
@@ -135,7 +135,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     }
 
     private void yingSpeak() {
-        mDataList.add(new ChatListItem(new Message(Message.Owner.YING, "小影說話"), ChatViewType.YING));
+        mDataList.add(new ChatListItem(new Message(Message.Owner.YING, "小影說話"), ChatViewType.YING_NORMAL));
 
         /**
          * 每次當我們的data有更新的時候，e.g. 新增一筆data or 刪除一筆data

@@ -23,7 +23,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public static final class ChatViewType {
         public static final int NORMAL = 0;
-        public static final int YING = 1;
+        public static final int YING_NORMAL = 1;
     }
 
     /**
@@ -68,7 +68,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             case ChatViewType.NORMAL:
                 return new NormalMessageViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_normal_message, parent, false));
 
-            case ChatViewType.YING:
+            case ChatViewType.YING_NORMAL:
                 return new YingNormalMessageViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_ying_normal_message,
                                                        parent, false));
 
@@ -92,7 +92,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 bindNormalMessageView((NormalMessageViewHolder) holder, position);
                 break;
 
-            case ChatViewType.YING:
+            case ChatViewType.YING_NORMAL:
                 bindYingNormalMessage((YingNormalMessageViewHolder) holder, position);
                 break;
         }
