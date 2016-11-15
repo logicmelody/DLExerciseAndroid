@@ -194,6 +194,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
         /**
          * 每次當我們的data有更新的時候，e.g. 新增一筆data or 刪除一筆data
          * 需要update我們的RecyclerView，方法是用Adapter call notifyDataSetChanged()
+         *
+         * 改變UI的這段一定要在UI thread上做!!!
          */
         mChatListAdapter.notifyDataSetChanged();
         scrollChatListToBottom();
