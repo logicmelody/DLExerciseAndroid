@@ -9,7 +9,7 @@ import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.datastructure.message.Message;
 import com.dl.dlexerciseandroid.datastructure.message.Message.ChatViewType;
 import com.dl.dlexerciseandroid.ui.chat.viewholder.BaseViewHolder;
-import com.dl.dlexerciseandroid.ui.chat.viewholder.ListMessageViewHolder;
+import com.dl.dlexerciseandroid.ui.chat.viewholder.HorizontalListMessageViewHolder;
 import com.dl.dlexerciseandroid.ui.chat.viewholder.NormalMessageViewHolder;
 import com.dl.dlexerciseandroid.ui.chat.viewholder.YingNormalMessageViewHolder;
 
@@ -50,7 +50,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         parent, false));
 
             case ChatViewType.HORIZONTAL_LIST:
-                return new ListMessageViewHolder(mContext, LayoutInflater.from(mContext).inflate(R.layout.item_list_message,
+                return new HorizontalListMessageViewHolder(mContext, LayoutInflater.from(mContext).inflate(R.layout.item_list_message,
                         parent, false));
 
             default:
