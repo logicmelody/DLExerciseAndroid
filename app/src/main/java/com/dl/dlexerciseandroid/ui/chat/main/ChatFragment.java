@@ -1,7 +1,6 @@
 package com.dl.dlexerciseandroid.ui.chat.main;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,7 +19,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.backgroundtask.service.MessageService;
@@ -170,7 +168,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
     }
 
     private void sendListMessage() {
-        Toast.makeText(mContext, "Send list message", Toast.LENGTH_SHORT).show();
+        saveMessage(new Message(Message.Owner.ME, "", ChatViewType.HORIZONTAL_LIST, System.currentTimeMillis()));
     }
 
     @Override

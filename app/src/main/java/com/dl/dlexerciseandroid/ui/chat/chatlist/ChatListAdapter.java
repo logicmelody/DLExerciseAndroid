@@ -10,6 +10,10 @@ import android.widget.TextView;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.datastructure.Message;
 import com.dl.dlexerciseandroid.datastructure.Message.ChatViewType;
+import com.dl.dlexerciseandroid.ui.chat.viewholder.BaseViewHolder;
+import com.dl.dlexerciseandroid.ui.chat.viewholder.ListMessageViewHolder;
+import com.dl.dlexerciseandroid.ui.chat.viewholder.NormalMessageViewHolder;
+import com.dl.dlexerciseandroid.ui.chat.viewholder.YingNormalMessageViewHolder;
 
 import java.util.List;
 
@@ -22,29 +26,6 @@ import java.util.List;
  * 需要自己實作並且extends RecyclerView.Adapter<RecyclerView.ViewHolder>
  */
 public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-    /**
-     * 每一個list item都需要一個view holder去記錄這個view中包含的元件
-     */
-    private class NormalMessageViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView messageText;
-
-        public NormalMessageViewHolder(View itemView) {
-            super(itemView);
-            messageText = (TextView) itemView.findViewById(R.id.text_view_normal_message_text);
-        }
-    }
-
-    private class YingNormalMessageViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView messageText;
-
-        public YingNormalMessageViewHolder(View itemView) {
-            super(itemView);
-            messageText = (TextView) itemView.findViewById(R.id.text_view_ying_normal_message_text);
-        }
-    }
 
     private Context mContext;
     private List<Message> mDataList;
@@ -69,6 +50,10 @@ public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 return new YingNormalMessageViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_ying_normal_message,
                                                        parent, false));
 
+            case ChatViewType.HORIZONTAL_LIST:
+                return new ListMessageViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_ying_normal_message,
+                                                 parent, false));
+
             default:
                 return new NormalMessageViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_normal_message, parent, false));
         }
@@ -80,27 +65,11 @@ public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
      */
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder == null) {
+        if (holder == null || !(holder instanceof BaseViewHolder)) {
             return;
         }
 
-        switch (mDataList.get(position).getViewType()) {
-            case ChatViewType.NORMAL:
-                bindNormalMessageView((NormalMessageViewHolder) holder, position);
-                break;
-
-            case ChatViewType.YING_NORMAL:
-                bindYingNormalMessage((YingNormalMessageViewHolder) holder, position);
-                break;
-        }
-    }
-
-    private void bindNormalMessageView(NormalMessageViewHolder vh, int position) {
-        vh.messageText.setText(mDataList.get(position).getMessage());
-    }
-
-    private void bindYingNormalMessage(YingNormalMessageViewHolder vh, int position) {
-        vh.messageText.setText(mDataList.get(position).getMessage());
+        ((BaseViewHolder) holder).bind(mDataList.get(position));
     }
 
     /**
