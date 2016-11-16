@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.backgroundtask.service.MessageService;
@@ -73,6 +74,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
     private TextView mNoMessageText;
     private ImageView mYingSpeakButton;
     private EditText mMessageBox;
+    private ImageView mListMessageButton;
     private Button mSendButton;
 
     private List<Message> mDataList = new ArrayList<>();
@@ -108,6 +110,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
         mNoMessageText = (TextView) getView().findViewById(R.id.text_view_chat_list_no_message);
         mYingSpeakButton = (ImageView) getView().findViewById(R.id.image_view_chat_panel_ying_speak_button);
         mMessageBox = (EditText) getView().findViewById(R.id.edit_text_chat_panel_text_box);
+        mListMessageButton = (ImageView) getView().findViewById(R.id.image_view_chat_panel_list_message_button);
         mSendButton = (Button) getView().findViewById(R.id.button_chat_panel_send);
     }
 
@@ -122,6 +125,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
 
     private void setupChatPanel() {
         mYingSpeakButton.setOnClickListener(this);
+        mListMessageButton.setOnClickListener(this);
         mSendButton.setOnClickListener(this);
     }
 
@@ -130,6 +134,11 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
         switch (view.getId()) {
             case R.id.image_view_chat_panel_ying_speak_button:
                 yingSpeak();
+
+                break;
+
+            case R.id.image_view_chat_panel_list_message_button:
+                sendListMessage();
 
                 break;
 
@@ -158,6 +167,10 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
 
     private void saveMessage(Message message) {
         mContext.startService(MessageService.generateSaveMessageIntent(mContext, message));
+    }
+
+    private void sendListMessage() {
+        Toast.makeText(mContext, "Send list message", Toast.LENGTH_SHORT).show();
     }
 
     @Override

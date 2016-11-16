@@ -23,6 +23,7 @@ public class Message implements Parcelable {
     public static final class ChatViewType {
         public static final int NORMAL = 0;
         public static final int YING_NORMAL = 1;
+        public static final int HORIZONTAL_LIST = 2;
     }
 
     private int mOwner;

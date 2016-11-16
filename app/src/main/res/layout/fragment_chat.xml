@@ -49,6 +49,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
 
+        <ImageView
+            android:id="@+id/image_view_chat_panel_list_message_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_chat_list_message"
+            android:background="?selectableItemBackgroundBorderless"/>
+
         <Button
             android:id="@+id/button_chat_panel_send"
             android:layout_width="wrap_content"

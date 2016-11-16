@@ -70,7 +70,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                                                        parent, false));
 
             default:
-                return null;
+                return new NormalMessageViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_normal_message, parent, false));
         }
     }
 
