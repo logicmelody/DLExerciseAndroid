@@ -23,8 +23,10 @@ import android.widget.TextView;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.backgroundtask.service.MessageService;
 import com.dl.dlexerciseandroid.database.dbscheme.DLExerciseContract;
-import com.dl.dlexerciseandroid.datastructure.Message;
-import com.dl.dlexerciseandroid.datastructure.Message.ChatViewType;
+import com.dl.dlexerciseandroid.datastructure.message.ListMessage;
+import com.dl.dlexerciseandroid.datastructure.message.Message;
+import com.dl.dlexerciseandroid.datastructure.message.Message.ChatViewType;
+import com.dl.dlexerciseandroid.datastructure.message.MessageFactory;
 import com.dl.dlexerciseandroid.ui.chat.chatlist.ChatListAdapter;
 import com.dl.dlexerciseandroid.ui.chat.chatlist.MessageItemDecoration;
 
@@ -168,7 +170,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
     }
 
     private void sendListMessage() {
-        saveMessage(new Message(Message.Owner.ME, "", ChatViewType.HORIZONTAL_LIST, System.currentTimeMillis()));
+        saveMessage(new ListMessage(Message.Owner.ME, "", ChatViewType.HORIZONTAL_LIST, System.currentTimeMillis()));
     }
 
     @Override
@@ -199,7 +201,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
             int viewType = data.getInt(VIEW_TYPE);
             long time = data.getLong(TIME);
 
-            mDataList.add(new Message(owner, text, viewType, time));
+            mDataList.add(MessageFactory.createMessage(owner, text, viewType, time));
         }
 
         /**

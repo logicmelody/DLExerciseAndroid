@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.datastructure;
+package com.dl.dlexerciseandroid.datastructure.message;
 
 /**
  * Created by dannylin on 2016/11/10.
@@ -26,10 +26,10 @@ public class Message implements Parcelable {
         public static final int HORIZONTAL_LIST = 2;
     }
 
-    private int mOwner;
-    private String mMessage;
-    private int mViewType;
-    private long mTime;
+    protected int mOwner;
+    protected String mMessage;
+    protected int mViewType;
+    protected long mTime;
 
 
     public Message(int owner, String message, int viewType, long time) {

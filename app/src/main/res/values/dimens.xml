@@ -94,4 +94,8 @@
     <dimen name="text_size_chat_message_item">18dp</dimen>
     <dimen name="corners_radius_chat_message_item">10dp</dimen>
 
+    <!-- List message -->
+    <dimen name="height_chat_list_message_horizontal_list">200dp</dimen>
+    <dimen name="width_chat_list_message_number">100dp</dimen>
+
 </resources>

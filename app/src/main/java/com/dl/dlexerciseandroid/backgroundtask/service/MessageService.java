@@ -3,9 +3,8 @@ package com.dl.dlexerciseandroid.backgroundtask.service;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
-import com.dl.dlexerciseandroid.datastructure.Message;
+import com.dl.dlexerciseandroid.datastructure.message.Message;
 import com.dl.dlexerciseandroid.utility.utils.DbUtils;
 
 /**

@@ -3,7 +3,7 @@ package com.dl.dlexerciseandroid.ui.chat.viewholder;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.dl.dlexerciseandroid.datastructure.Message;
+import com.dl.dlexerciseandroid.datastructure.message.Message;
 
 /**
  * Created by dannylin on 2016/11/16.

@@ -11,11 +11,13 @@
         android:layout_alignParentTop="true"
         android:src="@drawable/ic_ying_avatar"/>
 
-    <TextView
-        android:id="@+id/text_view_ying_normal_message_text"
-        style="@style/MessageItem"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_chat_list_message_horizontal_list"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_chat_list_message_horizontal_list"
         android:layout_toRightOf="@+id/image_view_ying_avatar"
         android:layout_alignTop="@+id/image_view_ying_avatar"
+        android:scrollbars="horizontal"
         android:background="@drawable/background_chat_ying_message"/>
 
 </RelativeLayout>

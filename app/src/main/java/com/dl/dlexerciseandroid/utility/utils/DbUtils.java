@@ -7,7 +7,7 @@ import android.text.TextUtils;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.database.dbscheme.DLExerciseContract;
-import com.dl.dlexerciseandroid.datastructure.Message;
+import com.dl.dlexerciseandroid.datastructure.message.Message;
 
 /**
  * Created by logicmelody on 2016/4/22.

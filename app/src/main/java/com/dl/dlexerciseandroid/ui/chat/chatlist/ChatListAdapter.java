@@ -3,13 +3,11 @@ package com.dl.dlexerciseandroid.ui.chat.chatlist;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.datastructure.Message;
-import com.dl.dlexerciseandroid.datastructure.Message.ChatViewType;
+import com.dl.dlexerciseandroid.datastructure.message.Message;
+import com.dl.dlexerciseandroid.datastructure.message.Message.ChatViewType;
 import com.dl.dlexerciseandroid.ui.chat.viewholder.BaseViewHolder;
 import com.dl.dlexerciseandroid.ui.chat.viewholder.ListMessageViewHolder;
 import com.dl.dlexerciseandroid.ui.chat.viewholder.NormalMessageViewHolder;
@@ -44,18 +42,20 @@ public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case ChatViewType.NORMAL:
-                return new NormalMessageViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_normal_message, parent, false));
+                return new NormalMessageViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_normal_message,
+                        parent, false));
 
             case ChatViewType.YING_NORMAL:
                 return new YingNormalMessageViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_ying_normal_message,
-                                                       parent, false));
+                        parent, false));
 
             case ChatViewType.HORIZONTAL_LIST:
-                return new ListMessageViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_ying_normal_message,
-                                                 parent, false));
+                return new ListMessageViewHolder(mContext, LayoutInflater.from(mContext).inflate(R.layout.item_list_message,
+                        parent, false));
 
             default:
-                return new NormalMessageViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_normal_message, parent, false));
+                return new NormalMessageViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_normal_message,
+                        parent, false));
         }
     }
 
