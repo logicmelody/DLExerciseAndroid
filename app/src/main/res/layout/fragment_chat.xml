@@ -43,18 +43,18 @@
             android:src="@drawable/ic_ying_speak"
             android:background="?selectableItemBackgroundBorderless"/>
 
-        <EditText
-            android:id="@+id/edit_text_chat_panel_text_box"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
         <ImageView
             android:id="@+id/image_view_chat_panel_list_message_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_chat_list_message"
             android:background="?selectableItemBackgroundBorderless"/>
+
+        <EditText
+            android:id="@+id/edit_text_chat_panel_text_box"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
 
         <Button
             android:id="@+id/button_chat_panel_send"
