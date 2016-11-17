@@ -118,6 +118,10 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
         mLinearLayoutManager = new LinearLayoutManager(mContext);
         mChatListAdapter = new ChatListAdapter(mContext, mDataList);
 
+        // 加這一行，可以讓訊息從list的底部開始塞
+        // 可以讓訊息很少的時候，從下面開始塞訊息
+        mLinearLayoutManager.setStackFromEnd(true);
+
         mChatList.setLayoutManager(mLinearLayoutManager);
         mChatList.addItemDecoration(new MessageItemDecoration(mContext));
         mChatList.setAdapter(mChatListAdapter);
