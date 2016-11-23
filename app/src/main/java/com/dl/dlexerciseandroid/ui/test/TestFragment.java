@@ -30,6 +30,42 @@ public class TestFragment extends Fragment implements View.OnClickListener {
 
 
     /**
+     * Activity跟Fragment之間的lifecycle關係：
+     *
+     先將Fragment貼到Activity上
+     11-23 14:30:32.468 5384-5384/com.dl.dlexerciseandroid D/danny: TestFragment onAttach()
+
+     Fragment的onCreate()有可能會在Activity的onCreate()完成之前
+     11-23 14:30:32.468 5384-5384/com.dl.dlexerciseandroid D/danny: TestFragment onCreate()
+     11-23 14:30:32.468 5384-5384/com.dl.dlexerciseandroid D/danny: MainActivity onCreate()
+     11-23 14:30:32.516 5384-5384/com.dl.dlexerciseandroid D/danny: TestFragment onCreateView()
+     11-23 14:30:32.522 5384-5384/com.dl.dlexerciseandroid D/danny: TestFragment onActivityCreated()
+     11-23 14:30:32.522 5384-5384/com.dl.dlexerciseandroid D/danny: TestFragment onViewStateRestored()
+
+     基本上就是跟著Activity
+     11-23 14:30:32.522 5384-5384/com.dl.dlexerciseandroid D/danny: TestFragment onStart()
+     11-23 14:30:32.523 5384-5384/com.dl.dlexerciseandroid D/danny: MainActivity onStart()
+
+     基本上就是跟著Activity
+     11-23 14:30:32.525 5384-5384/com.dl.dlexerciseandroid D/danny: MainActivity onResume()
+     11-23 14:30:32.527 5384-5384/com.dl.dlexerciseandroid D/danny: TestFragment onResume()
+
+     基本上就是跟著Activity
+     11-23 14:33:18.131 5384-5384/com.dl.dlexerciseandroid D/danny: TestFragment onPause()
+     11-23 14:33:18.132 5384-5384/com.dl.dlexerciseandroid D/danny: MainActivity onPause()
+
+     基本上就是跟著Activity
+     11-23 14:33:18.465 5384-5384/com.dl.dlexerciseandroid D/danny: TestFragment onStop()
+     11-23 14:33:18.465 5384-5384/com.dl.dlexerciseandroid D/danny: MainActivity onStop()
+
+     先將Fragment給destroy掉之後，再destroy Activity
+     11-23 14:33:18.476 5384-5384/com.dl.dlexerciseandroid D/danny: TestFragment onDestroyView()
+     11-23 14:33:18.478 5384-5384/com.dl.dlexerciseandroid D/danny: TestFragment onDestroy()
+     11-23 14:33:18.478 5384-5384/com.dl.dlexerciseandroid D/danny: TestFragment onDetach()
+     11-23 14:33:18.478 5384-5384/com.dl.dlexerciseandroid D/danny: MainActivity onDestroy()
+     */
+
+    /**
      * 一定要實作的method!!!
      * Called when a fragment is first attached to its context.
      */
@@ -43,6 +79,13 @@ public class TestFragment extends Fragment implements View.OnClickListener {
 
     /**
      * 會在onAttach()之後call
+<<<<<<< HEAD
+=======
+     * 這個method有可能會在Activity的onCreate()完成之前call
+     *
+     * Note that this can be called while the fragment's activity is still in the process of being created.
+     * As such, you can not rely on things like the activity's content view hierarchy being initialized at this point.
+>>>>>>> a44c745... [Test] Add log for fragment lifecycle
      */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
