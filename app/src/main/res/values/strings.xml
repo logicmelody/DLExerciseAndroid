@@ -36,7 +36,6 @@
     <string name="all_update">Update</string>
     <string name="all_chat">Chat</string>
     <string name="all_send">Send</string>
-    <string name="all_baidu_voice" translatable="false">Baidu Voice</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">Sure to logout?</string>
