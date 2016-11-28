@@ -82,15 +82,18 @@ public class DLExerciseContentProvider extends ContentProvider {
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         SQLiteDatabase db = mDLExerciseDatabaseHelper.getWritableDatabase();
+        Uri returnUri;
         long id = 0;
 
         switch (sUriMatcher.match(uri)) {
             case UriMatcherIndex.TASK:
                 id = db.insert(DLExerciseContract.Task.TABLE_NAME, null, values);
+                returnUri = ContentUris.withAppendedId(DLExerciseContract.Task.CONTENT_URI, id);
                 break;
 
             case UriMatcherIndex.MESSAGE:
                 id = db.insert(DLExerciseContract.Message.TABLE_NAME, null, values);
+                returnUri = ContentUris.withAppendedId(DLExerciseContract.Message.CONTENT_URI, id);
                 break;
 
             default:
@@ -100,7 +103,7 @@ public class DLExerciseContentProvider extends ContentProvider {
         // 必須要加這一行才可以跟LoaderManager連動
         getContext().getContentResolver().notifyChange(uri, null);
 
-        return ContentUris.withAppendedId(DLExerciseContract.Task.CONTENT_URI, id);
+        return returnUri;
     }
 
     @Override
