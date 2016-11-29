@@ -18,6 +18,7 @@ import com.dl.dlexerciseandroid.utility.utils.DbUtils;
 import com.dl.dlexerciseandroid.utility.utils.DoItLaterUtils;
 import com.dl.dlexerciseandroid.utility.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ public class LaterTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private RecyclerView mRecyclerView;
 
-    private List<DoItLaterViewItem> mDataSet;
+    private List<DoItLaterViewItem> mDataList;
 
     private class TaskViewHolder extends RecyclerView.ViewHolder {
 
@@ -92,7 +93,7 @@ public class LaterTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
 
         private void fireDoItLaterIntent() {
-            String laterCallback = mDataSet.get(getAdapterPosition()).task.laterCallback;
+            String laterCallback = mDataList.get(getAdapterPosition()).task.laterCallback;
 
             if (TextUtils.isEmpty(laterCallback)) {
                 return;
@@ -105,11 +106,11 @@ public class LaterTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     // 在Adapter的constructor中將需要顯示在RecyclerView上的data bind起來，
     // 要注意的是，之後這個List所指的記憶體空間就不能更動，不然會有不可預期的問題
-    public LaterTaskAdapter(Context context, RecyclerView recyclerView, List<DoItLaterViewItem> dataSet) {
+    public LaterTaskAdapter(Context context, RecyclerView recyclerView) {
         mContext = context;
         mHandler = new Handler();
         mRecyclerView = recyclerView;
-        mDataSet = dataSet;
+        mDataList = new ArrayList<>();
     }
 
     /**
@@ -119,11 +120,11 @@ public class LaterTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      * @param position
      */
     public void removeWithSnackBar(int position) {
-        final long removedTaskId = mDataSet.get(position).task.id;
+        final long removedTaskId = mDataList.get(position).task.id;
         final int removedPosition = position;
-        final DoItLaterViewItem removedTaskItem = mDataSet.get(position);
+        final DoItLaterViewItem removedTaskItem = mDataList.get(position);
 
-        mDataSet.remove(position);
+        mDataList.remove(position);
 
         // 跟notifyDataSetChanged()不一樣，不會rebind全部的data，只會通知被刪除的那筆資料，然後其他存在的data的position會變動
         // 這是RecyclerView強大的地方，使用這個method，其他的item移到新的position會有動畫
@@ -136,7 +137,7 @@ public class LaterTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         snackbar.setAction(R.string.all_undo, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDataSet.add(removedPosition, removedTaskItem);
+                mDataList.add(removedPosition, removedTaskItem);
                 notifyItemInserted(removedPosition);
             }
         });
@@ -158,11 +159,11 @@ public class LaterTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public void removeWithToast(int position) {
-        final long removedTaskId = mDataSet.get(position).task.id;
+        final long removedTaskId = mDataList.get(position).task.id;
         final int removedPosition = position;
-        final DoItLaterViewItem removedTaskItem = mDataSet.get(position);
+        final DoItLaterViewItem removedTaskItem = mDataList.get(position);
 
-        mDataSet.remove(position);
+        mDataList.remove(position);
 
         // 跟notifyDataSetChanged()不一樣，不會rebind全部的data，只會通知被刪除的那筆資料，然後其他存在的data的position會變動
         // 這是RecyclerView強大的地方，使用這個method，其他的item移到新的position會有動畫
@@ -188,7 +189,7 @@ public class LaterTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 // 不然那個thread三秒之後還是會把task從db中刪除
                 mHandler.removeCallbacks(deleteTaskRunnable);
 
-                mDataSet.add(removedPosition, removedTaskItem);
+                mDataList.add(removedPosition, removedTaskItem);
                 notifyItemInserted(removedPosition);
                 undoToast.dismiss();
             }
@@ -228,7 +229,7 @@ public class LaterTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        switch (mDataSet.get(position).viewType) {
+        switch (mDataList.get(position).viewType) {
             case DoItLaterViewItem.ViewType.NORMAL:
                 onBindNormalTask((TaskViewHolder) holder, position);
                 break;
@@ -240,24 +241,36 @@ public class LaterTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void onBindNormalTask(TaskViewHolder holder, int position) {
-        holder.title.setText(mDataSet.get(position).task.title);
-        holder.description.setText(mDataSet.get(position).task.description);
-        holder.time.setText(Utils.timeToString(mDataSet.get(position).task.time, Utils.DataFormat.YYYYMMDDHHMM));
+        holder.title.setText(mDataList.get(position).task.title);
+        holder.description.setText(mDataList.get(position).task.description);
+        holder.time.setText(Utils.timeToString(mDataList.get(position).task.time, Utils.DataFormat.YYYYMMDDHHMM));
     }
 
     private void onBindLaterTask(LaterTaskViewHolder holder, int position) {
-        holder.title.setText(mDataSet.get(position).task.title);
-        holder.description.setText(mDataSet.get(position).task.description);
-        holder.time.setText(Utils.timeToString(mDataSet.get(position).task.time, Utils.DataFormat.YYYYMMDDHHMM));
+        holder.title.setText(mDataList.get(position).task.title);
+        holder.description.setText(mDataList.get(position).task.description);
+        holder.time.setText(Utils.timeToString(mDataList.get(position).task.time, Utils.DataFormat.YYYYMMDDHHMM));
     }
 
     @Override
     public int getItemCount() {
-        return mDataSet.size();
+        return mDataList.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return mDataSet.get(position).viewType;
+        return mDataList.get(position).viewType;
+    }
+
+    public void clear() {
+        mDataList.clear();
+    }
+
+    public void add(DoItLaterViewItem doItLaterViewItem) {
+        mDataList.add(doItLaterViewItem);
+    }
+
+    public int getDataListSize() {
+        return mDataList.size();
     }
 }

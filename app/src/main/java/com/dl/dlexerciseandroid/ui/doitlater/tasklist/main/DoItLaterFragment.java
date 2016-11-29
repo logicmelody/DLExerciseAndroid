@@ -36,7 +36,6 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
 
     private ViewPager mTaskListViewPager;
     private DoItLaterPagerAdapter mDoItLaterPagerAdapter;
-    private List<Fragment> mFragmentList = new ArrayList<>();
 
     private FloatingActionButton mAddTaskButton;
 
@@ -62,7 +61,6 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
     private void initialize() {
         findViews();
         setupViews();
-        setupFragments();
         setupViewPager();
         setupTabLayout();
     }
@@ -77,9 +75,11 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
         mAddTaskButton.setOnClickListener(this);
     }
 
-    private void setupFragments() {
-        mFragmentList.add(Utils.getFragment(getChildFragmentManager(), NormalTaskFragment.class, NormalTaskFragment.TAG));
-        mFragmentList.add(Utils.getFragment(getChildFragmentManager(), LaterTaskFragment.class, LaterTaskFragment.TAG));
+    private void setFragments() {
+        mDoItLaterPagerAdapter.add(Utils.getFragment(getChildFragmentManager(),
+                NormalTaskFragment.class, NormalTaskFragment.TAG));
+        mDoItLaterPagerAdapter.add(Utils.getFragment(getChildFragmentManager(),
+                LaterTaskFragment.class, LaterTaskFragment.TAG));
     }
 
     private void setupViewPager() {
@@ -90,7 +90,8 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
 
         // 這邊第一個參數如果用getFragmentManager()會有問題，因為我們是在DoItLaterFragment中的ViewPager再加Fragment
         // 所以應該要使用getChildFragmentManager()
-        mDoItLaterPagerAdapter = new DoItLaterPagerAdapter(getChildFragmentManager(), mFragmentList, tabTitleList);
+        mDoItLaterPagerAdapter = new DoItLaterPagerAdapter(getChildFragmentManager(), tabTitleList);
+        setFragments();
 
         mTaskListViewPager.setAdapter(mDoItLaterPagerAdapter);
 

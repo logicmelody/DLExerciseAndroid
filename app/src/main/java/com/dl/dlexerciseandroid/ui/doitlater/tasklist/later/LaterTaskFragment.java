@@ -66,7 +66,6 @@ public class LaterTaskFragment extends Fragment implements LoaderManager.LoaderC
     private RecyclerView mTaskList;
     private StaggeredGridLayoutManager mTaskListLayoutManager;
     private LaterTaskAdapter mLaterTaskAdapter;
-    private List<DoItLaterViewItem> mTaskListDataSet = new ArrayList<>();
 
     private TextView mNoTaskText;
 
@@ -118,7 +117,7 @@ public class LaterTaskFragment extends Fragment implements LoaderManager.LoaderC
 
         // 這個地方就先將要顯示的data儲存List與Adapter bind在一起，之後要clear或是delete或是add資料，
         // 都在這裡對mTaskListDataSet進行操作
-        mLaterTaskAdapter = new LaterTaskAdapter(mContext, mTaskList, mTaskListDataSet);
+        mLaterTaskAdapter = new LaterTaskAdapter(mContext, mTaskList);
 
         // RecyclerView必須要設定的三個元件：
         // LayoutManager
@@ -153,7 +152,7 @@ public class LaterTaskFragment extends Fragment implements LoaderManager.LoaderC
     }
 
     private void setTaskListData(Cursor data) {
-        mTaskListDataSet.clear();
+        mLaterTaskAdapter.clear();
 
         while (data.moveToNext()) {
             long id = data.getLong(ID);
@@ -167,11 +166,11 @@ public class LaterTaskFragment extends Fragment implements LoaderManager.LoaderC
 
             Task task = new Task(id, title, description, laterPackageName, laterCallback, time);
 
-            mTaskListDataSet.add(new DoItLaterViewItem(task, viewType));
+            mLaterTaskAdapter.add(new DoItLaterViewItem(task, viewType));
         }
 
         mLaterTaskAdapter.notifyDataSetChanged();
-        mNoTaskText.setVisibility(mTaskListDataSet.size() == 0 ? View.VISIBLE : View.GONE);
+        mNoTaskText.setVisibility(mLaterTaskAdapter.getDataListSize() == 0 ? View.VISIBLE : View.GONE);
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,9 +18,9 @@ public class DoItLaterPagerAdapter extends FragmentPagerAdapter {
     private String[] mTabTitleList;
 
 
-    public DoItLaterPagerAdapter(FragmentManager fm, List<Fragment> fragmentList, String[] tabTitleList) {
+    public DoItLaterPagerAdapter(FragmentManager fm, String[] tabTitleList) {
         super(fm);
-        mFragmentList = fragmentList;
+        mFragmentList = new ArrayList<>();
         mTabTitleList = tabTitleList;
     }
 
@@ -37,5 +38,9 @@ public class DoItLaterPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return mTabTitleList[position];
+    }
+
+    public void add(Fragment fragment) {
+        mFragmentList.add(fragment);
     }
 }

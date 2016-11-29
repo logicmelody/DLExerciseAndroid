@@ -74,16 +74,15 @@ public class NormalTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private Context mContext;
 
-    private List<Task> mTaskData;
-
+    private List<Task> mDataList;
     private List<Long> mDeletedTaskList = new ArrayList<>();
 
     private int mPendingRemovePosition = -1;
 
 
-    public NormalTaskAdapter(Context context, List<Task> taskData) {
+    public NormalTaskAdapter(Context context) {
         mContext = context;
-        mTaskData = taskData;
+        mDataList = new ArrayList<>();
     }
 
     public void pendingRemove(int position) {
@@ -99,10 +98,10 @@ public class NormalTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             return;
         }
 
-        long removedTaskId = mTaskData.get(mPendingRemovePosition).id;
+        long removedTaskId = mDataList.get(mPendingRemovePosition).id;
         mDeletedTaskList.add(removedTaskId);
 
-        mTaskData.remove(mPendingRemovePosition);
+        mDataList.remove(mPendingRemovePosition);
 
         // 跟notifyDataSetChanged()不一樣，不會rebind全部的data，只會通知被刪除的那筆資料，然後其他存在的data的position會變動
         // 這是RecyclerView強大的地方，使用這個method，其他的item移到新的position會有動畫
@@ -136,9 +135,9 @@ public class NormalTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         NormalTaskViewHolder vh = (NormalTaskViewHolder) holder;
 
-        vh.title.setText(mTaskData.get(position).title);
-        vh.description.setText(mTaskData.get(position).description);
-        vh.time.setText(Utils.timeToString(mTaskData.get(position).time, Utils.DataFormat.YYYYMMDDHHMM));
+        vh.title.setText(mDataList.get(position).title);
+        vh.description.setText(mDataList.get(position).description);
+        vh.time.setText(Utils.timeToString(mDataList.get(position).time, Utils.DataFormat.YYYYMMDDHHMM));
 
         // 被swipe的item經由notifyItemChanged()，會執行這裡
         // Show出swipe之後的畫面
@@ -157,6 +156,18 @@ public class NormalTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemCount() {
-        return mTaskData.size();
+        return mDataList.size();
+    }
+
+    public void clear() {
+        mDataList.clear();
+    }
+
+    public void add(Task task) {
+        mDataList.add(task);
+    }
+
+    public int getDataListSize() {
+        return mDataList.size();
     }
 }

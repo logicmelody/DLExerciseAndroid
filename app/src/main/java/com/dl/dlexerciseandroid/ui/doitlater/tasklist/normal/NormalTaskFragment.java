@@ -57,13 +57,17 @@ public class NormalTaskFragment extends Fragment implements LoaderManager.Loader
 
     private Context mContext;
 
+    /**
+     * 以後要實作RecyclerView，一定要有下列三樣東西：
+     * 1. RecyclerView: 主要顯示的view
+     * 2. LayoutManager: 決定view的排列要如何排列
+     * 3. Adapter: 用來處理data，跟以前最大的不同是，我們將data list放到Adapter中處理，所以必須要開放API給外部使用
+     */
     private RecyclerView mTaskList;
     private NormalTaskAdapter mNormalTaskAdapter;
     private LinearLayoutManager mTaskListLayoutManager;
 
     private TextView mNoTextView;
-
-    private List<Task> mTaskData = new ArrayList<>();
 
 
     @Override
@@ -103,7 +107,7 @@ public class NormalTaskFragment extends Fragment implements LoaderManager.Loader
 
     private void setupNormalTaskList() {
         mTaskListLayoutManager = new LinearLayoutManager(mContext);
-        mNormalTaskAdapter = new NormalTaskAdapter(mContext, mTaskData);
+        mNormalTaskAdapter = new NormalTaskAdapter(mContext);
 
 //        mTaskList.addItemDecoration(new DividerItemDecoration(
 //                getResources().getDrawable(R.drawable.divider_all_vertical_list), false, true, false, 0));
@@ -173,7 +177,7 @@ public class NormalTaskFragment extends Fragment implements LoaderManager.Loader
     }
 
     private void setTaskListData(Cursor data) {
-        mTaskData.clear();
+        mNormalTaskAdapter.clear();
 
         while (data.moveToNext()) {
             long id = data.getLong(ID);
@@ -183,11 +187,11 @@ public class NormalTaskFragment extends Fragment implements LoaderManager.Loader
             String laterCallback = data.getString(LATER_CALL_BACK);
             long time = data.getLong(TIME);
 
-            mTaskData.add(new Task(id, title, description, laterPackageName, laterCallback, time));
+            mNormalTaskAdapter.add(new Task(id, title, description, laterPackageName, laterCallback, time));
         }
 
         mNormalTaskAdapter.notifyDataSetChanged();
-        mNoTextView.setVisibility(mTaskData.size() == 0 ? View.VISIBLE : View.GONE);
+        mNoTextView.setVisibility(mNormalTaskAdapter.getDataListSize() == 0 ? View.VISIBLE : View.GONE);
     }
 
     @Override
