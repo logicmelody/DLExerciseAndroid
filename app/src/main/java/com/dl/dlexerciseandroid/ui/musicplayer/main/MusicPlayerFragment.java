@@ -60,8 +60,6 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
 
     private boolean mIsMusicServiceBound = false;
 
-    private List<Music> mMusicDataList = new ArrayList<>();
-
     // MusicPlayerFragment需要顯示現在正在播放的音樂在最下方，所以也需要與MusicService bind
     private ServiceConnection mMusicConnection = new ServiceConnection() {
 
@@ -139,7 +137,7 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
     }
 
     private void setupMusicList() {
-        mMusicListAdapter = new MusicListAdapter(mContext, mMusicDataList);
+        mMusicListAdapter = new MusicListAdapter(mContext);
 
         mMusicList.setLayoutManager(new LinearLayoutManager(mContext));
         mMusicList.setAdapter(mMusicListAdapter);
@@ -190,7 +188,7 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
     }
 
     private void setMusicListData(Cursor cursor) {
-        mMusicDataList.clear();
+        mMusicListAdapter.clear();
 
         while (cursor.moveToNext()) {
             int idIndex = cursor.getColumnIndex(android.provider.MediaStore.Audio.Media._ID);
@@ -205,11 +203,11 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
 
             // 判斷music是不是mp3檔
             if (MusicUtils.isMusicFile(musicFilePath)) {
-                mMusicDataList.add(new Music(id, title, artist));
+                mMusicListAdapter.add(new Music(id, title, artist));
             }
         }
 
-        if (mMusicDataList.size() == 0) {
+        if (mMusicListAdapter.getDataListSize() == 0) {
             mNoMusicText.setVisibility(View.VISIBLE);
             mMusicList.setVisibility(View.GONE);
 

@@ -67,6 +67,11 @@ public class MusicListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private List<Music> mDataList;
 
 
+    public MusicListAdapter(Context context) {
+        mContext = context;
+        mDataList = new ArrayList<>();
+    }
+
     public MusicListAdapter(Context context, List<Music> dataList) {
         mContext = context;
         mDataList = dataList;
@@ -87,6 +92,18 @@ public class MusicListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
+        return mDataList.size();
+    }
+
+    public void clear() {
+        mDataList.clear();
+    }
+
+    public void add(Music music) {
+        mDataList.add(music);
+    }
+
+    public int getDataListSize() {
         return mDataList.size();
     }
 }
