@@ -19,7 +19,6 @@ public class CoordinatorLayoutActivity extends AppCompatActivity implements View
 
     private RecyclerView mNumberList;
     private NumberListAdapter mNumberListAdapter;
-    private List<Integer> mNumberListDataSet = new ArrayList<>();
 
     private Toolbar mToolBar;
     private ActionBar mActionBar;
@@ -64,9 +63,8 @@ public class CoordinatorLayoutActivity extends AppCompatActivity implements View
     }
 
     private void setupNumberList() {
+        mNumberListAdapter = new NumberListAdapter(this);
         setNumberListData();
-
-        mNumberListAdapter = new NumberListAdapter(this, mNumberListDataSet);
 
         mNumberList.setLayoutManager(new LinearLayoutManager(this));
         mNumberList.setAdapter(mNumberListAdapter);
@@ -74,7 +72,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity implements View
 
     private void setNumberListData() {
         for (int i = 0 ; i < 100 ; i++) {
-            mNumberListDataSet.add(i);
+            mNumberListAdapter.add(i);
         }
     }
 

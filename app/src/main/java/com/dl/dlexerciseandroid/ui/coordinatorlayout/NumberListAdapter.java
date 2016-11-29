@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public class NumberListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private Context mContext;
 
-    List<Integer> mDataSet;
+    private List<Integer> mDataSet;
 
 
     private static class NumberViewHolder extends RecyclerView.ViewHolder {
@@ -29,6 +30,11 @@ public class NumberListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             super(itemView);
             number = (TextView) itemView.findViewById(R.id.text_view_coordinator_layout_number);
         }
+    }
+
+    public NumberListAdapter(Context context) {
+        mContext = context;
+        mDataSet = new ArrayList<>();
     }
 
     public NumberListAdapter(Context context, List<Integer> dataSet) {
@@ -52,5 +58,9 @@ public class NumberListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public int getItemCount() {
         return mDataSet.size();
+    }
+
+    public void add(int num) {
+        mDataSet.add(num);
     }
 }
