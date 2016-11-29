@@ -13,6 +13,7 @@ import com.dl.dlexerciseandroid.ui.chat.viewholder.HorizontalListMessageViewHold
 import com.dl.dlexerciseandroid.ui.chat.viewholder.NormalMessageViewHolder;
 import com.dl.dlexerciseandroid.ui.chat.viewholder.YingNormalMessageViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,9 +30,15 @@ public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private List<Message> mDataList;
 
 
-    public ChatListAdapter(Context context, List<Message> dataList) {
+    /**
+     * 之後將要丟到Adapter的data list的操作都在Adapter中進行
+     * 所以需要照使用需求開API給外層的view
+     *
+     * 這樣的好處是可以將view跟data完全切開，之後RecyclerView只需要切換Adapter就可以改變裡面的資料
+     */
+    public ChatListAdapter(Context context) {
         mContext = context;
-        mDataList = dataList;
+        mDataList = new ArrayList<>();
     }
 
     /**
@@ -90,5 +97,17 @@ public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public int getItemViewType(int position) {
         return mDataList.get(position).getViewType();
+    }
+
+    public void clear() {
+        mDataList.clear();
+    }
+
+    public void add(Message message) {
+        mDataList.add(message);
+    }
+
+    public int getDataListSize() {
+        return mDataList.size();
     }
 }

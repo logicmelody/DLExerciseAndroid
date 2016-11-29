@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +19,11 @@ abstract public class BaseHorizontalListMessageAdapter<T> extends RecyclerView.A
     protected Context mContext;
     protected List<T> mDataList;
 
+
+    public BaseHorizontalListMessageAdapter(Context context) {
+        mContext = context;
+        mDataList = new ArrayList<>();
+    }
 
     public BaseHorizontalListMessageAdapter(Context context, List<T> dataList) {
         mContext = context;

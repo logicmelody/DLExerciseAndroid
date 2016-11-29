@@ -30,9 +30,6 @@ import com.dl.dlexerciseandroid.datastructure.message.MessageFactory;
 import com.dl.dlexerciseandroid.ui.chat.chatlist.ChatListAdapter;
 import com.dl.dlexerciseandroid.ui.chat.chatlist.MessageItemDecoration;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by logicmelody on 2016/6/27.
  */
@@ -77,8 +74,6 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
     private ImageView mListMessageButton;
     private Button mSendButton;
 
-    private List<Message> mDataList = new ArrayList<>();
-
 
     @Override
     public void onAttach(Context context) {
@@ -116,7 +111,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
 
     private void setupChatList() {
         mLinearLayoutManager = new LinearLayoutManager(mContext);
-        mChatListAdapter = new ChatListAdapter(mContext, mDataList);
+        mChatListAdapter = new ChatListAdapter(mContext);
 
         // 加這一行，可以讓訊息從list的底部開始塞
         // 可以讓訊息很少的時候，從下面開始塞訊息
@@ -196,7 +191,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
     }
 
     private void setChatListData(Cursor data) {
-        mDataList.clear();
+        mChatListAdapter.clear();
 
         while (data.moveToNext()) {
             long id = data.getLong(ID);
@@ -205,7 +200,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
             int viewType = data.getInt(VIEW_TYPE);
             long time = data.getLong(TIME);
 
-            mDataList.add(MessageFactory.createMessage(owner, text, viewType, time));
+            mChatListAdapter.add(MessageFactory.createMessage(owner, text, viewType, time));
         }
 
         /**
@@ -217,12 +212,12 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
         mChatListAdapter.notifyDataSetChanged();
         scrollChatListToBottom();
 
-        mNoMessageText.setVisibility(mDataList.size() == 0 ? View.VISIBLE : View.GONE);
+        mNoMessageText.setVisibility(mChatListAdapter.getDataListSize() == 0 ? View.VISIBLE : View.GONE);
     }
 
     private void scrollChatListToBottom() {
         mChatList.setVerticalScrollBarEnabled(false);
-        mChatList.scrollToPosition(mDataList.size() - 1);
+        mChatList.scrollToPosition(mChatListAdapter.getDataListSize() - 1);
         mChatList.setVerticalScrollBarEnabled(true);
     }
 
