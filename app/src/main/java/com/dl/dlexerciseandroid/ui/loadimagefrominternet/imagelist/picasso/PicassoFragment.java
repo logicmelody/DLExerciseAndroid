@@ -16,8 +16,8 @@ public class PicassoFragment extends ImageListFragment {
 
 
     @Override
-    protected ImageListAdapter getImageListAdapter(Context context, List<String> imageDataList) {
-        return new PicassoAdapter(context, imageDataList);
+    protected ImageListAdapter getImageListAdapter(Context context) {
+        return new PicassoAdapter(context);
     }
 
     @Override

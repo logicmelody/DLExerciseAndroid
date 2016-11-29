@@ -33,8 +33,6 @@ public class LoadImageFromInternetFragment extends Fragment implements ViewPager
 
     private TabLayout mImageListTabLayout;
 
-    private List<Fragment> mFragmentList = new ArrayList<>();
-
 
     @Override
     public void onAttach(Context context) {
@@ -56,7 +54,6 @@ public class LoadImageFromInternetFragment extends Fragment implements ViewPager
 
     private void initialize() {
         findViews();
-        setupFragments();
         setupViewPager();
         setupTabLayout();
     }
@@ -64,11 +61,6 @@ public class LoadImageFromInternetFragment extends Fragment implements ViewPager
     private void findViews() {
         mImageListTabLayout = (TabLayout) getView().findViewById(R.id.tab_layout_load_image_from_internet_image_list);
         mImageListViewPager = (ViewPager) getView().findViewById(R.id.view_pager_load_image_from_internet_image_list);
-    }
-
-    private void setupFragments() {
-        mFragmentList.add(Utils.getFragment(getChildFragmentManager(), PicassoFragment.class, PicassoFragment.TAG));
-        mFragmentList.add(Utils.getFragment(getChildFragmentManager(), LruFragment.class, LruFragment.TAG));
     }
 
     private void setupViewPager() {
@@ -79,7 +71,8 @@ public class LoadImageFromInternetFragment extends Fragment implements ViewPager
 
         // 這邊第一個參數如果用getFragmentManager()會有問題，因為我們是在DoItLaterFragment中的ViewPager再加Fragment
         // 所以應該要使用getChildFragmentManager()
-        mImageListPagerAdapter = new ImageListPagerAdapter(getChildFragmentManager(), mFragmentList, tabTitleList);
+        mImageListPagerAdapter = new ImageListPagerAdapter(getChildFragmentManager(), tabTitleList);
+        setFragments();
 
         mImageListViewPager.setAdapter(mImageListPagerAdapter);
 
@@ -87,6 +80,13 @@ public class LoadImageFromInternetFragment extends Fragment implements ViewPager
         // 設定這個值可以讓animation順暢，不用再花時間重新new一個Fragment
         mImageListViewPager.setOffscreenPageLimit(2);
         mImageListViewPager.setOnPageChangeListener(this);
+    }
+
+    private void setFragments() {
+        mImageListPagerAdapter.add(Utils.getFragment(getChildFragmentManager(),
+                PicassoFragment.class, PicassoFragment.TAG));
+        mImageListPagerAdapter.add(Utils.getFragment(getChildFragmentManager(),
+                LruFragment.class, LruFragment.TAG));
     }
 
     private void setupTabLayout() {

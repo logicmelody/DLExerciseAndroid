@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.dl.dlexerciseandroid.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +33,11 @@ public class ImageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     protected List<String> mImageUriList;
 
 
+    public ImageListAdapter(Context context) {
+        mContext = context;
+        mImageUriList = new ArrayList<>();
+    }
+
     public ImageListAdapter(Context context, List<String> imageUriList) {
         mContext = context;
         mImageUriList = imageUriList;
@@ -51,5 +57,9 @@ public class ImageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public int getItemCount() {
         return mImageUriList.size();
+    }
+
+    public void add(String uri) {
+        mImageUriList.add(uri);
     }
 }

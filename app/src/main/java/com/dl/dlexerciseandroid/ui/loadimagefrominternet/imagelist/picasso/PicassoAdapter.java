@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class PicassoAdapter extends ImageListAdapter {
 
-    public PicassoAdapter(Context context, List<String> imageUriList) {
-        super(context, imageUriList);
+    public PicassoAdapter(Context context) {
+        super(context);
     }
 
     @Override

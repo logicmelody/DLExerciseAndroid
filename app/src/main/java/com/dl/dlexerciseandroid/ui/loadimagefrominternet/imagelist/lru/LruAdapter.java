@@ -18,8 +18,8 @@ public class LruAdapter extends ImageListAdapter {
     private LruCache<String, Bitmap> mMemoryCache;
 
 
-    public LruAdapter(Context context, List<String> imageUriList, LruCache<String, Bitmap> memoryCache) {
-        super(context, imageUriList);
+    public LruAdapter(Context context, LruCache<String, Bitmap> memoryCache) {
+        super(context);
         mMemoryCache = memoryCache;
     }
 

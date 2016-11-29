@@ -82,8 +82,8 @@ public class LruFragment extends ImageListFragment {
     }
 
     @Override
-    protected ImageListAdapter getImageListAdapter(Context context, List<String> imageDataList) {
-        return new LruAdapter(context, imageDataList, mMemoryCache);
+    protected ImageListAdapter getImageListAdapter(Context context) {
+        return new LruAdapter(context, mMemoryCache);
     }
 
     @Override

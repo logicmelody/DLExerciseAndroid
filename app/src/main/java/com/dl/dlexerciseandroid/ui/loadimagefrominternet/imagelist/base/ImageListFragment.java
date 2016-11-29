@@ -20,15 +20,13 @@ import java.util.List;
  */
 abstract public class ImageListFragment extends Fragment {
 
-    protected abstract ImageListAdapter getImageListAdapter(Context context, List<String> imageDataList);
+    protected abstract ImageListAdapter getImageListAdapter(Context context);
     protected abstract String getImageUri();
 
     private Context mContext;
 
     private RecyclerView mImageList;
     private ImageListAdapter mImageListAdapter;
-
-    private List<String> mImageDataList = new ArrayList<>();
 
 
     @Override
@@ -51,7 +49,6 @@ abstract public class ImageListFragment extends Fragment {
 
     private void initialize() {
         findViews();
-        setImageData();
         setupImageList();
     }
 
@@ -59,16 +56,17 @@ abstract public class ImageListFragment extends Fragment {
         mImageList = (RecyclerView) getView().findViewById(R.id.recycler_view_image_list);
     }
 
-    private void setImageData() {
-        for (int i = 0 ; i < 100 ; i++) {
-            mImageDataList.add(getImageUri());
-        }
-    }
-
     private void setupImageList() {
-        mImageListAdapter = getImageListAdapter(mContext, mImageDataList);
+        mImageListAdapter = getImageListAdapter(mContext);
+        setImageData();
 
         mImageList.setLayoutManager(new LinearLayoutManager(mContext));
         mImageList.setAdapter(mImageListAdapter);
+    }
+
+    private void setImageData() {
+        for (int i = 0 ; i < 100 ; i++) {
+            mImageListAdapter.add(getImageUri());
+        }
     }
 }
