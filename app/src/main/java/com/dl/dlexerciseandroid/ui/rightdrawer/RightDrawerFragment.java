@@ -13,6 +13,7 @@ import android.widget.Button;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.ui.coordinatorlayout.CoordinatorLayoutActivity;
 import com.dl.dlexerciseandroid.ui.espressotest.EspressoTestActivity;
+import com.dl.dlexerciseandroid.ui.mininavigationdrawer.MiniNavigationDrawerActivity;
 import com.dl.dlexerciseandroid.ui.moviesearcher.MovieSearcherActivity;
 
 /**
@@ -32,6 +33,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
     private Button mCoordinatorLayoutButton;
     private Button mMovieSearcherButton;
     private Button mEspressoTestButton;
+    private Button mMiniNavigationDrawerButton;
 
 
     @Override
@@ -62,12 +64,14 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
         mCoordinatorLayoutButton = (Button) getView().findViewById(R.id.button_right_drawer_coordinator_layout);
         mMovieSearcherButton = (Button) getView().findViewById(R.id.button_right_drawer_movie_searcher);
         mEspressoTestButton = (Button) getView().findViewById(R.id.button_right_drawer_espresso_test);
+        mMiniNavigationDrawerButton = (Button) getView().findViewById(R.id.button_right_drawer_mini_navigation_drawer);
     }
 
     private void setupViews() {
         mCoordinatorLayoutButton.setOnClickListener(this);
         mMovieSearcherButton.setOnClickListener(this);
         mEspressoTestButton.setOnClickListener(this);
+        mMiniNavigationDrawerButton.setOnClickListener(this);
     }
 
     @Override
@@ -75,21 +79,21 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
         switch (v.getId()) {
             case R.id.button_right_drawer_coordinator_layout:
                 startActivity(new Intent(mContext, CoordinatorLayoutActivity.class));
-                mOnRightDrawerListener.onCloseRightDrawer();
-
                 break;
 
             case R.id.button_right_drawer_movie_searcher:
                 startActivity(new Intent(mContext, MovieSearcherActivity.class));
-                mOnRightDrawerListener.onCloseRightDrawer();
-
                 break;
 
             case R.id.button_right_drawer_espresso_test:
                 startActivity(new Intent(mContext, EspressoTestActivity.class));
-                mOnRightDrawerListener.onCloseRightDrawer();
+                break;
 
+            case R.id.button_right_drawer_mini_navigation_drawer:
+                startActivity(new Intent(mContext, MiniNavigationDrawerActivity.class));
                 break;
         }
+
+        mOnRightDrawerListener.onCloseRightDrawer();
     }
 }

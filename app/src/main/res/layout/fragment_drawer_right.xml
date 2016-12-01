@@ -23,4 +23,10 @@
         android:layout_height="wrap_content"
         android:text="@string/all_espresso_test"/>
 
+    <Button
+        android:id="@+id/button_right_drawer_mini_navigation_drawer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/all_mini_navigation_drawer"/>
+
 </LinearLayout>
