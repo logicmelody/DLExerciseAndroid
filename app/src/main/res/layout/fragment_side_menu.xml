@@ -2,6 +2,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/all_gray">
+    android:background="@color/background_side_menu">
+
+    <ImageView
+        android:id="@+id/image_view_mini_navigation_drawer_side_menu_yellow_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/width_mini_navigation_drawer_side_menu"
+        android:background="@drawable/background_mini_navigation_drawer_side_menu_yellow_button"/>
+
+    <ImageView
+        android:id="@+id/image_view_mini_navigation_drawer_side_menu_blue_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/width_mini_navigation_drawer_side_menu"
+        android:layout_below="@+id/image_view_mini_navigation_drawer_side_menu_yellow_button"
+        android:background="@drawable/background_mini_navigation_drawer_side_menu_blue_button"/>
+
+    <ImageView
+        android:id="@+id/image_view_mini_navigation_drawer_side_menu_white_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/width_mini_navigation_drawer_side_menu"
+        android:layout_below="@+id/image_view_mini_navigation_drawer_side_menu_blue_button"
+        android:background="@drawable/background_mini_navigation_drawer_side_menu_white_button"/>
+
+    <ImageView
+        android:id="@+id/image_view_mini_navigation_drawer_side_menu_setting_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_bottom_mini_navigation_drawer_side_menu_setting_button"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_settings"
+        android:background="?selectableItemBackgroundBorderless"/>
 
 </RelativeLayout>

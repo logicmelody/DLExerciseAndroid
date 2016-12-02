@@ -100,5 +100,6 @@
 
     <!-- Mini navigation drawer -->
     <dimen name="width_mini_navigation_drawer_side_menu">60dp</dimen>
+    <dimen name="margin_bottom_mini_navigation_drawer_side_menu_setting_button">10dp</dimen>
 
 </resources>

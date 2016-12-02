@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.dl.dlexerciseandroid.R;
 
@@ -14,11 +15,16 @@ import com.dl.dlexerciseandroid.R;
  * Created by dannylin on 2016/12/2.
  */
 
-public class SideMenuFragment extends Fragment {
+public class SideMenuFragment extends Fragment implements View.OnClickListener {
 
     public static final String TAG = SideMenuFragment.class.getName();
 
     private Context mContext;
+
+    private ImageView mYellowButton;
+    private ImageView mBlueButton;
+    private ImageView mWhiteButton;
+    private ImageView mSettingButton;
 
 
     @Override
@@ -40,6 +46,38 @@ public class SideMenuFragment extends Fragment {
     }
 
     private void initialize() {
+        findViews();
+        setupViews();
+    }
 
+    private void findViews() {
+        mYellowButton = (ImageView) getView().findViewById(R.id.image_view_mini_navigation_drawer_side_menu_yellow_button);
+        mBlueButton = (ImageView) getView().findViewById(R.id.image_view_mini_navigation_drawer_side_menu_blue_button);
+        mWhiteButton = (ImageView) getView().findViewById(R.id.image_view_mini_navigation_drawer_side_menu_white_button);
+        mSettingButton = (ImageView) getView().findViewById(R.id.image_view_mini_navigation_drawer_side_menu_setting_button);
+    }
+
+    private void setupViews() {
+        mYellowButton.setOnClickListener(this);
+        mBlueButton.setOnClickListener(this);
+        mWhiteButton.setOnClickListener(this);
+        mSettingButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.image_view_mini_navigation_drawer_side_menu_yellow_button:
+                break;
+
+            case R.id.image_view_mini_navigation_drawer_side_menu_blue_button:
+                break;
+
+            case R.id.image_view_mini_navigation_drawer_side_menu_white_button:
+                break;
+
+            case R.id.image_view_mini_navigation_drawer_side_menu_setting_button:
+                break;
+        }
     }
 }

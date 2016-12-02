@@ -60,4 +60,7 @@
     <!-- Chat -->
     <color name="background_chat_list">#FFE1E2E7</color>
 
+    <!-- Mini navigation drawer -->
+    <color name="background_side_menu">#FF1387A9</color>
+
 </resources>

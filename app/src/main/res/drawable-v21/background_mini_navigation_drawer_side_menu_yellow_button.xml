@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?colorControlHighlight">
+
+    <item>
+        <shape android:shape="rectangle">
+            <!-- 如果想要有ripple的效果，一定要設定solid，就算background的顏色跟parent的background一樣，還是需要設定solid -->
+            <solid android:color="@color/all_yellow" />
+        </shape>
+    </item>
+
+</ripple>
