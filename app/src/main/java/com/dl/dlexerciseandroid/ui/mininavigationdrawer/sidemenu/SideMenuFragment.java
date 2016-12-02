@@ -19,18 +19,31 @@ public class SideMenuFragment extends Fragment implements View.OnClickListener {
 
     public static final String TAG = SideMenuFragment.class.getName();
 
+    public interface OnSideMenuListener {
+        void onClickSideMenuTab(int tab);
+    }
+
+    public static final class TabType {
+        public static final int YELLOW = 0;
+        public static final int BLUE = 1;
+        public static final int WHITE = 2;
+    }
+
     private Context mContext;
 
-    private ImageView mYellowButton;
-    private ImageView mBlueButton;
-    private ImageView mWhiteButton;
+    private ImageView mYellowTab;
+    private ImageView mBlueTab;
+    private ImageView mWhiteTab;
     private ImageView mSettingButton;
+
+    private OnSideMenuListener mOnSideMenuListener;
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
+        mOnSideMenuListener = (OnSideMenuListener) context;
     }
 
     @Nullable
@@ -51,31 +64,36 @@ public class SideMenuFragment extends Fragment implements View.OnClickListener {
     }
 
     private void findViews() {
-        mYellowButton = (ImageView) getView().findViewById(R.id.image_view_mini_navigation_drawer_side_menu_yellow_button);
-        mBlueButton = (ImageView) getView().findViewById(R.id.image_view_mini_navigation_drawer_side_menu_blue_button);
-        mWhiteButton = (ImageView) getView().findViewById(R.id.image_view_mini_navigation_drawer_side_menu_white_button);
+        mYellowTab = (ImageView) getView().findViewById(R.id.image_view_mini_navigation_drawer_side_menu_yellow_tab);
+        mBlueTab = (ImageView) getView().findViewById(R.id.image_view_mini_navigation_drawer_side_menu_blue_tab);
+        mWhiteTab = (ImageView) getView().findViewById(R.id.image_view_mini_navigation_drawer_side_menu_white_tab);
         mSettingButton = (ImageView) getView().findViewById(R.id.image_view_mini_navigation_drawer_side_menu_setting_button);
     }
 
     private void setupViews() {
-        mYellowButton.setOnClickListener(this);
-        mBlueButton.setOnClickListener(this);
-        mWhiteButton.setOnClickListener(this);
+        mYellowTab.setOnClickListener(this);
+        mBlueTab.setOnClickListener(this);
+        mWhiteTab.setOnClickListener(this);
         mSettingButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.image_view_mini_navigation_drawer_side_menu_yellow_button:
+            // Tabs
+            case R.id.image_view_mini_navigation_drawer_side_menu_yellow_tab:
+                mOnSideMenuListener.onClickSideMenuTab(TabType.YELLOW);
                 break;
 
-            case R.id.image_view_mini_navigation_drawer_side_menu_blue_button:
+            case R.id.image_view_mini_navigation_drawer_side_menu_blue_tab:
+                mOnSideMenuListener.onClickSideMenuTab(TabType.BLUE);
                 break;
 
-            case R.id.image_view_mini_navigation_drawer_side_menu_white_button:
+            case R.id.image_view_mini_navigation_drawer_side_menu_white_tab:
+                mOnSideMenuListener.onClickSideMenuTab(TabType.WHITE);
                 break;
 
+            // Button
             case R.id.image_view_mini_navigation_drawer_side_menu_setting_button:
                 break;
         }
