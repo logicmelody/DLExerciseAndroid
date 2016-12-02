@@ -135,7 +135,7 @@
         <activity android:name=".ui.musicplayer.musiccontroller.MusicControllerActivity" />
         <activity android:name=".ui.moviesearcher.MovieSearcherActivity" />
         <activity android:name=".ui.espressotest.EspressoTestActivity" />
-        <activity android:name=".ui.mininavigationdrawer.MiniNavigationDrawerActivity" />
+        <activity android:name=".ui.mininavigationdrawer.main.MiniNavigationDrawerActivity" />
 
         <!--
         用receiver沒有辦法收到來自別的app的shared intent

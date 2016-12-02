@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<!-- 想要實作mini navigation drawer，可以使用這個Google提供的widget -->
+<android.support.v4.widget.SlidingPaneLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mini Navigation Drawer"/>
+    <!--
+    If the screen width is more than the sum of the two fragments width then the two fragments are visible at the same time,
+    otherwise we have to slide left and right to enable one of them.
 
-</RelativeLayout>
+    兩個container的width可以控制是否有滑出menu的效果：
+
+    Side menu width + content width < screen width: 兩個部分會同時顯示在screen上
+    e.g. Side menu width = 200dp and content width = 100dp
+
+    Side menu width + content width > screen width: 會顯示content，side menu需要從左邊滑出來
+    e.g. Side menu width = 60dp and content width = 800dp
+    -->
+
+    <!-- Side menu container -->
+    <FrameLayout
+        android:id="@+id/view_group_mini_navigation_drawer_side_menu_container"
+        android:layout_width="@dimen/width_mini_navigation_drawer_side_menu"
+        android:layout_height="match_parent" />
+
+    <!-- Content container -->
+    <FrameLayout
+        android:id="@+id/view_group_mini_navigation_drawer_content_container"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+</android.support.v4.widget.SlidingPaneLayout>

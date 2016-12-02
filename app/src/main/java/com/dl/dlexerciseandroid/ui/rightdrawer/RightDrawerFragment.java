@@ -13,7 +13,7 @@ import android.widget.Button;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.ui.coordinatorlayout.CoordinatorLayoutActivity;
 import com.dl.dlexerciseandroid.ui.espressotest.EspressoTestActivity;
-import com.dl.dlexerciseandroid.ui.mininavigationdrawer.MiniNavigationDrawerActivity;
+import com.dl.dlexerciseandroid.ui.mininavigationdrawer.main.MiniNavigationDrawerActivity;
 import com.dl.dlexerciseandroid.ui.moviesearcher.MovieSearcherActivity;
 
 /**

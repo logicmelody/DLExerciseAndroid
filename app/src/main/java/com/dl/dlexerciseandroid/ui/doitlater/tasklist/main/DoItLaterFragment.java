@@ -16,6 +16,7 @@ import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.dialog.activity.AddTaskActivity;
 import com.dl.dlexerciseandroid.ui.doitlater.tasklist.later.LaterTaskFragment;
 import com.dl.dlexerciseandroid.ui.doitlater.tasklist.normal.NormalTaskFragment;
+import com.dl.dlexerciseandroid.utility.utils.FragmentUtils;
 import com.dl.dlexerciseandroid.utility.utils.Utils;
 
 import java.util.ArrayList;
@@ -76,9 +77,9 @@ public class DoItLaterFragment extends Fragment implements View.OnClickListener,
     }
 
     private void setFragments() {
-        mDoItLaterPagerAdapter.add(Utils.getFragment(getChildFragmentManager(),
+        mDoItLaterPagerAdapter.add(FragmentUtils.getFragment(getChildFragmentManager(),
                 NormalTaskFragment.class, NormalTaskFragment.TAG));
-        mDoItLaterPagerAdapter.add(Utils.getFragment(getChildFragmentManager(),
+        mDoItLaterPagerAdapter.add(FragmentUtils.getFragment(getChildFragmentManager(),
                 LaterTaskFragment.class, LaterTaskFragment.TAG));
     }
 

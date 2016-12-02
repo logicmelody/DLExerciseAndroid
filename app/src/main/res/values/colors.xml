@@ -16,6 +16,8 @@
     <color name="all_black">#FF000000</color>
     <color name="all_white">#FFFFFFFF</color>
     <color name="all_gray">#FF868788</color>
+    <color name="all_yellow">#FFFFFF00</color>
+    <color name="all_blue">#FF3386FE</color>
 
     <!-- Left drawer -->
     <color name="background_main_left_drawer">#FFFFFFFF</color>

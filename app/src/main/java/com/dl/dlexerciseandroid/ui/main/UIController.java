@@ -39,6 +39,7 @@ import com.dl.dlexerciseandroid.ui.spring.ConsumingRestfulWebServiceFragment;
 import com.dl.dlexerciseandroid.ui.test.TestFragment;
 import com.dl.dlexerciseandroid.utility.utils.FbUtils;
 import com.dl.dlexerciseandroid.ui.doitlater.tasklist.main.DoItLaterFragment;
+import com.dl.dlexerciseandroid.utility.utils.FragmentUtils;
 import com.dl.dlexerciseandroid.utility.utils.Utils;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -173,8 +174,8 @@ public class UIController implements View.OnClickListener {
             // e.g. MusicPlayerFragment
             //
             // 所以這邊我們可以直接拿Fragment Tag來new出一個Class object
-            addFragmentTo((Class<? extends Fragment>) Class.forName(mCurrentFragmentClassName),
-                    R.id.frame_layout_main_container, mCurrentFragmentClassName);
+            FragmentUtils.addFragmentTo(mFragmentManager, (Class<? extends Fragment>) Class.forName(mCurrentFragmentClassName),
+                                        R.id.frame_layout_main_container, mCurrentFragmentClassName);
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -287,38 +288,14 @@ public class UIController implements View.OnClickListener {
     }
 
     private void setupRightDrawer() {
-        addFragmentTo(RightDrawerFragment.class, R.id.frame_layout_main_right_side_drawer, RightDrawerFragment.TAG);
-    }
-
-    private void addFragmentTo(Class<? extends Fragment> fragmentClass, int containerId, String fragmentTag) {
-        FragmentTransaction transaction = mFragmentManager.beginTransaction();
-        Fragment fragment = mFragmentManager.findFragmentByTag(fragmentTag);
-
-        if (fragment == null) {
-            try {
-                fragment = fragmentClass.newInstance();
-                transaction.add(containerId, fragment, fragmentTag);
-
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-
-        transaction.commit();
+        FragmentUtils.addFragmentTo(mFragmentManager, RightDrawerFragment.class, R.id.frame_layout_main_right_side_drawer,
+                                    RightDrawerFragment.TAG);
     }
 
     private void replaceFragmentTo(Class<? extends Fragment> fragmentClass, int containerId, String fragmentTag) {
-        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-
-        Fragment fragment = Utils.getFragment(mFragmentManager, fragmentClass, fragmentTag);
-        fragmentTransaction.replace(containerId, fragment, fragmentTag);
-
-        //mCurrentFragment = fragment;
         mCurrentFragmentClassName = fragmentTag;
 
-        fragmentTransaction.commit();
+        FragmentUtils.replaceFragmentTo(mFragmentManager, fragmentClass, containerId, fragmentTag);
     }
 
     private boolean isLeftDrawerOpened() {

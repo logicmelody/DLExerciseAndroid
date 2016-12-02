@@ -98,4 +98,7 @@
     <dimen name="height_chat_list_message_horizontal_list">200dp</dimen>
     <dimen name="width_chat_list_message_number">100dp</dimen>
 
+    <!-- Mini navigation drawer -->
+    <dimen name="width_mini_navigation_drawer_side_menu">60dp</dimen>
+
 </resources>

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.ui.loadimagefrominternet.imagelist.lru.LruFragment;
 import com.dl.dlexerciseandroid.ui.loadimagefrominternet.imagelist.picasso.PicassoFragment;
+import com.dl.dlexerciseandroid.utility.utils.FragmentUtils;
 import com.dl.dlexerciseandroid.utility.utils.Utils;
 
 import java.util.ArrayList;
@@ -83,9 +84,9 @@ public class LoadImageFromInternetFragment extends Fragment implements ViewPager
     }
 
     private void setFragments() {
-        mImageListPagerAdapter.add(Utils.getFragment(getChildFragmentManager(),
+        mImageListPagerAdapter.add(FragmentUtils.getFragment(getChildFragmentManager(),
                 PicassoFragment.class, PicassoFragment.TAG));
-        mImageListPagerAdapter.add(Utils.getFragment(getChildFragmentManager(),
+        mImageListPagerAdapter.add(FragmentUtils.getFragment(getChildFragmentManager(),
                 LruFragment.class, LruFragment.TAG));
     }
 
