@@ -45,6 +45,8 @@ public class FragmentUtils {
      * 如果之前的fragment已經有被add到activity，而且又再換回來，那本來那個fragment的狀態可以被保留
      *
      * 之前fragment的狀態可以被保留
+     *
+     * Reference: https://yrom.net/blog/2013/03/10/fragment-switch-not-restart/
      */
     public static void hideAndShowFragmentTo(FragmentManager fm,
                                              Class<? extends Fragment> fragmentClassToHide, Class<? extends Fragment> fragmentClassToShow,
