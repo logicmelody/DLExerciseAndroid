@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -40,7 +39,6 @@ import com.dl.dlexerciseandroid.ui.test.TestFragment;
 import com.dl.dlexerciseandroid.utility.utils.FbUtils;
 import com.dl.dlexerciseandroid.ui.doitlater.tasklist.main.DoItLaterFragment;
 import com.dl.dlexerciseandroid.utility.utils.FragmentUtils;
-import com.dl.dlexerciseandroid.utility.utils.Utils;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -175,7 +173,7 @@ public class UIController implements View.OnClickListener {
             //
             // 所以這邊我們可以直接拿Fragment Tag來new出一個Class object
             FragmentUtils.addFragmentTo(mFragmentManager, (Class<? extends Fragment>) Class.forName(mCurrentFragmentClassName),
-                                        R.id.frame_layout_main_container, mCurrentFragmentClassName);
+                                        mCurrentFragmentClassName, R.id.frame_layout_main_container);
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -217,64 +215,59 @@ public class UIController implements View.OnClickListener {
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_item_left_drawer_overview:
-                        replaceFragmentTo(OverviewFragment.class, R.id.frame_layout_main_container, OverviewFragment.TAG);
+                        replaceContentFragment(OverviewFragment.class, OverviewFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_consuming_restful_web_service:
-                        replaceFragmentTo(ConsumingRestfulWebServiceFragment.class, R.id.frame_layout_main_container,
-                                          ConsumingRestfulWebServiceFragment.TAG);
+                        replaceContentFragment(ConsumingRestfulWebServiceFragment.class, ConsumingRestfulWebServiceFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_facebook:
-                        replaceFragmentTo(FacebookFragment.class, R.id.frame_layout_main_container, FacebookFragment.TAG);
+                        replaceContentFragment(FacebookFragment.class, FacebookFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_do_it_later:
-                        replaceFragmentTo(DoItLaterFragment.class, R.id.frame_layout_main_container, DoItLaterFragment.TAG);
+                        replaceContentFragment(DoItLaterFragment.class, DoItLaterFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_intent:
-                        replaceFragmentTo(IntentFragment.class, R.id.frame_layout_main_container, IntentFragment.TAG);
+                        replaceContentFragment(IntentFragment.class, IntentFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_music_player:
-                        replaceFragmentTo(MusicPlayerFragment.class, R.id.frame_layout_main_container, MusicPlayerFragment.TAG);
+                        replaceContentFragment(MusicPlayerFragment.class, MusicPlayerFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_dl_sdk:
-                        replaceFragmentTo(DLSdkFragment.class, R.id.frame_layout_main_container, DLSdkFragment.TAG);
+                        replaceContentFragment(DLSdkFragment.class, DLSdkFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_firebase:
-                        replaceFragmentTo(FirebaseFragment.class, R.id.frame_layout_main_container, FirebaseFragment.TAG);
+                        replaceContentFragment(FirebaseFragment.class, FirebaseFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_bitmap:
-                        replaceFragmentTo(BitmapFragment.class, R.id.frame_layout_main_container, BitmapFragment.TAG);
+                        replaceContentFragment(BitmapFragment.class, BitmapFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_load_image_from_internet:
-                        replaceFragmentTo(LoadImageFromInternetFragment.class,
-                                          R.id.frame_layout_main_container, LoadImageFromInternetFragment.TAG);
+                        replaceContentFragment(LoadImageFromInternetFragment.class, LoadImageFromInternetFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_customized_view:
-                        replaceFragmentTo(CustomizedViewFragment.class,
-                                R.id.frame_layout_main_container, CustomizedViewFragment.TAG);
+                        replaceContentFragment(CustomizedViewFragment.class, CustomizedViewFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_file:
-                        replaceFragmentTo(FileFragment.class,
-                                R.id.frame_layout_main_container, FileFragment.TAG);
+                        replaceContentFragment(FileFragment.class, FileFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_chat:
-                        replaceFragmentTo(ChatFragment.class,
-                                R.id.frame_layout_main_container, ChatFragment.TAG);
+                        replaceContentFragment(ChatFragment.class, ChatFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:
-                        replaceFragmentTo(TestFragment.class, R.id.frame_layout_main_container, TestFragment.TAG);
+                        replaceContentFragment(TestFragment.class, TestFragment.TAG);
                         break;
                 }
 
@@ -288,14 +281,21 @@ public class UIController implements View.OnClickListener {
     }
 
     private void setupRightDrawer() {
-        FragmentUtils.addFragmentTo(mFragmentManager, RightDrawerFragment.class, R.id.frame_layout_main_right_side_drawer,
-                                    RightDrawerFragment.TAG);
+        FragmentUtils.addFragmentTo(mFragmentManager, RightDrawerFragment.class, RightDrawerFragment.TAG,
+                                    R.id.frame_layout_main_right_side_drawer);
     }
 
-    private void replaceFragmentTo(Class<? extends Fragment> fragmentClass, int containerId, String fragmentTag) {
-        mCurrentFragmentClassName = fragmentTag;
+    public void replaceContentFragment(Class<? extends Fragment> fragmentClassToShow, String fragmentToShowTag) {
+        try {
+            FragmentUtils.hideAndShowFragmentTo(mFragmentManager,
+                                                (Class<? extends Fragment>) Class.forName(mCurrentFragmentClassName), fragmentClassToShow,
+                                                mCurrentFragmentClassName, fragmentToShowTag, R.id.frame_layout_main_container);
 
-        FragmentUtils.replaceFragmentTo(mFragmentManager, fragmentClass, containerId, fragmentTag);
+            mCurrentFragmentClassName = fragmentToShowTag;
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private boolean isLeftDrawerOpened() {

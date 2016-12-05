@@ -28,25 +28,50 @@ public class FragmentUtils {
     }
 
     public static void addFragmentTo(FragmentManager fm, Class<? extends Fragment> fragmentClass,
-                                     int containerId, String fragmentTag) {
+                                     String fragmentTag, int containerId) {
         FragmentTransaction transaction = fm.beginTransaction();
-        Fragment fragment = fm.findFragmentByTag(fragmentTag);
+        Fragment fragment = getFragment(fm, fragmentClass, fragmentTag);
 
-        if (fragment == null) {
-            try {
-                fragment = fragmentClass.newInstance();
-                transaction.add(containerId, fragment, fragmentTag);
-
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
+        // 在add fragment的時候，要記得做檢查，避免重複add導致crash
+        if (!fragment.isAdded()) {
+            transaction.add(containerId, fragment, fragmentTag);
         }
 
         transaction.commit();
     }
 
+    /**
+     * 這個method會將之前的fragment給hide起來，然後add或是show新的fragment，
+     * 如果之前的fragment已經有被add到activity，而且又再換回來，那本來那個fragment的狀態可以被保留
+     *
+     * 之前fragment的狀態可以被保留
+     */
+    public static void hideAndShowFragmentTo(FragmentManager fm,
+                                             Class<? extends Fragment> fragmentClassToHide, Class<? extends Fragment> fragmentClassToShow,
+                                             String fragmentToHideTag, String fragmentToShowTag, int containerId) {
+        FragmentTransaction transaction = fm.beginTransaction();
+        Fragment fragmentToHide = getFragment(fm, fragmentClassToHide, fragmentToHideTag);
+        Fragment fragmentToShow = getFragment(fm, fragmentClassToShow, fragmentToShowTag);
+
+        if (fragmentToHide.isAdded()) {
+            transaction.hide(fragmentToHide);
+        }
+
+        if (fragmentToShow.isAdded()) {
+            transaction.show(fragmentToShow);
+
+        } else {
+            transaction.add(containerId, fragmentToShow, fragmentToShowTag);
+        }
+
+        transaction.commit();
+    }
+
+    /**
+     * 這個method會將之前的fragment給remove掉，然後replace上新的fragment，但如果之前的fragment再換回來的話，沒有辦法保留之前fragment的狀態
+     *
+     * 之前fragment的狀態不會被保留
+     */
     public static void replaceFragmentTo(FragmentManager fm, Class<? extends Fragment> fragmentClass,
                                          int containerId, String fragmentTag) {
         FragmentTransaction fragmentTransaction = fm.beginTransaction();

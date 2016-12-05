@@ -34,12 +34,12 @@ public class MiniNavigationDrawerActivity extends AppCompatActivity implements S
     private void setupFragments() {
         // 將SideMenuFragment放到左邊的container
         FragmentUtils.addFragmentTo(mFragmentManager, SideMenuFragment.class,
-                R.id.view_group_mini_navigation_drawer_side_menu_container, SideMenuFragment.TAG);
+                SideMenuFragment.TAG, R.id.view_group_mini_navigation_drawer_side_menu_container);
 
         // 將YellowFragment放到右邊的container
         // Note: 初始先暫時放YellowFragment，之後如果要處理旋轉狀況的話，需要紀錄fragment的tag
         FragmentUtils.addFragmentTo(mFragmentManager, YellowFragment.class,
-                R.id.view_group_mini_navigation_drawer_content_container, YellowFragment.TAG);
+                YellowFragment.TAG, R.id.view_group_mini_navigation_drawer_content_container);
     }
 
     @Override
