@@ -172,8 +172,11 @@ public class UIController implements View.OnClickListener {
             // e.g. MusicPlayerFragment
             //
             // 所以這邊我們可以直接拿Fragment Tag來new出一個Class object
-            FragmentUtils.addFragmentTo(mFragmentManager, (Class<? extends Fragment>) Class.forName(mCurrentFragmentClassName),
-                                        mCurrentFragmentClassName, R.id.frame_layout_main_container);
+            Fragment initFragment = FragmentUtils.getFragment(mFragmentManager,
+                    (Class<? extends Fragment>) Class.forName(mCurrentFragmentClassName),
+                    mCurrentFragmentClassName);
+
+            FragmentUtils.addFragmentTo(mFragmentManager, initFragment, mCurrentFragmentClassName, R.id.frame_layout_main_container);
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -281,15 +284,25 @@ public class UIController implements View.OnClickListener {
     }
 
     private void setupRightDrawer() {
-        FragmentUtils.addFragmentTo(mFragmentManager, RightDrawerFragment.class, RightDrawerFragment.TAG,
-                                    R.id.frame_layout_main_right_side_drawer);
+        Fragment rightDrawerFragment = FragmentUtils.getFragment(mFragmentManager,
+                RightDrawerFragment.class,
+                RightDrawerFragment.TAG);
+
+        FragmentUtils.addFragmentTo(mFragmentManager, rightDrawerFragment, RightDrawerFragment.TAG,
+                R.id.frame_layout_main_right_side_drawer);
     }
 
     public void replaceContentFragment(Class<? extends Fragment> fragmentClassToShow, String fragmentToShowTag) {
         try {
+            Fragment fragmentToHide = FragmentUtils.getFragment(mFragmentManager,
+                    (Class<? extends Fragment>) Class.forName(mCurrentFragmentClassName),
+                    mCurrentFragmentClassName);
+
+            Fragment fragmentToShow = FragmentUtils.getFragment(mFragmentManager, fragmentClassToShow, fragmentToShowTag);
+
             FragmentUtils.hideAndShowFragmentTo(mFragmentManager,
-                                                (Class<? extends Fragment>) Class.forName(mCurrentFragmentClassName), fragmentClassToShow,
-                                                mCurrentFragmentClassName, fragmentToShowTag, R.id.frame_layout_main_container);
+                    fragmentToHide, fragmentToShow,
+                    fragmentToShowTag, R.id.frame_layout_main_container);
 
             mCurrentFragmentClassName = fragmentToShowTag;
 

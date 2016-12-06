@@ -27,10 +27,8 @@ public class FragmentUtils {
         return fragment;
     }
 
-    public static void addFragmentTo(FragmentManager fm, Class<? extends Fragment> fragmentClass,
-                                     String fragmentTag, int containerId) {
+    public static void addFragmentTo(FragmentManager fm, Fragment fragment, String fragmentTag, int containerId) {
         FragmentTransaction transaction = fm.beginTransaction();
-        Fragment fragment = getFragment(fm, fragmentClass, fragmentTag);
 
         // 在add fragment的時候，要記得做檢查，避免重複add導致crash
         if (!fragment.isAdded()) {
@@ -49,11 +47,9 @@ public class FragmentUtils {
      * Reference: https://yrom.net/blog/2013/03/10/fragment-switch-not-restart/
      */
     public static void hideAndShowFragmentTo(FragmentManager fm,
-                                             Class<? extends Fragment> fragmentClassToHide, Class<? extends Fragment> fragmentClassToShow,
-                                             String fragmentToHideTag, String fragmentToShowTag, int containerId) {
+                                             Fragment fragmentToHide, Fragment fragmentToShow,
+                                             String fragmentToShowTag, int containerId) {
         FragmentTransaction transaction = fm.beginTransaction();
-        Fragment fragmentToHide = getFragment(fm, fragmentClassToHide, fragmentToHideTag);
-        Fragment fragmentToShow = getFragment(fm, fragmentClassToShow, fragmentToShowTag);
 
         if (fragmentToHide.isAdded()) {
             transaction.hide(fragmentToHide);
