@@ -149,7 +149,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
     }
 
     private void yingSpeak() {
-        saveMessage(new Message(Message.Owner.YING, "小影說話", ChatViewType.YING_NORMAL, System.currentTimeMillis()));
+        saveMessage(new Message(0, Message.Owner.YING, "小影說話", ChatViewType.YING_NORMAL, System.currentTimeMillis()));
     }
 
     private void sendMessage() {
@@ -159,7 +159,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
             return;
         }
 
-        saveMessage(new Message(Message.Owner.ME, messageText, ChatViewType.NORMAL, System.currentTimeMillis()));
+        // 這邊建立的Message中的id先是傳一個不會存到db的值，所以第一個參數可以不用理他
+        saveMessage(new Message(0, Message.Owner.ME, messageText, ChatViewType.NORMAL, System.currentTimeMillis()));
 
         mMessageBox.setText("");
     }
@@ -169,7 +170,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
     }
 
     private void sendListMessage() {
-        saveMessage(new ListMessage(Message.Owner.ME, "", ChatViewType.HORIZONTAL_LIST, System.currentTimeMillis()));
+        saveMessage(new ListMessage(0, Message.Owner.ME, "", ChatViewType.HORIZONTAL_LIST, System.currentTimeMillis()));
     }
 
     @Override
@@ -191,8 +192,6 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
     }
 
     private void setChatListData(Cursor data) {
-        mChatListAdapter.clear();
-
         while (data.moveToNext()) {
             long id = data.getLong(ID);
             int owner = data.getInt(OWNER);
@@ -200,16 +199,15 @@ public class ChatFragment extends Fragment implements View.OnClickListener, Load
             int viewType = data.getInt(VIEW_TYPE);
             long time = data.getLong(TIME);
 
-            mChatListAdapter.add(MessageFactory.createMessage(owner, text, viewType, time));
+            /**
+             * 每次當我們的data有更新的時候，e.g. 新增一筆data or 刪除一筆data
+             * 需要update我們的RecyclerView，方法是用Adapter call notifyDataSetXXXXXX()
+             *
+             * 改變UI的這段一定要在UI thread上做!!!
+             */
+            mChatListAdapter.add(MessageFactory.createMessage(id, owner, text, viewType, time));
         }
 
-        /**
-         * 每次當我們的data有更新的時候，e.g. 新增一筆data or 刪除一筆data
-         * 需要update我們的RecyclerView，方法是用Adapter call notifyDataSetChanged()
-         *
-         * 改變UI的這段一定要在UI thread上做!!!
-         */
-        mChatListAdapter.notifyDataSetChanged();
         scrollChatListToBottom();
 
         mNoMessageText.setVisibility(mChatListAdapter.getDataListSize() == 0 ? View.VISIBLE : View.GONE);

@@ -14,7 +14,9 @@ import com.dl.dlexerciseandroid.ui.chat.viewholder.NormalMessageViewHolder;
 import com.dl.dlexerciseandroid.ui.chat.viewholder.YingNormalMessageViewHolder;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by dannylin on 2016/11/9.
@@ -27,7 +29,9 @@ import java.util.List;
 public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
+
     private List<Message> mDataList;
+    private Set<Long> mIdMap;
 
 
     /**
@@ -39,6 +43,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public ChatListAdapter(Context context) {
         mContext = context;
         mDataList = new ArrayList<>();
+        mIdMap = new HashSet<>();
     }
 
     /**
@@ -101,13 +106,27 @@ public class ChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public void clear() {
         mDataList.clear();
+        notifyDataSetChanged();
     }
 
     public void add(Message message) {
+        // 用map來記錄已經存在adapter中的data id，利用此方式可以濾掉onLoadFinished的cursor中，一些已經重複的data
+        if (mIdMap.contains(message.getId())) {
+            return;
+        }
+
         mDataList.add(message);
+        mIdMap.add(message.getId());
+
+        // 以後也盡量在adapter中作notify的動作，像這邊是insert一筆data，並且有動畫的效果
+        notifyItemInserted(mDataList.indexOf(message));
     }
 
     public int getDataListSize() {
         return mDataList.size();
+    }
+
+    public void refresh() {
+        notifyDataSetChanged();
     }
 }

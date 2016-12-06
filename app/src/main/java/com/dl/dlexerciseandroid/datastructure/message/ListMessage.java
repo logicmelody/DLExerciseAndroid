@@ -14,8 +14,8 @@ public class ListMessage extends Message {
     private List<Integer> mDataList = new ArrayList<>();
 
 
-    public ListMessage(int owner, String message, int viewType, long time) {
-        super(owner, message, viewType, time);
+    public ListMessage(long id, int owner, String message, int viewType, long time) {
+        super(id, owner, message, viewType, time);
 
         for (int i = 0 ; i <= 5 ; i ++) {
             mDataList.add(i);

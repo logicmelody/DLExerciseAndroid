@@ -26,13 +26,16 @@ public class Message implements Parcelable {
         public static final int HORIZONTAL_LIST = 2;
     }
 
+    protected long mId;
     protected int mOwner;
     protected String mMessage;
     protected int mViewType;
     protected long mTime;
 
 
-    public Message(int owner, String message, int viewType, long time) {
+    // 以後要存進db中的data，相對應的data structure中都一定要有id這個資料
+    public Message(long id, int owner, String message, int viewType, long time) {
+        mId = id;
         mOwner = owner;
         mMessage = message;
         mViewType = viewType;
@@ -40,10 +43,41 @@ public class Message implements Parcelable {
     }
 
     protected Message(Parcel in) {
+        mId = in.readLong();
         mOwner = in.readInt();
         mMessage = in.readString();
         mViewType = in.readInt();
         mTime = in.readLong();
+    }
+
+    public static final Creator<Message> CREATOR = new Creator<Message>() {
+        @Override
+        public Message createFromParcel(Parcel in) {
+            return new Message(in);
+        }
+
+        @Override
+        public Message[] newArray(int size) {
+            return new Message[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(mId);
+        parcel.writeInt(mOwner);
+        parcel.writeString(mMessage);
+        parcel.writeInt(mViewType);
+        parcel.writeLong(mTime);
+    }
+
+    public long getId() {
+        return mId;
     }
 
     public int getOwner() {
@@ -61,29 +95,4 @@ public class Message implements Parcelable {
     public long getTime() {
         return mTime;
     }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(mOwner);
-        dest.writeString(mMessage);
-        dest.writeInt(mViewType);
-        dest.writeLong(mTime);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<Message> CREATOR = new Creator<Message>() {
-        @Override
-        public Message createFromParcel(Parcel in) {
-            return new Message(in);
-        }
-
-        @Override
-        public Message[] newArray(int size) {
-            return new Message[size];
-        }
-    };
 }
