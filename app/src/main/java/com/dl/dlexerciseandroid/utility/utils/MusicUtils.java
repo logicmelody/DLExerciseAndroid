@@ -50,7 +50,7 @@ public class MusicUtils {
     }
 
     public static boolean isMusicFile(String musicFilePath) {
-        String extension = Utils.getExtensionFrom(musicFilePath.trim());
+        String extension = GeneralUtils.getExtensionFrom(musicFilePath.trim());
 
         Log.d("danny", "Music file path = " + musicFilePath);
         Log.d("danny", "Music file extension = " + extension);

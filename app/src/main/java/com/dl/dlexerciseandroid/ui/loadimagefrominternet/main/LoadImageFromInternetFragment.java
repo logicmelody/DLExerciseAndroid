@@ -14,10 +14,6 @@ import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.ui.loadimagefrominternet.imagelist.lru.LruFragment;
 import com.dl.dlexerciseandroid.ui.loadimagefrominternet.imagelist.picasso.PicassoFragment;
 import com.dl.dlexerciseandroid.utility.utils.FragmentUtils;
-import com.dl.dlexerciseandroid.utility.utils.Utils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by logicmelody on 2016/7/12.

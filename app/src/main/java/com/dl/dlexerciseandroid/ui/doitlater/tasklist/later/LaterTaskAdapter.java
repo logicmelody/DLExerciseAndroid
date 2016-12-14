@@ -16,7 +16,7 @@ import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.ui.doitlater.tasklist.main.DoItLaterViewItem;
 import com.dl.dlexerciseandroid.utility.utils.DbUtils;
 import com.dl.dlexerciseandroid.utility.utils.DoItLaterUtils;
-import com.dl.dlexerciseandroid.utility.utils.Utils;
+import com.dl.dlexerciseandroid.utility.utils.GeneralUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -243,13 +243,13 @@ public class LaterTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private void onBindNormalTask(TaskViewHolder holder, int position) {
         holder.title.setText(mDataList.get(position).task.title);
         holder.description.setText(mDataList.get(position).task.description);
-        holder.time.setText(Utils.timeToString(mDataList.get(position).task.time, Utils.DataFormat.YYYYMMDDHHMM));
+        holder.time.setText(GeneralUtils.timeToString(mDataList.get(position).task.time, GeneralUtils.DataFormat.YYYYMMDDHHMM));
     }
 
     private void onBindLaterTask(LaterTaskViewHolder holder, int position) {
         holder.title.setText(mDataList.get(position).task.title);
         holder.description.setText(mDataList.get(position).task.description);
-        holder.time.setText(Utils.timeToString(mDataList.get(position).task.time, Utils.DataFormat.YYYYMMDDHHMM));
+        holder.time.setText(GeneralUtils.timeToString(mDataList.get(position).task.time, GeneralUtils.DataFormat.YYYYMMDDHHMM));
     }
 
     @Override

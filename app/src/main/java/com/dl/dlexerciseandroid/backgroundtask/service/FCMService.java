@@ -9,7 +9,7 @@ import android.util.Log;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.ui.main.MainActivity;
-import com.dl.dlexerciseandroid.utility.utils.Utils;
+import com.dl.dlexerciseandroid.utility.utils.GeneralUtils;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -76,6 +76,6 @@ public class FCMService extends FirebaseMessagingService {
                 .setAutoCancel(true);
 
         ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).
-                notify(Utils.getNotificationId(), builder.build());
+                notify(GeneralUtils.getNotificationId(), builder.build());
     }
 }

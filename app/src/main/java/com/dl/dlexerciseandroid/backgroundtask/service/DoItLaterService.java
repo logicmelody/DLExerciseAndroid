@@ -11,7 +11,7 @@ import com.dl.dlexerciseandroid.ui.doitlater.handleintent.InHouseDoItLaterTask;
 import com.dl.dlexerciseandroid.ui.doitlater.handleintent.OtherDoItLaterTask;
 import com.dl.dlexerciseandroid.utility.utils.DbUtils;
 import com.dl.dlexerciseandroid.utility.utils.DoItLaterUtils;
-import com.dl.dlexerciseandroid.utility.utils.Utils;
+import com.dl.dlexerciseandroid.utility.utils.GeneralUtils;
 
 /**
  * Created by logicmelody on 2016/4/22.
@@ -74,10 +74,10 @@ public class DoItLaterService extends IntentService {
             DbUtils.insertDoItLaterTask(this, doItLaterTask.getTitle(), doItLaterTask.getDescription(),
                                         doItLaterTask.getTime(), doItLaterTask.getLaterPackageName(),
                                         doItLaterTask.getLaterCallback());
-            Utils.showToastInNonUIThread(mHandler, this, getString(R.string.do_it_later_save_task_completed));
+            GeneralUtils.showToastInNonUIThread(mHandler, this, getString(R.string.do_it_later_save_task_completed));
 
         } else {
-            Utils.showToastInNonUIThread(mHandler, this, getString(R.string.do_it_later_save_task_failed));
+            GeneralUtils.showToastInNonUIThread(mHandler, this, getString(R.string.do_it_later_save_task_failed));
         }
     }
 }

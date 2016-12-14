@@ -21,7 +21,7 @@ import java.util.TimeZone;
 /**
  * Created by logicmelody on 2016/3/30.
  */
-public class Utils {
+public class GeneralUtils {
 
     public static final String URI_SPRING_WEB_SERVICE = "http://rest-service.guides.spring.io/greeting";
 

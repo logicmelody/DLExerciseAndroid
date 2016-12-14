@@ -3,7 +3,7 @@ package com.dl.dlexerciseandroid.ui.main;
 import android.app.Application;
 import android.view.animation.AnimationUtils;
 
-import com.dl.dlexerciseandroid.utility.utils.Utils;
+import com.dl.dlexerciseandroid.utility.utils.GeneralUtils;
 import com.facebook.FacebookSdk;
 
 /**
@@ -27,8 +27,8 @@ public class MainApplication extends Application {
     }
 
     private void initAnimation() {
-        Utils.sFadeInAnimation = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
-        Utils.sFadeOutAnimation = AnimationUtils.loadAnimation(this, android.R.anim.fade_out);
+        GeneralUtils.sFadeInAnimation = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
+        GeneralUtils.sFadeOutAnimation = AnimationUtils.loadAnimation(this, android.R.anim.fade_out);
     }
 
     private void initFacebookSdk() {

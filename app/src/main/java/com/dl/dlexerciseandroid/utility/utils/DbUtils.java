@@ -47,7 +47,7 @@ public class DbUtils {
         };
 
         context.getContentResolver().delete(DLExerciseContract.Task.CONTENT_URI, selection, selectionArgs);
-        Utils.showToastInNonUIThread(new Handler(), context, context.getString(R.string.do_it_later_delete_task));
+        GeneralUtils.showToastInNonUIThread(new Handler(), context, context.getString(R.string.do_it_later_delete_task));
     }
 
     public static void insertMessage(Context context, Message message) {
