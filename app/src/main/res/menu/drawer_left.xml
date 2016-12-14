@@ -57,6 +57,10 @@
             android:title="@string/all_chat" />
 
         <item
+            android:id="@+id/menu_item_left_drawer_time"
+            android:title="@string/all_time" />
+
+        <item
             android:id="@+id/menu_item_left_drawer_test"
             android:title="@string/all_testing" />
     </group>

@@ -36,6 +36,7 @@ import com.dl.dlexerciseandroid.ui.overview.OverviewFragment;
 import com.dl.dlexerciseandroid.ui.rightdrawer.RightDrawerFragment;
 import com.dl.dlexerciseandroid.ui.spring.ConsumingRestfulWebServiceFragment;
 import com.dl.dlexerciseandroid.ui.test.TestFragment;
+import com.dl.dlexerciseandroid.ui.time.TimeFragment;
 import com.dl.dlexerciseandroid.utility.utils.FbUtils;
 import com.dl.dlexerciseandroid.ui.doitlater.tasklist.main.DoItLaterFragment;
 import com.dl.dlexerciseandroid.utility.utils.FragmentUtils;
@@ -267,6 +268,10 @@ public class UIController implements View.OnClickListener {
 
                     case R.id.menu_item_left_drawer_chat:
                         replaceContentFragment(ChatFragment.class, ChatFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_time:
+                        replaceContentFragment(TimeFragment.class, TimeFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:
