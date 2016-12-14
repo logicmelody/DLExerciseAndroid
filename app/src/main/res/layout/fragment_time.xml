@@ -6,8 +6,18 @@
     android:orientation="vertical" >
 
     <TextView
+        android:id="@+id/text_view_time_millisecond"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="This is TimeFragment"/>
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/text_view_time_us_time_zone_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/text_view_time_default_time_zone_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
