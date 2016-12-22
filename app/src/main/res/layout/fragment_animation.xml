@@ -4,9 +4,24 @@
     android:layout_height="match_parent"
     android:padding="@dimen/padding_all_window">
 
-    <TextView
+    <FrameLayout
+        android:id="@+id/view_group_animation_flip_image_view_container"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AnimationFragment"/>
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image_view_animation_flip_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:src="@drawable/ic_flip_3d_black"/>
+
+        <ImageView
+            android:id="@+id/image_view_animation_flip_front"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_flip_3d_theme"/>
+
+    </FrameLayout>
 
 </RelativeLayout>
