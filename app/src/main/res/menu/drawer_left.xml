@@ -61,6 +61,10 @@
             android:title="@string/all_time" />
 
         <item
+            android:id="@+id/menu_item_left_drawer_animation"
+            android:title="@string/all_animation" />
+
+        <item
             android:id="@+id/menu_item_left_drawer_test"
             android:title="@string/all_testing" />
     </group>

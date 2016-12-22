@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.ui.animation.AnimationFragment;
 import com.dl.dlexerciseandroid.ui.bitmap.BitmapFragment;
 import com.dl.dlexerciseandroid.ui.chat.main.ChatFragment;
 import com.dl.dlexerciseandroid.ui.customizedview.CustomizedViewFragment;
@@ -272,6 +273,10 @@ public class UIController implements View.OnClickListener {
 
                     case R.id.menu_item_left_drawer_time:
                         replaceContentFragment(TimeFragment.class, TimeFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_animation:
+                        replaceContentFragment(AnimationFragment.class, AnimationFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:
