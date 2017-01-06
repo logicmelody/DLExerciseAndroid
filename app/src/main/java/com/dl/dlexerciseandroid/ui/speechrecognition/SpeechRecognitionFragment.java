@@ -18,12 +18,14 @@ import android.widget.TextView;
 import com.dl.dlexerciseandroid.R;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by dannylin on 2017/1/6.
  */
 
 // Reference: http://chengabriel.blogspot.tw/2016/04/android-dialog.html
+// http://blog.ucan.csie.au.edu.tw/2012/07/android_11.html
 // 用 Google 提供的 SpeechRecognizer 來實作 speech to text
 public class SpeechRecognitionFragment extends Fragment implements View.OnClickListener, RecognitionListener {
 
@@ -79,7 +81,13 @@ public class SpeechRecognitionFragment extends Fragment implements View.OnClickL
 
     private Intent getRecognizerIntent() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "zh-TW");
+
+        // 設定語言的時候，可以使用Locale中的constant變數，正確且方便
+        // 繁體中文：Locale.TRADITIONAL_CHINESE.toString()
+        // 簡體中文：Locale.SIMPLIFIED_CHINESE.toString()
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.TRADITIONAL_CHINESE.toString());
+        Log.d("danny", "EXTRA_LANGUAGE = " + Locale.TRADITIONAL_CHINESE.toString());
+
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, mContext.getPackageName());
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH);
         intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 3);
@@ -162,7 +170,7 @@ public class SpeechRecognitionFragment extends Fragment implements View.OnClickL
 
     @Override
     public void onEndOfSpeech() {
-
+        Log.d("danny", "檢測到用戶已經停止說話");
     }
 
     @Override
@@ -215,6 +223,8 @@ public class SpeechRecognitionFragment extends Fragment implements View.OnClickL
 
     @Override
     public void onResults(Bundle results) {
+        Log.d("danny", "onResults");
+
         setMicButtonListening(false);
 
         // matches的ArrayList會儲存所有可能的辨識結果，通常我們會取index = 0，代表機率最高的辨識結果
