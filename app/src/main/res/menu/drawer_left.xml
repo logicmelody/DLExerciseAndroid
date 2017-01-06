@@ -65,6 +65,10 @@
             android:title="@string/all_animation" />
 
         <item
+            android:id="@+id/menu_item_left_drawer_speech_recognition"
+            android:title="@string/all_speech_recognition" />
+
+        <item
             android:id="@+id/menu_item_left_drawer_test"
             android:title="@string/all_testing" />
     </group>

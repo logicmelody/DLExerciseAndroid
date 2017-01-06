@@ -35,6 +35,7 @@ import com.dl.dlexerciseandroid.ui.loadimagefrominternet.main.LoadImageFromInter
 import com.dl.dlexerciseandroid.ui.musicplayer.main.MusicPlayerFragment;
 import com.dl.dlexerciseandroid.ui.overview.OverviewFragment;
 import com.dl.dlexerciseandroid.ui.rightdrawer.RightDrawerFragment;
+import com.dl.dlexerciseandroid.ui.speechrecognition.SpeechRecognitionFragment;
 import com.dl.dlexerciseandroid.ui.spring.ConsumingRestfulWebServiceFragment;
 import com.dl.dlexerciseandroid.ui.test.TestFragment;
 import com.dl.dlexerciseandroid.ui.time.TimeFragment;
@@ -277,6 +278,10 @@ public class UIController implements View.OnClickListener {
 
                     case R.id.menu_item_left_drawer_animation:
                         replaceContentFragment(AnimationFragment.class, AnimationFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_speech_recognition:
+                        replaceContentFragment(SpeechRecognitionFragment.class, SpeechRecognitionFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:

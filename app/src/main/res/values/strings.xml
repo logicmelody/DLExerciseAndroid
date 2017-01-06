@@ -39,6 +39,7 @@
     <string name="all_send">Send</string>
     <string name="all_time" translatable="false">Time</string>
     <string name="all_animation" translatable="false">Animation</string>
+    <string name="all_speech_recognition" translatable="false">Speech Recognition</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">Sure to logout?</string>
