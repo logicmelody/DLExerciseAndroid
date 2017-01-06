@@ -18,6 +18,9 @@
     <!-- Music player會需要讀取device上的音樂檔案，所以需要加此permission -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <!-- For Speech Recognition -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <!-- Permissions for provider -->
     <uses-permission android:name="com.dl.dlexerciseandroid.provider.permission.READ" />
     <uses-permission android:name="com.dl.dlexerciseandroid.provider.permission.WRITE" />
