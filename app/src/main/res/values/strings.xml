@@ -98,4 +98,7 @@
     <!-- ValueBar -->
     <string name="chat_chat_list_no_message">Start chatting!</string>
 
+    <!-- Speech Recognition -->
+    <string name="speech_recognition_please_speak">Please speak</string>
+
 </resources>

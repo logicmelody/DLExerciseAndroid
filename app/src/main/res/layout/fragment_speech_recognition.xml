@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- FrameLayout裡面所有的元件都是從左上角開始擺放，每一個元件如果要調整在FrameLayout中的位置，必須要設定元件中的layout_gravity屬性
+     越後面加進FrameLayout的元件會在越上層
+
+     Note: FrameLayout的gravity屬性沒有作用 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/padding_all_window">
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SpeechRecognition" />
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/text_view_speech_recognition_result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/speech_recognition_please_speak"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"/>
+
+        <ImageView
+            android:id="@+id/image_view_speech_recognition_mic_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_speech_recognition_mic_button"
+            android:src="@drawable/ic_speech_recognition_mic"
+            android:background="?selectableItemBackgroundBorderless"/>
+
+    </LinearLayout>
 
 </FrameLayout>

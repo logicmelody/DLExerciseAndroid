@@ -45,4 +45,7 @@
     <!-- ValueBar -->
     <string name="chat_chat_list_no_message">開始聊天吧!</string>
 
+    <!-- Speech Recognition -->
+    <string name="speech_recognition_please_speak">請說話</string>
+
 </resources>

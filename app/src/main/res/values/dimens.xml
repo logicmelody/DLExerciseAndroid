@@ -102,4 +102,7 @@
     <dimen name="width_mini_navigation_drawer_side_menu">60dp</dimen>
     <dimen name="margin_bottom_mini_navigation_drawer_side_menu_setting_button">10dp</dimen>
 
+    <!-- Speech Recognition -->
+    <dimen name="margin_top_speech_recognition_mic_button">10dp</dimen>
+
 </resources>

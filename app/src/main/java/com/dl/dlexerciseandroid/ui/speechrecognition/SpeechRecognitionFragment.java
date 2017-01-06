@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.dl.dlexerciseandroid.R;
 
@@ -14,11 +15,13 @@ import com.dl.dlexerciseandroid.R;
  * Created by dannylin on 2017/1/6.
  */
 
-public class SpeechRecognitionFragment extends Fragment {
+public class SpeechRecognitionFragment extends Fragment implements View.OnClickListener {
 
     public static final String TAG = SpeechRecognitionFragment.class.getName();
 
     private Context mContext;
+
+    private ImageView mMicButton;
 
 
     @Override
@@ -41,9 +44,22 @@ public class SpeechRecognitionFragment extends Fragment {
 
     private void initialize() {
         findViews();
+        setupViews();
     }
 
     private void findViews() {
+        mMicButton = (ImageView) getView().findViewById(R.id.image_view_speech_recognition_mic_button);
+    }
 
+    private void setupViews() {
+        mMicButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.image_view_speech_recognition_mic_button:
+                break;
+        }
     }
 }
