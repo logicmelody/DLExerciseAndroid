@@ -146,6 +146,8 @@ public class ImageLoader {
 
     // 我們用一個Drawable，並且把他assign給ImageView
     // Drawable的class裡面會包一個load image的AsyncTask，用這個Drawable的class來與ImageView產生連結
+    //
+    // 這邊其實用一個Object物件包一個AsyncTask也可以，只要用setTag()的方式將Object set給ImageView即可
     private class DownloadedDrawable extends BitmapDrawable {
 
         private WeakReference<ImageLoaderAsyncTask> mImageLoaderAsyncTaskReference;
