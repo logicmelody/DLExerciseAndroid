@@ -17,7 +17,31 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/toolbar" />
+        <!-- android:fitsSystemWindows="true"
+             如果這個屬性設成true，系統會在畫面上保留status bar與action bar的padding，從這之下才開始繪製我們的UI
+             如果沒有設這個屬性，view跟status bar或是action bar會產生重疊-->
+        <!-- 要用app:theme and app:popupTheme設定theme才可以正常運作 -->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppBarPopupOverlay"
+            app:theme="@style/AppBarOverlay">
+
+            <!-- 我們可以將 Toolbar 視為一個 ViewGroup 來使用，這邊我們為了將 app title 移到中間，所以我們擺了一個 TextView
+                 記得要將本來 ActionBar 上的 title 給 hide 起來，需要在程式碼中用 mActionBar.setDisplayShowTitleEnabled(false) 來設定
+                  Note: @android:style/TextAppearance.DeviceDefault.Large: white text color
+                        @android:style/TextAppearance.DeviceDefault.Large.Inverse: black text color -->
+            <TextView
+                android:id="@+id/text_view_main_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
+        </android.support.v7.widget.Toolbar>
 
         <!-- 主要來顯示內容的container，用來顯示不同的Fragment -->
         <!-- android:clickable="true"：不加這行的話，drawer會有問題(有時候滑出drawer時會卡住) -->

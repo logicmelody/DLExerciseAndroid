@@ -78,6 +78,7 @@ public class UIController implements View.OnClickListener {
 
     private Toolbar mToolBar;
     private ActionBar mActionBar;
+    private TextView mTitleText;
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mActionBarDrawerToggle;
@@ -124,6 +125,7 @@ public class UIController implements View.OnClickListener {
 
     private void findViews() {
         mToolBar = (Toolbar) mActivity.findViewById(R.id.tool_bar);
+        mTitleText = (TextView) mActivity.findViewById(R.id.text_view_main_title_text);
         mDrawerLayout = (DrawerLayout) mActivity.findViewById(R.id.drawer_layout_main);
         mNavigationView = (NavigationView) mActivity.findViewById(R.id.navigation_view_main_left_side_drawer);
 
@@ -148,9 +150,8 @@ public class UIController implements View.OnClickListener {
 
         if (mActionBar != null) {
             mActionBar.setDisplayHomeAsUpEnabled(true);
-            mActionBar.setTitle(savedState == null ?
-                    mActivity.getString(R.string.all_overview) :
-                    savedState.getString(SavedStateKey.TITLE));
+            mActionBar.setDisplayShowTitleEnabled(false);
+            mTitleText.setText(savedState == null ? mActivity.getString(R.string.all_overview) : savedState.getString(SavedStateKey.TITLE));
             //mActionBar.setSubtitle(mActivity.getString(R.string.all_app_version));
         }
     }
@@ -290,7 +291,7 @@ public class UIController implements View.OnClickListener {
                 }
 
                 item.setChecked(true);
-                mActionBar.setTitle(item.getTitle());
+                mTitleText.setText(item.getTitle());
                 closeLeftDrawer();
 
                 return true;
