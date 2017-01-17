@@ -139,6 +139,7 @@
         <activity android:name=".ui.moviesearcher.MovieSearcherActivity" />
         <activity android:name=".ui.espressotest.EspressoTestActivity" />
         <activity android:name=".ui.mininavigationdrawer.main.MiniNavigationDrawerActivity" />
+        <activity android:name=".ui.bottomnavigationview.BottomNavigationViewActivity" />
 
         <!--
         用receiver沒有辦法收到來自別的app的shared intent

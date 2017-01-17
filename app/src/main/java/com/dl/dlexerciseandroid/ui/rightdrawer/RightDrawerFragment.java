@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.ui.bottomnavigationview.BottomNavigationViewActivity;
 import com.dl.dlexerciseandroid.ui.coordinatorlayout.CoordinatorLayoutActivity;
 import com.dl.dlexerciseandroid.ui.espressotest.EspressoTestActivity;
 import com.dl.dlexerciseandroid.ui.mininavigationdrawer.main.MiniNavigationDrawerActivity;
@@ -34,6 +35,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
     private Button mMovieSearcherButton;
     private Button mEspressoTestButton;
     private Button mMiniNavigationDrawerButton;
+    private Button mBottomNavigationViewButton;
 
 
     @Override
@@ -65,6 +67,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
         mMovieSearcherButton = (Button) getView().findViewById(R.id.button_right_drawer_movie_searcher);
         mEspressoTestButton = (Button) getView().findViewById(R.id.button_right_drawer_espresso_test);
         mMiniNavigationDrawerButton = (Button) getView().findViewById(R.id.button_right_drawer_mini_navigation_drawer);
+        mBottomNavigationViewButton = (Button) getView().findViewById(R.id.button_right_drawer_bottom_navigation_view);
     }
 
     private void setupViews() {
@@ -72,6 +75,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
         mMovieSearcherButton.setOnClickListener(this);
         mEspressoTestButton.setOnClickListener(this);
         mMiniNavigationDrawerButton.setOnClickListener(this);
+        mBottomNavigationViewButton.setOnClickListener(this);
     }
 
     @Override
@@ -91,6 +95,10 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
 
             case R.id.button_right_drawer_mini_navigation_drawer:
                 startActivity(new Intent(mContext, MiniNavigationDrawerActivity.class));
+                break;
+
+            case R.id.button_right_drawer_bottom_navigation_view:
+                startActivity(new Intent(mContext, BottomNavigationViewActivity.class));
                 break;
         }
 

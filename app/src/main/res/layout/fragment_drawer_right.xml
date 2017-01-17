@@ -29,4 +29,10 @@
         android:layout_height="wrap_content"
         android:text="@string/all_mini_navigation_drawer"/>
 
+    <Button
+        android:id="@+id/button_right_drawer_bottom_navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/all_bottom_navigation_view"/>
+
 </LinearLayout>
