@@ -1,5 +1,6 @@
 package com.dl.dlexerciseandroid.ui.bottomnavigationview;
 
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,7 @@ import android.view.MenuItem;
 
 import com.dl.dlexerciseandroid.R;
 
-public class BottomNavigationViewActivity extends AppCompatActivity {
+public class BottomNavigationViewActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     public static final String TAG = BottomNavigationViewActivity.class.getName();
 
@@ -56,10 +57,10 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
     // 1. 最多可以顯示在BottomNavigationView上的item數目是5個，如果超過五個的話會crash
     // 2. 只有兩個item的時候，左右兩邊會有奇怪的margin
     // 3. 只有三個item的時候是最正常的
-    // 4. 四個以上的item，會有一個特別的動畫
+    // 4. 四個以上的item，會有一個特別的動畫()
     // 5. 以後做這種東西，還是自己刻會比較好
     private void setupBottomMenu() {
-
+        mBottomBar.setOnNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -72,5 +73,29 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    // 記得要return true，這個menu item才會被設定成checked，記得是checked，而不是selected
+    // 所以對應的selector裡的屬性要寫對
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_bottom_navigation_view_bottom_bar_home:
+                break;
+
+            case R.id.menu_item_bottom_navigation_view_bottom_bar_search:
+                break;
+
+            case R.id.menu_item_bottom_navigation_view_bottom_bar_add:
+                break;
+
+            case R.id.menu_item_bottom_navigation_view_bottom_bar_notification:
+                break;
+
+            case R.id.menu_item_bottom_navigation_view_bottom_bar_person:
+                break;
+        }
+
+        return true;
     }
 }

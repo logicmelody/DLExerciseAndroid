@@ -18,14 +18,19 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <!-- com.android.support:design:25.0.0 這個版本的library才可以使用官方的BottomNavigationView
+        <!-- com.android.support:design:25.0.0這個版本的library才可以使用官方的BottomNavigationView
              有以下幾個比較重要的屬性可以使用：
 
              app:itemBackground — The background color to be used for the bottom navigation menu
              用來設定整個bottom view的background顏色，也可以設定ripple的效果，就跟設定一般view的background一樣
 
              app:itemIconTint — The tint to be used for the icons in the bottom navigation menu
+             可以在res/color/的資料夾中定義selector xml來決定不同狀態的時候，icon要用什麼顏色，這邊可以直接用這個selector來給icon上色，
+             所以我們icon只需要給一張白色的圖即可
+
              app:itemTextColor — The color to be used for the text in the bottom navigation menu
+             可以在res/color/的資料夾中定義selector xml來決定不同狀態的時候，text要用什麼顏色
+
              app:menu — The menu resource to be used to display items in the bottom navigation menu -->
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottom_navigation_view_bottom_navigation_view_bottom_menu"
@@ -33,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             app:itemBackground="@drawable/background_bottom_navigation_view_bottom_bar"
-            app:itemIconTint="@color/all_white"
+            app:itemIconTint="@color/selector_icon_tint_bottom_navigation_view_bottom_bar"
             app:itemTextColor="@color/all_white"
             app:menu="@menu/bottom_navigation_view_bottom_menu"/>
 

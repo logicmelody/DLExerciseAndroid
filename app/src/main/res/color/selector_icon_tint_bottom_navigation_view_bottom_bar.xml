@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 如果要定義顏色的selector，必須要在res的folder下新增一個color的folder，然後在這個folder中定義我們要的selector xml即可
+     e.g. 一個button的text color會隨著點擊狀態的不同而改變顏色 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="false" android:color="@color/all_gray" />
+    <item android:state_checked="true" android:color="@color/all_theme" />
+    <item android:color="@color/all_white" />
+</selector>
