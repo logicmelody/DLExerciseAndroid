@@ -102,4 +102,11 @@
     <!-- Speech Recognition -->
     <string name="speech_recognition_please_speak">Please speak</string>
 
+    <!-- Bottom Navigation View -->
+    <string name="bottom_navigation_view_home">Home</string>
+    <string name="bottom_navigation_view_search">Search</string>
+    <string name="bottom_navigation_view_add">Add</string>
+    <string name="bottom_navigation_view_notification">Notification</string>
+    <string name="bottom_navigation_view_person">Person</string>
+
 </resources>

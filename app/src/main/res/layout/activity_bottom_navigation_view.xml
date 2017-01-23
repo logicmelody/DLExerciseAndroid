@@ -1,16 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/padding_all_window"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    </RelativeLayout>
+        <FrameLayout
+            android:id="@+id/view_group_bottom_navigation_view_content_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- com.android.support:design:25.0.0 這個版本的library才可以使用官方的BottomNavigationView
+             有以下幾個比較重要的屬性可以使用：
+
+             app:itemBackground — The background color to be used for the bottom navigation menu
+             用來設定整個bottom view的background顏色，也可以設定ripple的效果，就跟設定一般view的background一樣
+
+             app:itemIconTint — The tint to be used for the icons in the bottom navigation menu
+             app:itemTextColor — The color to be used for the text in the bottom navigation menu
+             app:menu — The menu resource to be used to display items in the bottom navigation menu -->
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottom_navigation_view_bottom_navigation_view_bottom_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:itemBackground="@drawable/background_bottom_navigation_view_bottom_bar"
+            app:itemIconTint="@color/all_white"
+            app:itemTextColor="@color/all_white"
+            app:menu="@menu/bottom_navigation_view_bottom_menu"/>
+
+    </LinearLayout>
 
 </LinearLayout>
