@@ -43,10 +43,10 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'de.hdodenhof:circleimageview:2.0.0'
     // For Google Play Services，版本號碼必須跟Firebase一樣
-    compile 'com.google.android.gms:play-services-analytics:9.0.2'
+    compile 'com.google.android.gms:play-services-analytics:10.0.1'
     // For using Firebase，版本號碼必須跟Google Play Services一樣
-    compile 'com.google.firebase:firebase-core:9.0.2'
-    compile 'com.google.firebase:firebase-messaging:9.0.2'
+    compile 'com.google.firebase:firebase-core:10.0.1'
+    compile 'com.google.firebase:firebase-messaging:10.0.1'
     // For OkHttp
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile project(':dlsdk')
