@@ -24,6 +24,19 @@ public class MainActivity extends AppCompatActivity implements AlertDialogFragme
         super.onCreate(savedInstanceState);
         Log.d("danny", "MainActivity onCreate()");
 
+        Intent intent = getIntent();
+
+        if (intent != null) {
+            Log.d("danny", intent.toString());
+
+            Bundle bundle = intent.getExtras();
+            String[] keyArray = bundle.keySet().toArray(new String[bundle.keySet().size()]);
+
+            for (String key : keyArray) {
+                Log.d("danny", "Key = " + key);
+            }
+        }
+
         setContentView(R.layout.activity_main);
         mUIController = new UIController(this);
         mUIController.onCreate(savedInstanceState);

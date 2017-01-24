@@ -24,7 +24,11 @@ public class FCMService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        // 這個super已經可以handle大部分的message，但有兩個狀況是例外：
+        // 1. Notifications delivered when your app is in the background.
+        // 2. Messages with both notification and data payload, both background and foreground.
         super.onMessageReceived(remoteMessage);
+
         // TODO(developer): Handle FCM messages here.
         // If the application is in the foreground handle both data and notification messages here.
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -34,7 +38,7 @@ public class FCMService extends FirebaseMessagingService {
         // 則只會在device上跳出notification並且顯示body跟title而已
         //
         // Note: 當app被close掉的時候(user進到recent app的頁面，然後把app swipe掉)，
-        //       有些device會收不到Firebase傳來的notification(e.g. Zenfone 2)，但是Nexus 7正常可以收到
+        //       有些device會收不到Firebase傳來的notification(e.g. Zenfone 2)，但是Nexus 7和Nexus 5模擬器正常可以收到
 
         // app在foreground的時候並不會跳出notification，但是可以經由onMessageReceived()拿到完整的資訊，
         // 我們也可以在onMessageReceived()中自己顯示notification
