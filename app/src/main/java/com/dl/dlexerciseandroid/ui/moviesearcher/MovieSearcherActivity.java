@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.backgroundtask.service.TmdbApiService;
 
 public class MovieSearcherActivity extends AppCompatActivity {
 
@@ -25,14 +24,14 @@ public class MovieSearcherActivity extends AppCompatActivity {
 
     private void initialize() {
         findViews();
-        setupAction();
+        setupActionBar();
     }
 
     private void findViews() {
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
     }
 
-    private void setupAction() {
+    private void setupActionBar() {
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
 
