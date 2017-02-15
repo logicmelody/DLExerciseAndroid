@@ -1,13 +1,15 @@
 package com.dl.dlexerciseandroid.utility.utils;
 
+import android.text.TextUtils;
+import android.util.Log;
+
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**
  * Created by logicmelody on 2016/7/29.
  */
-public class MovieUrlUtils {
+public class TmdbApiUtils {
 
     private static String sBaseUrl = "https://api.themoviedb.org/3";
     private static String sApiKey = "?api_key=75f52adbad642f600178dacee90d3ec4";
@@ -26,9 +28,9 @@ public class MovieUrlUtils {
 
     private static String buildUrlString(String endPoint, Map<String, String> queries) {
         StringBuilder result = new StringBuilder();
-        String queryString = MovieUrlUtils.buildQueryString(queries);
+        String queryString = TmdbApiUtils.buildQueryString(queries);
 
-        if (queryString.length() > 0) {
+        if (!TextUtils.isEmpty(queryString)) {
             result.append(sBaseUrl).append(endPoint).append(sApiKey).append(queryString);
 
         } else {
@@ -39,15 +41,13 @@ public class MovieUrlUtils {
     }
 
     private static String buildQueryString(Map<String, String> queries) {
-        if (queries == null) {
+        if (queries == null || queries.size() == 0) {
             return "";
         }
 
         StringBuilder queryString = new StringBuilder();
 
-        Iterator iterator = queries.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry entry = (Map.Entry) iterator.next();
+        for (Map.Entry<String, String> entry : queries.entrySet()) {
             queryString.append("&")
                     .append(entry.getKey())
                     .append("=")

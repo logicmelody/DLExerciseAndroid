@@ -164,7 +164,7 @@
             android:name=".backgroundtask.service.MusicService"
             android:exported="false" />
         <service
-            android:name=".backgroundtask.service.MovieInfoService"
+            android:name=".backgroundtask.service.TmdbApiService"
             android:exported="false" />
         <service android:name=".backgroundtask.service.FCMService">
             <intent-filter>

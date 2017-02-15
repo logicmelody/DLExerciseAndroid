@@ -7,35 +7,45 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.dl.dlexerciseandroid.utility.utils.HttpUtils;
-import com.dl.dlexerciseandroid.utility.utils.MovieUrlUtils;
+import com.dl.dlexerciseandroid.utility.utils.TmdbApiUtils;
 
 import java.io.IOException;
 
 /**
  * Created by logicmelody on 2016/7/29.
  */
-public class MovieInfoService extends IntentService {
+public class TmdbApiService extends IntentService {
 
-    private static final String TAG = MovieInfoService.class.getName();
+    private static final String TAG = TmdbApiService.class.getName();
 
     public static final class Actions {
         public static final String SEARCH_MOVIES_BY_TEXT = "com.dl.dlexerciseandroid.ACTION_SEARCH_MOVIES_BY_TEXT";
+        public static final String GET_MOVIE_POSTERS = "com.dl.dlexerciseandroid.GET_MOVIE_POSTERS";
     }
 
     public static final class ExtraKeys {
         public static final String STRING_QUERY_TEXT = "com.dl.dlexerciseandroid.EXTRA_QUERY_TEXT";
+        public static final String STRING_MOVIE_ID = "com.dl.dlexerciseandroid.EXTRA_MOVIE_ID";
     }
 
 
     public static Intent generateSearchMoviesByTextIntent(Context context, String queryText) {
-        Intent intent = new Intent(context, MovieInfoService.class);
+        Intent intent = new Intent(context, TmdbApiService.class);
         intent.setAction(Actions.SEARCH_MOVIES_BY_TEXT);
         intent.putExtra(ExtraKeys.STRING_QUERY_TEXT, queryText);
 
         return intent;
     }
 
-    public MovieInfoService() {
+    public static Intent generateGetMoviePostersIntent(Context context, String movieId) {
+        Intent intent = new Intent(context, TmdbApiService.class);
+        intent.setAction(Actions.GET_MOVIE_POSTERS);
+        intent.putExtra(ExtraKeys.STRING_MOVIE_ID, movieId);
+
+        return intent;
+    }
+
+    public TmdbApiService() {
         super(TAG);
     }
 
@@ -46,6 +56,9 @@ public class MovieInfoService extends IntentService {
         try {
             if (Actions.SEARCH_MOVIES_BY_TEXT.equals(action)) {
                 searchMoviesByText(intent);
+
+            } else if (Actions.GET_MOVIE_POSTERS.equals(action)) {
+                getMoviePosters();
             }
 
         } catch (IOException e) {
@@ -60,10 +73,14 @@ public class MovieInfoService extends IntentService {
             return;
         }
 
-        String url = MovieUrlUtils.searchMoviesByTextUrl(queryText);
+        String url = TmdbApiUtils.searchMoviesByTextUrl(queryText);
         String jsonString = HttpUtils.getJsonStringFromUrl(url);
 
         Log.d("danny", "Movie search Url string = " + url);
         Log.d("danny", "Movie search Json string = " + jsonString);
+    }
+
+    private void getMoviePosters() {
+
     }
 }
