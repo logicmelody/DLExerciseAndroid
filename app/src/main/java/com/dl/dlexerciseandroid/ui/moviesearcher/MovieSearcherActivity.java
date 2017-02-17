@@ -1,34 +1,148 @@
 package com.dl.dlexerciseandroid.ui.moviesearcher;
 
+import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.dl.dlexerciseandroid.R;
 
 public class MovieSearcherActivity extends AppCompatActivity {
 
-    private Toolbar mToolbar;
+    private static final int PAUSE_FOR_SEARCH_TEXT_CHANGED = 1000;
 
+    private Toolbar mToolbar;
+    private EditText mSearchBox;
+
+    private Handler mHandler;
+
+    private SearchMovieAsyncTask mSearchMovieAsyncTask;
+
+    private Runnable mSearchMovieRunnable;
+
+    private TextWatcher mSearchBoxTextWatcher = new TextWatcher() {
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            Log.d("danny", "Movie search box text = " + String.valueOf(charSequence));
+
+            triggerSearchMovieAsyncTask(String.valueOf(charSequence));
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
+    };
+
+    private void triggerSearchMovieAsyncTask(final String queryText) {
+        if (TextUtils.isEmpty(queryText)) {
+            return;
+        }
+
+        if (mSearchMovieRunnable != null) {
+            mHandler.removeCallbacks(mSearchMovieRunnable);
+            mSearchMovieRunnable = null;
+        }
+
+        mSearchMovieRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (mSearchMovieAsyncTask != null) {
+                    if (queryText.equals(mSearchMovieAsyncTask.getSearchText())) {
+                        return;
+                    }
+
+                    mSearchMovieAsyncTask.cancel(true);
+                    mSearchMovieAsyncTask = null;
+                }
+
+                mSearchMovieAsyncTask = new SearchMovieAsyncTask(queryText);
+                mSearchMovieAsyncTask.execute();
+            }
+        };
+
+        mHandler.postDelayed(mSearchMovieRunnable, PAUSE_FOR_SEARCH_TEXT_CHANGED);
+    }
+
+    private class SearchMovieAsyncTask extends AsyncTask<Void, Void, String> {
+
+        private String mSearchText;
+
+
+        public SearchMovieAsyncTask(String searchText) {
+            mSearchText = searchText;
+        }
+
+        public void setSearchText(String searchText) {
+            mSearchText = searchText;
+        }
+
+        public String getSearchText() {
+            return mSearchText;
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            Log.d("danny", "SearchMovieAsyncTask doInBackground()");
+
+            // 1. Send get request to server
+            // 2. Parse Json string to object list
+
+            return null;
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+
+            Log.d("danny", "SearchMovieAsyncTask onCancelled()");
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (isCancelled()) {
+                Log.d("danny", "SearchMovieAsyncTask onPostExecute() isCancelled()");
+
+                return;
+            }
+
+            // Put object list to adapter
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_searcher);
         initialize();
-
-        //startService(TmdbApiService.generateSearchMoviesByTextIntent(this, "ghost"));
     }
 
     private void initialize() {
+        mHandler = new Handler();
+
         findViews();
         setupActionBar();
     }
 
     private void findViews() {
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
+        mSearchBox = (EditText) findViewById(R.id.edit_text_movie_searcher_search_box);
     }
 
     private void setupActionBar() {
@@ -39,6 +153,20 @@ public class MovieSearcherActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowTitleEnabled(false);
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mSearchBox.addTextChangedListener(mSearchBoxTextWatcher);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        mSearchBox.removeTextChangedListener(mSearchBoxTextWatcher);
     }
 
     @Override
