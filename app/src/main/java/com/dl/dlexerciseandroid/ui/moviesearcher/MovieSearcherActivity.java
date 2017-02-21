@@ -37,8 +37,6 @@ public class MovieSearcherActivity extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            Log.d("danny", "Movie search box text = " + String.valueOf(charSequence));
-
             triggerSearchMovieAsyncTask(String.valueOf(charSequence));
         }
 
@@ -98,6 +96,7 @@ public class MovieSearcherActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... voids) {
             Log.d("danny", "SearchMovieAsyncTask doInBackground()");
+            Log.d("danny", "Search movie text = " + mSearchText);
 
             // 1. Send get request to server
             // 2. Parse Json string to object list
@@ -123,6 +122,7 @@ public class MovieSearcherActivity extends AppCompatActivity {
             }
 
             // Put object list to adapter
+
         }
     }
 
