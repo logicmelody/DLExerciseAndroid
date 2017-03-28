@@ -43,6 +43,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
         ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null) {
+            actionBar.setTitle(getString(R.string.all_bottom_navigation_view));
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
