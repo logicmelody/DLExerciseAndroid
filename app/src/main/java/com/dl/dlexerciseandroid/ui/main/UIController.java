@@ -151,7 +151,9 @@ public class UIController implements View.OnClickListener {
         if (mActionBar != null) {
             mActionBar.setDisplayHomeAsUpEnabled(true);
             mActionBar.setDisplayShowTitleEnabled(false);
-            mTitleText.setText(savedState == null ? mActivity.getString(R.string.all_overview) : savedState.getString(SavedStateKey.TITLE));
+            mTitleText.setText(savedState == null ?
+                    mActivity.getString(R.string.all_overview) :
+                    savedState.getString(SavedStateKey.TITLE));
             //mActionBar.setSubtitle(mActivity.getString(R.string.all_app_version));
         }
     }
@@ -557,7 +559,7 @@ public class UIController implements View.OnClickListener {
 
     public void onSaveInstanceState(Bundle outState) {
         outState.putString(SavedStateKey.FRAGMENT_CLASS_NAME, mCurrentFragmentClassName);
-        outState.putString(SavedStateKey.TITLE, String.valueOf(mActionBar.getTitle()));
+        outState.putString(SavedStateKey.TITLE, String.valueOf(mTitleText.getText()));
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
