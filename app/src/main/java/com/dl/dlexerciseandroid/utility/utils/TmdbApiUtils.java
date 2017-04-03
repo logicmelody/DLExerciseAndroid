@@ -19,7 +19,7 @@ public class TmdbApiUtils {
     }
 
 
-    public static String searchMoviesByTextUrl(String queryText) {
+    public static String getSearchMoviesByTextUrl(String queryText) {
         Map<String, String> map = new HashMap<>();
         map.put("query", queryText);
 

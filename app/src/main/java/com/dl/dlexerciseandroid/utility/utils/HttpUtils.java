@@ -33,7 +33,7 @@ public class HttpUtils {
     public static String getJsonStringFromUrl(String url) throws IOException {
         Response response = sHttpClient.newCall(getRequest(url)).execute();
 
-        // 可以在Response的部分加上callback，但要注意的是，callback的method都是在這裏是background thread執行
+        // 可以在Response的部分加上callback，但要注意的是，callback的method都是在background thread執行
 //        Call call = sHttpClient.newCall(getRequest(url));
 //        call.enqueue(new Callback() {
 //            @Override

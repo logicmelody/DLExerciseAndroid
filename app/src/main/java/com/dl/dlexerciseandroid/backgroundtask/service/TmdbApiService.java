@@ -73,7 +73,7 @@ public class TmdbApiService extends IntentService {
             return;
         }
 
-        String url = TmdbApiUtils.searchMoviesByTextUrl(queryText);
+        String url = TmdbApiUtils.getSearchMoviesByTextUrl(queryText);
         String jsonString = HttpUtils.getJsonStringFromUrl(url);
 
         Log.d("danny", "Movie search Url string = " + url);

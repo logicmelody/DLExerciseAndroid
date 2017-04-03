@@ -14,6 +14,10 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.utility.utils.HttpUtils;
+import com.dl.dlexerciseandroid.utility.utils.TmdbApiUtils;
+
+import java.io.IOException;
 
 public class MovieSearcherActivity extends AppCompatActivity {
 
@@ -108,8 +112,14 @@ public class MovieSearcherActivity extends AppCompatActivity {
             Log.d("danny", "SearchMovieAsyncTask doInBackground()");
             Log.d("danny", "Search movie text = " + mSearchText);
 
-            // 1. Send get request to server
             // 2. Parse Json string to object list
+
+            try {
+                return HttpUtils.getJsonStringFromUrl(TmdbApiUtils.getSearchMoviesByTextUrl(mSearchText));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             return null;
         }
@@ -131,8 +141,12 @@ public class MovieSearcherActivity extends AppCompatActivity {
                 return;
             }
 
-            // Put object list to adapter
+            if (TextUtils.isEmpty(s)) {
+                return;
+            }
 
+            // Put object list to adapter
+            Log.d("danny", "Movie search json = " + s);
         }
     }
 
