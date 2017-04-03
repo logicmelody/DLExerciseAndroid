@@ -90,6 +90,8 @@ public class MovieSearcherActivity extends AppCompatActivity {
         }
     }
 
+    // 這邊不用IntentService來實作的原因是因為：如果想要取消前一筆get request，用IntentService沒有辦法做到，
+    // 但是如果用AsyncTask可以用cancel的方式來取消前一筆task
     private class SearchMovieAsyncTask extends AsyncTask<Void, Void, String> {
 
         private String mSearchText;
