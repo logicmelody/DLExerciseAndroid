@@ -51,13 +51,13 @@ public class MovieSearcherActivity extends AppCompatActivity {
     };
 
     private void triggerSearchMovieAsyncTask(String queryText) {
-        if (TextUtils.isEmpty(queryText)) {
-            return;
-        }
-
         if (mSearchMovieRunnable != null) {
             mHandler.removeCallbacks(mSearchMovieRunnable);
             mSearchMovieRunnable = null;
+        }
+
+        if (TextUtils.isEmpty(queryText)) {
+            return;
         }
 
         mSearchMovieRunnable = new SearchMovieRunnable(queryText);
