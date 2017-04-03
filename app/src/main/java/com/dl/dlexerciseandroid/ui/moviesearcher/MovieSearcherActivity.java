@@ -46,7 +46,7 @@ public class MovieSearcherActivity extends AppCompatActivity {
         }
     };
 
-    private void triggerSearchMovieAsyncTask(final String queryText) {
+    private void triggerSearchMovieAsyncTask(String queryText) {
         if (TextUtils.isEmpty(queryText)) {
             return;
         }
@@ -56,24 +56,34 @@ public class MovieSearcherActivity extends AppCompatActivity {
             mSearchMovieRunnable = null;
         }
 
-        mSearchMovieRunnable = new Runnable() {
-            @Override
-            public void run() {
-                if (mSearchMovieAsyncTask != null) {
-                    if (queryText.equals(mSearchMovieAsyncTask.getSearchText())) {
-                        return;
-                    }
+        mSearchMovieRunnable = new SearchMovieRunnable(queryText);
+        mHandler.postDelayed(mSearchMovieRunnable, PAUSE_FOR_SEARCH_TEXT_CHANGED);
+    }
 
-                    mSearchMovieAsyncTask.cancel(true);
-                    mSearchMovieAsyncTask = null;
+
+    private class SearchMovieRunnable implements Runnable {
+
+        private String mQueryText;
+
+
+        public SearchMovieRunnable(String queryText) {
+            mQueryText = queryText;
+        }
+
+        @Override
+        public void run() {
+            if (mSearchMovieAsyncTask != null) {
+                if (mQueryText.equals(mSearchMovieAsyncTask.getSearchText())) {
+                    return;
                 }
 
-                mSearchMovieAsyncTask = new SearchMovieAsyncTask(queryText);
-                mSearchMovieAsyncTask.execute();
+                mSearchMovieAsyncTask.cancel(true);
+                mSearchMovieAsyncTask = null;
             }
-        };
 
-        mHandler.postDelayed(mSearchMovieRunnable, PAUSE_FOR_SEARCH_TEXT_CHANGED);
+            mSearchMovieAsyncTask = new SearchMovieAsyncTask(mQueryText);
+            mSearchMovieAsyncTask.execute();
+        }
     }
 
     private class SearchMovieAsyncTask extends AsyncTask<Void, Void, String> {
