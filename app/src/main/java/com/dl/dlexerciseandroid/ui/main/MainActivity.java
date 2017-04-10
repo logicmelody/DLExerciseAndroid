@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements AlertDialogFragme
         Log.d("danny", "MainActivity onPause()");
 
         mUIController.onPause();
+
+        test
     }
 
     @Override
