@@ -9,12 +9,8 @@ general:
 machine:
     environment:
         ANDROID_HOME: /usr/local/android-sdk-linux
-        KEYSTORE: ${HOME}/${CIRCLE_PROJECT_REPONAME}/signing.keystore
 
 dependencies:
-    pre:
-        - bash DOWNLOAD_KEYSTORE_SH
-
     override:
         - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-25.0.0,android-24,extra-google-m2repository,extra-google-google_play_services,extra-android-support
         - ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
