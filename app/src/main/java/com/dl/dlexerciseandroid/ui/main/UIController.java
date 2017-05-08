@@ -37,7 +37,7 @@ import com.dl.dlexerciseandroid.ui.overview.OverviewFragment;
 import com.dl.dlexerciseandroid.ui.rightdrawer.RightDrawerFragment;
 import com.dl.dlexerciseandroid.ui.speechrecognition.SpeechRecognitionFragment;
 import com.dl.dlexerciseandroid.ui.spring.ConsumingRestfulWebServiceFragment;
-import com.dl.dlexerciseandroid.ui.strategypattern.StrategyPatternFragment;
+import com.dl.dlexerciseandroid.ui.strategypattern.main.StrategyPatternFragment;
 import com.dl.dlexerciseandroid.ui.test.TestFragment;
 import com.dl.dlexerciseandroid.ui.time.TimeFragment;
 import com.dl.dlexerciseandroid.utility.utils.FbUtils;

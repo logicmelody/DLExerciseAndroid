@@ -44,36 +44,36 @@ repositories {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     // For consuming restful web service with Spring
-    compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
     // For Facebook
-    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'de.hdodenhof:circleimageview:2.0.0'
     // For Google Play Services，版本號碼必須跟Firebase一樣
-    compile 'com.google.android.gms:play-services-analytics:10.0.1'
     // For using Firebase，版本號碼必須跟Google Play Services一樣
-    compile 'com.google.firebase:firebase-core:10.0.1'
-    compile 'com.google.firebase:firebase-messaging:10.0.1'
     // For OkHttp
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile project(':dlsdk')
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:design:25.0.0'
     // Required -- JUnit 4 framework, for 一般的unit tests
-    testCompile 'junit:junit:4.12'
     // Optional -- Mockito framework, for 跟Android framework有一點相依性的unit tests
-    testCompile 'org.mockito:mockito-core:1.10.19'
-    androidTestCompile 'com.android.support:support-annotations:25.0.0'
-    androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support.test:rules:0.5'
     // Optional -- Hamcrest library, which lets you create more flexible assertions using the Hamcrest matcher APIs
-    androidTestCompile 'org.hamcrest:hamcrest-library:1.3'
     // Optional -- UI testing with Espresso，用來作Android UI測試
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     // Optional -- UI testing with UI Automator，vXX的版本必須要跟minSdkVersion一致(e.g. 這邊都是18)
+    compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'com.google.android.gms:play-services-analytics:10.0.1'
+    compile 'com.google.firebase:firebase-core:10.0.1'
+    compile 'com.google.firebase:firebase-messaging:10.0.1'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.android.support:design:25.0.0'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    androidTestCompile 'com.android.support:support-annotations:25.0.0'
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test:rules:0.5'
+    androidTestCompile 'org.hamcrest:hamcrest-library:1.3'
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
 }

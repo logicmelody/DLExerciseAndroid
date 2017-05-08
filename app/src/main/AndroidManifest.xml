@@ -140,6 +140,8 @@
         <activity android:name=".ui.espressotest.EspressoTestActivity" />
         <activity android:name=".ui.mininavigationdrawer.main.MiniNavigationDrawerActivity" />
         <activity android:name=".ui.bottomnavigationview.BottomNavigationViewActivity" />
+        <activity android:name=".ui.strategypattern.activities.EatActivity" />
+        <activity android:name=".ui.strategypattern.activities.SleepActivity" />
 
         <!--
         用receiver沒有辦法收到來自別的app的shared intent
