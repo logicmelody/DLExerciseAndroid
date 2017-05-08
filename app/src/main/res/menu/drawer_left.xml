@@ -69,6 +69,10 @@
             android:title="@string/all_speech_recognition" />
 
         <item
+            android:id="@+id/menu_item_left_drawer_strategy_pattern"
+            android:title="@string/all_strategy_pattern" />
+
+        <item
             android:id="@+id/menu_item_left_drawer_test"
             android:title="@string/all_testing" />
     </group>

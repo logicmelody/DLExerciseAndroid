@@ -37,6 +37,7 @@ import com.dl.dlexerciseandroid.ui.overview.OverviewFragment;
 import com.dl.dlexerciseandroid.ui.rightdrawer.RightDrawerFragment;
 import com.dl.dlexerciseandroid.ui.speechrecognition.SpeechRecognitionFragment;
 import com.dl.dlexerciseandroid.ui.spring.ConsumingRestfulWebServiceFragment;
+import com.dl.dlexerciseandroid.ui.strategypattern.StrategyPatternFragment;
 import com.dl.dlexerciseandroid.ui.test.TestFragment;
 import com.dl.dlexerciseandroid.ui.time.TimeFragment;
 import com.dl.dlexerciseandroid.utility.utils.FbUtils;
@@ -285,6 +286,10 @@ public class UIController implements View.OnClickListener {
 
                     case R.id.menu_item_left_drawer_speech_recognition:
                         replaceContentFragment(SpeechRecognitionFragment.class, SpeechRecognitionFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_strategy_pattern:
+                        replaceContentFragment(StrategyPatternFragment.class, StrategyPatternFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:

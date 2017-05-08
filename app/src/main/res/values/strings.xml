@@ -41,6 +41,7 @@
     <string name="all_time" translatable="false">Time</string>
     <string name="all_animation" translatable="false">Animation</string>
     <string name="all_speech_recognition" translatable="false">Speech Recognition</string>
+    <string name="all_strategy_pattern" translatable="false">Strategy Pattern</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">Sure to logout?</string>
@@ -108,5 +109,9 @@
     <string name="bottom_navigation_view_add">Add</string>
     <string name="bottom_navigation_view_notification">Notification</string>
     <string name="bottom_navigation_view_person">Person</string>
+
+    <!-- Strategy Pattern -->
+    <string name="strategy_pattern_eat">Eat</string>
+    <string name="strategy_pattern_sleep">Sleep</string>
 
 </resources>

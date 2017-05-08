@@ -57,4 +57,8 @@
     <string name="bottom_navigation_view_notification">通知</string>
     <string name="bottom_navigation_view_person">個人</string>
 
+    <!-- Strategy Pattern -->
+    <string name="strategy_pattern_eat">吃</string>
+    <string name="strategy_pattern_sleep">睡</string>
+
 </resources>
