@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.text.TextUtils;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.ui.doitlater.handleintent.DoItLaterTask;
@@ -16,22 +17,25 @@ import com.dl.dlexerciseandroid.utility.utils.GeneralUtils;
 /**
  * Created by logicmelody on 2016/4/22.
  */
-public class DoItLaterService extends IntentService {
+public class TaskService extends IntentService {
 
-    private static final String TAG = DoItLaterService.class.getName();
+    private static final String TAG = TaskService.class.getName();
 
     private static final class Action {
+        public static final String SAVE_NORMAL_TASK = "com.dl.dlexerciseandroid.SAVE_NORMAL_TASK";
         public static final String SAVE_DO_IT_LATER_TASK = "com.dl.dlexerciseandroid.SAVE_DO_IT_LATER_TASK";
     }
 
     private static final class ExtraKey {
+        public static final String STRING_NORMAL_TASK_TITLE = "com.dl.dlexerciseandroid.EXTRA_STRING_NORMAL_TASK_TITLE";
+        public static final String STRING_NORMAL_TASK_DESCRIPTION = "com.dl.dlexerciseandroid.EXTRA_STRING_NORMAL_TASK_DESCRIPTION";
         public static final String INTENT_FROM_OTHER_APP = "com.dl.dlexerciseandroid.EXTRA_INTENT_FROM_OTHER_APP";
     }
 
     private Handler mHandler;
 
 
-    public DoItLaterService() {
+    public TaskService() {
         super(TAG);
     }
 
@@ -41,8 +45,17 @@ public class DoItLaterService extends IntentService {
         mHandler = new Handler();
     }
 
+    public static Intent generateSaveNormalTaskIntent(Context context, String title, String description) {
+        Intent intent = new Intent(context, TaskService.class);
+        intent.setAction(Action.SAVE_NORMAL_TASK);
+        intent.putExtra(ExtraKey.STRING_NORMAL_TASK_TITLE, title);
+        intent.putExtra(ExtraKey.STRING_NORMAL_TASK_DESCRIPTION, description);
+
+        return intent;
+    }
+
     public static Intent generateSaveDoItLaterTaskIntent(Context context, Intent intentFromOtherApp) {
-        Intent intent = new Intent(context, DoItLaterService.class);
+        Intent intent = new Intent(context, TaskService.class);
         intent.setAction(Action.SAVE_DO_IT_LATER_TASK);
         intent.putExtra(ExtraKey.INTENT_FROM_OTHER_APP, intentFromOtherApp);
 
@@ -53,9 +66,24 @@ public class DoItLaterService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         String action = intent.getAction();
 
-        if (Action.SAVE_DO_IT_LATER_TASK.equals(action)) {
+        if (Action.SAVE_NORMAL_TASK.equals(action)) {
+            saveNormalTask(intent);
+
+        } else if (Action.SAVE_DO_IT_LATER_TASK.equals(action)) {
             saveDoItLaterTask(intent);
         }
+    }
+
+    private void saveNormalTask(Intent intent) {
+        String title = intent.getStringExtra(ExtraKey.STRING_NORMAL_TASK_TITLE);
+        String description = intent.getStringExtra(ExtraKey.STRING_NORMAL_TASK_DESCRIPTION);
+
+        if (TextUtils.isEmpty(title)) {
+            return;
+        }
+
+        DbUtils.insertTask(this, title, description, System.currentTimeMillis());
+        GeneralUtils.showToastInNonUIThread(mHandler, this, getString(R.string.do_it_later_save_task_completed));
     }
 
     private void saveDoItLaterTask(Intent intent) {

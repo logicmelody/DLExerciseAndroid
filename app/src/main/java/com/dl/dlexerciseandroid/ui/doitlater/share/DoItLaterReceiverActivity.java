@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.dl.dlexerciseandroid.backgroundtask.service.DoItLaterService;
+import com.dl.dlexerciseandroid.backgroundtask.service.TaskService;
 import com.dl.dlexerciseandroid.utility.utils.DoItLaterUtils;
 
 /**
@@ -23,7 +23,7 @@ public class DoItLaterReceiverActivity extends AppCompatActivity {
 
         if (action.equals(DoItLaterUtils.ACTION_DO_IT_LATER) || action.equals(Intent.ACTION_SEND)) {
             // 開啟存task的service之後，我們就把這個用來接收shared intent的Activity關掉
-            startService(DoItLaterService.generateSaveDoItLaterTaskIntent(this, getIntent()));
+            startService(TaskService.generateSaveDoItLaterTaskIntent(this, getIntent()));
         }
 
         finish();

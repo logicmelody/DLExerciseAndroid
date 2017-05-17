@@ -157,7 +157,7 @@
         -->
 
         <service
-            android:name=".backgroundtask.service.DoItLaterService"
+            android:name=".backgroundtask.service.TaskService"
             android:exported="false" />
         <service
             android:name=".backgroundtask.service.MessageService"

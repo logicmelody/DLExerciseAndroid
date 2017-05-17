@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.utility.utils.DbUtils;
+import com.dl.dlexerciseandroid.backgroundtask.service.TaskService;
 
 public class AddTaskActivity extends AppCompatActivity {
 
@@ -84,6 +84,6 @@ public class AddTaskActivity extends AppCompatActivity {
             return;
         }
 
-        DbUtils.insertTask(this, title, description, System.currentTimeMillis());
+        startService(TaskService.generateSaveNormalTaskIntent(this, title, description));
     }
 }
