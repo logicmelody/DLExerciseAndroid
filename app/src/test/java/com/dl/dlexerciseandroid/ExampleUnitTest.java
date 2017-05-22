@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
  * Local Unit Test要將file放在這個package底下
  */
 public class ExampleUnitTest {
+
     @Test
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
