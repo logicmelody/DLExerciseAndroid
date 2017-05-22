@@ -6,6 +6,8 @@ import static org.junit.Assert.*;
 
 /**
  * To work on unit tests, switch the Test Artifact in the Build Variants view.
+ *
+ * Local Unit Test要將file放在這個package底下
  */
 public class ExampleUnitTest {
     @Test
