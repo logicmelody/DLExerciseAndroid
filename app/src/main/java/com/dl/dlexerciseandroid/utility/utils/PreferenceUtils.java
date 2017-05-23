@@ -11,4 +11,7 @@ public class PreferenceUtils {
 
     // Firebase
     public static final String PREFERENCE_SUBSCRIBE_TEST_TOPIC = "com.dl.dlexerciseandroid.PREFERENCE_SUBSCRIBE_TEST_TOPIC";
+
+    // Instrumented Unit Tests
+    public static final String PREFERENCE_TESTING = "com.dl.dlexerciseandroid.PREFERENCE_TESTING";
 }

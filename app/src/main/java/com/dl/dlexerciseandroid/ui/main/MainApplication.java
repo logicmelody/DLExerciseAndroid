@@ -1,9 +1,12 @@
 package com.dl.dlexerciseandroid.ui.main;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.animation.AnimationUtils;
 
 import com.dl.dlexerciseandroid.utility.utils.GeneralUtils;
+import com.dl.dlexerciseandroid.utility.utils.PreferenceUtils;
 import com.facebook.FacebookSdk;
 
 /**
@@ -24,6 +27,7 @@ public class MainApplication extends Application {
     private void initialize() {
         initAnimation();
         initFacebookSdk();
+        initSharedPreferences();
     }
 
     private void initAnimation() {
@@ -36,5 +40,14 @@ public class MainApplication extends Application {
         // Initialize the SDK before executing any other operations,
         // especially, if you're using Facebook UI elements.
         FacebookSdk.sdkInitialize(getApplicationContext());
+    }
+
+    private void initSharedPreferences() {
+        if (PreferenceManager.getDefaultSharedPreferences(this).contains(PreferenceUtils.PREFERENCE_TESTING)) {
+            return;
+        }
+
+        PreferenceManager.getDefaultSharedPreferences(this).edit()
+                .putString(PreferenceUtils.PREFERENCE_TESTING, PreferenceUtils.PREFERENCE_TESTING).apply();
     }
 }
