@@ -42,6 +42,7 @@
     <!-- Music Player -->
     <dimen name="padding_music_item">15dp</dimen>
     <dimen name="height_playing_music_item">60dp</dimen>
+    <dimen name="margin_top_button_music_player_request_permission">10dp</dimen>
 
     <!-- Notification for playing music -->
     <dimen name="padding_notification_playing_music">15dp</dimen>

@@ -37,6 +37,8 @@
 
     <!-- Music player -->
     <string name="music_player_no_music">放些音樂到裝置上吧</string>
+    <string name="music_player_request_permission_explanation">如果你想要聽音樂，你必須同意存取權限</string>
+    <string name="music_player_request_reading_media_permission">要求存取多媒體的權限</string>
 
     <!-- Movie Searcher -->
     <string name="movie_searcher_search_movie">請輸入電影名稱...</string>

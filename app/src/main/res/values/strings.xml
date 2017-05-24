@@ -74,6 +74,8 @@
 
     <!-- Music player -->
     <string name="music_player_no_music">Drag some musics to device</string>
+    <string name="music_player_request_permission_explanation">If you want to listen to music on your phone, you need to grant permission.</string>
+    <string name="music_player_request_reading_media_permission">Request Reading Media Permission</string>
 
     <!-- Firebase -->
     <string name="firebase_switch_subscribe_topic_test" translatable="false">Subscribe Topic Test</string>
