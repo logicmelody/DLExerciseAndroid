@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.dl.dlexerciseandroid"
         minSdkVersion 18
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
 
@@ -66,8 +66,8 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'de.hdodenhof:circleimageview:2.0.0'
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:design:25.0.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
 
     // Required -- JUnit 4 framework, for 一般的unit tests
     testCompile 'junit:junit:4.12'
@@ -85,7 +85,7 @@ dependencies {
 
     // Optional -- UI testing with UI Automator，vXX的版本必須要跟minSdkVersion一致(e.g. 這邊都是18)
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
-    androidTestCompile 'com.android.support:support-annotations:25.0.0'
+    androidTestCompile 'com.android.support:support-annotations:25.3.1'
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
