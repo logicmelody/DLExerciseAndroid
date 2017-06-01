@@ -35,4 +35,10 @@
         android:layout_height="wrap_content"
         android:text="@string/all_bottom_navigation_view"/>
 
+    <Button
+        android:id="@+id/button_right_drawer_preview_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/all_preview_camera"/>
+
 </LinearLayout>

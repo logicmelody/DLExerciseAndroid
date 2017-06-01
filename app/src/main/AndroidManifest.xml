@@ -142,6 +142,7 @@
         <activity android:name=".ui.bottomnavigationview.BottomNavigationViewActivity" />
         <activity android:name=".ui.strategypattern.activities.EatActivity" />
         <activity android:name=".ui.strategypattern.activities.SleepActivity" />
+        <activity android:name=".ui.previewcamera.PreviewCameraActivity" />
 
         <!--
         用receiver沒有辦法收到來自別的app的shared intent

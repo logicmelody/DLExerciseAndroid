@@ -16,6 +16,7 @@ import com.dl.dlexerciseandroid.ui.coordinatorlayout.CoordinatorLayoutActivity;
 import com.dl.dlexerciseandroid.ui.espressotest.EspressoTestActivity;
 import com.dl.dlexerciseandroid.ui.mininavigationdrawer.main.MiniNavigationDrawerActivity;
 import com.dl.dlexerciseandroid.ui.moviesearcher.MovieSearcherActivity;
+import com.dl.dlexerciseandroid.ui.previewcamera.PreviewCameraActivity;
 
 /**
  * Created by logicmelody on 2016/4/4.
@@ -36,6 +37,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
     private Button mEspressoTestButton;
     private Button mMiniNavigationDrawerButton;
     private Button mBottomNavigationViewButton;
+    private Button mPreviewCameraButton;
 
 
     @Override
@@ -68,6 +70,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
         mEspressoTestButton = (Button) getView().findViewById(R.id.button_right_drawer_espresso_test);
         mMiniNavigationDrawerButton = (Button) getView().findViewById(R.id.button_right_drawer_mini_navigation_drawer);
         mBottomNavigationViewButton = (Button) getView().findViewById(R.id.button_right_drawer_bottom_navigation_view);
+        mPreviewCameraButton = (Button) getView().findViewById(R.id.button_right_drawer_preview_camera);
     }
 
     private void setupViews() {
@@ -76,6 +79,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
         mEspressoTestButton.setOnClickListener(this);
         mMiniNavigationDrawerButton.setOnClickListener(this);
         mBottomNavigationViewButton.setOnClickListener(this);
+        mPreviewCameraButton.setOnClickListener(this);
     }
 
     @Override
@@ -99,6 +103,10 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
 
             case R.id.button_right_drawer_bottom_navigation_view:
                 startActivity(new Intent(mContext, BottomNavigationViewActivity.class));
+                break;
+
+            case R.id.button_right_drawer_preview_camera:
+                startActivity(new Intent(mContext, PreviewCameraActivity.class));
                 break;
         }
 
