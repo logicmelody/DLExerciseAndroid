@@ -6,17 +6,40 @@
 
     <include layout="@layout/toolbar" />
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/padding_all_window">
+        android:layout_height="match_parent">
 
-        <TextView
+        <SurfaceView
+            android:id="@+id/surface_view_preview_camera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/view_group_preview_camera_request_camera_permission_explanation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/all_preview_camera"/>
+            android:padding="@dimen/padding_all_window"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
 
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:text="@string/preview_camera_request_camera_permission_explanation"/>
+
+            <Button
+                android:id="@+id/button_preview_camera_request_camera_permission"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top_button_preview_camera_request_camera_permission"
+                android:text="@string/preview_camera_request_camera_permission"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
 
 </LinearLayout>

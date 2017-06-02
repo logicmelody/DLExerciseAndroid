@@ -117,4 +117,8 @@
     <string name="strategy_pattern_eat">Eat</string>
     <string name="strategy_pattern_sleep">Sleep</string>
 
+    <!-- Preview Camera -->
+    <string name="preview_camera_request_camera_permission_explanation">If you want to preview the camera, you need to grant permission.</string>
+    <string name="preview_camera_request_camera_permission">Request Camera Permission</string>
+
 </resources>

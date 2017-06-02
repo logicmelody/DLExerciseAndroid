@@ -45,7 +45,7 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
     public static final Uri sAudioContentUri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
 
     private static final int LOADER_ID = 47;
-    private static final int READ_CODE_EXTERNAL_STORAGE = 1;
+    private static final int REQUEST_CODE_EXTERNAL_STORAGE = 1;
 
     private Context mContext;
 
@@ -191,9 +191,9 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
         // 在Fragment中如果想要requestPermissions，根據最新的support-v4 library，直接用Fragment class中的method即可
         requestPermissions(
                 new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},
-                READ_CODE_EXTERNAL_STORAGE);
+                REQUEST_CODE_EXTERNAL_STORAGE);
 
-        // READ_CODE_EXTERNAL_STORAGE is an
+        // REQUEST_CODE_EXTERNAL_STORAGE is an
         // app-defined int constant. The callback method gets the
         // result of the request.
     }
@@ -330,7 +330,7 @@ public class MusicPlayerFragment extends Fragment implements LoaderManager.Loade
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         switch (requestCode) {
-            case READ_CODE_EXTERNAL_STORAGE:
+            case REQUEST_CODE_EXTERNAL_STORAGE:
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted, yay! Do the

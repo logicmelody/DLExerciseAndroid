@@ -63,4 +63,9 @@
     <string name="strategy_pattern_eat">吃</string>
     <string name="strategy_pattern_sleep">睡</string>
 
+    <!-- Preview Camera -->
+    <string name="preview_camera_request_camera_permission_explanation">如果你想要預覽相機畫面，你必須同意存取權限</string>
+    <string name="preview_camera_request_camera_permission">要求存取相機的權限</string>
+
+
 </resources>
