@@ -17,8 +17,12 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.utility.utils.GeneralUtils;
+
+import java.io.IOException;
 
 public class PreviewCameraActivity extends AppCompatActivity implements
         SurfaceHolder.Callback, View.OnClickListener {
@@ -34,8 +38,10 @@ public class PreviewCameraActivity extends AppCompatActivity implements
     // SurfaceView是一個View，我們可以用獨立的thread去變更SurfaceView上呈現的東西，因為是獨立的thread，
     // 所以我們可以進行比較複雜的UI操作，而且不會block住main thread
     private SurfaceView mPreviewCameraSurfaceView;
+    private SurfaceHolder mPreviewCameraSurfaceHolder;
 
     private Camera mCamera;
+    private int mDefaultCameraId = -1;
 
     private boolean mHasCameraPermission = false;
 
@@ -79,7 +85,8 @@ public class PreviewCameraActivity extends AppCompatActivity implements
     }
 
     private void setupPreviewCamera() {
-        mPreviewCameraSurfaceView.getHolder().addCallback(this);
+        mPreviewCameraSurfaceHolder = mPreviewCameraSurfaceView.getHolder();
+        mPreviewCameraSurfaceHolder.addCallback(this);
     }
 
     @Override
@@ -98,7 +105,27 @@ public class PreviewCameraActivity extends AppCompatActivity implements
     }
 
     private void setupCamera() {
+        if (mCamera != null) {
+            return;
+        }
 
+        mCamera = Camera.open();
+        mDefaultCameraId = getDefaultCameraId();
+    }
+
+    private int getDefaultCameraId() {
+        Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+        int defaultCameraId = -1;
+
+        for (int i = 0; i < Camera.getNumberOfCameras(); i++) {
+            Camera.getCameraInfo(i, cameraInfo);
+
+            if (Camera.CameraInfo.CAMERA_FACING_BACK == cameraInfo.facing) {
+                defaultCameraId = i;
+            }
+        }
+
+        return defaultCameraId;
     }
 
     private boolean hasCameraPermission() {
@@ -150,7 +177,12 @@ public class PreviewCameraActivity extends AppCompatActivity implements
     }
 
     private void releaseCamera() {
+        if (mCamera == null) {
+            return;
+        }
 
+        mCamera.release();
+        mCamera = null;
     }
 
     @Override
@@ -158,7 +190,6 @@ public class PreviewCameraActivity extends AppCompatActivity implements
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-
                 return true;
 
             default:
@@ -173,12 +204,33 @@ public class PreviewCameraActivity extends AppCompatActivity implements
         }
 
         // 這邊我們在surface建立成功後就開始進行camera的preview
-        //startCameraPreview();
+        startCameraPreview();
+    }
+
+    private void startCameraPreview() {
+        if (mCamera == null) {
+            return;
+        }
+
+        try {
+            // 設定要用哪個surface來preview camera的畫面，我們這邊是用SurfaceView來實作，
+            // 所以必須等到SurfaceView的surface create成功之後才可以call mCamera.setPreviewDisplay()
+            mCamera.setPreviewDisplay(mPreviewCameraSurfaceHolder);
+
+            // 開始擷取畫面，並且將擷取到的image在設定好的surface上呈現
+            mCamera.startPreview();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+            Toast.makeText(this, "Unable to open camera.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
+        // 預設的camera角度會有點問題，可以利用Google提供的sample method把preview的畫面轉成正確的方向
+        GeneralUtils.setCameraDisplayOrientation(this, mDefaultCameraId, mCamera);
     }
 
     @Override
