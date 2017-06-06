@@ -9,10 +9,14 @@ import com.dl.dlexerciseandroid.R;
 
 public class RunningManActivity extends AppCompatActivity {
 
+    private RunningManView mRunningManView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_running_man);
+        mRunningManView = new RunningManView(this);
+        setContentView(mRunningManView);
         initialize();
     }
 
@@ -29,6 +33,18 @@ public class RunningManActivity extends AppCompatActivity {
 
         actionBar.setTitle(getString(R.string.all_running_man));
         actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mRunningManView.resume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mRunningManView.pause();
     }
 
     @Override
