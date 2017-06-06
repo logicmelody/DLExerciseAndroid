@@ -41,4 +41,10 @@
         android:layout_height="wrap_content"
         android:text="@string/all_preview_camera"/>
 
+    <Button
+        android:id="@+id/button_right_drawer_running_man"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/all_running_man"/>
+
 </LinearLayout>

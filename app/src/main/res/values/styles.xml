@@ -16,6 +16,15 @@
         <item name="android:windowBackground">@color/all_white</item>
     </style>
 
+    <style name="AppThemeWithActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/colorTextPrimary</item>  <!-- ActionBar title的顏色 -->
+        <item name="android:textColorSecondary">@color/colorTextSecondary</item>  <!-- ActionBar subtitle的顏色 -->
+        <item name="android:windowBackground">@color/all_white</item>
+    </style>
+
     <style name="AppTheme" parent="BaseAppTheme">
     </style>
 

@@ -19,6 +19,7 @@
     <string name="all_mini_navigation_drawer" translatable="false">Mini Navigation Drawer</string>
     <string name="all_bottom_navigation_view" translatable="false">Bottom Navigation View</string>
     <string name="all_preview_camera" translatable="false">Preview Camera</string>
+    <string name="all_running_man" translatable="false">Running Man</string>
     <string name="all_testing">Testing</string>
     <string name="all_music_player" translatable="false">Music Player</string>
     <string name="all_dl_sdk" translatable="false">DL SDK</string>

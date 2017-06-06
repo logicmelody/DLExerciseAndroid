@@ -17,6 +17,7 @@ import com.dl.dlexerciseandroid.ui.espressotest.EspressoTestActivity;
 import com.dl.dlexerciseandroid.ui.mininavigationdrawer.main.MiniNavigationDrawerActivity;
 import com.dl.dlexerciseandroid.ui.moviesearcher.MovieSearcherActivity;
 import com.dl.dlexerciseandroid.ui.previewcamera.PreviewCameraActivity;
+import com.dl.dlexerciseandroid.ui.runningman.RunningManActivity;
 
 /**
  * Created by logicmelody on 2016/4/4.
@@ -38,6 +39,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
     private Button mMiniNavigationDrawerButton;
     private Button mBottomNavigationViewButton;
     private Button mPreviewCameraButton;
+    private Button mRunningManButton;
 
 
     @Override
@@ -71,6 +73,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
         mMiniNavigationDrawerButton = (Button) getView().findViewById(R.id.button_right_drawer_mini_navigation_drawer);
         mBottomNavigationViewButton = (Button) getView().findViewById(R.id.button_right_drawer_bottom_navigation_view);
         mPreviewCameraButton = (Button) getView().findViewById(R.id.button_right_drawer_preview_camera);
+        mRunningManButton = (Button) getView().findViewById(R.id.button_right_drawer_running_man);
     }
 
     private void setupViews() {
@@ -80,6 +83,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
         mMiniNavigationDrawerButton.setOnClickListener(this);
         mBottomNavigationViewButton.setOnClickListener(this);
         mPreviewCameraButton.setOnClickListener(this);
+        mRunningManButton.setOnClickListener(this);
     }
 
     @Override
@@ -107,6 +111,10 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
 
             case R.id.button_right_drawer_preview_camera:
                 startActivity(new Intent(mContext, PreviewCameraActivity.class));
+                break;
+
+            case R.id.button_right_drawer_running_man:
+                startActivity(new Intent(mContext, RunningManActivity.class));
                 break;
         }
 

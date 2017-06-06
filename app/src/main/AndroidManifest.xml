@@ -148,6 +148,9 @@
         <activity android:name=".ui.strategypattern.activities.EatActivity" />
         <activity android:name=".ui.strategypattern.activities.SleepActivity" />
         <activity android:name=".ui.previewcamera.PreviewCameraActivity" />
+        <activity
+            android:name=".ui.runningman.RunningManActivity"
+            android:theme="@style/AppThemeWithActionBar"/>
 
         <!--
         用receiver沒有辦法收到來自別的app的shared intent
