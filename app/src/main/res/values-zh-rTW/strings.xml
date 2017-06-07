@@ -67,5 +67,7 @@
     <string name="preview_camera_request_camera_permission_explanation">如果你想要預覽相機畫面，你必須同意存取權限</string>
     <string name="preview_camera_request_camera_permission">要求存取相機的權限</string>
 
+    <!-- Running Man -->
+    <string name="running_man_keep_running">加油!</string>
 
 </resources>

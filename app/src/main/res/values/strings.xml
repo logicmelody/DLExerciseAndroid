@@ -122,4 +122,7 @@
     <string name="preview_camera_request_camera_permission_explanation">If you want to preview the camera, you need to grant permission.</string>
     <string name="preview_camera_request_camera_permission">Request Camera Permission</string>
 
+    <!-- Running Man -->
+    <string name="running_man_keep_running">Keep running!</string>
+
 </resources>

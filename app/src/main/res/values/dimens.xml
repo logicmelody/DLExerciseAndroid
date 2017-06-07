@@ -109,4 +109,7 @@
     <!-- Preview Camera -->
     <dimen name="margin_top_button_preview_camera_request_camera_permission">10dp</dimen>
 
+    <!-- Running Man -->
+    <dimen name="margin_right_bottom_running_man_keep_running_button">10dp</dimen>
+
 </resources>

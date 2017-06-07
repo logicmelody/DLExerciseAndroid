@@ -9,14 +9,18 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
 
-public class RunningManActivity extends AppCompatActivity {
+public class RunningManActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String THREAD_RUNNING_MAN = "com.dl.dlexerciseandroid.THREAD_RUNNING_MAN";
 
     private SurfaceView mSurfaceView;
+
+    private Button mKeepRunningButton;
 
     // 用一條HandlerThread跟Handler來處理畫running man的動畫
     private HandlerThread mRunningManThread;
@@ -33,6 +37,7 @@ public class RunningManActivity extends AppCompatActivity {
 
     private void initialize() {
         findViews();
+        setupViews();
         setupActionBar();
         setupSurfaceView();
         setupRunningManThread();
@@ -40,6 +45,11 @@ public class RunningManActivity extends AppCompatActivity {
 
     private void findViews() {
         mSurfaceView = (SurfaceView) findViewById(R.id.surface_view_running_main);
+        mKeepRunningButton = (Button) findViewById(R.id.button_running_man_keep_running);
+    }
+
+    private void setupViews() {
+        mKeepRunningButton.setOnClickListener(this);
     }
 
     private void setupActionBar() {
@@ -129,6 +139,16 @@ public class RunningManActivity extends AppCompatActivity {
 
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_running_man_keep_running:
+                Toast.makeText(this, getString(R.string.running_man_keep_running), Toast.LENGTH_SHORT).show();
+
+                break;
         }
     }
 }

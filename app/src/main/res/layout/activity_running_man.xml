@@ -8,4 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <Button
+        android:id="@+id/button_running_man_keep_running"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/margin_right_bottom_running_man_keep_running_button"
+        android:layout_marginBottom="@dimen/margin_right_bottom_running_man_keep_running_button"
+        android:layout_gravity="right|bottom"
+        android:text="@string/running_man_keep_running"/>
+
 </FrameLayout>
