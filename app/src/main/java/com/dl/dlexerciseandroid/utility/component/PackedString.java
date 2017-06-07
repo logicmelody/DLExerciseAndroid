@@ -148,6 +148,9 @@ public class PackedString {
     private static String convertObjectToString(Object value) {
         String result = "";
         ByteArrayOutputStream bo;
+
+        // An ObjectOutputStream writes primitive data types and graphs of Java objects to an OutputStream.
+        // Only objects that support the java.io.Serializable interface can be written to streams.
         ObjectOutputStream out;
         Class<?> _class = value.getClass();
 
@@ -160,6 +163,7 @@ public class PackedString {
                 out = new ObjectOutputStream(bo);
                 out.writeObject(value);
 
+                // 第一個packageName讓我們知道，如果要還原成原來的object的時候，要用哪個package的class loader
                 result = Builder.mPackagename + DELIMITER_TYPE + Base64
                         .encodeToString(bo.toByteArray(), Base64.DEFAULT);
 
@@ -206,6 +210,7 @@ public class PackedString {
 
                 try {
                     // 利用別的app的package name取回那個app環境的class loader
+                    // typeString = packageName
                     remote1 = mContext.createPackageContext(typeString,
                             Context.CONTEXT_INCLUDE_CODE | Context.CONTEXT_IGNORE_SECURITY);
 
