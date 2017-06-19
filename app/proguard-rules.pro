@@ -15,3 +15,16 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-dontwarn com.squareup.picasso.**
+-keep class com.squareup.picasso.**
+
+-dontwarn com.fasterxml.jackson.**
+-keep class com.fasterxml.jackson.**
+
+-dontwarn okio.**
+-keep class okio.**
+
+-dontwarn org.springframework.**
+-keep class org.springframework.**
+

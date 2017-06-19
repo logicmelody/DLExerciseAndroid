@@ -23,12 +23,30 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            // 打開Proguard功能
+            minifyEnabled true
+
             zipAlignEnabled true
             signingConfig signingConfigs.release
+
+            // getDefaultProguardFile('proguard-android.txt'):
+            // Gets the default ProGuard settings from the Android SDK tools/proguard/ folder
+            // proguard-rules.pro:
+            // 我們自己可以customize的Proguard rule
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // 我們還可以針對不同的product版本定義不同的proguard rule
+    // Ex: flavor2就接受了三種不同的proguard rules(proguard-android.txt, proguard-rules.pro, flavor2-rules.pro)
+//    productFlavors {
+//        flavor1 {
+//        }
+//        flavor2 {
+//            proguardFile 'flavor2-rules.pro'
+//        }
+//    }
+
     // For consuming restful web service with Spring
     packagingOptions {
         exclude 'META-INF/ASL2.0'
