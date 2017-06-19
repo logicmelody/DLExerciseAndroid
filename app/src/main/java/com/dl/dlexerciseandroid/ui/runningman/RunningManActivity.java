@@ -24,7 +24,7 @@ public class RunningManActivity extends AppCompatActivity implements View.OnClic
 
     // 用一條HandlerThread跟Handler來處理畫running man的動畫
     private HandlerThread mRunningManThread;
-    private Handler mRunningMainHandler;
+    private Handler mRunningManHandler;
     private RunningManRunnable mRunningManRunnable;
 
 
@@ -88,8 +88,8 @@ public class RunningManActivity extends AppCompatActivity implements View.OnClic
         mRunningManThread.start();
 
         mRunningManRunnable = new RunningManRunnable(getResources(), mSurfaceView);
-        mRunningMainHandler = new Handler(mRunningManThread.getLooper());
-        mRunningMainHandler.post(mRunningManRunnable);
+        mRunningManHandler = new Handler(mRunningManThread.getLooper());
+        mRunningManHandler.post(mRunningManRunnable);
     }
 
     @Override
@@ -124,7 +124,7 @@ public class RunningManActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void releaseRunningManThread() {
-        mRunningMainHandler.removeCallbacks(mRunningManRunnable);
+        mRunningManHandler.removeCallbacks(mRunningManRunnable);
         mRunningManThread.quit();
         mRunningManRunnable = null;
     }
