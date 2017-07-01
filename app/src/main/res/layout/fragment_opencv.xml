@@ -5,9 +5,9 @@
     android:padding="@dimen/padding_all_window">
 
     <TextView
+        android:id="@+id/text_view_opencv_test_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/all_opencv"/>
+        android:layout_gravity="center" />
 
 </FrameLayout>

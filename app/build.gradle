@@ -12,6 +12,13 @@ android {
 
         // Default test runner
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        // For Ndk CMake
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++11 -frtti -fexceptions"
+            }
+        }
     }
     signingConfigs {
         release {
@@ -54,6 +61,13 @@ android {
         exclude 'META-INF/license.txt'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/notice.txt'
+    }
+
+    // For Ndk CMake
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
     }
 }
 

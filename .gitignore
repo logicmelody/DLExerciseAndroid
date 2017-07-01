@@ -38,3 +38,5 @@ proguard/
 # Log Files
 *.log
 
+# Ndk build
+app/.externalNativeBuild/
