@@ -33,6 +33,7 @@ import com.dl.dlexerciseandroid.ui.firebase.FirebaseFragment;
 import com.dl.dlexerciseandroid.ui.intent.IntentFragment;
 import com.dl.dlexerciseandroid.ui.loadimagefrominternet.main.LoadImageFromInternetFragment;
 import com.dl.dlexerciseandroid.ui.musicplayer.main.MusicPlayerFragment;
+import com.dl.dlexerciseandroid.ui.opencv.OpenCVFragment;
 import com.dl.dlexerciseandroid.ui.overview.OverviewFragment;
 import com.dl.dlexerciseandroid.ui.rightdrawer.RightDrawerFragment;
 import com.dl.dlexerciseandroid.ui.speechrecognition.SpeechRecognitionFragment;
@@ -294,6 +295,10 @@ public class UIController implements View.OnClickListener {
 
                     case R.id.menu_item_left_drawer_test:
                         replaceContentFragment(TestFragment.class, TestFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_opencv:
+                        replaceContentFragment(OpenCVFragment.class, OpenCVFragment.TAG);
                         break;
                 }
 

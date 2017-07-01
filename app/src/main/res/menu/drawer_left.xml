@@ -73,6 +73,10 @@
             android:title="@string/all_strategy_pattern" />
 
         <item
+            android:id="@+id/menu_item_left_drawer_opencv"
+            android:title="@string/all_opencv" />
+
+        <item
             android:id="@+id/menu_item_left_drawer_test"
             android:title="@string/all_testing" />
     </group>
