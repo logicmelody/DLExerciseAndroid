@@ -70,4 +70,8 @@
     <!-- Running Man -->
     <string name="running_man_keep_running">加油!</string>
 
+    <!-- OpenCV -->
+    <string name="opencv_restore_image">還原圖片</string>
+    <string name="opencv_process_image">處理圖片</string>
+
 </resources>

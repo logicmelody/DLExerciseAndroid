@@ -126,4 +126,8 @@
     <!-- Running Man -->
     <string name="running_man_keep_running">Keep running!</string>
 
+    <!-- OpenCV -->
+    <string name="opencv_restore_image">Restore Image</string>
+    <string name="opencv_process_image">Process Image</string>
+
 </resources>

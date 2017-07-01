@@ -19,6 +19,11 @@ android {
                 cppFlags "-std=c++11 -frtti -fexceptions"
             }
         }
+
+        ndk {
+            abiFilters "armeabi"
+            abiFilters "x86"
+        }
     }
     signingConfigs {
         release {
