@@ -8,6 +8,7 @@
 
 using namespace cv;
 
+// C syntax
 IplImage *change4channelTo3InIplImage(IplImage *src) {
     if (src->nChannels != 4) {
         return NULL;
@@ -25,6 +26,8 @@ IplImage *change4channelTo3InIplImage(IplImage *src) {
     return destImg;
 }
 
+// C++ syntax: Required to declare as extern "C" to prevent c++ compiler
+// to mangle function names
 extern "C" {
     JNIEXPORT jintArray JNICALL
     Java_com_dl_dlexerciseandroid_utility_utils_OpenCVUtils_getCannyImg(JNIEnv *env, jobject obj,
