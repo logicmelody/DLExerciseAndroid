@@ -22,6 +22,15 @@ add_library( # Sets the name of the library.
              # Provides a relative path to your source file(s).
              src/main/cpp/native-lib.cpp )
 
+add_library( # Sets the name of the library.
+             passing-data-lib
+
+             # Sets the library as a shared library.
+             SHARED
+
+             # Provides a relative path to your source file(s).
+             src/main/cpp/passing-data-lib.cpp )
+
 # 如果要新增prebuilt的library，需要用以下這種寫法
 add_library( opencv_java3-lib
              SHARED
@@ -66,6 +75,7 @@ target_link_libraries( # Specifies the target library.
                        opencv-lib
                        opencv_java3-lib
                        native-lib
+                       passing-data-lib
 
                        # Links the target library to the log library
                        # included in the NDK.
