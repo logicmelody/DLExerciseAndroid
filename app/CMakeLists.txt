@@ -22,6 +22,7 @@ add_library( # Sets the name of the library.
              # Provides a relative path to your source file(s).
              src/main/cpp/native-lib.cpp )
 
+# 如果要新增prebuilt的library，需要用以下這種寫法
 add_library( opencv_java3-lib
              SHARED
              IMPORTED)
