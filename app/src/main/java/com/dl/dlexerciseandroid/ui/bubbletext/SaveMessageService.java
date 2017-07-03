@@ -51,6 +51,7 @@ public class SaveMessageService extends IntentService {
             return;
         }
 
+        // 我們嘗試在SaveMessageService這個IntentService中呼叫另外一個BubbleTextService去更新畫面
         startService(BubbleTextService.generateUpdateBubbleTextViewMessageIntent(this, message));
     }
 }
