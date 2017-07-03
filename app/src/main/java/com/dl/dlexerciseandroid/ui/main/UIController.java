@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.ui.animation.AnimationFragment;
 import com.dl.dlexerciseandroid.ui.bitmap.BitmapFragment;
+import com.dl.dlexerciseandroid.ui.bubbletext.BubbleTextFragment;
 import com.dl.dlexerciseandroid.ui.chat.main.ChatFragment;
 import com.dl.dlexerciseandroid.ui.customizedview.CustomizedViewFragment;
 import com.dl.dlexerciseandroid.database.debug.AndroidDatabaseManager;
@@ -300,6 +301,10 @@ public class UIController implements View.OnClickListener {
 
                     case R.id.menu_item_left_drawer_opencv:
                         replaceContentFragment(OpenCVFragment.class, OpenCVFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_bubble_text:
+                        replaceContentFragment(BubbleTextFragment.class, BubbleTextFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:

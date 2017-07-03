@@ -46,6 +46,7 @@
     <string name="all_strategy_pattern" translatable="false">Strategy Pattern</string>
     <string name="all_opencv" translatable="false">OpenCV</string>
     <string name="all_ndk" translatable="false">NDK</string>
+    <string name="all_bubble_text" translatable="false">Bubble Text</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">Sure to logout?</string>
