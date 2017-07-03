@@ -132,4 +132,7 @@
     <string name="opencv_restore_image">Restore Image</string>
     <string name="opencv_process_image">Process Image</string>
 
+    <!-- Bubble Text -->
+    <string name="bubble_text_show_bubble_text_view" translatable="false">Show BubbleTextView</string>
+
 </resources>

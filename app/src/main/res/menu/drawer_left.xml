@@ -81,10 +81,6 @@
             android:title="@string/all_opencv" />
 
         <item
-            android:id="@+id/menu_item_left_drawer_bubble_text"
-            android:title="@string/all_bubble_text" />
-
-        <item
             android:id="@+id/menu_item_left_drawer_test"
             android:title="@string/all_testing" />
     </group>

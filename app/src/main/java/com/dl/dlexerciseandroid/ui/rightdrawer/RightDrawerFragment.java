@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.ui.bottomnavigationview.BottomNavigationViewActivity;
+import com.dl.dlexerciseandroid.ui.bubbletext.BubbleTextActivity;
 import com.dl.dlexerciseandroid.ui.coordinatorlayout.CoordinatorLayoutActivity;
 import com.dl.dlexerciseandroid.ui.espressotest.EspressoTestActivity;
 import com.dl.dlexerciseandroid.ui.mininavigationdrawer.main.MiniNavigationDrawerActivity;
@@ -40,6 +41,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
     private Button mBottomNavigationViewButton;
     private Button mPreviewCameraButton;
     private Button mRunningManButton;
+    private Button mBubbleTextButton;
 
 
     @Override
@@ -74,6 +76,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
         mBottomNavigationViewButton = (Button) getView().findViewById(R.id.button_right_drawer_bottom_navigation_view);
         mPreviewCameraButton = (Button) getView().findViewById(R.id.button_right_drawer_preview_camera);
         mRunningManButton = (Button) getView().findViewById(R.id.button_right_drawer_running_man);
+        mBubbleTextButton = (Button) getView().findViewById(R.id.button_right_drawer_bubble_text);
     }
 
     private void setupViews() {
@@ -84,6 +87,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
         mBottomNavigationViewButton.setOnClickListener(this);
         mPreviewCameraButton.setOnClickListener(this);
         mRunningManButton.setOnClickListener(this);
+        mBubbleTextButton.setOnClickListener(this);
     }
 
     @Override
@@ -115,6 +119,10 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
 
             case R.id.button_right_drawer_running_man:
                 startActivity(new Intent(mContext, RunningManActivity.class));
+                break;
+
+            case R.id.button_right_drawer_bubble_text:
+                startActivity(new Intent(mContext, BubbleTextActivity.class));
                 break;
         }
 

@@ -28,6 +28,10 @@
     <uses-permission android:name="com.dl.dlexerciseandroid.provider.permission.READ" />
     <uses-permission android:name="com.dl.dlexerciseandroid.provider.permission.WRITE" />
 
+    <!-- Permissions for BubbleTextView -->
+    <!-- 如果要做floating window的效果，記得要加上這個permission -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
     <uses-feature android:name="android.hardware.camera" />
 
     <!-- 要把自己定義的Application class在AndroidManifest中進行設定 -->
@@ -151,6 +155,7 @@
         <activity
             android:name=".ui.runningman.RunningManActivity"
             android:theme="@style/AppThemeWithActionBar"/>
+        <activity android:name=".ui.bubbletext.BubbleTextActivity" />
 
         <!--
         用receiver沒有辦法收到來自別的app的shared intent
@@ -176,6 +181,9 @@
             android:exported="false" />
         <service
             android:name=".backgroundtask.service.TmdbApiService"
+            android:exported="false" />
+        <service
+            android:name=".ui.bubbletext.BubbleTextService"
             android:exported="false" />
         <service android:name=".backgroundtask.service.FCMService">
             <intent-filter>
