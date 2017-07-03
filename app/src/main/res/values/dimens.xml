@@ -115,5 +115,6 @@
     <!-- Bubble Text -->
     <dimen name="padding_bubble_text_view">8dp</dimen>
     <dimen name="corners_radius_bubble_text_view">15dp</dimen>
+    <dimen name="margin_left_image_view_bubble_text_view_close">5dp</dimen>
 
 </resources>

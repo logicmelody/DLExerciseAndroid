@@ -1,6 +1,7 @@
 package com.dl.dlexerciseandroid.ui.bubbletext;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
@@ -35,6 +36,14 @@ public class BubbleTextService extends Service {
     private TextView mmBubbleTextViewMessage;
     private ImageView mCloseBubbleTextViewButton;
 
+
+    public static Intent generateUpdateBubbleTextViewMessageIntent(Context context, String message) {
+        Intent intent = new Intent(context, BubbleTextService.class);
+        intent.setAction(BubbleTextService.Action.ACTION_GET_NEW_MESSAGE);
+        intent.putExtra(BubbleTextService.Extra.EXTRA_MESSAGE, message);
+
+        return intent;
+    }
 
     @Override
     public void onCreate() {

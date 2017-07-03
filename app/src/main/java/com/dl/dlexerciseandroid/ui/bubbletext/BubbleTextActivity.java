@@ -57,25 +57,19 @@ public class BubbleTextActivity extends AppCompatActivity implements View.OnClic
                 break;
 
             case R.id.button_bubble_text_send_message_to_bubble_text_view:
-                sendMessageToBubbleTextView();
-
-                startService(new Intent(this, BubbleTextService.class));
+                saveMessage();
 
                 break;
         }
     }
 
-    private void sendMessageToBubbleTextView() {
+    private void saveMessage() {
         String input = mInputText.getText().toString();
 
         if (TextUtils.isEmpty(input)) {
             return;
         }
 
-        Intent intent = new Intent(this, BubbleTextService.class);
-        intent.setAction(BubbleTextService.Action.ACTION_GET_NEW_MESSAGE);
-        intent.putExtra(BubbleTextService.Extra.EXTRA_MESSAGE, input);
-
-        startService(intent);
+        startService(SaveMessageService.generateSaveMessageIntent(this, input));
     }
 }

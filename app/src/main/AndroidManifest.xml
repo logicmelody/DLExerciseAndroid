@@ -185,6 +185,9 @@
         <service
             android:name=".ui.bubbletext.BubbleTextService"
             android:exported="false" />
+        <service
+            android:name=".ui.bubbletext.SaveMessageService"
+            android:exported="false" />
         <service android:name=".backgroundtask.service.FCMService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

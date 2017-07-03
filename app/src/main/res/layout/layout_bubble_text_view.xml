@@ -17,6 +17,7 @@
         android:id="@+id/image_view_bubble_text_view_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_left_image_view_bubble_text_view_close"
         android:src="@drawable/ic_bubble_text_close" />
 
 </LinearLayout>
