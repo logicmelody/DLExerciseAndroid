@@ -134,5 +134,6 @@
 
     <!-- Bubble Text -->
     <string name="bubble_text_show_bubble_text_view" translatable="false">Show BubbleTextView</string>
+    <string name="bubble_text_send_message" translatable="false">Send Message</string>
 
 </resources>

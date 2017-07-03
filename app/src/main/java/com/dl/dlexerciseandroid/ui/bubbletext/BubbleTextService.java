@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
 
@@ -19,9 +21,18 @@ import com.dl.dlexerciseandroid.R;
 
 public class BubbleTextService extends Service {
 
+    public static final class Action {
+        public static final String ACTION_GET_NEW_MESSAGE = "com.dl.dlexerciseandroid.ui.bubbletext.ACTION_GET_NEW_MESSAGE";
+    }
+
+    public static final class Extra {
+        public static final String EXTRA_MESSAGE = "com.dl.dlexerciseandroid.ui.bubbletext.EXTRA_MESSAGE";
+    }
+
     private WindowManager mWindowManager;
 
     private View mBubbleTextView;
+    private TextView mmBubbleTextViewMessage;
     private ImageView mCloseBubbleTextViewButton;
 
 
@@ -65,6 +76,7 @@ public class BubbleTextService extends Service {
     }
 
     private void findViews() {
+        mmBubbleTextViewMessage = (TextView) mBubbleTextView.findViewById(R.id.text_view_bubble_text_view_message);
         mCloseBubbleTextViewButton = (ImageView) mBubbleTextView.findViewById(R.id.image_view_bubble_text_view_close);
     }
 
@@ -79,7 +91,23 @@ public class BubbleTextService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        String action = intent.getAction();
+
+        if (Action.ACTION_GET_NEW_MESSAGE.equals(action)) {
+            updateBubbleTextViewMessage(intent);
+        }
+
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    private void updateBubbleTextViewMessage(Intent intent) {
+        if (intent == null) {
+            return;
+        }
+
+        String message = intent.getStringExtra(Extra.EXTRA_MESSAGE);
+
+        mmBubbleTextViewMessage.setText(TextUtils.isEmpty(message) ? "" : message);
     }
 
     @Nullable
