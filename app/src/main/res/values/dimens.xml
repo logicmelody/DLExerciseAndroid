@@ -113,7 +113,7 @@
     <dimen name="margin_right_bottom_running_man_keep_running_button">10dp</dimen>
 
     <!-- Bubble Text -->
-    <dimen name="padding_bubble_text_view">10dp</dimen>
+    <dimen name="padding_bubble_text_view">8dp</dimen>
     <dimen name="corners_radius_bubble_text_view">15dp</dimen>
 
 </resources>

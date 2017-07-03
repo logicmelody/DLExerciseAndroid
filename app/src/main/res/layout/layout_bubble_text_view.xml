@@ -3,6 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="@dimen/padding_bubble_text_view"
+    android:gravity="center_vertical"
     android:orientation="horizontal"
     android:background="@drawable/background_bubble_text_view">
 
@@ -10,7 +11,12 @@
         android:id="@+id/text_view_bubble_text_view_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:text="Bubble text view"/>
+        android:textAppearance="?android:textAppearanceLarge" />
+
+    <ImageView
+        android:id="@+id/image_view_bubble_text_view_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_bubble_text_close" />
 
 </LinearLayout>

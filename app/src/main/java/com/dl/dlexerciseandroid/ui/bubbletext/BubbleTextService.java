@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.dl.dlexerciseandroid.R;
 
@@ -21,6 +22,7 @@ public class BubbleTextService extends Service {
     private WindowManager mWindowManager;
 
     private View mBubbleTextView;
+    private ImageView mCloseBubbleTextViewButton;
 
 
     @Override
@@ -34,6 +36,7 @@ public class BubbleTextService extends Service {
 
         setupBubbleTextView();
         findViews();
+        setupViews();
     }
 
     private void setupBubbleTextView() {
@@ -62,7 +65,16 @@ public class BubbleTextService extends Service {
     }
 
     private void findViews() {
+        mCloseBubbleTextViewButton = (ImageView) mBubbleTextView.findViewById(R.id.image_view_bubble_text_view_close);
+    }
 
+    private void setupViews() {
+        mCloseBubbleTextViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BubbleTextService.this.stopSelf();
+            }
+        });
     }
 
     @Override
@@ -74,5 +86,14 @@ public class BubbleTextService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mBubbleTextView != null) {
+            mWindowManager.removeView(mBubbleTextView);
+        }
+
+        super.onDestroy();
     }
 }
