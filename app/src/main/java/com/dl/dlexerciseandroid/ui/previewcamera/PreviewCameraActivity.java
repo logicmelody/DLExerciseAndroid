@@ -229,6 +229,8 @@ public class PreviewCameraActivity extends AppCompatActivity implements
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+        Log.d("danny", "PreviewCameraActivity: surfaceChanged");
+
         // 預設的camera角度會有點問題，可以利用Google提供的sample method把preview的畫面轉成正確的方向
         GeneralUtils.setCameraDisplayOrientation(this, mDefaultCameraId, mCamera);
     }
