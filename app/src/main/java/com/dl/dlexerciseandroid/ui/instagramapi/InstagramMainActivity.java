@@ -1,6 +1,7 @@
 package com.dl.dlexerciseandroid.ui.instagramapi;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -97,8 +98,7 @@ public class InstagramMainActivity extends AppCompatActivity implements View.OnC
 
                     Log.d("danny", "Instagram code = " + code);
 
-                    // TODO: Run一個AsyncTask來拿取access_token
-
+                    new GetAuthenticationTokenAsyncTask(InstagramMainActivity.this).execute(code);
 
                 } else if (RESULT_CANCELED == resultCode) {
                     Log.d("danny", "onActivityResult RESULT_CANCELED");

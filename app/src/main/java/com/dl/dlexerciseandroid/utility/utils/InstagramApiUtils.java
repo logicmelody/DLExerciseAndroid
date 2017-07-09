@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.dl.dlexerciseandroid.R;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by logicmelody on 2017/7/9.
  */
@@ -25,19 +28,19 @@ public class InstagramApiUtils {
         return AUTHORIZATION_URL.replaceAll("CLIENT-ID", clientId).replaceAll("REDIRECT-URI", redirectUri);
     }
 
-    public static String getTokenUrl(Context context, String code) {
-        return new StringBuilder(TOKEN_URL)
-                .append("?client_id=").append(context.getString(R.string.instagram_api_client_id))
-                .append("&client_secret=").append(context.getString(R.string.instagram_api_client_secret))
-                .append("&redirect_uri=").append(context.getString(R.string.instagram_api_client_redirect_uri))
-                .append("&grant_type=").append(code).toString();
+    public static String getTokenUrl() {
+        return TOKEN_URL;
     }
 
-    public static String getTokenUrl(String clientId, String clientSecret, String redirectUri, String code) {
-        return new StringBuilder(TOKEN_URL)
-                .append("?client_id=").append(clientId)
-                .append("&client_secret=").append(clientSecret)
-                .append("&redirect_uri=").append(redirectUri)
-                .append("&grant_type=").append(code).toString();
+    public static Map<String, String> getTokenBodyMap(Context context, String code) {
+        Map<String, String> map = new HashMap<>();
+
+        map.put("client_id", context.getString(R.string.instagram_api_client_id));
+        map.put("client_secret", context.getString(R.string.instagram_api_client_secret));
+        map.put("redirect_uri", context.getString(R.string.instagram_api_client_redirect_uri));
+        map.put("grant_type", "authorization_code");
+        map.put("code", code);
+
+        return map;
     }
 }

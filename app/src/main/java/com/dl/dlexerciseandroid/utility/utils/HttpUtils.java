@@ -52,6 +52,12 @@ public class HttpUtils {
         return response.body().string();
     }
 
+    public static String postJsonStringFromUrl(String url, Map<String, String> bodyMap) throws IOException {
+        Response response = sHttpClient.newCall(postRequest(url, bodyMap)).execute();
+
+        return response.body().string();
+    }
+
     /**
      * 記得要在background thread執行
      *
