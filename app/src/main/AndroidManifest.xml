@@ -155,7 +155,8 @@
         <activity
             android:name=".ui.runningman.RunningManActivity"
             android:theme="@style/AppThemeWithActionBar"/>
-        <activity android:name=".ui.bubbletext.BubbleTextActivity" />
+        <activity android:name=".ui.bubbletext.BubbleTextActivity"
+            android:theme="@style/AppThemeWithActionBar"/>
         <activity
             android:name=".ui.instagramapi.InstagramApiActivity"
             android:theme="@style/AppThemeWithActionBar"/>
