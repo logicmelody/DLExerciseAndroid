@@ -30,7 +30,7 @@
 
     <!-- Permissions for BubbleTextView -->
     <!-- 如果要做floating window的效果，記得要加上這個permission -->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <uses-feature android:name="android.hardware.camera" />
 
@@ -154,11 +154,14 @@
         <activity android:name=".ui.previewcamera.PreviewCameraActivity" />
         <activity
             android:name=".ui.runningman.RunningManActivity"
-            android:theme="@style/AppThemeWithActionBar"/>
-        <activity android:name=".ui.bubbletext.BubbleTextActivity"
-            android:theme="@style/AppThemeWithActionBar"/>
+            android:theme="@style/AppThemeWithActionBar" />
         <activity
-            android:name=".ui.instagramapi.InstagramApiActivity"
+            android:name=".ui.bubbletext.BubbleTextActivity"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity
+            android:name=".ui.instagramapi.InstagramMainActivity"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity android:name=".ui.instagramapi.InstagramLoginActivity"
             android:theme="@style/AppThemeWithActionBar"/>
 
         <!--

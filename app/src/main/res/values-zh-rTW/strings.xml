@@ -74,4 +74,7 @@
     <string name="opencv_restore_image">還原圖片</string>
     <string name="opencv_process_image">處理圖片</string>
 
+    <!-- Instagram API -->
+    <string name="instagram_api_login">Instagram 登入</string>
+
 </resources>

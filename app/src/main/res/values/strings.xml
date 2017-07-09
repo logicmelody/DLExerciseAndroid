@@ -137,4 +137,10 @@
     <string name="bubble_text_show_bubble_text_view" translatable="false">Show BubbleTextView</string>
     <string name="bubble_text_send_message" translatable="false">Send Message</string>
 
+    <!-- Instagram API -->
+    <string name="instagram_api_client_id" translatable="false">3d183cf6ddc9418d8cee45bdca10e4e5</string>
+    <string name="instagram_api_client_secret" translatable="false">034a046568a7456e9b30af0443ee3478</string>
+    <string name="instagram_api_client_redirect_uri" translatable="false">http://localhost</string>
+    <string name="instagram_api_login">Instagram Login</string>
+
 </resources>
