@@ -15,6 +15,7 @@ import com.dl.dlexerciseandroid.ui.bottomnavigationview.BottomNavigationViewActi
 import com.dl.dlexerciseandroid.ui.bubbletext.BubbleTextActivity;
 import com.dl.dlexerciseandroid.ui.coordinatorlayout.CoordinatorLayoutActivity;
 import com.dl.dlexerciseandroid.ui.espressotest.EspressoTestActivity;
+import com.dl.dlexerciseandroid.ui.instagramapi.InstagramApiActivity;
 import com.dl.dlexerciseandroid.ui.mininavigationdrawer.main.MiniNavigationDrawerActivity;
 import com.dl.dlexerciseandroid.ui.moviesearcher.MovieSearcherActivity;
 import com.dl.dlexerciseandroid.ui.previewcamera.PreviewCameraActivity;
@@ -42,6 +43,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
     private Button mPreviewCameraButton;
     private Button mRunningManButton;
     private Button mBubbleTextButton;
+    private Button mInstagramApiButton;
 
 
     @Override
@@ -77,6 +79,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
         mPreviewCameraButton = (Button) getView().findViewById(R.id.button_right_drawer_preview_camera);
         mRunningManButton = (Button) getView().findViewById(R.id.button_right_drawer_running_man);
         mBubbleTextButton = (Button) getView().findViewById(R.id.button_right_drawer_bubble_text);
+        mInstagramApiButton = (Button) getView().findViewById(R.id.button_right_drawer_instagram_api);
     }
 
     private void setupViews() {
@@ -88,6 +91,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
         mPreviewCameraButton.setOnClickListener(this);
         mRunningManButton.setOnClickListener(this);
         mBubbleTextButton.setOnClickListener(this);
+        mInstagramApiButton.setOnClickListener(this);
     }
 
     @Override
@@ -123,6 +127,10 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
 
             case R.id.button_right_drawer_bubble_text:
                 startActivity(new Intent(mContext, BubbleTextActivity.class));
+                break;
+
+            case R.id.button_right_drawer_instagram_api:
+                startActivity(new Intent(mContext, InstagramApiActivity.class));
                 break;
         }
 

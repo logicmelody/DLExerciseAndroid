@@ -156,6 +156,9 @@
             android:name=".ui.runningman.RunningManActivity"
             android:theme="@style/AppThemeWithActionBar"/>
         <activity android:name=".ui.bubbletext.BubbleTextActivity" />
+        <activity
+            android:name=".ui.instagramapi.InstagramApiActivity"
+            android:theme="@style/AppThemeWithActionBar"/>
 
         <!--
         用receiver沒有辦法收到來自別的app的shared intent

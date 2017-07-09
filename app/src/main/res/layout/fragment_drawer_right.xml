@@ -53,4 +53,10 @@
         android:layout_height="wrap_content"
         android:text="@string/all_bubble_text"/>
 
+    <Button
+        android:id="@+id/button_right_drawer_instagram_api"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/all_instagram_api"/>
+
 </LinearLayout>
