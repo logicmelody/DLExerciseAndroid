@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
@@ -23,6 +24,8 @@ public class InstagramMainActivity extends AppCompatActivity implements
     public static final String EXTRA_INSTAGRAM_CODE = "com.dl.dlexerciseandroid.EXTRA_INSTAGRAM_CODE";
 
     private static final int REQUEST_INSTAGRAM_LOGIN = 1;
+
+    private ProgressBar mLoadingProgressBar;
 
     private Button mInstagramLoginButton;
 
@@ -43,6 +46,7 @@ public class InstagramMainActivity extends AppCompatActivity implements
 
     private void findViews() {
         mInstagramLoginButton = (Button) findViewById(R.id.button_instagram_api_login);
+        mLoadingProgressBar = (ProgressBar) findViewById(R.id.progress_bar_instagram_api_loading);
     }
 
     private void setupViews() {
@@ -65,10 +69,13 @@ public class InstagramMainActivity extends AppCompatActivity implements
      */
     private void tryTokenToLogin() {
         if (InstagramDataCache.hasTokenInSharedPreference(this)) {
+            mLoadingProgressBar.setVisibility(View.VISIBLE);
+
             new GetLoginUserAsyncTask(this, this).execute();
 
         } else {
             mInstagramLoginButton.setVisibility(View.VISIBLE);
+            mLoadingProgressBar.setVisibility(View.GONE);
         }
     }
 
@@ -112,6 +119,8 @@ public class InstagramMainActivity extends AppCompatActivity implements
                         break;
                     }
 
+                    mLoadingProgressBar.setVisibility(View.GONE);
+
                     // 拿到要存取access_token必須要的code
                     String code = data.getStringExtra(EXTRA_INSTAGRAM_CODE);
 
@@ -121,6 +130,8 @@ public class InstagramMainActivity extends AppCompatActivity implements
 
                 } else if (RESULT_CANCELED == resultCode) {
                     Log.d("danny", "onActivityResult RESULT_CANCELED");
+
+                    mLoadingProgressBar.setVisibility(View.VISIBLE);
                 }
 
                 break;
@@ -133,6 +144,8 @@ public class InstagramMainActivity extends AppCompatActivity implements
         Log.d("danny", "Login user = " + InstagramDataCache.getInstance().getLoginUser().toString());
 
         mInstagramLoginButton.setVisibility(View.GONE);
+        mLoadingProgressBar.setVisibility(View.VISIBLE);
+
         Toast.makeText(this, "Ready to go", Toast.LENGTH_SHORT).show();
     }
 
@@ -141,11 +154,14 @@ public class InstagramMainActivity extends AppCompatActivity implements
         Log.d("danny", "Get authentication token failed");
 
         mInstagramLoginButton.setVisibility(View.VISIBLE);
+        mLoadingProgressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void onGetLoginUserSuccessful() {
         mInstagramLoginButton.setVisibility(View.GONE);
+        mLoadingProgressBar.setVisibility(View.VISIBLE);
+
         Toast.makeText(this, "Ready to go", Toast.LENGTH_SHORT).show();
     }
 
@@ -154,5 +170,6 @@ public class InstagramMainActivity extends AppCompatActivity implements
         Log.d("danny", "Get login user failed");
 
         mInstagramLoginButton.setVisibility(View.VISIBLE);
+        mLoadingProgressBar.setVisibility(View.GONE);
     }
 }
