@@ -1,7 +1,6 @@
 package com.dl.dlexerciseandroid.ui.instagramapi;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +11,8 @@ import android.widget.Button;
 
 import com.dl.dlexerciseandroid.R;
 
-public class InstagramMainActivity extends AppCompatActivity implements View.OnClickListener {
+public class InstagramMainActivity extends AppCompatActivity implements
+        View.OnClickListener, GetAuthenticationTokenAsyncTask.OnGetAuthenticationTokenListener {
 
     private static final String TAG = InstagramMainActivity.class.getName();
 
@@ -98,7 +98,7 @@ public class InstagramMainActivity extends AppCompatActivity implements View.OnC
 
                     Log.d("danny", "Instagram code = " + code);
 
-                    new GetAuthenticationTokenAsyncTask(InstagramMainActivity.this).execute(code);
+                    new GetAuthenticationTokenAsyncTask(InstagramMainActivity.this, this).execute(code);
 
                 } else if (RESULT_CANCELED == resultCode) {
                     Log.d("danny", "onActivityResult RESULT_CANCELED");
@@ -106,5 +106,16 @@ public class InstagramMainActivity extends AppCompatActivity implements View.OnC
 
                 break;
         }
+    }
+
+    @Override
+    public void onGetAuthenticationTokenSuccessful() {
+        Log.d("danny", "Token = " + InstagramDataCache.getInstance().getToken());
+        Log.d("danny", "Login user = " + InstagramDataCache.getInstance().getLoginUser().toString());
+    }
+
+    @Override
+    public void onGetAuthenticationTokenFailed() {
+        Log.d("danny", "Get authentication token failed");
     }
 }
