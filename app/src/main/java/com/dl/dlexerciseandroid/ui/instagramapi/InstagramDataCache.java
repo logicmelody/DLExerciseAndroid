@@ -1,5 +1,8 @@
 package com.dl.dlexerciseandroid.ui.instagramapi;
 
+import android.content.Context;
+import android.preference.PreferenceManager;
+
 import com.dl.dlexerciseandroid.datastructure.IGUser;
 
 /**
@@ -9,6 +12,8 @@ import com.dl.dlexerciseandroid.datastructure.IGUser;
  */
 
 public class InstagramDataCache {
+
+    private static final String PREFERENCE_TOKEN = "com.dl.dlexerciseandroid.PREFERENCE_TOKEN";
 
     private volatile static InstagramDataCache sInstagramDataCache = null;
 
@@ -29,6 +34,19 @@ public class InstagramDataCache {
         }
 
         return sInstagramDataCache;
+    }
+
+    public static void saveTokenToSharedPreference(Context context, String token) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit()
+                         .putString(PREFERENCE_TOKEN, token).apply();
+    }
+
+    public static String getTokenFromSharedPreference(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(PREFERENCE_TOKEN, "");
+    }
+
+    public static boolean hasTokenInSharedPreference(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).contains(PREFERENCE_TOKEN);
     }
 
     public void setToken(String token) {

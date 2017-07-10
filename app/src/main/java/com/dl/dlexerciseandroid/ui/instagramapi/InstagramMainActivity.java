@@ -8,11 +8,15 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetAuthenticationTokenAsyncTask;
+import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetLoginUserAsyncTask;
 
 public class InstagramMainActivity extends AppCompatActivity implements
-        View.OnClickListener, GetAuthenticationTokenAsyncTask.OnGetAuthenticationTokenListener {
+        View.OnClickListener, GetAuthenticationTokenAsyncTask.OnGetAuthenticationTokenListener,
+        GetLoginUserAsyncTask.OnGetLoginUserListener{
 
     private static final String TAG = InstagramMainActivity.class.getName();
 
@@ -34,6 +38,7 @@ public class InstagramMainActivity extends AppCompatActivity implements
         findViews();
         setupViews();
         setupActionBar();
+        tryTokenToLogin();
     }
 
     private void findViews() {
@@ -50,6 +55,20 @@ public class InstagramMainActivity extends AppCompatActivity implements
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(getString(R.string.all_instagram_api));
+        }
+    }
+
+    /**
+     * 檢查SharedPreference中有沒有token的資訊：
+     * 有：用get login user的API來檢查token有沒有過期
+     * 沒有：跳出Authentication page
+     */
+    private void tryTokenToLogin() {
+        if (InstagramDataCache.hasTokenInSharedPreference(this)) {
+            new GetLoginUserAsyncTask(this, this).execute();
+
+        } else {
+            mInstagramLoginButton.setVisibility(View.VISIBLE);
         }
     }
 
@@ -112,10 +131,28 @@ public class InstagramMainActivity extends AppCompatActivity implements
     public void onGetAuthenticationTokenSuccessful() {
         Log.d("danny", "Token = " + InstagramDataCache.getInstance().getToken());
         Log.d("danny", "Login user = " + InstagramDataCache.getInstance().getLoginUser().toString());
+
+        mInstagramLoginButton.setVisibility(View.GONE);
+        Toast.makeText(this, "Ready to go", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onGetAuthenticationTokenFailed() {
         Log.d("danny", "Get authentication token failed");
+
+        mInstagramLoginButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onGetLoginUserSuccessful() {
+        mInstagramLoginButton.setVisibility(View.GONE);
+        Toast.makeText(this, "Ready to go", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onGetLoginUserFailed() {
+        Log.d("danny", "Get login user failed");
+
+        mInstagramLoginButton.setVisibility(View.VISIBLE);
     }
 }

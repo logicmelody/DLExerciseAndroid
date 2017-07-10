@@ -1,10 +1,11 @@
-package com.dl.dlexerciseandroid.ui.instagramapi;
+package com.dl.dlexerciseandroid.backgroundtask.task.instagramapi;
 
 import android.content.Context;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 
 import com.dl.dlexerciseandroid.datastructure.IGUser;
+import com.dl.dlexerciseandroid.ui.instagramapi.InstagramDataCache;
 import com.dl.dlexerciseandroid.utility.utils.HttpUtils;
 import com.dl.dlexerciseandroid.utility.utils.InstagramApiUtils;
 import com.dl.dlexerciseandroid.utility.utils.JsonUtils;
@@ -53,14 +54,13 @@ public class GetAuthenticationTokenAsyncTask extends AsyncTask<String, Void, Str
             }
 
             IGUser loginUser = InstagramApiUtils
-                    .getLoginUser(authenticationObject.getJSONObject(InstagramApiUtils.EndPointKeys.USER));
+                    .getLoginUserFromAuthentication(authenticationObject.getJSONObject(InstagramApiUtils.EndPointKeys.USER));
 
             if (loginUser == null) {
                 return "";
             }
 
-            InstagramDataCache.getInstance().setToken(token);
-            InstagramDataCache.getInstance().setLoginUser(loginUser);
+            saveTokenAndLoginUser(token, loginUser);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,6 +72,12 @@ public class GetAuthenticationTokenAsyncTask extends AsyncTask<String, Void, Str
         }
 
         return token;
+    }
+
+    private void saveTokenAndLoginUser(String token, IGUser loginUser) {
+        InstagramDataCache.saveTokenToSharedPreference(mContext, token);
+        InstagramDataCache.getInstance().setToken(token);
+        InstagramDataCache.getInstance().setLoginUser(loginUser);
     }
 
     @Override

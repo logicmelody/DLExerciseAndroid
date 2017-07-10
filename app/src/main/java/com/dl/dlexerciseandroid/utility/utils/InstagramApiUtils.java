@@ -29,6 +29,7 @@ public class InstagramApiUtils {
         public static final String USER_NAME = "username";
         public static final String FULL_NAME = "full_name";
         public static final String PROFILE_PICTURE = "profile_picture";
+        public static final String DATA = "data";
     }
 
 
@@ -57,7 +58,11 @@ public class InstagramApiUtils {
         return map;
     }
 
-    public static IGUser getLoginUser(JSONObject userObject) throws JSONException {
+    public static String getLoginUserUrl(String token) {
+        return new StringBuilder(API_URL).append("/users/self/?access_token=").append(token).toString();
+    }
+
+    public static IGUser getLoginUserFromAuthentication(JSONObject userObject) throws JSONException {
         if (userObject == null) {
             return null;
         }
@@ -66,6 +71,19 @@ public class InstagramApiUtils {
         String userName = JsonUtils.getStringFromJson(userObject, EndPointKeys.USER_NAME);
         String fullName = JsonUtils.getStringFromJson(userObject, EndPointKeys.FULL_NAME);
         String profilePicture = JsonUtils.getStringFromJson(userObject, EndPointKeys.PROFILE_PICTURE);
+
+        return new IGUser(id, userName, fullName, profilePicture);
+    }
+
+    public static IGUser getLoginUserFromEndPoint(JSONObject dataObject) throws JSONException {
+        if (dataObject == null) {
+            return null;
+        }
+
+        String id = JsonUtils.getStringFromJson(dataObject, EndPointKeys.ID);
+        String userName = JsonUtils.getStringFromJson(dataObject, EndPointKeys.USER_NAME);
+        String fullName = JsonUtils.getStringFromJson(dataObject, EndPointKeys.FULL_NAME);
+        String profilePicture = JsonUtils.getStringFromJson(dataObject, EndPointKeys.PROFILE_PICTURE);
 
         return new IGUser(id, userName, fullName, profilePicture);
     }
