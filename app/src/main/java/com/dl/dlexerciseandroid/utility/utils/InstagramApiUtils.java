@@ -38,6 +38,7 @@ public class InstagramApiUtils {
         public static final String NEXT_MAX_ID = "next_max_id";
         public static final String NEXT_URL = "next_url";
         public static final String IMAGES = "images";
+        public static final String IMAGE = "image";
         public static final String THUMBNAIL = "thumbnail";
         public static final String URL = "url";
         public static final String STANDARD_RESOLUTION = "standard_resolution";

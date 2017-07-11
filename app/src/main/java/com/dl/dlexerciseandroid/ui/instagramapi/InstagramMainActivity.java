@@ -16,7 +16,11 @@ import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetAuthenticationTokenAsyncTask;
 import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetLoginUserAsyncTask;
 import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetRecentMediaAsyncTask;
+import com.dl.dlexerciseandroid.datastructure.instagramapi.IGImage;
+import com.dl.dlexerciseandroid.datastructure.instagramapi.IGRecentMedia;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -212,12 +216,14 @@ public class InstagramMainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onGetRecentMediaSuccessful() {
-
+    public void onGetRecentMediaSuccessful(IGRecentMedia igRecentMedia) {
+        for (IGImage igImage : igRecentMedia.getImageList()) {
+            Log.d("danny", igImage.toString());
+        }
     }
 
     @Override
     public void onGetRecentMediaFailed() {
-
+        Log.d("danny", "onGetRecentMediaFailed()");
     }
 }

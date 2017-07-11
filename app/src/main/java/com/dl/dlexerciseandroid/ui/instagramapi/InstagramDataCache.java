@@ -21,8 +21,6 @@ public class InstagramDataCache {
 
     private IGUser mLoginUser;
 
-    private String mMediaNextMaxId;
-
 
     private InstagramDataCache() {}
 
@@ -57,13 +55,5 @@ public class InstagramDataCache {
 
     public IGUser getLoginUser() {
         return mLoginUser;
-    }
-
-    public void setMediaNextMaxId(String nextMaxId) {
-        mMediaNextMaxId = nextMaxId;
-    }
-
-    public String getMediaNextMaxId() {
-        return mMediaNextMaxId;
     }
 }

@@ -13,6 +13,10 @@ public class JsonUtils {
         return jsonObject.has(key) ? jsonObject.getString(key) : "";
     }
 
+    public static int getIntFromJson(JSONObject jsonObject, String key) throws JSONException {
+        return jsonObject.has(key) ? jsonObject.getInt(key) : -1;
+    }
+
     public static long getLongFromJson(JSONObject jsonObject, String key) throws JSONException {
         return jsonObject.has(key) ? jsonObject.getLong(key) : -1L;
     }
