@@ -509,7 +509,7 @@ public class UIController implements View.OnClickListener {
         int widthHeight =
                 mActivity.getResources().getInteger(R.integer.width_height_left_drawer_header_login_user_avatar_from_uri);
         Picasso.with(mActivity).load(Profile.getCurrentProfile().getProfilePictureUri(widthHeight, widthHeight))
-                               .placeholder(R.drawable.ic_left_drawer_header_login_avatar).into(mLoginUserAvatar);
+                               .placeholder(R.drawable.ic_login_avatar).into(mLoginUserAvatar);
 
         // Profile image要拿剪裁過後的版本，還是原始版本
         //mProfilePictureView.setCropped(true);

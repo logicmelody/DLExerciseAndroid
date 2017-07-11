@@ -2,7 +2,6 @@
 
 <!-- Drawer上的header可以自由設計，height也可以自己定義 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:facebook="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/height_main_left_drawer_header"
     android:padding="@dimen/padding_main_left_drawer_header"
@@ -37,7 +36,7 @@
             android:id="@+id/circle_image_view_left_drawer_header_login_user_avatar"
             android:layout_width="@dimen/width_height_left_drawer_header_login_user_avatar"
             android:layout_height="@dimen/width_height_left_drawer_header_login_user_avatar"
-            android:src="@drawable/ic_left_drawer_header_login_avatar"/>
+            android:src="@drawable/ic_login_avatar"/>
 
         <TextView
             android:id="@+id/text_view_left_drawer_header_login_user_name"

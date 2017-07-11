@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_all_window">
+
+    <FrameLayout
+        android:id="@+id/view_group_instagram_api_feed_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circle_image_view_instagram_api_login_user_avatar"
+                android:layout_width="@dimen/width_height_instagram_api_login_user_avatar"
+                android:layout_height="@dimen/width_height_instagram_api_login_user_avatar"
+                android:src="@drawable/ic_login_avatar"/>
+
+            <TextView
+                android:id="@+id/text_view_instagram_api_login_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/all_white"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
 
     <ProgressBar
         android:id="@+id/progress_bar_instagram_api_loading"

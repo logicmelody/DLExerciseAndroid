@@ -117,4 +117,7 @@
     <dimen name="corners_radius_bubble_text_view">15dp</dimen>
     <dimen name="margin_left_image_view_bubble_text_view_close">5dp</dimen>
 
+    <!-- Instagram Api -->
+    <dimen name="width_height_instagram_api_login_user_avatar">70dp</dimen>
+
 </resources>
