@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.utility.utils.URIUtils;
+import com.dl.dlexerciseandroid.utility.utils.UrlUtils;
 import com.dl.dlexerciseandroid.utility.utils.GeneralUtils;
 
 import java.util.HashMap;
@@ -90,7 +90,7 @@ public class ConsumingRestfulWebServiceFragment extends Fragment implements View
             map.put("name", userName);
         }
 
-        String uri = URIUtils.buildURIString(GeneralUtils.URI_SPRING_WEB_SERVICE, map);
+        String uri = UrlUtils.buildUrlString(GeneralUtils.URI_SPRING_WEB_SERVICE, map);
 
         new GetRequestAsyncTask(this).execute(uri);
     }

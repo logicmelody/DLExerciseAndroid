@@ -3,7 +3,7 @@ package com.dl.dlexerciseandroid.ui.instagramapi;
 import android.content.Context;
 import android.preference.PreferenceManager;
 
-import com.dl.dlexerciseandroid.datastructure.IGUser;
+import com.dl.dlexerciseandroid.datastructure.instagramapi.IGUser;
 
 /**
  * 一個Singleton的class，用來作Instagram data的cache
@@ -47,14 +47,6 @@ public class InstagramDataCache {
 
     public static boolean hasTokenInSharedPreference(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context).contains(PREFERENCE_TOKEN);
-    }
-
-    public void setToken(String token) {
-        mToken = token;
-    }
-
-    public String getToken() {
-        return mToken;
     }
 
     public void setLoginUser(IGUser loginUser) {

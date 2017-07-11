@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 
-import com.dl.dlexerciseandroid.datastructure.IGUser;
+import com.dl.dlexerciseandroid.datastructure.instagramapi.IGUser;
 import com.dl.dlexerciseandroid.ui.instagramapi.InstagramDataCache;
 import com.dl.dlexerciseandroid.utility.utils.HttpUtils;
 import com.dl.dlexerciseandroid.utility.utils.InstagramApiUtils;
@@ -76,7 +76,6 @@ public class GetAuthenticationTokenAsyncTask extends AsyncTask<String, Void, Str
 
     private void saveTokenAndLoginUser(String token, IGUser loginUser) {
         InstagramDataCache.saveTokenToSharedPreference(mContext, token);
-        InstagramDataCache.getInstance().setToken(token);
         InstagramDataCache.getInstance().setLoginUser(loginUser);
     }
 

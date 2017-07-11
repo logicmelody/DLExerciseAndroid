@@ -15,13 +15,14 @@ import android.widget.TextView;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetAuthenticationTokenAsyncTask;
 import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetLoginUserAsyncTask;
+import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetRecentMediaAsyncTask;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class InstagramMainActivity extends AppCompatActivity implements
         View.OnClickListener, GetAuthenticationTokenAsyncTask.OnGetAuthenticationTokenListener,
-        GetLoginUserAsyncTask.OnGetLoginUserListener{
+        GetLoginUserAsyncTask.OnGetLoginUserListener, GetRecentMediaAsyncTask.OnGetRecentMediaListener {
 
     private static final String TAG = InstagramMainActivity.class.getName();
 
@@ -155,14 +156,31 @@ public class InstagramMainActivity extends AppCompatActivity implements
      */
     @Override
     public void onGetAuthenticationTokenSuccessful() {
-        Log.d("danny", "Token = " + InstagramDataCache.getInstance().getToken());
+        Log.d("danny", "Token = " + InstagramDataCache.getTokenFromSharedPreference(this));
         Log.d("danny", "Login user = " + InstagramDataCache.getInstance().getLoginUser().toString());
 
         mInstagramLoginButton.setVisibility(View.GONE);
         mLoadingProgressBar.setVisibility(View.VISIBLE);
+
+        setFeedContainer();
+    }
+
+    private void setFeedContainer() {
         mFeedContainer.setVisibility(View.VISIBLE);
 
-        setupLoginUser();
+        setLoginUser();
+
+        new GetRecentMediaAsyncTask(this, this).execute();
+    }
+
+    private void setLoginUser() {
+        if (InstagramDataCache.getInstance().getLoginUser() == null) {
+            return;
+        }
+
+        Picasso.with(this).load(InstagramDataCache.getInstance().getLoginUser().getProfilePicture())
+                .placeholder(R.drawable.ic_login_avatar).into(mLoginUserAvatarView);
+        mLoginUserNameView.setText(InstagramDataCache.getInstance().getLoginUser().getFullName());
     }
 
     @Override
@@ -181,19 +199,8 @@ public class InstagramMainActivity extends AppCompatActivity implements
     public void onGetLoginUserSuccessful() {
         mInstagramLoginButton.setVisibility(View.GONE);
         mLoadingProgressBar.setVisibility(View.VISIBLE);
-        mFeedContainer.setVisibility(View.VISIBLE);
 
-        setupLoginUser();
-    }
-
-    private void setupLoginUser() {
-        if (InstagramDataCache.getInstance().getLoginUser() == null) {
-            return;
-        }
-
-        Picasso.with(this).load(InstagramDataCache.getInstance().getLoginUser().getProfilePicture())
-                          .placeholder(R.drawable.ic_login_avatar).into(mLoginUserAvatarView);
-        mLoginUserNameView.setText(InstagramDataCache.getInstance().getLoginUser().getFullName());
+        setFeedContainer();
     }
 
     @Override
@@ -202,5 +209,15 @@ public class InstagramMainActivity extends AppCompatActivity implements
 
         mInstagramLoginButton.setVisibility(View.VISIBLE);
         mLoadingProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onGetRecentMediaSuccessful() {
+
+    }
+
+    @Override
+    public void onGetRecentMediaFailed() {
+
     }
 }

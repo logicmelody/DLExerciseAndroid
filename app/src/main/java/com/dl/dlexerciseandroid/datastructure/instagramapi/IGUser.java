@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.datastructure;
+package com.dl.dlexerciseandroid.datastructure.instagramapi;
 
 import android.graphics.Bitmap;
 

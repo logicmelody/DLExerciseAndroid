@@ -1,26 +1,25 @@
 package com.dl.dlexerciseandroid.utility.utils;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 /**
  * Created by daz on 10/9/15.
  */
-public class URIUtils {
+public class UrlUtils {
 
-    public static String buildURIString(String baseURL, HashMap<String, String> queries) {
-        String queryString = URIUtils.buildQueryString(queries);
+    public static String buildUrlString(String baseUrl, Map<String, String> queries) {
+        String queryString = UrlUtils.buildQueryString(queries);
 
         if (queryString.length() > 0) {
-            return baseURL + "?" + queryString;
+            return baseUrl + "?" + queryString;
 
         } else {
-            return baseURL;
+            return baseUrl;
         }
     }
 
-    private static String buildQueryString(HashMap<String, String> queries) {
+    private static String buildQueryString(Map<String, String> queries) {
         String queryString = "";
 
         if (queries != null) {

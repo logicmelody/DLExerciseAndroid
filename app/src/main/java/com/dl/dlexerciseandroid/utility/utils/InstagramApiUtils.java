@@ -1,9 +1,10 @@
 package com.dl.dlexerciseandroid.utility.utils;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.datastructure.IGUser;
+import com.dl.dlexerciseandroid.datastructure.instagramapi.IGUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +31,19 @@ public class InstagramApiUtils {
         public static final String FULL_NAME = "full_name";
         public static final String PROFILE_PICTURE = "profile_picture";
         public static final String DATA = "data";
+        public static final String MAX_ID = "max_id";
+        public static final String MIN_ID = "min_id";
+        public static final String COUNT = "count";
+        public static final String PAGINATION = "pagination";
+        public static final String NEXT_MAX_ID = "next_max_id";
+        public static final String NEXT_URL = "next_url";
+        public static final String IMAGES = "images";
+        public static final String THUMBNAIL = "thumbnail";
+        public static final String URL = "url";
+        public static final String STANDARD_RESOLUTION = "standard_resolution";
+        public static final String CREATED_TIME = "created_time";
+        public static final String LIKES = "likes";
+        public static final String TYPE = "type";
     }
 
 
@@ -59,7 +73,37 @@ public class InstagramApiUtils {
     }
 
     public static String getLoginUserUrl(String token) {
-        return new StringBuilder(API_URL).append("/users/self/?access_token=").append(token).toString();
+        String baseUrl = API_URL + "/users/self/";
+        Map<String, String> map = new HashMap<>();
+
+        map.put(EndPointKeys.ACCESS_TOKEN, token);
+
+        return UrlUtils.buildUrlString(baseUrl, map);
+    }
+
+    public static String getRecentMediaUrl(String token, String userId, String maxId, String minId, int count) {
+        StringBuilder baseUrlStringBuilder = new StringBuilder(API_URL);
+        baseUrlStringBuilder.append("/users")
+                .append(TextUtils.isEmpty(userId) ? "/self" : "/" + userId)
+                .append("/media/recent/");
+
+        Map<String, String> map = new HashMap<>();
+
+        map.put(EndPointKeys.ACCESS_TOKEN, token);
+
+        if (!TextUtils.isEmpty(maxId)) {
+            map.put(EndPointKeys.MAX_ID, maxId);
+        }
+
+        if (!TextUtils.isEmpty(minId)) {
+            map.put(EndPointKeys.MIN_ID, minId);
+        }
+
+        if (count > 0) {
+            map.put(EndPointKeys.COUNT, String.valueOf(count));
+        }
+
+        return UrlUtils.buildUrlString(baseUrlStringBuilder.toString(), map);
     }
 
     public static IGUser getLoginUserFromAuthentication(JSONObject userObject) throws JSONException {
