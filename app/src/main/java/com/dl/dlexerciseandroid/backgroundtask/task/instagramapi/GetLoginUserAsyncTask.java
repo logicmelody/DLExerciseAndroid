@@ -63,7 +63,7 @@ public class GetLoginUserAsyncTask extends AsyncTask<Void, Void, IGUser> {
                 return null;
             }
 
-            loginUser = InstagramApiUtils.getLoginUserFromEndPoint(loginUserObject);
+            loginUser = InstagramApiUtils.getLoginUserFromEndPoint(dataObject);
             InstagramDataCache.getInstance().setLoginUser(loginUser);
 
         } catch (IOException e) {

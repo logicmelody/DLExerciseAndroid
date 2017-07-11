@@ -7,13 +7,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetAuthenticationTokenAsyncTask;
 import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetLoginUserAsyncTask;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class InstagramMainActivity extends AppCompatActivity implements
         View.OnClickListener, GetAuthenticationTokenAsyncTask.OnGetAuthenticationTokenListener,
@@ -28,6 +32,10 @@ public class InstagramMainActivity extends AppCompatActivity implements
     private ProgressBar mLoadingProgressBar;
 
     private Button mInstagramLoginButton;
+
+    private ViewGroup mFeedContainer;
+    private CircleImageView mLoginUserAvatarView;
+    private TextView mLoginUserNameView;
 
 
     @Override
@@ -47,6 +55,9 @@ public class InstagramMainActivity extends AppCompatActivity implements
     private void findViews() {
         mInstagramLoginButton = (Button) findViewById(R.id.button_instagram_api_login);
         mLoadingProgressBar = (ProgressBar) findViewById(R.id.progress_bar_instagram_api_loading);
+        mFeedContainer = (ViewGroup) findViewById(R.id.view_group_instagram_api_feed_container);
+        mLoginUserAvatarView = (CircleImageView) findViewById(R.id.circle_image_view_instagram_api_login_user_avatar);
+        mLoginUserNameView = (TextView) findViewById(R.id.text_view_instagram_api_login_user_name);
     }
 
     private void setupViews() {
@@ -138,6 +149,10 @@ public class InstagramMainActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * GetAuthenticationTokenAsyncTask的callback，如果成功get token，
+     * 就直接顯示login user的資訊，並load feed
+     */
     @Override
     public void onGetAuthenticationTokenSuccessful() {
         Log.d("danny", "Token = " + InstagramDataCache.getInstance().getToken());
@@ -145,8 +160,9 @@ public class InstagramMainActivity extends AppCompatActivity implements
 
         mInstagramLoginButton.setVisibility(View.GONE);
         mLoadingProgressBar.setVisibility(View.VISIBLE);
+        mFeedContainer.setVisibility(View.VISIBLE);
 
-        Toast.makeText(this, "Ready to go", Toast.LENGTH_SHORT).show();
+        setupLoginUser();
     }
 
     @Override
@@ -157,12 +173,27 @@ public class InstagramMainActivity extends AppCompatActivity implements
         mLoadingProgressBar.setVisibility(View.GONE);
     }
 
+    /**
+     * GetLoginUserAsyncTask的callback，如果用SharedPreference中的token成功得到login user的資訊，
+     * 就直接顯示login user的資訊，並load feed
+     */
     @Override
     public void onGetLoginUserSuccessful() {
         mInstagramLoginButton.setVisibility(View.GONE);
         mLoadingProgressBar.setVisibility(View.VISIBLE);
+        mFeedContainer.setVisibility(View.VISIBLE);
 
-        Toast.makeText(this, "Ready to go", Toast.LENGTH_SHORT).show();
+        setupLoginUser();
+    }
+
+    private void setupLoginUser() {
+        if (InstagramDataCache.getInstance().getLoginUser() == null) {
+            return;
+        }
+
+        Picasso.with(this).load(InstagramDataCache.getInstance().getLoginUser().getProfilePicture())
+                          .placeholder(R.drawable.ic_login_avatar).into(mLoginUserAvatarView);
+        mLoginUserNameView.setText(InstagramDataCache.getInstance().getLoginUser().getFullName());
     }
 
     @Override
