@@ -10,14 +10,18 @@ public class IGImage {
     private String mThumbnailUrl;
     private String mStandardUrl;
 
+    private float mRatio = 1F;
+
     private long mCreatedTime;
     private int mLikeCount;
 
 
-    public IGImage(String id, String thumbnailUrl, String standardUrl, long createdTime, int likeCount) {
+    public IGImage(String id, String thumbnailUrl, String standardUrl,
+                   float ratio, long createdTime, int likeCount) {
         mId = id;
         mThumbnailUrl = thumbnailUrl;
         mStandardUrl = standardUrl;
+        mRatio = ratio;
         mCreatedTime = createdTime;
         mLikeCount = likeCount;
     }
@@ -42,6 +46,10 @@ public class IGImage {
         return mLikeCount;
     }
 
+    public float getRatio() {
+        return mRatio;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -49,6 +57,7 @@ public class IGImage {
                      .append("Id = ").append(mId).append("\n")
                      .append("ThumbnailUrl = ").append(mThumbnailUrl).append("\n")
                      .append("StandardUrl = ").append(mStandardUrl).append("\n")
+                     .append("Ratio = ").append(mRatio).append("\n")
                      .append("CreatedTime = ").append(mCreatedTime).append("\n")
                      .append("LikeCount = ").append(mLikeCount).append("\n");
 

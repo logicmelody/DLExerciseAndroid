@@ -45,6 +45,8 @@ public class InstagramApiUtils {
         public static final String CREATED_TIME = "created_time";
         public static final String LIKES = "likes";
         public static final String TYPE = "type";
+        public static final String WIDTH = "width";
+        public static final String HEIGHT = "height";
     }
 
 

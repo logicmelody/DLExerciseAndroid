@@ -1,10 +1,10 @@
 package com.dl.dlexerciseandroid.ui.instagramapi.feedview.viewholder;
 
 import android.view.View;
-import android.widget.ImageView;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.datastructure.instagramapi.IGImage;
+import com.dl.dlexerciseandroid.utility.component.DynamicHeightNetworkImageView;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 
 public class IGImageViewHolder extends BaseViewHolder {
 
-    private ImageView mIgImage;
+    private DynamicHeightNetworkImageView mIgImage;
 
 
     public IGImageViewHolder(View itemView) {
@@ -23,13 +23,15 @@ public class IGImageViewHolder extends BaseViewHolder {
 
     @Override
     protected void findViews(View itemView) {
-        mIgImage = (ImageView) itemView.findViewById(R.id.image_view_instagram_api_ig_image);
+        mIgImage = (DynamicHeightNetworkImageView) itemView.findViewById(R.id.image_view_instagram_api_ig_image);
     }
 
     @Override
     public void bind(IGImage igImage) {
         Picasso.with(itemView.getContext())
                 .load(igImage.getStandardUrl())
-                .placeholder(R.drawable.ic_login_avatar).into(mIgImage);
+                .into(mIgImage);
+
+        mIgImage.setAspectRatio(igImage.getRatio());
     }
 }

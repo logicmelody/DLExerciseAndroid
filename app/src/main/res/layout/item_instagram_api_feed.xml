@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@drawable/background_later_task_item">
+    android:layout_margin="1dp"
+    android:orientation="vertical">
 
-    <ImageView
+    <com.dl.dlexerciseandroid.utility.component.DynamicHeightNetworkImageView
         android:id="@+id/image_view_instagram_api_ig_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"/>
 
 </LinearLayout>

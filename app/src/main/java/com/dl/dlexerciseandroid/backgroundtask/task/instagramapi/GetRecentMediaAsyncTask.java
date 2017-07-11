@@ -89,14 +89,20 @@ public class GetRecentMediaAsyncTask extends AsyncTask<Void, Void, IGRecentMedia
                     continue;
                 }
 
+                JSONObject thumbnailObject = JsonUtils.getJsonObjectFromJson(imageJson, EndPointKeys.THUMBNAIL);
+                JSONObject standardObject = JsonUtils.getJsonObjectFromJson(imageJson, EndPointKeys.STANDARD_RESOLUTION);
+
                 String id = JsonUtils.getStringFromJson(dataJson, EndPointKeys.ID);
-                String thumbnailUrl = imageJson.getJSONObject(EndPointKeys.THUMBNAIL).getString(EndPointKeys.URL);
-                String standardUrl =
-                        imageJson.getJSONObject(EndPointKeys.STANDARD_RESOLUTION).getString(EndPointKeys.URL);
+                String thumbnailUrl = JsonUtils.getStringFromJson(thumbnailObject, EndPointKeys.URL);
+                String standardUrl = JsonUtils.getStringFromJson(standardObject, EndPointKeys.URL);
+
+                int width = JsonUtils.getIntFromJson(standardObject, EndPointKeys.WIDTH);
+                int height = JsonUtils.getIntFromJson(standardObject, EndPointKeys.HEIGHT);
+                float ratio = (float) width / (float) height;
                 long createdTime = JsonUtils.getLongFromJson(dataJson, EndPointKeys.CREATED_TIME);
                 int likeCount = dataJson.getJSONObject(EndPointKeys.LIKES).getInt(EndPointKeys.COUNT);
 
-                imageList.add(new IGImage(id, thumbnailUrl, standardUrl, createdTime, likeCount));
+                imageList.add(new IGImage(id, thumbnailUrl, standardUrl, ratio, createdTime, likeCount));
             }
 
         } catch (IOException e) {
