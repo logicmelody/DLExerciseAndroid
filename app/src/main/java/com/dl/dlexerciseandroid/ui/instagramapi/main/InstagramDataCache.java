@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.ui.instagramapi;
+package com.dl.dlexerciseandroid.ui.instagramapi.main;
 
 import android.content.Context;
 import android.preference.PreferenceManager;

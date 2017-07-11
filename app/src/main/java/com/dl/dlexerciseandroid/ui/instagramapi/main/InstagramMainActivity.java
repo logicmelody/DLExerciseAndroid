@@ -1,9 +1,11 @@
-package com.dl.dlexerciseandroid.ui.instagramapi;
+package com.dl.dlexerciseandroid.ui.instagramapi.main;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,11 +18,9 @@ import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetAuthenticationTokenAsyncTask;
 import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetLoginUserAsyncTask;
 import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetRecentMediaAsyncTask;
-import com.dl.dlexerciseandroid.datastructure.instagramapi.IGImage;
 import com.dl.dlexerciseandroid.datastructure.instagramapi.IGRecentMedia;
+import com.dl.dlexerciseandroid.ui.instagramapi.feedview.FeedViewAdapter;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -42,6 +42,9 @@ public class InstagramMainActivity extends AppCompatActivity implements
     private CircleImageView mLoginUserAvatarView;
     private TextView mLoginUserNameView;
 
+    private RecyclerView mFeedView;
+    private FeedViewAdapter mFeedViewAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class InstagramMainActivity extends AppCompatActivity implements
         findViews();
         setupViews();
         setupActionBar();
+        setupFeedView();
         tryTokenToLogin();
     }
 
@@ -63,6 +67,7 @@ public class InstagramMainActivity extends AppCompatActivity implements
         mFeedContainer = (ViewGroup) findViewById(R.id.view_group_instagram_api_feed_container);
         mLoginUserAvatarView = (CircleImageView) findViewById(R.id.circle_image_view_instagram_api_login_user_avatar);
         mLoginUserNameView = (TextView) findViewById(R.id.text_view_instagram_api_login_user_name);
+        mFeedView = (RecyclerView) findViewById(R.id.recycler_view_instagram_api_feed);
     }
 
     private void setupViews() {
@@ -76,6 +81,13 @@ public class InstagramMainActivity extends AppCompatActivity implements
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle(getString(R.string.all_instagram_api));
         }
+    }
+
+    private void setupFeedView() {
+        mFeedViewAdapter = new FeedViewAdapter(this);
+
+        mFeedView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        mFeedView.setAdapter(mFeedViewAdapter);
     }
 
     /**
@@ -217,9 +229,12 @@ public class InstagramMainActivity extends AppCompatActivity implements
 
     @Override
     public void onGetRecentMediaSuccessful(IGRecentMedia igRecentMedia) {
-        for (IGImage igImage : igRecentMedia.getImageList()) {
-            Log.d("danny", igImage.toString());
+        if (igRecentMedia.getImageList() == null || igRecentMedia.getImageList().size() == 0) {
+            return;
         }
+
+        mFeedViewAdapter.add(igRecentMedia.getImageList());
+        mLoadingProgressBar.setVisibility(View.GONE);
     }
 
     @Override

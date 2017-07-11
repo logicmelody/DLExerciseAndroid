@@ -15,7 +15,7 @@ import com.dl.dlexerciseandroid.ui.bottomnavigationview.BottomNavigationViewActi
 import com.dl.dlexerciseandroid.ui.bubbletext.BubbleTextActivity;
 import com.dl.dlexerciseandroid.ui.coordinatorlayout.CoordinatorLayoutActivity;
 import com.dl.dlexerciseandroid.ui.espressotest.EspressoTestActivity;
-import com.dl.dlexerciseandroid.ui.instagramapi.InstagramMainActivity;
+import com.dl.dlexerciseandroid.ui.instagramapi.main.InstagramMainActivity;
 import com.dl.dlexerciseandroid.ui.mininavigationdrawer.main.MiniNavigationDrawerActivity;
 import com.dl.dlexerciseandroid.ui.moviesearcher.MovieSearcherActivity;
 import com.dl.dlexerciseandroid.ui.previewcamera.PreviewCameraActivity;

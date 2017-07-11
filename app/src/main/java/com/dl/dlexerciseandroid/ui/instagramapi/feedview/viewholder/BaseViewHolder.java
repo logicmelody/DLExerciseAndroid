@@ -1,8 +1,9 @@
-package com.dl.dlexerciseandroid.ui.chat.viewholder;
+package com.dl.dlexerciseandroid.ui.instagramapi.feedview.viewholder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.dl.dlexerciseandroid.datastructure.instagramapi.IGImage;
 import com.dl.dlexerciseandroid.datastructure.message.Message;
 
 /**
@@ -12,7 +13,7 @@ import com.dl.dlexerciseandroid.datastructure.message.Message;
 abstract public class BaseViewHolder extends RecyclerView.ViewHolder {
 
     abstract protected void findViews(View itemView);
-    abstract public void bind(Message message);
+    abstract public void bind(IGImage igImage);
 
 
     public BaseViewHolder(View itemView) {

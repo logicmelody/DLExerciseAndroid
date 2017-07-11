@@ -4,10 +4,11 @@
     android:layout_height="match_parent"
     android:padding="@dimen/padding_all_window">
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/view_group_instagram_api_feed_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:visibility="gone">
 
         <LinearLayout
@@ -32,7 +33,13 @@
 
         </LinearLayout>
 
-    </FrameLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_instagram_api_feed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"/>
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progress_bar_instagram_api_loading"

@@ -36,7 +36,7 @@ public class HorizontalListMessageViewHolder extends BaseViewHolder {
     }
 
     @Override
-    void findViews(View itemView) {
+    protected void findViews(View itemView) {
         mRootView = itemView;
         mHorizontalList = (RecyclerView) itemView.findViewById(R.id.recyclerview_chat_list_message_horizontal_list);
     }

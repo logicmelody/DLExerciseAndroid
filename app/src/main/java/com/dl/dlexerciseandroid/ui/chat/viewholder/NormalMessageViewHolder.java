@@ -23,7 +23,7 @@ public class NormalMessageViewHolder extends BaseViewHolder {
     }
 
     @Override
-    void findViews(View itemView) {
+    protected void findViews(View itemView) {
         messageText = (TextView) itemView.findViewById(R.id.text_view_normal_message_text);
     }
 

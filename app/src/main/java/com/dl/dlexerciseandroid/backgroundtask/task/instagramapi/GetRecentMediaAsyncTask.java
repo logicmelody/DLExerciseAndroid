@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 
 import com.dl.dlexerciseandroid.datastructure.instagramapi.IGImage;
 import com.dl.dlexerciseandroid.datastructure.instagramapi.IGRecentMedia;
-import com.dl.dlexerciseandroid.ui.instagramapi.InstagramDataCache;
+import com.dl.dlexerciseandroid.ui.instagramapi.main.InstagramDataCache;
 import com.dl.dlexerciseandroid.utility.utils.HttpUtils;
 import com.dl.dlexerciseandroid.utility.utils.InstagramApiUtils;
 import com.dl.dlexerciseandroid.utility.utils.InstagramApiUtils.EndPointKeys;

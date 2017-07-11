@@ -20,7 +20,7 @@ public class YingNormalMessageViewHolder extends BaseViewHolder {
     }
 
     @Override
-    void findViews(View itemView) {
+    protected void findViews(View itemView) {
         messageText = (TextView) itemView.findViewById(R.id.text_view_ying_normal_message_text);
     }
 
