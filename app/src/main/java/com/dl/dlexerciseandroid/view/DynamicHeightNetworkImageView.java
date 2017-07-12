@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.utility.component;
+package com.dl.dlexerciseandroid.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
