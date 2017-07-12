@@ -118,6 +118,9 @@
     <dimen name="margin_left_image_view_bubble_text_view_close">5dp</dimen>
 
     <!-- Instagram Api -->
+    <dimen name="padding_instagram_api_login_user_container">10dp</dimen>
     <dimen name="width_height_instagram_api_login_user_avatar">70dp</dimen>
+    <dimen name="margin_instagram_api_feed_item">3dp</dimen>
+    <dimen name="padding_instagram_api_feed_item_description">5dp</dimen>
 
 </resources>

@@ -142,5 +142,6 @@
     <string name="instagram_api_client_secret" translatable="false">034a046568a7456e9b30af0443ee3478</string>
     <string name="instagram_api_client_redirect_uri" translatable="false">http://localhost</string>
     <string name="instagram_api_login">Instagram Login</string>
+    <string name="instagram_api_likes" translatable="false">Likes</string>
 
 </resources>

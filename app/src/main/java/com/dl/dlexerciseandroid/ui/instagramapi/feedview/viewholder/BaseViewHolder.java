@@ -15,9 +15,12 @@ abstract public class BaseViewHolder extends RecyclerView.ViewHolder {
     abstract protected void findViews(View itemView);
     abstract public void bind(IGImage igImage);
 
+    protected View mRootView;
+
 
     public BaseViewHolder(View itemView) {
         super(itemView);
+        mRootView = itemView;
         findViews(itemView);
     }
 }

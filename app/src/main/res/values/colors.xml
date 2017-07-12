@@ -63,4 +63,7 @@
     <!-- Mini navigation drawer -->
     <color name="background_side_menu">#FF1387A9</color>
 
+    <!-- Instagram Api -->
+    <color name="background_feed_item">#FF2C2F34</color>
+
 </resources>
