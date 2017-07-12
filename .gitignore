@@ -39,4 +39,4 @@ proguard/
 *.log
 
 # Ndk build
-app/.externalNativeBuild/
+.externalNativeBuild
