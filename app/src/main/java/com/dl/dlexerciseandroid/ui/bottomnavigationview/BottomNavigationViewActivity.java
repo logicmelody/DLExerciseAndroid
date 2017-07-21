@@ -7,15 +7,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
 
-public class BottomNavigationViewActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class BottomNavigationViewActivity extends AppCompatActivity implements
+        BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationContract.View {
 
     public static final String TAG = BottomNavigationViewActivity.class.getName();
 
+    private BottomNavigationPresenter mBottomNavigationPresenter;
+
     private Toolbar mToolbar;
 
+    private TextView mContentText;
     private BottomNavigationView mBottomBar;
 
 
@@ -27,6 +32,8 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
     }
 
     private void initialize() {
+        mBottomNavigationPresenter = new BottomNavigationPresenter(this);
+
         findViews();
         setupActionBar();
         setupBottomMenu();
@@ -34,6 +41,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
 
     private void findViews() {
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
+        mContentText = (TextView) findViewById(R.id.text_view_bottom_navigation_view_content);
         mBottomBar = (BottomNavigationView) findViewById(R.id.bottom_navigation_view_bottom_navigation_view_bottom_menu);
     }
 
@@ -80,23 +88,52 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements B
     // 所以對應的selector裡的屬性要寫對
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
+        return selectNavigationItem(item.getItemId());
+    }
+
+    @Override
+    public void setPresenter(BottomNavigationContract.Presenter presenter) {
+
+    }
+
+    @Override
+    public boolean selectNavigationItem(int menuItemId) {
+        String content = "";
+
+        switch (menuItemId) {
             case R.id.menu_item_bottom_navigation_view_bottom_bar_home:
+                content = getString(R.string.bottom_navigation_view_home);
+
                 break;
 
             case R.id.menu_item_bottom_navigation_view_bottom_bar_search:
+                content = getString(R.string.bottom_navigation_view_search);
+
                 break;
 
             case R.id.menu_item_bottom_navigation_view_bottom_bar_add:
+                content = getString(R.string.bottom_navigation_view_add);
+
                 break;
 
             case R.id.menu_item_bottom_navigation_view_bottom_bar_notification:
+                content = getString(R.string.bottom_navigation_view_notification);
+
                 break;
 
             case R.id.menu_item_bottom_navigation_view_bottom_bar_person:
+                content = getString(R.string.bottom_navigation_view_person);
+
                 break;
         }
 
+        mBottomNavigationPresenter.changeContent(content);
+
         return true;
+    }
+
+    @Override
+    public void setContent(String content) {
+        mContentText.setText(content);
     }
 }

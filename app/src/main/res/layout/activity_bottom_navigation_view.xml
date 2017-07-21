@@ -16,7 +16,17 @@
             android:id="@+id/view_group_bottom_navigation_view_content_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/text_view_bottom_navigation_view_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:layout_gravity="center"
+                android:text="@string/bottom_navigation_view_home"/>
+
+        </FrameLayout>
 
         <!-- com.android.support:design:25.0.0這個版本的library才可以使用官方的BottomNavigationView
              有以下幾個比較重要的屬性可以使用：
