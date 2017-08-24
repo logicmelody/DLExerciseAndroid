@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements AlertDialogFragme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //
         Log.d("danny", "MainActivity onCreate()");
 
 //        Intent intent = getIntent();
