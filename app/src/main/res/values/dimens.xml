@@ -123,4 +123,8 @@
     <dimen name="margin_instagram_api_feed_item">3dp</dimen>
     <dimen name="padding_instagram_api_feed_item_description">5dp</dimen>
 
+    <!-- Settings -->
+    <dimen name="min_height_settings_item">70dp</dimen>
+    <dimen name="padding_left_right_settings_item">10dp</dimen>
+
 </resources>
