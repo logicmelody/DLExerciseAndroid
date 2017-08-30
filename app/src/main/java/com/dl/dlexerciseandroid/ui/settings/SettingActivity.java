@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.datastructure.settings.SettingData;
@@ -53,11 +54,42 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void setSettingsData() {
-        mSettingAdapter.add(new SettingData("Item1", "Item1", false));
-        mSettingAdapter.add(new SettingData("Item2", "Item2", false));
-        mSettingAdapter.add(new SettingData("Item3", "Item3", false));
-        mSettingAdapter.add(new SettingData("Item4", "Item4", true));
-        mSettingAdapter.add(new SettingData("Item5", "Item5", true));
+        mSettingAdapter.clear();
+
+        mSettingAdapter.add(new SettingData("Item1", "Item1", false, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(SettingActivity.this, "Item1 click", Toast.LENGTH_SHORT).show();
+            }
+        }));
+
+        mSettingAdapter.add(new SettingData("Item2", "Item2", false, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(SettingActivity.this, "Item2 click", Toast.LENGTH_SHORT).show();
+            }
+        }));
+
+        mSettingAdapter.add(new SettingData("Item3", "Item3", false, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(SettingActivity.this, "Item3 click", Toast.LENGTH_SHORT).show();
+            }
+        }));
+
+        mSettingAdapter.add(new SettingData("Item4", "Item4", true, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(SettingActivity.this, "Item4 click", Toast.LENGTH_SHORT).show();
+            }
+        }));
+
+        mSettingAdapter.add(new SettingData("Item5", "Item5", true, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(SettingActivity.this, "Item5 click", Toast.LENGTH_SHORT).show();
+            }
+        }));
 
         mSettingAdapter.refresh();
     }

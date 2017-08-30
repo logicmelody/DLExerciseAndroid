@@ -32,6 +32,7 @@ public class SettingItemViewHolder extends BasedSettingItemViewHolder {
 
     @Override
     public void onBind(SettingData settingData) {
+        mRootView.setOnClickListener(settingData.getOnClickListener());
         mTitleTextView.setText(settingData.getTitle());
         mSubtitleTextView.setText(settingData.getSubtitle());
         mSwitch.setVisibility(settingData.hasToggle() ? View.VISIBLE : View.GONE);

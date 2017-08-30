@@ -1,5 +1,8 @@
 package com.dl.dlexerciseandroid.datastructure.settings;
 
+import android.view.View.OnClickListener;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+
 /**
  * Created by logicmelody on 2017/8/30.
  */
@@ -11,11 +14,15 @@ public class SettingData {
 
     private boolean mHasToggle = false;
 
+    private OnClickListener mOnClickListener;
+    private OnCheckedChangeListener mOnCheckedChangeListener;
 
-    public SettingData(String title, String subtitle, boolean hasToggle) {
+
+    public SettingData(String title, String subtitle, boolean hasToggle, OnClickListener onClickListener) {
         mTitle = title;
         mSubtitle = subtitle;
         mHasToggle = hasToggle;
+        mOnClickListener = onClickListener;
     }
 
     public String getTitle() {
@@ -40,5 +47,21 @@ public class SettingData {
 
     public void setHasToggle(boolean hasToggle) {
         mHasToggle = hasToggle;
+    }
+
+    public void setOnClickListener(OnClickListener listener) {
+        mOnClickListener = listener;
+    }
+
+    public OnClickListener getOnClickListener() {
+        return mOnClickListener;
+    }
+
+    public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
+        mOnCheckedChangeListener = listener;
+    }
+
+    public OnCheckedChangeListener getOnCheckedChangeListener() {
+        return mOnCheckedChangeListener;
     }
 }

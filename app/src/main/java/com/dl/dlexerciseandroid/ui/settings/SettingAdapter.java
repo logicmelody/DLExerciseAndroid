@@ -49,6 +49,10 @@ public class SettingAdapter extends RecyclerView.Adapter<BasedSettingItemViewHol
         mDataList.add(settingData);
     }
 
+    public void clear() {
+        mDataList.clear();
+    }
+
     public void refresh() {
         notifyDataSetChanged();
     }
