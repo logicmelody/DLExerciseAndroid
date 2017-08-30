@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.datastructure.settings.SettingData;
@@ -54,12 +53,6 @@ public class SettingAdapter extends RecyclerView.Adapter<BasedSettingItemViewHol
     }
 
     public void refresh() {
-        notifyDataSetChanged();
-    }
-
-    public void refreshLanguage() {
-        Toast.makeText(mContext, "Refresh language in Settings", Toast.LENGTH_SHORT).show();
-
         notifyDataSetChanged();
     }
 }

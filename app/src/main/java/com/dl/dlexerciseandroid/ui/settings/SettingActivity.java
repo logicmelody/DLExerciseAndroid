@@ -3,7 +3,6 @@ package com.dl.dlexerciseandroid.ui.settings;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,8 +14,8 @@ import com.dl.dlexerciseandroid.datastructure.settings.SettingData;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private SettingManager mSettingManager;
     private RecyclerView mSettingRecyclerView;
-    private SettingAdapter mSettingAdapter;
 
     private Button mTestButton;
 
@@ -36,7 +35,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         findViews();
         setupViews();
         setupActionBar();
-        setupSettingsRecyclerView();
+        setupSettingManager();
 
         setSettingsData();
     }
@@ -59,31 +58,28 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private void setupSettingsRecyclerView() {
-        mSettingRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mSettingAdapter = new SettingAdapter(this);
-
-        mSettingRecyclerView.setAdapter(mSettingAdapter);
+    private void setupSettingManager() {
+        mSettingManager = new SettingManager(this, mSettingRecyclerView);
     }
 
     private void setSettingsData() {
-        mSettingAdapter.clear();
+        mSettingManager.clearList();
 
-        mSettingAdapter.add(new SettingData("Item1", "Item1", false, new View.OnClickListener() {
+        mSettingManager.addItem(new SettingData("Item1", "Item1", false, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(SettingActivity.this, "Item1 click", Toast.LENGTH_SHORT).show();
             }
         }));
 
-        mSettingAdapter.add(new SettingData("Item2", "Item2", false, new View.OnClickListener() {
+        mSettingManager.addItem(new SettingData("Item2", "Item2", false, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(SettingActivity.this, "Item2 click", Toast.LENGTH_SHORT).show();
             }
         }));
 
-        mSettingAdapter.add(new SettingData("Item3", "Item3", false, new View.OnClickListener() {
+        mSettingManager.addItem(new SettingData("Item3", "Item3", false, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(SettingActivity.this, "Item3 click", Toast.LENGTH_SHORT).show();
@@ -91,14 +87,14 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         }));
 
         if (mIsFirstEnter) {
-            mSettingAdapter.add(new SettingData("Item4", "Item4", true, new View.OnClickListener() {
+            mSettingManager.addItem(new SettingData("Item4", "Item4", true, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(SettingActivity.this, "Item4 click", Toast.LENGTH_SHORT).show();
                 }
             }));
 
-            mSettingAdapter.add(new SettingData("Item5", "Item5", true, new View.OnClickListener() {
+            mSettingManager.addItem(new SettingData("Item5", "Item5", true, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(SettingActivity.this, "Item5 click", Toast.LENGTH_SHORT).show();
@@ -106,7 +102,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             }));
         }
 
-        mSettingAdapter.refresh();
+        mSettingManager.refreshList();
     }
 
     @Override
