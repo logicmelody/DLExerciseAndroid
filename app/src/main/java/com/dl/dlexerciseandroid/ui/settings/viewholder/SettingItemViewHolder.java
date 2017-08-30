@@ -25,9 +25,9 @@ public class SettingItemViewHolder extends BasedSettingItemViewHolder {
 
     @Override
     protected void findViews(View itemView) {
-        mTitleTextView = (TextView) itemView.findViewById(R.id.text_view_settings_item_title);
-        mSubtitleTextView = (TextView) itemView.findViewById(R.id.text_view_settings_item_subtitle);
-        mSwitch = (Switch) itemView.findViewById(R.id.switch_settings_item);
+        mTitleTextView = (TextView) itemView.findViewById(R.id.text_view_setting_item_title);
+        mSubtitleTextView = (TextView) itemView.findViewById(R.id.text_view_setting_item_subtitle);
+        mSwitch = (Switch) itemView.findViewById(R.id.switch_setting_item);
     }
 
     @Override

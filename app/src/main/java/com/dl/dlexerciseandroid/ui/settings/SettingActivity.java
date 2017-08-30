@@ -11,16 +11,16 @@ import android.view.View;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.datastructure.settings.SettingData;
 
-public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
+public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private RecyclerView mSettingsRecyclerView;
-    private SettingsAdapter mSettingsAdapter;
+    private RecyclerView mSettingRecyclerView;
+    private SettingAdapter mSettingAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_setting);
         initialize();
     }
 
@@ -33,7 +33,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void findViews() {
-        mSettingsRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_settings_list);
+        mSettingRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_setting_list);
     }
 
     private void setupActionBar() {
@@ -41,25 +41,25 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle(getString(R.string.all_settings));
+            actionBar.setTitle(getString(R.string.all_setting));
         }
     }
 
     private void setupSettingsRecyclerView() {
-        mSettingsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mSettingsAdapter = new SettingsAdapter(this);
+        mSettingRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mSettingAdapter = new SettingAdapter(this);
 
-        mSettingsRecyclerView.setAdapter(mSettingsAdapter);
+        mSettingRecyclerView.setAdapter(mSettingAdapter);
     }
 
     private void setSettingsData() {
-        mSettingsAdapter.add(new SettingData("Item1", "Item1", false));
-        mSettingsAdapter.add(new SettingData("Item2", "Item2", false));
-        mSettingsAdapter.add(new SettingData("Item3", "Item3", false));
-        mSettingsAdapter.add(new SettingData("Item4", "Item4", true));
-        mSettingsAdapter.add(new SettingData("Item5", "Item5", true));
+        mSettingAdapter.add(new SettingData("Item1", "Item1", false));
+        mSettingAdapter.add(new SettingData("Item2", "Item2", false));
+        mSettingAdapter.add(new SettingData("Item3", "Item3", false));
+        mSettingAdapter.add(new SettingData("Item4", "Item4", true));
+        mSettingAdapter.add(new SettingData("Item5", "Item5", true));
 
-        mSettingsAdapter.refresh();
+        mSettingAdapter.refresh();
     }
 
     @Override

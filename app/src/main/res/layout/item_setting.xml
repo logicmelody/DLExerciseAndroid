@@ -2,29 +2,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="@dimen/min_height_settings_item">
+    android:minHeight="@dimen/min_height_setting_item">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/padding_left_right_settings_item"
+        android:paddingLeft="@dimen/padding_left_right_setting_item"
         android:layout_centerVertical="true"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/text_view_settings_item_title"
+            android:id="@+id/text_view_setting_item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/text_view_settings_item_subtitle"
+            android:id="@+id/text_view_setting_item_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
 
     <Switch
-        android:id="@+id/switch_settings_item"
+        android:id="@+id/switch_setting_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

@@ -48,7 +48,7 @@
     <string name="all_ndk" translatable="false">NDK</string>
     <string name="all_bubble_text" translatable="false">Bubble Text</string>
     <string name="all_instagram_api" translatable="false">Instagram API</string>
-    <string name="all_settings">Settings</string>
+    <string name="all_setting">Settings</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">Sure to logout?</string>

@@ -37,7 +37,7 @@ import com.dl.dlexerciseandroid.ui.ndk.NdkFragment;
 import com.dl.dlexerciseandroid.ui.opencv.OpenCVFragment;
 import com.dl.dlexerciseandroid.ui.overview.OverviewFragment;
 import com.dl.dlexerciseandroid.ui.rightdrawer.RightDrawerFragment;
-import com.dl.dlexerciseandroid.ui.settings.SettingsActivity;
+import com.dl.dlexerciseandroid.ui.settings.SettingActivity;
 import com.dl.dlexerciseandroid.ui.speechrecognition.SpeechRecognitionFragment;
 import com.dl.dlexerciseandroid.ui.spring.ConsumingRestfulWebServiceFragment;
 import com.dl.dlexerciseandroid.ui.strategypattern.main.StrategyPatternFragment;
@@ -560,7 +560,7 @@ public class UIController implements View.OnClickListener {
         } else {
             switch (item.getItemId()) {
                 case R.id.menu_item_main_settings:
-                    mActivity.startActivity(new Intent(mActivity, SettingsActivity.class));
+                    mActivity.startActivity(new Intent(mActivity, SettingActivity.class));
                     return true;
 
                 case R.id.menu_item_main_open_right_drawer:

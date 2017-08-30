@@ -124,7 +124,7 @@
     <dimen name="padding_instagram_api_feed_item_description">5dp</dimen>
 
     <!-- Settings -->
-    <dimen name="min_height_settings_item">70dp</dimen>
-    <dimen name="padding_left_right_settings_item">10dp</dimen>
+    <dimen name="min_height_setting_item">70dp</dimen>
+    <dimen name="padding_left_right_setting_item">10dp</dimen>
 
 </resources>

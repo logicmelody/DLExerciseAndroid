@@ -18,14 +18,14 @@ import java.util.List;
  * Created by logicmelody on 2017/8/30.
  */
 
-public class SettingsAdapter extends RecyclerView.Adapter<BasedSettingItemViewHolder> {
+public class SettingAdapter extends RecyclerView.Adapter<BasedSettingItemViewHolder> {
 
     private Context mContext;
 
     private List<SettingData> mDataList;
 
 
-    public SettingsAdapter(Context context) {
+    public SettingAdapter(Context context) {
         mContext = context;
         mDataList = new ArrayList<>();
     }
