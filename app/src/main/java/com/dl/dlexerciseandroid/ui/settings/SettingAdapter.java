@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.datastructure.settings.SettingData;
+import com.dl.dlexerciseandroid.datastructure.settings.BasedSettingModel;
 import com.dl.dlexerciseandroid.ui.settings.viewholder.BasedSettingItemViewHolder;
-import com.dl.dlexerciseandroid.ui.settings.viewholder.SettingItemViewHolder;
+import com.dl.dlexerciseandroid.ui.settings.viewholder.OneLineSettingItemViewHolder;
+import com.dl.dlexerciseandroid.ui.settings.viewholder.TwoLineSettingItemViewHolder;
+import com.dl.dlexerciseandroid.ui.settings.viewholder.TwoLineWithSwitchSettingItemViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,7 @@ public class SettingAdapter extends RecyclerView.Adapter<BasedSettingItemViewHol
 
     private Context mContext;
 
-    private List<SettingData> mDataList;
+    private List<BasedSettingModel> mDataList;
 
 
     public SettingAdapter(Context context) {
@@ -30,8 +32,24 @@ public class SettingAdapter extends RecyclerView.Adapter<BasedSettingItemViewHol
     }
 
     @Override
-    public BasedSettingItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        return new SettingItemViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_setting, viewGroup, false));
+    public BasedSettingItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        switch (viewType) {
+            case SettingManager.ItemViewType.ONE_LINE:
+                return new OneLineSettingItemViewHolder(
+                        LayoutInflater.from(mContext).inflate(R.layout.item_setting_one_line, viewGroup, false));
+
+            case SettingManager.ItemViewType.TWO_LINE:
+                return new TwoLineSettingItemViewHolder(
+                        LayoutInflater.from(mContext).inflate(R.layout.item_setting_two_line, viewGroup, false));
+
+            case SettingManager.ItemViewType.TWO_LINE_WITH_SWITCH:
+                return new TwoLineWithSwitchSettingItemViewHolder(
+                        LayoutInflater.from(mContext).inflate(R.layout.item_setting_two_line_with_switch, viewGroup, false));
+
+            default:
+                return new OneLineSettingItemViewHolder(
+                        LayoutInflater.from(mContext).inflate(R.layout.item_setting_one_line, viewGroup, false));
+        }
     }
 
     @Override
@@ -44,8 +62,13 @@ public class SettingAdapter extends RecyclerView.Adapter<BasedSettingItemViewHol
         return mDataList.size();
     }
 
-    public void add(SettingData settingData) {
-        mDataList.add(settingData);
+    @Override
+    public int getItemViewType(int position) {
+        return mDataList.get(position).getViewType();
+    }
+
+    public void add(BasedSettingModel settingModel) {
+        mDataList.add(settingModel);
     }
 
     public void clear() {

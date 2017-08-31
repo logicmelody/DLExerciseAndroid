@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.datastructure.settings.SettingData;
+import com.dl.dlexerciseandroid.datastructure.settings.OneLineSettingModel;
+import com.dl.dlexerciseandroid.datastructure.settings.TwoLineSettingModel;
+import com.dl.dlexerciseandroid.datastructure.settings.TwoLineWithSwitchSettingModel;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -65,21 +67,21 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private void setSettingsData() {
         mSettingManager.clearList();
 
-        mSettingManager.addItem(new SettingData("Item1", "Item1", false, new View.OnClickListener() {
+        mSettingManager.addItem(new OneLineSettingModel("Item1", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(SettingActivity.this, "Item1 click", Toast.LENGTH_SHORT).show();
             }
         }));
 
-        mSettingManager.addItem(new SettingData("Item2", "Item2", false, new View.OnClickListener() {
+        mSettingManager.addItem(new TwoLineSettingModel("Item2", "Item2", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(SettingActivity.this, "Item2 click", Toast.LENGTH_SHORT).show();
             }
         }));
 
-        mSettingManager.addItem(new SettingData("Item3", "Item3", false, new View.OnClickListener() {
+        mSettingManager.addItem(new TwoLineWithSwitchSettingModel("Item3", "Item3", false, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(SettingActivity.this, "Item3 click", Toast.LENGTH_SHORT).show();
@@ -87,14 +89,14 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         }));
 
         if (mIsFirstEnter) {
-            mSettingManager.addItem(new SettingData("Item4", "Item4", true, new View.OnClickListener() {
+            mSettingManager.addItem(new TwoLineSettingModel("Item4", "Item4", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(SettingActivity.this, "Item4 click", Toast.LENGTH_SHORT).show();
                 }
             }));
 
-            mSettingManager.addItem(new SettingData("Item5", "Item5", true, new View.OnClickListener() {
+            mSettingManager.addItem(new TwoLineWithSwitchSettingModel("Item5", "Item5", false, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(SettingActivity.this, "Item5 click", Toast.LENGTH_SHORT).show();

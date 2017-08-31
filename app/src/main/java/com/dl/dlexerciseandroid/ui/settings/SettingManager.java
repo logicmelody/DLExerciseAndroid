@@ -4,13 +4,19 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.dl.dlexerciseandroid.datastructure.settings.SettingData;
+import com.dl.dlexerciseandroid.datastructure.settings.BasedSettingModel;
 
 /**
  * Created by logicmelody on 2017/8/30.
  */
 
 public class SettingManager {
+
+    public static final class ItemViewType {
+        public static final int ONE_LINE = 0;
+        public static final int TWO_LINE = 1;
+        public static final int TWO_LINE_WITH_SWITCH = 2;
+    }
 
     private Context mContext;
 
@@ -36,15 +42,27 @@ public class SettingManager {
         mSettingRecyclerView.setAdapter(mSettingAdapter);
     }
 
-    public void addItem(SettingData settingData) {
-        mSettingAdapter.add(settingData);
+    public void addItem(BasedSettingModel settingModel) {
+        if (mSettingRecyclerView == null) {
+            return;
+        }
+
+        mSettingAdapter.add(settingModel);
     }
 
     public void clearList() {
+        if (mSettingRecyclerView == null) {
+            return;
+        }
+
         mSettingAdapter.clear();
     }
 
     public void refreshList() {
+        if (mSettingRecyclerView == null) {
+            return;
+        }
+
         mSettingAdapter.notifyDataSetChanged();
     }
 }
