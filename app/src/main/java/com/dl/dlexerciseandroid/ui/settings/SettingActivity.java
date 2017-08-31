@@ -39,7 +39,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         setupActionBar();
         setupSettingManager();
 
-        setSettingsData();
+        setSettingDatas();
     }
 
     private void findViews() {
@@ -64,7 +64,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         mSettingManager = new SettingManager(this, mSettingRecyclerView);
     }
 
-    private void setSettingsData() {
+    private void setSettingDatas() {
         mSettingManager.clearList();
 
         mSettingManager.addItem(new OneLineSettingModel("Item1", new View.OnClickListener() {
@@ -124,7 +124,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_setting_test:
-                setSettingsData();
+                setSettingDatas();
 
                 break;
         }
