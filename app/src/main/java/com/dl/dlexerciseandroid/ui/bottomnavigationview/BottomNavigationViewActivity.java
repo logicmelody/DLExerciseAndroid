@@ -19,7 +19,6 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements
     private BottomNavigationPresenter mBottomNavigationPresenter;
 
     private Toolbar mToolbar;
-    private String mTestBranchText = "";
 
     private TextView mContentText;
     private BottomNavigationView mBottomBar;
