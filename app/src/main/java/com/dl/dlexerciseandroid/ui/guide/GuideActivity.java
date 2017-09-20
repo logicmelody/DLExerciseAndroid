@@ -76,7 +76,7 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
                     return;
                 }
 
-                mGuideView.cleanUp();
+                removeGuideView();
 
                 break;
 
@@ -93,6 +93,11 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
 
     private boolean hasGuideViewOnWindow() {
         return mGuideView != null && ViewCompat.isAttachedToWindow(mGuideView);
+    }
+
+    private void removeGuideView() {
+        mGuideView.cleanUp();
+        mGuideView = null;
     }
 
     private void setupGuideView() {
@@ -151,6 +156,16 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
 
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (hasGuideViewOnWindow()) {
+            removeGuideView();
+
+        } else {
+            super.onBackPressed();
         }
     }
 }
