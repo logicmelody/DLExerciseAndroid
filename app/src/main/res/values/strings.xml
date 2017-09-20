@@ -146,4 +146,8 @@
     <string name="instagram_api_login">Instagram Login</string>
     <string name="instagram_api_likes" translatable="false">Likes</string>
 
+    <!-- Guide -->
+    <string name="guide_highlight_button_text" translatable="false">Highlight Button</string>
+    <string name="guide_call_guide_button_text" translatable="false">Call Guide</string>
+
 </resources>

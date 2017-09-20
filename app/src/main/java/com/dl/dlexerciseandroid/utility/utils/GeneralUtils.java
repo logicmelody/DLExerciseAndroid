@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.view.Surface;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.widget.Toast;
@@ -122,5 +123,12 @@ public class GeneralUtils {
         }
 
         camera.setDisplayOrientation(result);
+    }
+
+    public static int[] getViewLocationOnScreen(View view) {
+        int[] pos = new int[2];
+        view.getLocationOnScreen(pos);
+
+        return pos;
     }
 }

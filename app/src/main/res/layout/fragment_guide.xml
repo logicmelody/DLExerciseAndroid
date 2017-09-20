@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/padding_all_window"
-    android:orientation="vertical" >
+    android:padding="@dimen/padding_all_window">
 
-    <TextView
-        android:id="@+id/text_view_overview_gtm_text"
+    <Button
+        android:id="@+id/button_guide_highlight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-        android:text="Guide view"/>
+        android:layout_gravity="center_horizontal|top"
+        android:text="@string/guide_highlight_button_text"/>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/button_guide_call_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/guide_call_guide_button_text"/>
+
+</FrameLayout>
