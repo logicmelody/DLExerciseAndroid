@@ -15,6 +15,7 @@ import com.dl.dlexerciseandroid.ui.bottomnavigationview.BottomNavigationViewActi
 import com.dl.dlexerciseandroid.ui.bubbletext.BubbleTextActivity;
 import com.dl.dlexerciseandroid.ui.coordinatorlayout.CoordinatorLayoutActivity;
 import com.dl.dlexerciseandroid.ui.espressotest.EspressoTestActivity;
+import com.dl.dlexerciseandroid.ui.guide.GuideActivity;
 import com.dl.dlexerciseandroid.ui.instagramapi.main.InstagramMainActivity;
 import com.dl.dlexerciseandroid.ui.mininavigationdrawer.main.MiniNavigationDrawerActivity;
 import com.dl.dlexerciseandroid.ui.moviesearcher.MovieSearcherActivity;
@@ -44,6 +45,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
     private Button mRunningManButton;
     private Button mBubbleTextButton;
     private Button mInstagramApiButton;
+    private Button mGuideButton;
 
 
     @Override
@@ -80,6 +82,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
         mRunningManButton = (Button) getView().findViewById(R.id.button_right_drawer_running_man);
         mBubbleTextButton = (Button) getView().findViewById(R.id.button_right_drawer_bubble_text);
         mInstagramApiButton = (Button) getView().findViewById(R.id.button_right_drawer_instagram_api);
+        mGuideButton = (Button) getView().findViewById(R.id.button_right_drawer_guide);
     }
 
     private void setupViews() {
@@ -92,6 +95,7 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
         mRunningManButton.setOnClickListener(this);
         mBubbleTextButton.setOnClickListener(this);
         mInstagramApiButton.setOnClickListener(this);
+        mGuideButton.setOnClickListener(this);
     }
 
     @Override
@@ -131,6 +135,10 @@ public class RightDrawerFragment extends Fragment implements View.OnClickListene
 
             case R.id.button_right_drawer_instagram_api:
                 startActivity(new Intent(mContext, InstagramMainActivity.class));
+                break;
+
+            case R.id.button_right_drawer_guide:
+                startActivity(new Intent(mContext, GuideActivity.class));
                 break;
         }
 

@@ -59,4 +59,10 @@
         android:layout_height="wrap_content"
         android:text="@string/all_instagram_api"/>
 
+    <Button
+        android:id="@+id/button_right_drawer_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/all_guide"/>
+
 </LinearLayout>

@@ -19,8 +19,8 @@ public class GuideView extends FrameLayout {
 
     private Context mContext;
 
-    private Bitmap mEraserBitmap;
-    private Canvas mEraserCanvas;
+    private Bitmap mOverlayBitmap;
+    private Canvas mOverlayCanvas;
 
     private Paint mEraserPaint;
     private Paint mOverlayPaint;
@@ -38,45 +38,47 @@ public class GuideView extends FrameLayout {
         super(context);
         mContext = context;
         mHighlightView = highlightView;
-        initialize(null, 0);
+        initialize();
     }
 
-    private void initialize(AttributeSet attrs, int defStyle) {
+    private void initialize() {
         setWillNotDraw(false);
+        initHighlightArea();
 
-        int[] pos = GeneralUtils.getViewLocationOnScreen(mHighlightView);
-        mRectF = new RectF(pos[0], pos[1], pos[0] + mHighlightView.getWidth(), pos[1] + mHighlightView.getHeight());
-
-        mEraserBitmap = Bitmap.createBitmap(mContext.getResources().getDisplayMetrics().widthPixels,
+        mOverlayBitmap = Bitmap.createBitmap(mContext.getResources().getDisplayMetrics().widthPixels,
                 mContext.getResources().getDisplayMetrics().heightPixels, Bitmap.Config.ARGB_8888);
-        mEraserCanvas = new Canvas(mEraserBitmap);
+        mOverlayCanvas = new Canvas(mOverlayBitmap);
 
         mOverlayPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mOverlayPaint.setColor(getResources().getColor(android.R.color.black));
+        mOverlayPaint.setColor(0xcc000000);
         mOverlayPaint.setStyle(Paint.Style.FILL);
 
         mEraserPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mEraserPaint.setColor(getResources().getColor(android.R.color.black));
         mEraserPaint.setStyle(Paint.Style.FILL);
         mEraserPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+    }
+
+    private void initHighlightArea() {
+        int[] pos = GeneralUtils.getViewLocationOnScreen(mHighlightView);
+        mRectF = new RectF(pos[0], pos[1], pos[0] + mHighlightView.getWidth(), pos[1] + mHighlightView.getHeight());
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        mEraserBitmap.eraseColor(Color.TRANSPARENT);
-        mEraserCanvas.drawColor(Color.BLACK);
-        mEraserCanvas.drawRect(mRectF, mEraserPaint);
+        mOverlayBitmap.eraseColor(Color.TRANSPARENT);
+        mOverlayCanvas.drawPaint(mOverlayPaint);
+        mOverlayCanvas.drawRect(mRectF, mEraserPaint);
 
-        canvas.drawBitmap(mEraserBitmap, 0, 0, null);
+        canvas.drawBitmap(mOverlayBitmap, 0, 0, null);
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        mEraserCanvas.setBitmap(null);
-        mEraserBitmap = null;
+        mOverlayCanvas.setBitmap(null);
+        mOverlayBitmap = null;
     }
 
     public void cleanUp() {
