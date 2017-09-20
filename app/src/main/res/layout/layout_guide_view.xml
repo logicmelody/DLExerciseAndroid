@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- The <merge /> tag helps eliminate redundant view groups in your view hierarchy
+     when including one layout within another. -->
+<!-- 因為GuideView已經繼承了FrameLayout，用merge的方式來合成所有的View，可以讓view hierarchy少一層 -->
+<!-- 通常我們要include xml layout的時候，都可以將要include的layout的root設為merge，內容的部份就看parent是用LinearLayout或是
+     RelativeLayout採用對應的寫法-->
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.dl.dlexerciseandroid.ui.guide.OverlayHoleView
+        android:id="@+id/overlay_hole_view_guide_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <Button
+        android:id="@+id/button_guide_i_know"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/guide_i_know_button_text"/>
+
+</merge>

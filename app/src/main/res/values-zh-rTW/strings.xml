@@ -78,4 +78,7 @@
     <!-- Instagram API -->
     <string name="instagram_api_login">Instagram 登入</string>
 
+    <!-- Guide -->
+    <string name="guide_i_know_button_text">我知道了</string>
+
 </resources>

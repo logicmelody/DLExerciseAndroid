@@ -149,5 +149,6 @@
     <!-- Guide -->
     <string name="guide_highlight_button_text" translatable="false">Highlight Button</string>
     <string name="guide_call_guide_button_text" translatable="false">Call Guide</string>
+    <string name="guide_i_know_button_text">I Know</string>
 
 </resources>

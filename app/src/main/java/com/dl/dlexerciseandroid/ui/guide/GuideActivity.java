@@ -91,13 +91,16 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private boolean hasGuideViewOnWindow() {
-        return mGuideView != null && ViewCompat.isAttachedToWindow(mGuideView);
+    private void removeGuideView() {
+        if (!hasGuideViewOnWindow()) {
+            return;
+        }
+
+        mGuideView.removeSelf();
     }
 
-    private void removeGuideView() {
-        mGuideView.cleanUp();
-        mGuideView = null;
+    private boolean hasGuideViewOnWindow() {
+        return mGuideView != null && ViewCompat.isAttachedToWindow(mGuideView);
     }
 
     private void setupGuideView() {

@@ -1,0 +1,102 @@
+package com.dl.dlexerciseandroid.ui.guide;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.RectF;
+import android.support.annotation.AttrRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.FrameLayout;
+
+import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.utility.utils.GeneralUtils;
+
+public class OverlayHoleView extends FrameLayout {
+
+    private Context mContext;
+
+    private Bitmap mOverlayBitmap;
+    private Canvas mOverlayCanvas;
+
+    private Paint mEraserPaint;
+    private Paint mOverlayPaint;
+
+    private View mHighlightView;
+    private RectF mRectF;
+
+
+    public void setHighlightView(View highlightView) {
+        mHighlightView = highlightView;
+        invalidate();
+    }
+
+    public OverlayHoleView(@NonNull Context context) {
+        super(context);
+        mContext = context;
+        initialize();
+    }
+
+    public OverlayHoleView(@NonNull Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        mContext = context;
+        initialize();
+    }
+
+    public OverlayHoleView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        mContext = context;
+        initialize();
+    }
+
+    private void initialize() {
+        setWillNotDraw(false);
+
+        mOverlayBitmap = Bitmap.createBitmap(mContext.getResources().getDisplayMetrics().widthPixels,
+                mContext.getResources().getDisplayMetrics().heightPixels, Bitmap.Config.ARGB_8888);
+        mOverlayCanvas = new Canvas(mOverlayBitmap);
+
+        mOverlayPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mOverlayPaint.setColor(mContext.getResources().getColor(R.color.background_guide_overlay));
+        mOverlayPaint.setStyle(Paint.Style.FILL);
+
+        mEraserPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mEraserPaint.setStyle(Paint.Style.FILL);
+        mEraserPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+    }
+
+    private void setHighlightArea() {
+        int[] pos = GeneralUtils.getViewLocationOnScreen(mHighlightView);
+        mRectF = new RectF(pos[0], pos[1], pos[0] + mHighlightView.getWidth(), pos[1] + mHighlightView.getHeight());
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        if (mHighlightView == null) {
+            return;
+        }
+
+        setHighlightArea();
+
+        mOverlayBitmap.eraseColor(Color.TRANSPARENT);
+        mOverlayCanvas.drawPaint(mOverlayPaint);
+        mOverlayCanvas.drawRect(mRectF, mEraserPaint);
+
+        canvas.drawBitmap(mOverlayBitmap, 0, 0, null);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        mOverlayCanvas.setBitmap(null);
+        mOverlayBitmap = null;
+    }
+}

@@ -1,91 +1,63 @@
 package com.dl.dlexerciseandroid.ui.guide;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.RectF;
-import android.util.AttributeSet;
+import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
-import com.dl.dlexerciseandroid.utility.utils.GeneralUtils;
+import com.dl.dlexerciseandroid.R;
 
-public class GuideView extends FrameLayout {
+public class GuideView extends FrameLayout implements View.OnClickListener {
 
     private Context mContext;
 
-    private Bitmap mOverlayBitmap;
-    private Canvas mOverlayCanvas;
-
-    private Paint mEraserPaint;
-    private Paint mOverlayPaint;
-
     private View mHighlightView;
-    private RectF mRectF;
+    private OverlayHoleView mOverlayHoleView;
+    private Button mIKnowButton;
 
 
-    public void setHighlightView(View highlightView) {
-        this.mHighlightView = highlightView;
-        invalidate();
-    }
-
-    public GuideView(Context context, View highlightView) {
+    public GuideView(@NonNull Context context, View highlightView) {
         super(context);
         mContext = context;
         mHighlightView = highlightView;
         initialize();
+        setupButtons();
+        setHighlightView();
     }
 
     private void initialize() {
-        setWillNotDraw(false);
-        initHighlightArea();
+        LayoutInflater.from(mContext).inflate(R.layout.layout_guide_view, this);
 
-        mOverlayBitmap = Bitmap.createBitmap(mContext.getResources().getDisplayMetrics().widthPixels,
-                mContext.getResources().getDisplayMetrics().heightPixels, Bitmap.Config.ARGB_8888);
-        mOverlayCanvas = new Canvas(mOverlayBitmap);
-
-        mOverlayPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mOverlayPaint.setColor(0xcc000000);
-        mOverlayPaint.setStyle(Paint.Style.FILL);
-
-        mEraserPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mEraserPaint.setStyle(Paint.Style.FILL);
-        mEraserPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        mOverlayHoleView = (OverlayHoleView) findViewById(R.id.overlay_hole_view_guide_overlay);
+        mIKnowButton = (Button) findViewById(R.id.button_guide_i_know);
     }
 
-    private void initHighlightArea() {
-        int[] pos = GeneralUtils.getViewLocationOnScreen(mHighlightView);
-        mRectF = new RectF(pos[0], pos[1], pos[0] + mHighlightView.getWidth(), pos[1] + mHighlightView.getHeight());
+    private void setupButtons() {
+        mIKnowButton.setOnClickListener(this);
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_guide_i_know:
+                removeSelf();
 
-        mOverlayBitmap.eraseColor(Color.TRANSPARENT);
-        mOverlayCanvas.drawPaint(mOverlayPaint);
-        mOverlayCanvas.drawRect(mRectF, mEraserPaint);
-
-        canvas.drawBitmap(mOverlayBitmap, 0, 0, null);
+                break;
+        }
     }
 
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        mOverlayCanvas.setBitmap(null);
-        mOverlayBitmap = null;
-    }
-
-    public void cleanUp() {
+    public void removeSelf() {
         if (getParent() == null) {
             return;
         }
 
         ((ViewGroup) this.getParent()).removeView(this);
+    }
+
+    public void setHighlightView() {
+        mOverlayHoleView.setHighlightView(mHighlightView);
     }
 }

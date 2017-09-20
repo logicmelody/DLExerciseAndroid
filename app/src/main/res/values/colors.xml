@@ -66,4 +66,7 @@
     <!-- Instagram Api -->
     <color name="background_feed_item">#FF2C2F34</color>
 
+    <!-- Guide -->
+    <color name="background_guide_overlay">#CC000000</color>
+
 </resources>
