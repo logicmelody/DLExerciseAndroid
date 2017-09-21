@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
 
@@ -26,6 +27,7 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
 
     private Button mHighlightButton;
     private Button mCallGuideButton;
+    private Button mShowToastButton;
 
     private GuideView mGuideView;
 
@@ -48,11 +50,13 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
         mHighlightButton = (Button) findViewById(R.id.button_guide_highlight);
         mCallGuideButton = (Button) findViewById(R.id.button_guide_call_guide);
+        mShowToastButton = (Button) findViewById(R.id.button_guide_show_toast);
     }
 
     private void setupViews() {
         mHighlightButton.setOnClickListener(this);
         mCallGuideButton.setOnClickListener(this);
+        mShowToastButton.setOnClickListener(this);
     }
 
     private void setupActionBar() {
@@ -86,6 +90,11 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
                 }
 
                 setupGuideView();
+
+                break;
+
+            case R.id.button_guide_show_toast:
+                Toast.makeText(this, "Toast", Toast.LENGTH_SHORT).show();
 
                 break;
         }
