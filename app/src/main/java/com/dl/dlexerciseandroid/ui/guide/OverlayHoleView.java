@@ -56,6 +56,7 @@ public class OverlayHoleView extends FrameLayout {
     }
 
     private void initialize() {
+        // 在ViewGroup中，如果要在canvas上畫東西，要加上這行，如果是普通一般的View不用加
         setWillNotDraw(false);
 
         mOverlayBitmap = Bitmap.createBitmap(mContext.getResources().getDisplayMetrics().widthPixels,
@@ -69,11 +70,6 @@ public class OverlayHoleView extends FrameLayout {
         mEraserPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mEraserPaint.setStyle(Paint.Style.FILL);
         mEraserPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-    }
-
-    private void setHighlightArea() {
-        int[] pos = GeneralUtils.getViewLocationOnScreen(mHighlightView);
-        mRectF = new RectF(pos[0], pos[1], pos[0] + mHighlightView.getWidth(), pos[1] + mHighlightView.getHeight());
     }
 
     @Override
@@ -91,6 +87,11 @@ public class OverlayHoleView extends FrameLayout {
         mOverlayCanvas.drawRect(mRectF, mEraserPaint);
 
         canvas.drawBitmap(mOverlayBitmap, 0, 0, null);
+    }
+
+    private void setHighlightArea() {
+        int[] pos = GeneralUtils.getViewLocationOnScreen(mHighlightView);
+        mRectF = new RectF(pos[0], pos[1], pos[0] + mHighlightView.getWidth(), pos[1] + mHighlightView.getHeight());
     }
 
     @Override
