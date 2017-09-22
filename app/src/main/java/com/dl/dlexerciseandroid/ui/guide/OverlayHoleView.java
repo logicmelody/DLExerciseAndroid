@@ -104,6 +104,8 @@ public class OverlayHoleView extends FrameLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        // 可以把touch event往下傳到highlight view，所以點擊highlight view可以觸發事件，
+        // 但是點擊highlight view以外的地方沒有作用
         return mHighlightView == null ? super.dispatchTouchEvent(ev) : !isWithinHighlightView(ev);
     }
 

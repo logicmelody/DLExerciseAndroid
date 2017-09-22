@@ -28,7 +28,7 @@ public class NumberListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         public NumberViewHolder(View itemView) {
             super(itemView);
-            number = (TextView) itemView.findViewById(R.id.text_view_coordinator_layout_number);
+            number = (TextView) itemView.findViewById(R.id.text_view_item_layout_number);
         }
     }
 
@@ -45,7 +45,7 @@ public class NumberListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new NumberViewHolder(
-                LayoutInflater.from(mContext).inflate(R.layout.item_coordinator_layout_number_list, parent, false));
+                LayoutInflater.from(mContext).inflate(R.layout.item_layout_number_list, parent, false));
     }
 
     @Override

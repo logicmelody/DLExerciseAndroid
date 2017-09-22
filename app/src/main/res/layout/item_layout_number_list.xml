@@ -4,7 +4,7 @@
     android:layout_height="@dimen/height_coordinator_layout_number_item">
 
     <TextView
-        android:id="@+id/text_view_coordinator_layout_number"
+        android:id="@+id/text_view_item_layout_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

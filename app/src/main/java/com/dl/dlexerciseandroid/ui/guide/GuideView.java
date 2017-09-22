@@ -12,17 +12,24 @@ import com.dl.dlexerciseandroid.R;
 
 public class GuideView extends FrameLayout implements View.OnClickListener {
 
+    public interface OnGuideViewListener {
+        void onClickIKnow();
+    }
+
     private Context mContext;
 
     private View mHighlightView;
     private OverlayHoleView mOverlayHoleView;
     private Button mIKnowButton;
 
+    private OnGuideViewListener mOnGuideViewListener;
 
-    public GuideView(@NonNull Context context, View highlightView) {
+
+    public GuideView(@NonNull Context context, View highlightView, OnGuideViewListener listener) {
         super(context);
         mContext = context;
         mHighlightView = highlightView;
+        mOnGuideViewListener = listener;
         initialize();
         setupButtons();
         setHighlightView();
@@ -43,6 +50,10 @@ public class GuideView extends FrameLayout implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_guide_i_know:
+                if (mOnGuideViewListener != null) {
+                    mOnGuideViewListener.onClickIKnow();
+                }
+
                 removeSelf();
 
                 break;
