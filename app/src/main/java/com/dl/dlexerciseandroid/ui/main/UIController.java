@@ -37,6 +37,7 @@ import com.dl.dlexerciseandroid.ui.ndk.NdkFragment;
 import com.dl.dlexerciseandroid.ui.opencv.OpenCVFragment;
 import com.dl.dlexerciseandroid.ui.overview.OverviewFragment;
 import com.dl.dlexerciseandroid.ui.rightdrawer.RightDrawerFragment;
+import com.dl.dlexerciseandroid.ui.rxjava.RxJavaFragment;
 import com.dl.dlexerciseandroid.ui.settings.SettingActivity;
 import com.dl.dlexerciseandroid.ui.speechrecognition.SpeechRecognitionFragment;
 import com.dl.dlexerciseandroid.ui.spring.ConsumingRestfulWebServiceFragment;
@@ -301,6 +302,10 @@ public class UIController implements View.OnClickListener {
 
                     case R.id.menu_item_left_drawer_opencv:
                         replaceContentFragment(OpenCVFragment.class, OpenCVFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_rxjava:
+                        replaceContentFragment(RxJavaFragment.class, RxJavaFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:
