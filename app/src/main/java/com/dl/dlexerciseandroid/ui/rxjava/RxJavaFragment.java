@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
 
-import org.reactivestreams.Subscriber;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -25,6 +25,8 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 public class RxJavaFragment extends Fragment {
@@ -57,9 +59,9 @@ public class RxJavaFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initialize();
-        testRxJava();
-        testRxJava2();
-        testRxJava3();
+        rxJavaFromArray();
+        printHelloWorld();
+        rxJavaEmpty();
         loadIronMan();
     }
 
@@ -74,126 +76,141 @@ public class RxJavaFragment extends Fragment {
         mIronManImageView = (ImageView) getView().findViewById(R.id.image_view_rxjava_iron_man);
     }
 
-    private void testRxJava() {
-        appendLog("====== testRxJava() ======");
+    private void rxJavaFromArray() {
+        String[] names = new String[] {"DANNY", "Steven", "D LUFFY", "Kobe"};
 
         // Observable用來產生資料
-        // Emits "Hello"
-        Observable<String> myObservable = Observable.just("Hello", "World");
-
-        // Observer用來接收Observable產生的資料，Observer有多種callback可以使用
-        // 所有的事件會是存在一個queue中，當queue中的事件全部都執行完畢，或是中間有出現錯誤的時候，
-        // 會call onComplete()跟onError()，onComplete()跟onError()彼此是互斥，只會有一個執行
-        Observer<String> myObserver = new Observer<String>() {
-
-            @Override
-            public void onSubscribe(Disposable d) {
-                showLog("onSubscribe!");
-            }
-
-            @Override
-            public void onNext(String value) {
-                // Called each time the observable emits data
-                showLog("onNext = " + value);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                // Called when the observable encounters an error
-                showLog("onError = " + e.toString());
-                appendLog("======================");
-            }
-
-            @Override
-            public void onComplete() {
-                // Called when the observable has no more data to emit
-                showLog("onComplete!");
-                appendLog("======================");
-                setLogText();
-            }
-        };
-
-        // Subscribe之後才會執行Observer裡的callback動作
-        myObservable.subscribe(myObserver);
-    }
-
-    private void appendLog(String log) {
-        if (TextUtils.isEmpty(log)) {
-            return;
-        }
-
-        mLogStringBuilder.append(log).append("\n");
-    }
-
-    private void showLog(String log) {
-        Log.d("danny", log);
-        appendLog(log);
-    }
-
-    private void testRxJava2() {
-        appendLog("====== testRxJava2() ======");
-
-        String[] names = new String[] {"Danny", "Steven", "Kobe"};
-
+        // Emits "Hello World"
         // 由於RxJava的預設規則，事件的發出和消費都是在同一個thread，只用下面的做法，實作出來的只是一個同一條thread的觀察者模式
         Observable.fromArray(names)
+
+                // 可以用來過濾資料
+                .filter(new Predicate<String>() {
+                    @Override
+                    public boolean test(@NonNull String s) throws Exception {
+                        return s.startsWith("D");
+                    }
+                })
+
+                // 只取前面兩筆資料
+                .take(2)
+
+                // 取出來的資料重複三次
+                .repeat(3)
+
+                // 消除重複的資料
+                .distinct()
+
+                // 有新的資料，也就是跟之前資料不同的時候，才會發出新的資料
+                .distinctUntilChanged()
+
+                // 每30秒才會更新一次資料，抓取最後一筆資料，take the last
+                //.sample(30, TimeUnit.SECONDS)
+
+                // 每30秒才會更新一次資料，抓取第一筆資料，take the first
+                //.throttleFirst(30, TimeUnit.SECONDS)
+
+                // 可以利用map將原始資料做一次轉換，轉換成我們想要的
+                .map(new Function<String, String>() {
+                    @Override
+                    public String apply(@NonNull String s) throws Exception {
+                        return s.toLowerCase();
+                    }
+                })
+
+                // Subscribe Observer，Observer只需要管拿到data之後要做什麼事情，在這邊就是把log印出來
+                // Observer用來接收Observable產生的資料，Observer有多種callback可以使用
+                // 所有的事件會是存在一個queue中，當queue中的事件全部都執行完畢，或是中間有出現錯誤的時候，
+                // 會call onComplete()跟onError()，onComplete()跟onError()彼此是互斥，只會有一個執行
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        showLog("onSubscribe!");
+                        showLog("rxJavaFromArray()", "onSubscribe!");
                     }
 
                     @Override
                     public void onNext(@NonNull String s) {
-                        showLog("onNext = " + s);
+                        showLog("rxJavaFromArray()", "onNext = " + s);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        showLog("onError = " + e.toString());
-                        appendLog("======================");
+                        showLog("rxJavaFromArray()", "onError = " + e.toString());
+                        setLogText();
                     }
 
                     @Override
                     public void onComplete() {
-                        showLog("onComplete!");
-                        appendLog("======================");
+                        showLog("rxJavaFromArray()", "onComplete!");
                         setLogText();
                     }
                 });
     }
 
-    private void testRxJava3() {
-        appendLog("====== testRxJava3() ======");
-
-        Observable.just(1, 2, 3, 4, 5)
-
-                // 以下這兩行的設定非常常見，適用於多數的background thread取資料，main thread顯示UI
-                .subscribeOn(Schedulers.io()) // 指定Observable執行在IO thread
-                .observeOn(AndroidSchedulers.mainThread()) // 指定Observer執行在main thread
-
-                .subscribe(new Observer<Integer>() {
+    private void printHelloWorld() {
+        // Observable用來產生資料
+        // Emits "Hello World"
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<String> subscriber) throws Exception {
+                // 會對應到Observer的callback：onNext(), onComplete(), onError()
+                subscriber.onNext("Hello World");
+                //subscriber.onError(new Throwable());
+                subscriber.onComplete();
+            }
+        })
+                // Observer用來接收Observable產生的資料，Observer有多種callback可以使用
+                // 所有的事件會是存在一個queue中，當queue中的事件全部都執行完畢，或是中間有出現錯誤的時候，
+                // 會call onComplete()跟onError()，onComplete()跟onError()彼此是互斥，只會有一個執行
+                .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        showLog("onSubscribe!");
+                        showLog("printHelloWorld()", "onSubscribe!");
                     }
 
                     @Override
-                    public void onNext(@NonNull Integer integer) {
-                        showLog("onNext = " + integer);
+                    public void onNext(@NonNull String s) {
+                        // Called each time the observable emits data
+                        showLog("printHelloWorld()", "onNext = " + s);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        showLog("onError = " + e.toString());
-                        appendLog("======================");
+                        // Called when the observable encounters an error
+                        showLog("printHelloWorld()", "onError = " + e.toString());
+                        setLogText();
                     }
 
                     @Override
                     public void onComplete() {
-                        showLog("onComplete!");
-                        appendLog("======================");
+                        // Called when the observable has no more data to emit
+                        showLog("printHelloWorld()", "onComplete!");
                         setLogText();
+                    }
+                });
+    }
+
+    private void rxJavaEmpty() {
+        Observable.empty()
+                .subscribe(new Observer<Object>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Object o) {
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }
@@ -202,34 +219,64 @@ public class RxJavaFragment extends Fragment {
         Observable.create(new ObservableOnSubscribe<Drawable>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Drawable> subscriber) throws Exception {
+                //Thread.sleep(5000);
+
                 Drawable drawable = mContext.getResources().getDrawable(R.drawable.poster_iron_man);
                 subscriber.onNext(drawable);
                 subscriber.onComplete();
             }
         })
+                // 這個Scheduler主要用來執行存取disk的資料或是網路存取資料
                 .subscribeOn(Schedulers.io())
+
+                // 這個Scheduler主要用來執行比較需要花時間和大量的運算
+                //.subscribeOn(Schedulers.computation())
+
+                // Observer在UI thread執行
                 .observeOn(AndroidSchedulers.mainThread())
+
                 .subscribe(new Observer<Drawable>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
+                        showLog("loadIronMan()", "onSubscribe!");
                     }
 
                     @Override
                     public void onNext(@NonNull Drawable drawable) {
+                        showLog("loadIronMan()", "onNext = drawable");
+
                         mIronManImageView.setImageDrawable(drawable);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        showLog("loadIronMan()", "onError = " + e.toString());
+                        setLogText();
+
                         Toast.makeText(mContext, "Iron Man Error!", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onComplete() {
-
+                        showLog("loadIronMan()", "onComplete!");
+                        setLogText();
                     }
                 });
+    }
+
+    private void showLog(String tag, String log) {
+        String printLog = tag + " " + log;
+
+        Log.d("danny", printLog);
+        appendLog(printLog);
+    }
+
+    private void appendLog(String log) {
+        if (TextUtils.isEmpty(log)) {
+            return;
+        }
+
+        mLogStringBuilder.append(log).append("\n");
     }
 
     private void setLogText() {
