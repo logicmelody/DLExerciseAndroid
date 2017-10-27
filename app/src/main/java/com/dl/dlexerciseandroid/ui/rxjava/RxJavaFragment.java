@@ -16,8 +16,6 @@ import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
 
-import java.util.concurrent.TimeUnit;
-
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
