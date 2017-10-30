@@ -217,14 +217,16 @@ public class RxJavaFragment extends Fragment {
         Observable.create(new ObservableOnSubscribe<Drawable>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Drawable> subscriber) throws Exception {
-                //Thread.sleep(5000);
+                // 處理background load image的工作
+                Thread.sleep(3000);
 
                 Drawable drawable = mContext.getResources().getDrawable(R.drawable.poster_iron_man);
                 subscriber.onNext(drawable);
                 subscriber.onComplete();
             }
         })
-                // 這個Scheduler主要用來執行存取disk的資料或是網路存取資料
+                // 這個Scheduler主要用來執行存取disk的資料或是網路存取資料，不是在UI thread，所以我們可以進行些需要耗費時間的工作，
+                // 甚至可以用Thread.sleep()把工作暫停
                 .subscribeOn(Schedulers.io())
 
                 // 這個Scheduler主要用來執行比較需要花時間和大量的運算
