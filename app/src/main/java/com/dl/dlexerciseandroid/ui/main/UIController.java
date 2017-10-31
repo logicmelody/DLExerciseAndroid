@@ -30,6 +30,7 @@ import com.dl.dlexerciseandroid.ui.dlsdk.DLSdkFragment;
 import com.dl.dlexerciseandroid.ui.facebook.FacebookFragment;
 import com.dl.dlexerciseandroid.ui.file.FileFragment;
 import com.dl.dlexerciseandroid.ui.firebase.FirebaseFragment;
+import com.dl.dlexerciseandroid.ui.installedapps.InstalledAppsFragment;
 import com.dl.dlexerciseandroid.ui.intent.IntentFragment;
 import com.dl.dlexerciseandroid.ui.loadimagefrominternet.main.LoadImageFromInternetFragment;
 import com.dl.dlexerciseandroid.ui.musicplayer.main.MusicPlayerFragment;
@@ -306,6 +307,10 @@ public class UIController implements View.OnClickListener {
 
                     case R.id.menu_item_left_drawer_rxjava:
                         replaceContentFragment(RxJavaFragment.class, RxJavaFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_installed_apps:
+                        replaceContentFragment(InstalledAppsFragment.class, InstalledAppsFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:

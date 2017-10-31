@@ -51,6 +51,7 @@
     <string name="all_setting">Settings</string>
     <string name="all_guide" translatable="false">Guide</string>
     <string name="all_rxjava" translatable="false">RxJava</string>
+    <string name="all_installed_apps">Installed Apps</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">Sure to logout?</string>
