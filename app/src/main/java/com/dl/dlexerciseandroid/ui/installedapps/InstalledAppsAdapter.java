@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.datastructure.installedapps.InstalledApp;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +34,17 @@ public class InstalledAppsAdapter extends RecyclerView.Adapter<InstalledAppsAdap
 
         public InstalledAppViewHolder(View itemView) {
             super(itemView);
+            findViews();
+        }
+
+        private void findViews() {
+            mAppIcon = (ImageView) itemView.findViewById(R.id.image_view_installed_app_item_icon);
+            mAppName = (TextView) itemView.findViewById(R.id.text_view_installed_app_item_name);
         }
 
         public void bind(InstalledApp installedApp) {
-
+            mAppIcon.setImageDrawable(installedApp.getIcon());
+            mAppName.setText(installedApp.getName());
         }
     }
 

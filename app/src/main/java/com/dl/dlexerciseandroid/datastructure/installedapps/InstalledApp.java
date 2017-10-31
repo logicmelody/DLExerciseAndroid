@@ -1,22 +1,24 @@
 package com.dl.dlexerciseandroid.datastructure.installedapps;
 
+import android.graphics.drawable.Drawable;
+
 /**
  * Created by logicmelody on 2017/10/31.
  */
 
 public class InstalledApp {
 
-    private String mIconUri;
+    private Drawable mIcon;
     private String mName;
 
 
-    public InstalledApp(String iconUri, String name) {
-        mIconUri = iconUri;
+    public InstalledApp(Drawable icon, String name) {
+        mIcon = icon;
         mName = name;
     }
 
-    public String getIconUri() {
-        return mIconUri;
+    public Drawable getIcon() {
+        return mIcon;
     }
 
     public String getName() {

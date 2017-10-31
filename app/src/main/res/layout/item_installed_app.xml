@@ -7,18 +7,18 @@
     android:orientation="horizontal">
 
     <ImageView
+        android:id="@+id/image_view_installed_app_item_icon"
         android:layout_width="@dimen/height_installed_apps_item"
-        android:layout_height="@dimen/height_installed_apps_item"
-        android:background="@color/all_blue" />
+        android:layout_height="@dimen/height_installed_apps_item" />
     
     <TextView
+        android:id="@+id/text_view_installed_app_item_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginLeft="@dimen/margin_left_installed_apps_item_name"
         android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold"
-        android:gravity="center_vertical"
-        android:text="Installed app"/>
+        android:gravity="center_vertical" />
 
 </LinearLayout>
