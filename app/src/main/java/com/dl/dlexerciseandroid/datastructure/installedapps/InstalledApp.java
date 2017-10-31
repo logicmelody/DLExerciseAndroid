@@ -17,6 +17,14 @@ public class InstalledApp {
         mName = name;
     }
 
+    public void setIcon(Drawable icon) {
+        mIcon = icon;
+    }
+
+    public void setName(String name) {
+        mName = name;
+    }
+
     public Drawable getIcon() {
         return mIcon;
     }

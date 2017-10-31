@@ -26,6 +26,7 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -97,6 +98,14 @@ public class InstalledAppsFragment extends Fragment {
                 subscriber.onComplete();
             }
         })
+                .map(new Function<InstalledApp, InstalledApp>() {
+                    @Override
+                    public InstalledApp apply(InstalledApp installedApp) throws Exception {
+                        installedApp.setName(installedApp.getName().toLowerCase());
+
+                        return installedApp;
+                    }
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<InstalledApp>() {
