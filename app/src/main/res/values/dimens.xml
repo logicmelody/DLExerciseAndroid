@@ -127,4 +127,9 @@
     <dimen name="min_height_setting_item">70dp</dimen>
     <dimen name="padding_left_right_setting_item">10dp</dimen>
 
+    <!-- Installed Apps -->
+    <dimen name="height_installed_apps_item">80dp</dimen>
+    <dimen name="padding_installed_apps_item">10dp</dimen>
+    <dimen name="margin_left_installed_apps_item_name">10dp</dimen>
+
 </resources>
