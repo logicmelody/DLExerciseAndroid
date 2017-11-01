@@ -16,9 +16,13 @@ import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -60,6 +64,7 @@ public class RxJavaFragment extends Fragment {
         rxJavaFromArray();
         printHelloWorld();
         rxJavaEmpty();
+        rxJavaFlatMap();
         loadIronMan();
     }
 
@@ -213,12 +218,106 @@ public class RxJavaFragment extends Fragment {
                 });
     }
 
+    private void rxJavaFlatMap() {
+        List<Integer> list = new ArrayList<>();
+
+        for (int i = 0 ; i < 10 ; i++) {
+            list.add(i);
+        }
+
+        Observable.fromArray(list)
+                .flatMap(new Function<List<Integer>, ObservableSource<String>>() {
+                    @Override
+                    public ObservableSource<String> apply(List<Integer> integers) throws Exception {
+                        List<String> strings = convertIntegerListToStringList(integers);
+
+                        return Observable.fromArray(strings.toArray(new String[strings.size()]));
+                    }
+                })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        showLog("rxJavaFlatMap()", "onNext = " + s);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private List<String> convertIntegerListToStringList(List<Integer> list) {
+        List<String> result = new ArrayList<>();
+
+        if (list == null || list.size() == 0) {
+            return result;
+        }
+
+        for (int num : list) {
+            result.add(convertIntegerToString(num));
+        }
+
+        return result;
+    }
+
+    private String convertIntegerToString(int num) {
+        if (num <= 0) {
+            return "zero";
+        }
+
+        String result = "";
+
+        switch (num) {
+            case 1:
+                return "one";
+
+            case 2:
+                return "two";
+
+            case 3:
+                return "three";
+
+            case 4:
+                return "four";
+
+            case 5:
+                return "five";
+
+            case 6:
+                return "six";
+
+            case 7:
+                return "seven";
+
+            case 8:
+                return "eight";
+
+            case 9:
+                return "nine";
+        }
+
+        return result;
+    }
+
     private void loadIronMan() {
         Observable.create(new ObservableOnSubscribe<Drawable>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Drawable> subscriber) throws Exception {
                 // 處理background load image的工作
-                Thread.sleep(3000);
+                //Thread.sleep(3000);
 
                 Drawable drawable = mContext.getResources().getDrawable(R.drawable.poster_iron_man);
                 subscriber.onNext(drawable);
