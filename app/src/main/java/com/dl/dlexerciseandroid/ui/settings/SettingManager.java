@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.dl.dlexerciseandroid.datastructure.settings.BasedSettingModel;
+import com.dl.dlexerciseandroid.model.settings.BasedSettingModel;
 
 /**
  * Created by logicmelody on 2017/8/30.

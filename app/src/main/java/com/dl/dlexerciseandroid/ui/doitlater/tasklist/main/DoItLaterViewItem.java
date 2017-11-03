@@ -1,6 +1,6 @@
 package com.dl.dlexerciseandroid.ui.doitlater.tasklist.main;
 
-import com.dl.dlexerciseandroid.datastructure.Task;
+import com.dl.dlexerciseandroid.model.Task;
 
 /**
  * Created by logicmelody on 2016/4/28.

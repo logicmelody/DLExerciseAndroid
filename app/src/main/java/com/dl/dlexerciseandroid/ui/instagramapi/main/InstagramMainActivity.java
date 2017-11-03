@@ -18,7 +18,7 @@ import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetAuthenticationTokenAsyncTask;
 import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetLoginUserAsyncTask;
 import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetRecentMediaAsyncTask;
-import com.dl.dlexerciseandroid.datastructure.instagramapi.IGRecentMedia;
+import com.dl.dlexerciseandroid.model.instagramapi.IGRecentMedia;
 import com.dl.dlexerciseandroid.ui.instagramapi.feedview.FeedViewAdapter;
 import com.squareup.picasso.Picasso;
 

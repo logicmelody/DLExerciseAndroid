@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.backgroundtask.service.MusicService;
-import com.dl.dlexerciseandroid.datastructure.Music;
+import com.dl.dlexerciseandroid.model.Music;
 import com.dl.dlexerciseandroid.utility.utils.PreferenceUtils;
 
 // 這個class主要用來顯示現在正在播放音樂的一些基本資訊：歌名, 歌手

@@ -6,8 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.datastructure.message.ListMessage;
-import com.dl.dlexerciseandroid.datastructure.message.Message;
+import com.dl.dlexerciseandroid.model.message.ListMessage;
+import com.dl.dlexerciseandroid.model.message.Message;
 import com.dl.dlexerciseandroid.ui.chat.horizontallistmessage.NumberListMessageAdapter;
 
 /**

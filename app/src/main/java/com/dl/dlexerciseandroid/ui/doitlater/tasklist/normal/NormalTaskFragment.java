@@ -20,10 +20,7 @@ import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.database.dbscheme.DLExerciseContract;
-import com.dl.dlexerciseandroid.datastructure.Task;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.dl.dlexerciseandroid.model.Task;
 
 /**
  * Created by logicmelody on 2016/5/4.

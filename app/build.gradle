@@ -119,6 +119,10 @@ dependencies {
     // For Retrofit (版本要一致)
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    // JSON Parsing: Gson
+    compile 'com.google.code.gson:gson:2.8.2'
 
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
     compile 'com.squareup.picasso:picasso:2.5.2'

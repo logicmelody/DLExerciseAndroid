@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.datastructure.settings;
+package com.dl.dlexerciseandroid.model.settings;
 
 import android.view.View;
 

@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.datastructure.settings.BasedSettingModel;
+import com.dl.dlexerciseandroid.model.settings.BasedSettingModel;
 import com.dl.dlexerciseandroid.ui.settings.viewholder.BasedSettingItemViewHolder;
 import com.dl.dlexerciseandroid.ui.settings.viewholder.OneLineSettingItemViewHolder;
 import com.dl.dlexerciseandroid.ui.settings.viewholder.TwoLineSettingItemViewHolder;

@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.datastructure.message;
+package com.dl.dlexerciseandroid.model.message;
 
 import android.os.Parcel;
 

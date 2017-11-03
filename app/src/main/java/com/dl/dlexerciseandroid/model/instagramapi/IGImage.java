@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.datastructure.instagramapi;
+package com.dl.dlexerciseandroid.model.instagramapi;
 
 /**
  * Created by logicmelody on 2017/7/11.

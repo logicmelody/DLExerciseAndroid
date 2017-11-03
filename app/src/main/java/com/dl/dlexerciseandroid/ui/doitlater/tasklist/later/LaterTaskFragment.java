@@ -20,11 +20,8 @@ import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.database.dbscheme.DLExerciseContract;
-import com.dl.dlexerciseandroid.datastructure.Task;
+import com.dl.dlexerciseandroid.model.Task;
 import com.dl.dlexerciseandroid.ui.doitlater.tasklist.main.DoItLaterViewItem;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by logicmelody on 2016/4/18.

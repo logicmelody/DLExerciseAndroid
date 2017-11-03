@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.datastructure;
+package com.dl.dlexerciseandroid.model;
 
 /**
  * Created by logicmelody on 2016/4/18.

@@ -1,6 +1,6 @@
 package com.dl.dlexerciseandroid.utility.utils;
 
-import com.dl.dlexerciseandroid.datastructure.NdkData;
+import com.dl.dlexerciseandroid.model.NdkData;
 
 /**
  * Created by logicmelody on 2017/7/1.

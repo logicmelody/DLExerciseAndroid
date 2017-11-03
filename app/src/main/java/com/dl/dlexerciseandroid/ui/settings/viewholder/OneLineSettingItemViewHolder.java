@@ -2,8 +2,8 @@ package com.dl.dlexerciseandroid.ui.settings.viewholder;
 
 import android.view.View;
 
-import com.dl.dlexerciseandroid.datastructure.settings.BasedSettingModel;
-import com.dl.dlexerciseandroid.datastructure.settings.OneLineSettingModel;
+import com.dl.dlexerciseandroid.model.settings.BasedSettingModel;
+import com.dl.dlexerciseandroid.model.settings.OneLineSettingModel;
 
 /**
  * Created by logicmelody on 2017/8/31.

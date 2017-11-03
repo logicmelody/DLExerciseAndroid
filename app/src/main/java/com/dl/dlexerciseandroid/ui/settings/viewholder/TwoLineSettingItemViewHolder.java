@@ -4,8 +4,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.datastructure.settings.BasedSettingModel;
-import com.dl.dlexerciseandroid.datastructure.settings.TwoLineSettingModel;
+import com.dl.dlexerciseandroid.model.settings.BasedSettingModel;
+import com.dl.dlexerciseandroid.model.settings.TwoLineSettingModel;
 
 /**
  * Created by logicmelody on 2017/8/31.

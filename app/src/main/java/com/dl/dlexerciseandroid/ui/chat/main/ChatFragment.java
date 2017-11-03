@@ -23,10 +23,10 @@ import android.widget.TextView;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.backgroundtask.service.MessageService;
 import com.dl.dlexerciseandroid.database.dbscheme.DLExerciseContract;
-import com.dl.dlexerciseandroid.datastructure.message.ListMessage;
-import com.dl.dlexerciseandroid.datastructure.message.Message;
-import com.dl.dlexerciseandroid.datastructure.message.Message.ChatViewType;
-import com.dl.dlexerciseandroid.datastructure.message.MessageFactory;
+import com.dl.dlexerciseandroid.model.message.ListMessage;
+import com.dl.dlexerciseandroid.model.message.Message;
+import com.dl.dlexerciseandroid.model.message.Message.ChatViewType;
+import com.dl.dlexerciseandroid.model.message.MessageFactory;
 import com.dl.dlexerciseandroid.ui.chat.chatlist.ChatListAdapter;
 import com.dl.dlexerciseandroid.ui.chat.chatlist.MessageItemDecoration;
 

@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.datastructure.message.Message;
+import com.dl.dlexerciseandroid.model.message.Message;
 
 /**
  * Created by dannylin on 2016/11/16.

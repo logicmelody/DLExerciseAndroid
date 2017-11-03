@@ -10,9 +10,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.datastructure.settings.OneLineSettingModel;
-import com.dl.dlexerciseandroid.datastructure.settings.TwoLineSettingModel;
-import com.dl.dlexerciseandroid.datastructure.settings.TwoLineWithSwitchSettingModel;
+import com.dl.dlexerciseandroid.model.settings.OneLineSettingModel;
+import com.dl.dlexerciseandroid.model.settings.TwoLineSettingModel;
+import com.dl.dlexerciseandroid.model.settings.TwoLineWithSwitchSettingModel;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 

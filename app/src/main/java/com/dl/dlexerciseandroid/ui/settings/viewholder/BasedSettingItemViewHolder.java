@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.datastructure.settings.BasedSettingModel;
+import com.dl.dlexerciseandroid.model.settings.BasedSettingModel;
 
 /**
  * Created by logicmelody on 2017/8/30.

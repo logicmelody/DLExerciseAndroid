@@ -9,8 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.datastructure.installedapps.InstalledApp;
-import com.squareup.picasso.Picasso;
+import com.dl.dlexerciseandroid.model.installedapps.InstalledApp;
 
 import java.util.ArrayList;
 import java.util.List;

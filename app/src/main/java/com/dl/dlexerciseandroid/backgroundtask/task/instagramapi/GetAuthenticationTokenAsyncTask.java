@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 
-import com.dl.dlexerciseandroid.datastructure.instagramapi.IGUser;
+import com.dl.dlexerciseandroid.model.instagramapi.IGUser;
 import com.dl.dlexerciseandroid.ui.instagramapi.main.InstagramDataCache;
 import com.dl.dlexerciseandroid.utility.utils.HttpUtils;
 import com.dl.dlexerciseandroid.utility.utils.InstagramApiUtils;

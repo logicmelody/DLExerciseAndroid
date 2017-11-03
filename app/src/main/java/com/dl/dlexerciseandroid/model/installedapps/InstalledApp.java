@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.datastructure.installedapps;
+package com.dl.dlexerciseandroid.model.installedapps;
 
 import android.graphics.drawable.Drawable;
 

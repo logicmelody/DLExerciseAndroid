@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.datastructure.instagramapi.IGImage;
+import com.dl.dlexerciseandroid.model.instagramapi.IGImage;
 import com.dl.dlexerciseandroid.ui.instagramapi.feedview.viewholder.IGImageViewHolder;
 import com.dl.dlexerciseandroid.ui.instagramapi.feedview.viewholder.BaseViewHolder;
 

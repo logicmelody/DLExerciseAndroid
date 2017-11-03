@@ -30,7 +30,7 @@ import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.backgroundtask.service.MusicService;
-import com.dl.dlexerciseandroid.datastructure.Music;
+import com.dl.dlexerciseandroid.model.Music;
 import com.dl.dlexerciseandroid.ui.musicplayer.musiccontroller.MusicControlReceiver;
 import com.dl.dlexerciseandroid.ui.musicplayer.musiccontroller.MusicControllerActivity;
 import com.dl.dlexerciseandroid.utility.utils.MusicUtils;

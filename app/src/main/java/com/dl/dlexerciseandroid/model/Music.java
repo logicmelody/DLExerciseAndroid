@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.datastructure;
+package com.dl.dlexerciseandroid.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

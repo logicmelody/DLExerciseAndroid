@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.datastructure.message.Message;
-import com.dl.dlexerciseandroid.datastructure.message.Message.ChatViewType;
+import com.dl.dlexerciseandroid.model.message.Message;
+import com.dl.dlexerciseandroid.model.message.Message.ChatViewType;
 import com.dl.dlexerciseandroid.ui.chat.viewholder.BaseViewHolder;
 import com.dl.dlexerciseandroid.ui.chat.viewholder.HorizontalListMessageViewHolder;
 import com.dl.dlexerciseandroid.ui.chat.viewholder.NormalMessageViewHolder;

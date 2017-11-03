@@ -4,7 +4,7 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 
-import com.dl.dlexerciseandroid.datastructure.message.Message;
+import com.dl.dlexerciseandroid.model.message.Message;
 import com.dl.dlexerciseandroid.utility.utils.DbUtils;
 
 /**

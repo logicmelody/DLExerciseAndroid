@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.datastructure.message;
+package com.dl.dlexerciseandroid.model.message;
 
 /**
  * Created by dannylin on 2016/11/10.

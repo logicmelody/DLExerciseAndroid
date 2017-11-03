@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.datastructure.instagramapi.IGImage;
+import com.dl.dlexerciseandroid.model.instagramapi.IGImage;
 import com.dl.dlexerciseandroid.view.DynamicHeightNetworkImageView;
 import com.squareup.picasso.Picasso;
 
