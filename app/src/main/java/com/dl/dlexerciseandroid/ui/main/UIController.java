@@ -42,6 +42,7 @@ import com.dl.dlexerciseandroid.ui.rxjava.RxJavaFragment;
 import com.dl.dlexerciseandroid.ui.settings.SettingActivity;
 import com.dl.dlexerciseandroid.ui.speechrecognition.SpeechRecognitionFragment;
 import com.dl.dlexerciseandroid.ui.spring.ConsumingRestfulWebServiceFragment;
+import com.dl.dlexerciseandroid.ui.stackoverflow.StackOverflowFragment;
 import com.dl.dlexerciseandroid.ui.strategypattern.main.StrategyPatternFragment;
 import com.dl.dlexerciseandroid.ui.test.TestFragment;
 import com.dl.dlexerciseandroid.ui.time.TimeFragment;
@@ -311,6 +312,10 @@ public class UIController implements View.OnClickListener {
 
                     case R.id.menu_item_left_drawer_installed_apps:
                         replaceContentFragment(InstalledAppsFragment.class, InstalledAppsFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_stack_overflow:
+                        replaceContentFragment(StackOverflowFragment.class, StackOverflowFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:
