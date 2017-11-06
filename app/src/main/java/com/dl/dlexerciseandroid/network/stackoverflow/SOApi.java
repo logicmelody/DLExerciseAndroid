@@ -18,6 +18,7 @@ public interface SOApi {
         public static final String ANSWERS = "answers?order=desc&sort=activity&site=stackoverflow";
     }
 
+    // Retrofit interface中的method都一定要有endpoint的url
     @GET(EndPoints.ANSWERS)
     Observable<SOAnswersResponse> getAnswers();
 
