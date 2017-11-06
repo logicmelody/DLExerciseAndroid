@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by logicmelody on 2017/11/3.
  */
 
-public class RetrofitUtils {
+public class ApiUtils {
 
     public static SOApi generateSOApi() {
         return generateRetrofit(SOApi.BASE_URL).create(SOApi.class);

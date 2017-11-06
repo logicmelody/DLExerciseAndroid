@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.model.stackoverflow.SOAnswersResponse;
 import com.dl.dlexerciseandroid.model.stackoverflow.SOItem;
-import com.dl.dlexerciseandroid.utility.utils.RetrofitUtils;
+import com.dl.dlexerciseandroid.utility.utils.ApiUtils;
 
 import java.util.List;
 
@@ -61,7 +61,7 @@ public class StackOverflowFragment extends Fragment {
     }
 
     private void loadAnswers() {
-        RetrofitUtils.generateSOApi().getAnswers()
+        ApiUtils.generateSOApi().getAnswers()
                 .flatMap(new Function<SOAnswersResponse, ObservableSource<SOItem>>() {
                     @Override
                     public ObservableSource<SOItem> apply(SOAnswersResponse soAnswersResponse) throws Exception {
