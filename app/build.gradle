@@ -118,7 +118,7 @@ dependencies {
 
     // For Retrofit (版本要一致)
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
 
     // JSON Parsing: Gson

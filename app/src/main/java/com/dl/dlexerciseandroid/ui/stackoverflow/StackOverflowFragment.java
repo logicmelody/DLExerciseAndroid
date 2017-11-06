@@ -1,34 +1,27 @@
 package com.dl.dlexerciseandroid.ui.stackoverflow;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.model.stackoverflow.SOAnswersResponse;
+import com.dl.dlexerciseandroid.model.stackoverflow.SOItem;
+import com.dl.dlexerciseandroid.utility.utils.RetrofitUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 public class StackOverflowFragment extends Fragment {
@@ -56,6 +49,7 @@ public class StackOverflowFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initialize();
+        loadAnswers();
     }
 
     private void initialize() {
@@ -64,5 +58,40 @@ public class StackOverflowFragment extends Fragment {
 
     private void findViews() {
 
+    }
+
+    private void loadAnswers() {
+        RetrofitUtils.generateSOApi().getAnswers()
+                .flatMap(new Function<SOAnswersResponse, ObservableSource<SOItem>>() {
+                    @Override
+                    public ObservableSource<SOItem> apply(SOAnswersResponse soAnswersResponse) throws Exception {
+                        List<SOItem> list = soAnswersResponse.getItems();
+
+                        return Observable.fromArray(list.toArray(new SOItem[list.size()]));
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<SOItem>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.d("danny", "StackOverflow onSubscribe()");
+                    }
+
+                    @Override
+                    public void onNext(SOItem soItem) {
+                        Log.d("danny", "StackOverflow SOItem = " + soItem.getSOOwner().getDisplayName());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("danny", "StackOverflow onError() = " + e.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d("danny", "StackOverflow onComplete()");
+                    }
+                });
     }
 }

@@ -2,7 +2,7 @@ package com.dl.dlexerciseandroid.network.stackoverflow;
 
 import com.dl.dlexerciseandroid.model.stackoverflow.SOAnswersResponse;
 
-import retrofit2.Call;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -19,9 +19,9 @@ public interface SOApi {
     }
 
     @GET(EndPoints.ANSWERS)
-    Call<SOAnswersResponse> getAnswers();
+    Observable<SOAnswersResponse> getAnswers();
 
     // 這個method所產生的Url = answers?order=desc&sort=activity&site=stackoverflow&tagged=[tags]
     @GET(EndPoints.ANSWERS)
-    Call<SOAnswersResponse> getAnswers(@Query("tagged") String tags);
+    Observable<SOAnswersResponse> getAnswers(@Query("tagged") String tags);
 }

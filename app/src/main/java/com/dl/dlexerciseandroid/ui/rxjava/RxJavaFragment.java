@@ -226,6 +226,8 @@ public class RxJavaFragment extends Fragment {
         }
 
         Observable.fromArray(list)
+                // 第一階段取得的資料是一個ArrayList包含很多Integer：List<Integer>
+                // 我們利用flatMap()將第一階段的資料轉成另一個Observable包含很多個String：Observable.fromArray(strings.toArray(new String[strings.size()]))
                 .flatMap(new Function<List<Integer>, ObservableSource<String>>() {
                     @Override
                     public ObservableSource<String> apply(List<Integer> integers) throws Exception {
@@ -236,6 +238,8 @@ public class RxJavaFragment extends Fragment {
                 })
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
+
+                // Observer處理的是很多個String
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(Disposable d) {
