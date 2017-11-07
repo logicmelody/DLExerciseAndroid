@@ -27,6 +27,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
@@ -323,11 +324,24 @@ public class RxJavaFragment extends Fragment {
                 // 處理background load image的工作
                 //Thread.sleep(3000);
 
+                // 2. Thread create() = RxCachedThreadScheduler-1
+                Log.d("danny", "Thread create() = " + Thread.currentThread().getName());
+
                 Drawable drawable = mContext.getResources().getDrawable(R.drawable.poster_iron_man);
                 subscriber.onNext(drawable);
                 subscriber.onComplete();
             }
         })
+                .doOnNext(new Consumer<Drawable>() {
+                    @Override
+                    public void accept(Drawable drawable) throws Exception {
+                        // 3. Thread doOnNext() = RxCachedThreadScheduler-1
+                        Log.d("danny", "Thread doOnNext() = " + Thread.currentThread().getName());
+
+                        Thread.sleep(3000);
+                    }
+                })
+
                 // 這個Scheduler主要用來執行存取disk的資料或是網路存取資料，不是在UI thread，所以我們可以進行些需要耗費時間的工作，
                 // 甚至可以用Thread.sleep()把工作暫停
                 .subscribeOn(Schedulers.io())
@@ -341,6 +355,9 @@ public class RxJavaFragment extends Fragment {
                 .subscribe(new Observer<Drawable>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
+                        // 1. Thread subscribe() = main
+                        Log.d("danny", "Thread subscribe() = " + Thread.currentThread().getName());
+
                         showLog("loadIronMan()", "onSubscribe!");
                     }
 
