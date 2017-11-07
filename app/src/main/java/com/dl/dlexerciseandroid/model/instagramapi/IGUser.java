@@ -2,15 +2,29 @@ package com.dl.dlexerciseandroid.model.instagramapi;
 
 import android.graphics.Bitmap;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by logicmelody on 2017/7/10.
  */
 
 public class IGUser {
 
+    @SerializedName("id")
+    @Expose
     private String mId;
+
+    @SerializedName("username")
+    @Expose
     private String mUserName;
+
+    @SerializedName("full_name")
+    @Expose
     private String mFullName;
+
+    @SerializedName("profile_picture")
+    @Expose
     private String mProfilePicture;
 
     private Bitmap mProfilePictureBitmap;
