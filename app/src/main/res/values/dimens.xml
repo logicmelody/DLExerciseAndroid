@@ -132,4 +132,7 @@
     <dimen name="padding_installed_apps_item">10dp</dimen>
     <dimen name="margin_left_installed_apps_item_name">10dp</dimen>
 
+    <!-- StackOverflow -->
+    <dimen name="height_stack_overflow_item">80dp</dimen>
+
 </resources>

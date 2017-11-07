@@ -4,10 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.model.stackoverflow.SOAnswersResponse;
@@ -32,6 +36,11 @@ public class StackOverflowFragment extends Fragment {
 
     private Context mContext;
 
+    private RecyclerView mSORecyclerView;
+    private StackOverflowAdapter mStackOverflowAdapter;
+
+    private ProgressBar mProgressBar;
+
 
     @Override
     public void onAttach(Context context) {
@@ -54,10 +63,19 @@ public class StackOverflowFragment extends Fragment {
 
     private void initialize() {
         findViews();
+        setupSORecyclerView();
     }
 
     private void findViews() {
+        mSORecyclerView = (RecyclerView) getView().findViewById(R.id.recycler_view_stack_overflow_list);
+        mProgressBar = (ProgressBar) getView().findViewById(R.id.progress_bar_stack_overflow_loading);
+    }
 
+    private void setupSORecyclerView() {
+        mStackOverflowAdapter = new StackOverflowAdapter(mContext);
+
+        mSORecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        mSORecyclerView.setAdapter(mStackOverflowAdapter);
     }
 
     private void loadAnswers() {
@@ -75,22 +93,29 @@ public class StackOverflowFragment extends Fragment {
                 .subscribe(new Observer<SOItem>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Log.d("danny", "StackOverflow onSubscribe()");
+
                     }
 
                     @Override
                     public void onNext(SOItem soItem) {
-                        Log.d("danny", "StackOverflow SOItem = " + soItem.getSOOwner().getDisplayName());
+                        mStackOverflowAdapter.add(soItem);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Log.d("danny", "StackOverflow onError() = " + e.toString());
+
+                        mProgressBar.setVisibility(View.GONE);
+
+                        Toast.makeText(mContext, "StackOverflow onError()", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onComplete() {
-                        Log.d("danny", "StackOverflow onComplete()");
+                        mStackOverflowAdapter.refresh();
+                        mProgressBar.setVisibility(View.GONE);
+
+                        Toast.makeText(mContext, "StackOverflow onComplete()", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

@@ -41,6 +41,8 @@ public class SOItem {
     @Expose
     private int mLastEditDate;
 
+    private int mViewType;
+
 
     public SOOwner getSOOwner() {
         return mSOOwner;
@@ -104,5 +106,13 @@ public class SOItem {
 
     public void setLastEditDate(int lastEditDate) {
         this.mLastEditDate = lastEditDate;
+    }
+
+    public int getViewType() {
+        return mViewType;
+    }
+
+    public void setViewType(int viewType) {
+        this.mViewType = viewType;
     }
 }
