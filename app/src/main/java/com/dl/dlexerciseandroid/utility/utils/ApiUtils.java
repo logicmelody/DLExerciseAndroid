@@ -1,6 +1,7 @@
 package com.dl.dlexerciseandroid.utility.utils;
 
 import com.dl.dlexerciseandroid.network.instagramapi.IGAccessTokenApi;
+import com.dl.dlexerciseandroid.network.instagramapi.IGApi;
 import com.dl.dlexerciseandroid.network.stackoverflow.SOApi;
 
 import retrofit2.Retrofit;
@@ -19,6 +20,10 @@ public class ApiUtils {
 
     public static IGAccessTokenApi generateIGAccessTokenApi() {
         return generateRetrofit(IGAccessTokenApi.BASE_URL).create(IGAccessTokenApi.class);
+    }
+
+    public static IGApi generateIGApi() {
+        return generateRetrofit(IGApi.BASE_URL).create(IGApi.class);
     }
 
     // 如果要整合Retrofit跟RxJava，必須要在build.gradle中加入這個library：

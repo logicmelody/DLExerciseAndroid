@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,25 +16,30 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetLoginUserAsyncTask;
 import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetRecentMediaAsyncTask;
 import com.dl.dlexerciseandroid.model.instagramapi.IGAccessTokenResponse;
 import com.dl.dlexerciseandroid.model.instagramapi.IGRecentMedia;
 import com.dl.dlexerciseandroid.model.instagramapi.IGUser;
+import com.dl.dlexerciseandroid.model.instagramapi.IGUsersSelfResponse;
 import com.dl.dlexerciseandroid.ui.instagramapi.feedview.FeedViewAdapter;
 import com.dl.dlexerciseandroid.utility.utils.ApiUtils;
 import com.dl.dlexerciseandroid.utility.utils.InstagramApiUtils;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class InstagramMainActivity extends AppCompatActivity implements
-        View.OnClickListener, GetLoginUserAsyncTask.OnGetLoginUserListener, GetRecentMediaAsyncTask.OnGetRecentMediaListener {
+        View.OnClickListener, GetRecentMediaAsyncTask.OnGetRecentMediaListener {
 
     private static final String TAG = InstagramMainActivity.class.getName();
 
@@ -106,12 +112,94 @@ public class InstagramMainActivity extends AppCompatActivity implements
         if (InstagramDataCache.hasTokenInSharedPreference(this)) {
             mLoadingProgressBar.setVisibility(View.VISIBLE);
 
-            new GetLoginUserAsyncTask(this, this).execute();
+            //new GetLoginUserAsyncTask(this, this).execute();
+
+            fetchUsersSelf();
 
         } else {
             mInstagramLoginButton.setVisibility(View.VISIBLE);
             mLoadingProgressBar.setVisibility(View.GONE);
         }
+    }
+
+    private void fetchUsersSelf() {
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> subscriber) throws Exception {
+                String token = InstagramDataCache.getTokenFromSharedPreference(InstagramMainActivity.this);
+
+                if (!TextUtils.isEmpty(token)) {
+                    subscriber.onNext(token);
+                    subscriber.onComplete();
+
+                } else {
+                    subscriber.onError(new Throwable());
+                }
+            }
+
+        }).flatMap(new Function<String, ObservableSource<IGUsersSelfResponse>>() {
+            @Override
+            public ObservableSource<IGUsersSelfResponse> apply(String s) throws Exception {
+                return ApiUtils.generateIGApi().getUsersSelf(s);
+            }
+
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<IGUsersSelfResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.d("danny", "fetchUsersSelf onSubscribe()");
+                    }
+
+                    @Override
+                    public void onNext(IGUsersSelfResponse igUsersSelfResponse) {
+                        Log.d("danny", "fetchUsersSelf Username = " + igUsersSelfResponse.getIGUser().getUserName());
+
+                        InstagramDataCache.getInstance().setLoginUser(igUsersSelfResponse.getIGUser());
+                    }
+
+                    // Access token是null的狀況
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("danny", "Get login user failed");
+                        Log.d("danny", "fetchUsersSelf onError()");
+
+                        mInstagramLoginButton.setVisibility(View.VISIBLE);
+                        mLoadingProgressBar.setVisibility(View.GONE);
+                    }
+
+                    /**
+                     * GetLoginUserAsyncTask的callback，如果用SharedPreference中的token成功得到login user的資訊，
+                     * 就直接顯示login user的資訊，並load feed
+                     */
+                    @Override
+                    public void onComplete() {
+                        Log.d("danny", "fetchUsersSelf onComplete()");
+
+                        mInstagramLoginButton.setVisibility(View.GONE);
+                        mLoadingProgressBar.setVisibility(View.VISIBLE);
+
+                        setFeedContainer();
+                    }
+                });
+    }
+
+    private void setFeedContainer() {
+        mFeedContainer.setVisibility(View.VISIBLE);
+
+        setLoginUser();
+
+        new GetRecentMediaAsyncTask(this, this).execute();
+    }
+
+    private void setLoginUser() {
+        if (InstagramDataCache.getInstance().getLoginUser() == null) {
+            return;
+        }
+
+        Picasso.with(this).load(InstagramDataCache.getInstance().getLoginUser().getProfilePicture())
+                .placeholder(R.drawable.ic_login_avatar).into(mLoginUserAvatarView);
+        mLoginUserNameView.setText(InstagramDataCache.getInstance().getLoginUser().getFullName());
     }
 
     @Override
@@ -189,7 +277,7 @@ public class InstagramMainActivity extends AppCompatActivity implements
                 .subscribe(new Observer<IGAccessTokenResponse>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Log.d("danny", "InstagramApi onSubscribe()");
+                        Log.d("danny", "fetchAccessToken onSubscribe()");
                     }
 
                     @Override
@@ -199,7 +287,7 @@ public class InstagramMainActivity extends AppCompatActivity implements
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("danny", "Get authentication token failed: " + e.toString());
+                        Log.d("danny", "fetchAccessToken failed: " + e.toString());
 
                         mInstagramLoginButton.setVisibility(View.VISIBLE);
                         mLoadingProgressBar.setVisibility(View.GONE);
@@ -211,7 +299,7 @@ public class InstagramMainActivity extends AppCompatActivity implements
                      */
                     @Override
                     public void onComplete() {
-                        Log.d("danny", "InstagramApi onComplete()");
+                        Log.d("danny", "fetchAccessToken onComplete()");
                         Log.d("danny", "Token = " + InstagramDataCache.getTokenFromSharedPreference(InstagramMainActivity.this));
                         Log.d("danny", "Login user = " + InstagramDataCache.getInstance().getLoginUser().toString());
 
@@ -243,24 +331,6 @@ public class InstagramMainActivity extends AppCompatActivity implements
 //        setFeedContainer();
 //    }
 
-    private void setFeedContainer() {
-        mFeedContainer.setVisibility(View.VISIBLE);
-
-        setLoginUser();
-
-        new GetRecentMediaAsyncTask(this, this).execute();
-    }
-
-    private void setLoginUser() {
-        if (InstagramDataCache.getInstance().getLoginUser() == null) {
-            return;
-        }
-
-        Picasso.with(this).load(InstagramDataCache.getInstance().getLoginUser().getProfilePicture())
-                .placeholder(R.drawable.ic_login_avatar).into(mLoginUserAvatarView);
-        mLoginUserNameView.setText(InstagramDataCache.getInstance().getLoginUser().getFullName());
-    }
-
 //    @Override
 //    public void onGetAuthenticationTokenFailed() {
 //        Log.d("danny", "Get authentication token failed");
@@ -269,25 +339,25 @@ public class InstagramMainActivity extends AppCompatActivity implements
 //        mLoadingProgressBar.setVisibility(View.GONE);
 //    }
 
-    /**
-     * GetLoginUserAsyncTask的callback，如果用SharedPreference中的token成功得到login user的資訊，
-     * 就直接顯示login user的資訊，並load feed
-     */
-    @Override
-    public void onGetLoginUserSuccessful() {
-        mInstagramLoginButton.setVisibility(View.GONE);
-        mLoadingProgressBar.setVisibility(View.VISIBLE);
-
-        setFeedContainer();
-    }
-
-    @Override
-    public void onGetLoginUserFailed() {
-        Log.d("danny", "Get login user failed");
-
-        mInstagramLoginButton.setVisibility(View.VISIBLE);
-        mLoadingProgressBar.setVisibility(View.GONE);
-    }
+//    /**
+//     * GetLoginUserAsyncTask的callback，如果用SharedPreference中的token成功得到login user的資訊，
+//     * 就直接顯示login user的資訊，並load feed
+//     */
+//    @Override
+//    public void onGetLoginUserSuccessful() {
+//        mInstagramLoginButton.setVisibility(View.GONE);
+//        mLoadingProgressBar.setVisibility(View.VISIBLE);
+//
+//        setFeedContainer();
+//    }
+//
+//    @Override
+//    public void onGetLoginUserFailed() {
+//        Log.d("danny", "Get login user failed");
+//
+//        mInstagramLoginButton.setVisibility(View.VISIBLE);
+//        mLoadingProgressBar.setVisibility(View.GONE);
+//    }
 
     @Override
     public void onGetRecentMediaSuccessful(IGRecentMedia igRecentMedia) {

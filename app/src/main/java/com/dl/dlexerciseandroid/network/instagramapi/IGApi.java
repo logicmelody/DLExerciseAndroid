@@ -1,6 +1,7 @@
 package com.dl.dlexerciseandroid.network.instagramapi;
 
 import com.dl.dlexerciseandroid.model.instagramapi.IGAccessTokenResponse;
+import com.dl.dlexerciseandroid.model.instagramapi.IGUsersSelfResponse;
 import com.dl.dlexerciseandroid.model.stackoverflow.SOAnswersResponse;
 
 import java.util.Map;
@@ -17,12 +18,16 @@ import retrofit2.http.Query;
 
 public interface IGApi {
 
-    String BASE_TOKEN_URL = "https://api.instagram.com/oauth/";
+    String BASE_URL = "https://api.instagram.com/v1/";
 
     final class EndPoints {
+        public static final String USERS_SELF = "users/self";
+    }
+
+    final class Queries {
         public static final String ACCESS_TOKEN = "access_token";
     }
 
-    @POST(EndPoints.ACCESS_TOKEN)
-    Observable<IGAccessTokenResponse> getAccessToken(@FieldMap Map<String, String> map);
+    @GET(EndPoints.USERS_SELF)
+    Observable<IGUsersSelfResponse> getUsersSelf(@Query(Queries.ACCESS_TOKEN) String token);
 }
