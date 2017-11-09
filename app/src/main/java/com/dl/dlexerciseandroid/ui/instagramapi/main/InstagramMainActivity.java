@@ -16,9 +16,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.backgroundtask.task.instagramapi.GetRecentMediaAsyncTask;
 import com.dl.dlexerciseandroid.model.instagramapi.IGAccessTokenResponse;
-import com.dl.dlexerciseandroid.model.instagramapi.IGRecentMedia;
+import com.dl.dlexerciseandroid.model.instagramapi.IGMedia;
+import com.dl.dlexerciseandroid.model.instagramapi.IGRecentMediaResponse;
 import com.dl.dlexerciseandroid.model.instagramapi.IGUser;
 import com.dl.dlexerciseandroid.model.instagramapi.IGUsersSelfResponse;
 import com.dl.dlexerciseandroid.ui.instagramapi.feedview.FeedViewAdapter;
@@ -38,10 +38,11 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
-public class InstagramMainActivity extends AppCompatActivity implements
-        View.OnClickListener, GetRecentMediaAsyncTask.OnGetRecentMediaListener {
+public class InstagramMainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = InstagramMainActivity.class.getName();
+
+    private static final int DEFAULT_RECENT_MEDIA_COUNT = 20;
 
     public static final String EXTRA_INSTAGRAM_CODE = "com.dl.dlexerciseandroid.EXTRA_INSTAGRAM_CODE";
 
@@ -113,7 +114,6 @@ public class InstagramMainActivity extends AppCompatActivity implements
             mLoadingProgressBar.setVisibility(View.VISIBLE);
 
             //new GetLoginUserAsyncTask(this, this).execute();
-
             fetchUsersSelf();
 
         } else {
@@ -189,7 +189,56 @@ public class InstagramMainActivity extends AppCompatActivity implements
 
         setLoginUser();
 
-        new GetRecentMediaAsyncTask(this, this).execute();
+        //new GetRecentMediaAsyncTask(this, this).execute();
+        fetchRecentMedia();
+    }
+
+    private void fetchRecentMedia() {
+        String token = InstagramDataCache.getTokenFromSharedPreference(InstagramMainActivity.this);
+
+        if (TextUtils.isEmpty(token)) {
+            return;
+        }
+
+        ApiUtils.generateIGApi()
+                .getRecentMediaSelf("self", token, String.valueOf(DEFAULT_RECENT_MEDIA_COUNT))
+                .doOnNext(new Consumer<IGRecentMediaResponse>() {
+                    @Override
+                    public void accept(IGRecentMediaResponse igRecentMediaResponse) throws Exception {
+                        for (IGMedia igMedia : igRecentMediaResponse.getIGMedias()) {
+                            igMedia.setRatio(igMedia.calculateRatio());
+
+                            Log.d("danny", igMedia.toString());
+                        }
+
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<IGRecentMediaResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.d("danny", "fetchRecentMedia onSubscribe()");
+                    }
+
+                    @Override
+                    public void onNext(IGRecentMediaResponse igRecentMediaResponse) {
+                        mFeedViewAdapter.add(igRecentMediaResponse.getIGMedias());
+                        mLoadingProgressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("danny", "fetchRecentMedia onError() = " + e.toString());
+
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d("danny", "fetchRecentMedia onComplete()");
+                    }
+                });
     }
 
     private void setLoginUser() {
@@ -359,18 +408,18 @@ public class InstagramMainActivity extends AppCompatActivity implements
 //        mLoadingProgressBar.setVisibility(View.GONE);
 //    }
 
-    @Override
-    public void onGetRecentMediaSuccessful(IGRecentMedia igRecentMedia) {
-        if (igRecentMedia.getImageList() == null || igRecentMedia.getImageList().size() == 0) {
-            return;
-        }
-
-        mFeedViewAdapter.add(igRecentMedia.getImageList());
-        mLoadingProgressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onGetRecentMediaFailed() {
-        Log.d("danny", "onGetRecentMediaFailed()");
-    }
+//    @Override
+//    public void onGetRecentMediaSuccessful(IGRecentMedia igRecentMedia) {
+//        if (igRecentMedia.getImageList() == null || igRecentMedia.getImageList().size() == 0) {
+//            return;
+//        }
+//
+//        mFeedViewAdapter.add(igRecentMedia.getImageList());
+//        mLoadingProgressBar.setVisibility(View.GONE);
+//    }
+//
+//    @Override
+//    public void onGetRecentMediaFailed() {
+//        Log.d("danny", "onGetRecentMediaFailed()");
+//    }
 }

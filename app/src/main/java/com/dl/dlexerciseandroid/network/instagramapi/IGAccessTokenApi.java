@@ -21,6 +21,7 @@ public interface IGAccessTokenApi {
         public static final String ACCESS_TOKEN = "access_token";
     }
 
+    // @FieldMap只能用在request body，比如@POST
     @FormUrlEncoded
     @POST(EndPoints.ACCESS_TOKEN)
     Observable<IGAccessTokenResponse> getAccessToken(@FieldMap Map<String, String> map);

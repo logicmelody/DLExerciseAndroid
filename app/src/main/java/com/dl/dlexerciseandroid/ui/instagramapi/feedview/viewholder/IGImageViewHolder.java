@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.model.instagramapi.IGImage;
+import com.dl.dlexerciseandroid.model.instagramapi.IGMedia;
 import com.dl.dlexerciseandroid.view.DynamicHeightNetworkImageView;
 import com.squareup.picasso.Picasso;
 
@@ -40,26 +40,26 @@ public class IGImageViewHolder extends BaseViewHolder {
     }
 
     @Override
-    public void bind(IGImage igImage) {
-        bindImage(igImage);
-        bindLikeCount(igImage);
+    public void bind(IGMedia igMedia) {
+        bindImage(igMedia);
+        bindLikeCount(igMedia);
     }
 
-    private void bindImage(IGImage igImage) {
+    private void bindImage(IGMedia igMedia) {
         Picasso.with(itemView.getContext())
-                .load(igImage.getStandardUrl())
+                .load(igMedia.getImages().getStandardResolution().getUrl())
                 .into(mIgImage);
 
         // 因為我們是用StaggeredGridLayoutManager的方式顯示，這樣會造成ImageView的width是確定的，但是height不確定
         // 所以在動態load image的時候會造成因為height不確定，顯示的時候會出現問題
         // 解法：我們customize一個ImageView(DynamicHeightNetworkImageView)，把image的ratio(width/height)設定好，
         //      如此一來ImageView的width和height就會變成固定，顯示上就沒有問題了
-        mIgImage.setAspectRatio(igImage.getRatio());
+        mIgImage.setAspectRatio(igMedia.getRatio());
     }
 
-    private void bindLikeCount(IGImage igImage) {
+    private void bindLikeCount(IGMedia igMedia) {
         StringBuilder sb = new StringBuilder();
-        int likeCount = igImage.getLikeCount() < 0 ? 0 : igImage.getLikeCount();
+        int likeCount = igMedia.getLikes().getCount() < 0 ? 0 : igMedia.getLikes().getCount();
 
         sb.append(likeCount).append(" ").append(itemView.getContext().getString(R.string.instagram_api_likes));
 

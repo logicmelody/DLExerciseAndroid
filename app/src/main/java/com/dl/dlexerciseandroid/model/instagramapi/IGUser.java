@@ -27,7 +27,7 @@ public class IGUser {
     @Expose
     private String mProfilePicture;
 
-    private Bitmap mProfilePictureBitmap;
+    private transient Bitmap mProfilePictureBitmap;
 
 
     public IGUser(String id, String userName, String fullName, String profilePicture) {

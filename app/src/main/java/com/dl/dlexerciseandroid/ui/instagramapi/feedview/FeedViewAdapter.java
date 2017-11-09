@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.model.instagramapi.IGImage;
+import com.dl.dlexerciseandroid.model.instagramapi.IGMedia;
 import com.dl.dlexerciseandroid.ui.instagramapi.feedview.viewholder.IGImageViewHolder;
 import com.dl.dlexerciseandroid.ui.instagramapi.feedview.viewholder.BaseViewHolder;
 
@@ -20,12 +20,12 @@ import java.util.List;
 public class FeedViewAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     private Context mContext;
-    private List<IGImage> mImageList;
+    private List<IGMedia> mMedias;
 
 
     public FeedViewAdapter(Context context) {
         mContext = context;
-        mImageList = new ArrayList<>();
+        mMedias = new ArrayList<>();
     }
 
     @Override
@@ -36,16 +36,16 @@ public class FeedViewAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     @Override
     public void onBindViewHolder(BaseViewHolder viewHolder, int i) {
-        viewHolder.bind(mImageList.get(i));
+        viewHolder.bind(mMedias.get(i));
     }
 
     @Override
     public int getItemCount() {
-        return mImageList.size();
+        return mMedias.size();
     }
 
-    public void add(List<IGImage> imageList) {
-        mImageList.addAll(imageList);
+    public void add(List<IGMedia> medias) {
+        mMedias.addAll(medias);
         notifyDataSetChanged();
     }
 
