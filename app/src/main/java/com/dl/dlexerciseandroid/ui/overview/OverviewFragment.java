@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.model.PersonData;
 import com.dl.dlexerciseandroid.utility.gtm.ContainerHolderSingleton;
 import com.dl.dlexerciseandroid.utility.utils.GtmUtils;
 import com.google.android.gms.common.api.PendingResult;
@@ -19,6 +20,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.tagmanager.Container;
 import com.google.android.gms.tagmanager.ContainerHolder;
 import com.google.android.gms.tagmanager.TagManager;
+import com.google.gson.Gson;
 
 import java.util.concurrent.TimeUnit;
 
@@ -62,6 +64,7 @@ public class OverviewFragment extends Fragment {
 
         findViews();
         loadTextFromGtm();
+        testGson();
     }
 
     private void findViews() {
@@ -99,5 +102,26 @@ public class OverviewFragment extends Fragment {
                 mGtmText.setTextColor(Color.parseColor(container.getString(GtmUtils.Key.OVERVIEW_TEXT_COLOR)));
             }
         }, 2000, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     * 在使用Gson的時候，要把思維轉換成Json字串跟物件之間的轉換
+     * Serialization:   Object -> Json string
+     * Deserialization: Json string -> Object
+     *
+     * 只要把Java object設定好，基本上就沒有問題了
+     * 這裡的例子是將一串Json的字串轉換成Java object，是個很常見的使用情境
+     */
+    private void testGson() {
+        String jsonString = "{\n" +
+                "  \"age\": \"23\",\n" +
+                "  \"weight\": \"58\",\n" +
+                "  \"height\": \"168\"\n" +
+                "}";
+
+        Gson gson = new Gson();
+        PersonData personData = gson.fromJson(jsonString, PersonData.class);
+
+        Log.d("danny", "testGson() " + personData.toString());
     }
 }
