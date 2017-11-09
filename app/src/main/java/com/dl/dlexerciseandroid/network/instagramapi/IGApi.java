@@ -1,7 +1,7 @@
 package com.dl.dlexerciseandroid.network.instagramapi;
 
-import com.dl.dlexerciseandroid.model.instagramapi.IGRecentMediaResponse;
-import com.dl.dlexerciseandroid.model.instagramapi.IGUsersSelfResponse;
+import com.dl.dlexerciseandroid.model.instagramapi.gson.IGRecentMediaResponse;
+import com.dl.dlexerciseandroid.model.instagramapi.gson.IGUsersSelfResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

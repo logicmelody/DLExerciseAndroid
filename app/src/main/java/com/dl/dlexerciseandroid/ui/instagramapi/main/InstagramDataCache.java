@@ -3,7 +3,7 @@ package com.dl.dlexerciseandroid.ui.instagramapi.main;
 import android.content.Context;
 import android.preference.PreferenceManager;
 
-import com.dl.dlexerciseandroid.model.instagramapi.IGUser;
+import com.dl.dlexerciseandroid.model.instagramapi.gson.IGUser;
 
 /**
  * 一個Singleton的class，用來作Instagram data的cache

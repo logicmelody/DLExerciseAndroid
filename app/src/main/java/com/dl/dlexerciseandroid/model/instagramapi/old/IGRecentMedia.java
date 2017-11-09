@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.model.instagramapi;
+package com.dl.dlexerciseandroid.model.instagramapi.old;
 
 import java.util.List;
 

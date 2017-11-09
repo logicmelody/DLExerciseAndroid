@@ -4,7 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.model.instagramapi.IGUser;
+import com.dl.dlexerciseandroid.model.instagramapi.gson.IGUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;

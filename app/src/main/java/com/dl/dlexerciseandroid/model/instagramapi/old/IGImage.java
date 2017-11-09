@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.model.instagramapi;
+package com.dl.dlexerciseandroid.model.instagramapi.old;
 
 /**
  * Created by logicmelody on 2017/7/11.

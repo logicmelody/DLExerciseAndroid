@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.model.instagramapi;
+package com.dl.dlexerciseandroid.model.instagramapi.gson;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

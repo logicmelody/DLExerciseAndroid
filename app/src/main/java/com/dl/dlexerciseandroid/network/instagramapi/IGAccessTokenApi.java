@@ -1,6 +1,6 @@
 package com.dl.dlexerciseandroid.network.instagramapi;
 
-import com.dl.dlexerciseandroid.model.instagramapi.IGAccessTokenResponse;
+import com.dl.dlexerciseandroid.model.instagramapi.gson.IGAccessTokenResponse;
 
 import java.util.Map;
 

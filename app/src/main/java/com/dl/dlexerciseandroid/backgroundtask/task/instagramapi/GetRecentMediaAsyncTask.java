@@ -3,8 +3,8 @@ package com.dl.dlexerciseandroid.backgroundtask.task.instagramapi;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.dl.dlexerciseandroid.model.instagramapi.IGImage;
-import com.dl.dlexerciseandroid.model.instagramapi.IGRecentMedia;
+import com.dl.dlexerciseandroid.model.instagramapi.old.IGImage;
+import com.dl.dlexerciseandroid.model.instagramapi.old.IGRecentMedia;
 import com.dl.dlexerciseandroid.ui.instagramapi.main.InstagramDataCache;
 import com.dl.dlexerciseandroid.utility.utils.HttpUtils;
 import com.dl.dlexerciseandroid.utility.utils.InstagramApiUtils;

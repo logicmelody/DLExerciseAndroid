@@ -3,7 +3,7 @@ package com.dl.dlexerciseandroid.ui.instagramapi.feedview.viewholder;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.dl.dlexerciseandroid.model.instagramapi.IGMedia;
+import com.dl.dlexerciseandroid.model.instagramapi.gson.IGMedia;
 
 /**
  * Created by dannylin on 2016/11/16.

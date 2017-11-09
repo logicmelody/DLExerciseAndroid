@@ -16,11 +16,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.model.instagramapi.IGAccessTokenResponse;
-import com.dl.dlexerciseandroid.model.instagramapi.IGMedia;
-import com.dl.dlexerciseandroid.model.instagramapi.IGRecentMediaResponse;
-import com.dl.dlexerciseandroid.model.instagramapi.IGUser;
-import com.dl.dlexerciseandroid.model.instagramapi.IGUsersSelfResponse;
+import com.dl.dlexerciseandroid.model.instagramapi.gson.IGAccessTokenResponse;
+import com.dl.dlexerciseandroid.model.instagramapi.gson.IGMedia;
+import com.dl.dlexerciseandroid.model.instagramapi.gson.IGRecentMediaResponse;
+import com.dl.dlexerciseandroid.model.instagramapi.gson.IGUser;
+import com.dl.dlexerciseandroid.model.instagramapi.gson.IGUsersSelfResponse;
 import com.dl.dlexerciseandroid.ui.instagramapi.feedview.FeedViewAdapter;
 import com.dl.dlexerciseandroid.utility.utils.ApiUtils;
 import com.dl.dlexerciseandroid.utility.utils.InstagramApiUtils;

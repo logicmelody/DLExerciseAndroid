@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.model.instagramapi;
+package com.dl.dlexerciseandroid.model.instagramapi.gson;
 
 import android.graphics.Bitmap;
 
