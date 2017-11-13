@@ -48,7 +48,6 @@ public class AnimationFragment extends Fragment implements View.OnClickListener 
                 mSetLeftIn.start();
 
                 mIsFlipBackVisible = true;
-                int t = 10;
 
             } else {
                 mSetRightOut.setTarget(mFlipImageBack);
