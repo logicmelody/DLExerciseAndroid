@@ -13,9 +13,11 @@ public interface BottomNavigationContract {
     interface View extends BaseView<Presenter> {
         boolean selectNavigationItem(int menuItemId);
         void setContent(String content);
+        void finish();
     }
 
     interface Presenter extends BasePresenter {
         void changeContent(String content);
+        void finishActivity();
     }
 }

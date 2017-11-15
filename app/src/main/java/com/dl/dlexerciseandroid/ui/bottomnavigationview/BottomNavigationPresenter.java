@@ -11,10 +11,21 @@ public class BottomNavigationPresenter implements BottomNavigationContract.Prese
 
     public BottomNavigationPresenter(BottomNavigationContract.View view) {
         mBottomNavigationView = view;
+        mBottomNavigationView.setPresenter(this);
+    }
+
+    @Override
+    public void start() {
+
     }
 
     @Override
     public void changeContent(String content) {
         mBottomNavigationView.setContent(content);
+    }
+
+    @Override
+    public void finishActivity() {
+        mBottomNavigationView.finish();
     }
 }

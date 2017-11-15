@@ -16,7 +16,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements
 
     public static final String TAG = BottomNavigationViewActivity.class.getName();
 
-    private BottomNavigationPresenter mBottomNavigationPresenter;
+    private BottomNavigationContract.Presenter mBottomNavigationPresenter;
 
     private Toolbar mToolbar;
 
@@ -76,7 +76,8 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                mBottomNavigationPresenter.finishActivity();
+
                 return true;
 
             default:
@@ -93,7 +94,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity implements
 
     @Override
     public void setPresenter(BottomNavigationContract.Presenter presenter) {
-
+        mBottomNavigationPresenter = presenter;
     }
 
     @Override
