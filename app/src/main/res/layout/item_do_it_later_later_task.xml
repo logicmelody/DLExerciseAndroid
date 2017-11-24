@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- 如果background已經被拿去設定color，我們可以利用foreground來設定?selectableItemBackground -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/padding_task_item"
     android:layout_margin="@dimen/margin_do_it_later_between_task_item"
     android:orientation="vertical"
-    android:background="@drawable/background_later_task_item">
+    android:background="@drawable/background_later_task_item"
+    android:foreground="?selectableItemBackground">
 
     <TextView
         android:id="@+id/text_view_task_item_title"
