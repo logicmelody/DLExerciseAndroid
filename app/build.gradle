@@ -136,6 +136,7 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
+    compile 'com.github.danylovolokh:list-visibility-utils:0.2.0'
 
     // Required -- JUnit 4 framework, for 一般的unit tests
     testCompile 'junit:junit:4.12'

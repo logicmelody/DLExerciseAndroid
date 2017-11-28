@@ -11,19 +11,27 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.dl.dlexerciseandroid.R;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.volokh.danylo.visibility_utils.calculator.DefaultSingleItemCalculatorCallback;
+import com.volokh.danylo.visibility_utils.calculator.ListItemsVisibilityCalculator;
+import com.volokh.danylo.visibility_utils.calculator.SingleListViewItemActiveCalculator;
+import com.volokh.danylo.visibility_utils.scroll_utils.ItemsPositionGetter;
+import com.volokh.danylo.visibility_utils.scroll_utils.RecyclerViewItemPositionGetter;
 
 public class CoordinatorLayoutActivity extends AppCompatActivity implements View.OnClickListener {
 
     private RecyclerView mNumberList;
     private NumberListAdapter mNumberListAdapter;
+    private LinearLayoutManager mLinearLayoutManager;
 
     private Toolbar mToolBar;
     private ActionBar mActionBar;
 
     private FloatingActionButton mFloatingActionButton;
+
+    private ItemsPositionGetter mItemsPositionGetter;
+    private ListItemsVisibilityCalculator mListItemVisibilityCalculator;
+
+    private int mScrollState;
 
 
     @Override
@@ -64,15 +72,49 @@ public class CoordinatorLayoutActivity extends AppCompatActivity implements View
 
     private void setupNumberList() {
         mNumberListAdapter = new NumberListAdapter(this);
+        mLinearLayoutManager = new LinearLayoutManager(this);
+
+        mNumberList.setLayoutManager(mLinearLayoutManager);
+        mNumberList.setAdapter(mNumberListAdapter);
+        mListItemVisibilityCalculator =
+                new SingleListViewItemActiveCalculator(new DefaultSingleItemCalculatorCallback(), mNumberListAdapter.getDatas());
+
+        mNumberList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
+                mScrollState = scrollState;
+                if(scrollState == RecyclerView.SCROLL_STATE_IDLE && !mNumberListAdapter.isEmpty()){
+
+                    mListItemVisibilityCalculator.onScrollStateIdle(
+                            mItemsPositionGetter,
+                            mLinearLayoutManager.findFirstVisibleItemPosition(),
+                            mLinearLayoutManager.findLastVisibleItemPosition());
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if(!mNumberListAdapter.isEmpty()){
+                    mListItemVisibilityCalculator.onScroll(
+                            mItemsPositionGetter,
+                            mLinearLayoutManager.findFirstVisibleItemPosition(),
+                            mLinearLayoutManager.findLastVisibleItemPosition() - mLinearLayoutManager.findFirstVisibleItemPosition() + 1,
+                            mScrollState);
+                }
+            }
+        });
+
         setNumberListData();
 
-        mNumberList.setLayoutManager(new LinearLayoutManager(this));
-        mNumberList.setAdapter(mNumberListAdapter);
+        mNumberListAdapter.notifyDataSetChanged();
+
+        mItemsPositionGetter = new RecyclerViewItemPositionGetter(mLinearLayoutManager, mNumberList);
     }
 
     private void setNumberListData() {
         for (int i = 0 ; i < 100 ; i++) {
-            mNumberListAdapter.add(i);
+            mNumberListAdapter.add(new NumberItem(i));
         }
     }
 

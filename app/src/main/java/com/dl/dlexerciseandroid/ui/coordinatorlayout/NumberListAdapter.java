@@ -19,7 +19,7 @@ public class NumberListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private Context mContext;
 
-    private List<Integer> mDataSet;
+    private List<NumberItem> mDatas;
 
 
     private static class NumberViewHolder extends RecyclerView.ViewHolder {
@@ -34,12 +34,7 @@ public class NumberListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public NumberListAdapter(Context context) {
         mContext = context;
-        mDataSet = new ArrayList<>();
-    }
-
-    public NumberListAdapter(Context context, List<Integer> dataSet) {
-        mContext = context;
-        mDataSet = dataSet;
+        mDatas = new ArrayList<>();
     }
 
     @Override
@@ -52,15 +47,23 @@ public class NumberListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         NumberViewHolder numberVH = (NumberViewHolder) holder;
 
-        numberVH.number.setText(String.valueOf(mDataSet.get(position)));
+        numberVH.number.setText(String.valueOf(mDatas.get(position).getInteger()));
     }
 
     @Override
     public int getItemCount() {
-        return mDataSet.size();
+        return mDatas.size();
     }
 
-    public void add(int num) {
-        mDataSet.add(num);
+    public void add(NumberItem item) {
+        mDatas.add(item);
+    }
+
+    public List<NumberItem> getDatas() {
+        return mDatas;
+    }
+
+    public boolean isEmpty() {
+        return mDatas.size() == 0;
     }
 }
