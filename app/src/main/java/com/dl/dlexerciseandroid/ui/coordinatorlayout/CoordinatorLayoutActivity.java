@@ -19,7 +19,7 @@ import com.volokh.danylo.visibility_utils.scroll_utils.RecyclerViewItemPositionG
 
 public class CoordinatorLayoutActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private RecyclerView mNumberList;
+    private RecyclerView mRecyclerViewNumber;
     private NumberListAdapter mNumberListAdapter;
     private LinearLayoutManager mLinearLayoutManager;
 
@@ -50,7 +50,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity implements View
 
     private void findViews() {
         mToolBar = (Toolbar) findViewById(R.id.tool_bar);
-        mNumberList = (RecyclerView) findViewById(R.id.recycler_view_coordinator_layout_number_list);
+        mRecyclerViewNumber = (RecyclerView) findViewById(R.id.recycler_view_coordinator_layout_number_list);
         mFloatingActionButton =
                 (FloatingActionButton) findViewById(R.id.floating_action_button_coordinator_layout);
     }
@@ -72,20 +72,22 @@ public class CoordinatorLayoutActivity extends AppCompatActivity implements View
 
     private void setupNumberList() {
         mNumberListAdapter = new NumberListAdapter(this);
+        setNumberListData();
+
         mLinearLayoutManager = new LinearLayoutManager(this);
-
-        mNumberList.setLayoutManager(mLinearLayoutManager);
-        mNumberList.setAdapter(mNumberListAdapter);
         mListItemVisibilityCalculator =
-                new SingleListViewItemActiveCalculator(new DefaultSingleItemCalculatorCallback(), mNumberListAdapter.getDatas());
+                new NumberItemActiveCalculator(new DefaultSingleItemCalculatorCallback(),
+                                               mNumberListAdapter.getDatas());
 
-        mNumberList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mRecyclerViewNumber.setLayoutManager(mLinearLayoutManager);
+        mRecyclerViewNumber.setAdapter(mNumberListAdapter);
+        mRecyclerViewNumber.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int scrollState) {
                 mScrollState = scrollState;
-                if(scrollState == RecyclerView.SCROLL_STATE_IDLE && !mNumberListAdapter.isEmpty()){
 
+                if (scrollState == RecyclerView.SCROLL_STATE_IDLE && !mNumberListAdapter.isEmpty()) {
                     mListItemVisibilityCalculator.onScrollStateIdle(
                             mItemsPositionGetter,
                             mLinearLayoutManager.findFirstVisibleItemPosition(),
@@ -95,7 +97,7 @@ public class CoordinatorLayoutActivity extends AppCompatActivity implements View
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if(!mNumberListAdapter.isEmpty()){
+                if (!mNumberListAdapter.isEmpty()) {
                     mListItemVisibilityCalculator.onScroll(
                             mItemsPositionGetter,
                             mLinearLayoutManager.findFirstVisibleItemPosition(),
@@ -105,16 +107,28 @@ public class CoordinatorLayoutActivity extends AppCompatActivity implements View
             }
         });
 
-        setNumberListData();
-
-        mNumberListAdapter.notifyDataSetChanged();
-
-        mItemsPositionGetter = new RecyclerViewItemPositionGetter(mLinearLayoutManager, mNumberList);
+        mItemsPositionGetter = new RecyclerViewItemPositionGetter(mLinearLayoutManager, mRecyclerViewNumber);
     }
 
     private void setNumberListData() {
         for (int i = 0 ; i < 100 ; i++) {
-            mNumberListAdapter.add(new NumberItem(i));
+            mNumberListAdapter.add(new NumberItem(String.valueOf(i)));
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(!mNumberListAdapter.isEmpty()) {
+            mRecyclerViewNumber.post(new Runnable() {
+                @Override
+                public void run() {
+                    mListItemVisibilityCalculator.onScrollStateIdle(
+                            mItemsPositionGetter,
+                            mLinearLayoutManager.findFirstVisibleItemPosition(),
+                            mLinearLayoutManager.findLastVisibleItemPosition());
+                }
+            });
         }
     }
 

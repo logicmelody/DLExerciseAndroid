@@ -14,21 +14,21 @@ public class NumberItem implements ListItem {
 
     private static final String TAG = NumberItem.class.getSimpleName();
 
-    private int mInteger = 0;
+    private String mText;
 
     private final Rect mCurrentViewRect = new Rect();
 
 
-    public NumberItem(int integer) {
-        mInteger = integer;
+    public NumberItem(String text) {
+        mText = text;
     }
 
-    public int getInteger() {
-        return mInteger;
+    public String getInteger() {
+        return mText;
     }
 
-    public void setInteger(int integer) {
-        this.mInteger = integer;
+    public void setInteger(String integer) {
+        this.mText = integer;
     }
 
     @Override
@@ -60,11 +60,11 @@ public class NumberItem implements ListItem {
 
     @Override
     public void setActive(View newActiveView, int newActiveViewPosition) {
-        Log.d("danny", "setActive item = " + String.valueOf(mInteger));
+        Log.d("danny", "setActive item = " + mText);
     }
 
     @Override
     public void deactivate(View currentView, int position) {
-        Log.d("danny", "deactivate item = " + String.valueOf(mInteger));
+        Log.d("danny", "deactivate item = " + mText);
     }
 }
