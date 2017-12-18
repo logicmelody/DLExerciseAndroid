@@ -16,15 +16,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- 如果要讓Toolbar也可以利用CoordinatorLayout來進行一些動畫，就必須要使用Toolbar，傳統的ActionBar沒有辦法 -->
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/tool_bar"
+        <!-- app:layout_scrollFlags：當scroll的時候要執行哪些行為，通常都設定成"scroll|exitUntilCollapsed" -->
+        <!-- app:contentScrim：Toolbar全部縮起來的時候要顯示什麼顏色 -->
+        <!-- 將本來在Toolbar中的app:theme="@style/AppBarOverlay"加到CollapsingToolbarLayout中，這樣才可以改到字的顏色 -->
+        <!-- 大部分的設定都設定在CollapsingToolbarLayout中，字的顏色，展開跟縮起來字的位置，縮起來Toolbar的顏色 -->
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppBarPopupOverlay"
-            app:theme="@style/AppBarOverlay" />
+            android:layout_height="@dimen/height_coordinator_layout_collapsing_toolbar"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="?attr/colorPrimary"
+            app:theme="@style/AppBarOverlay">
+
+            <View
+                android:id="@+id/view_coordinate_layout_color_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/all_yellow"
+                app:layout_collapseMode="parallax"/>
+
+            <!-- 如果要讓Toolbar也可以利用CoordinatorLayout來進行一些動畫，就必須要使用Toolbar，傳統的ActionBar沒有辦法 -->
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/AppBarPopupOverlay"
+                app:layout_collapseMode="pin"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
 
