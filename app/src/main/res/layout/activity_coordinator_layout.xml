@@ -62,6 +62,8 @@
     <!-- app:fabSize可以設normal或是mini -->
     <!-- 建議的margin是phone: 16dp   tablet: 24dp -->
     <!-- app:layout_behavior：assign我們實作的behavior -->
+    <!-- 當CoordinatorLayout中的其中一個View發生特定事件的時候，會執行app:layout_behavior裡的實作的動作 -->
+    <!-- ex: 當RecyclerView發生scroll事件的時候，FloatingActionButton會執行FloatingActionButtonBehavior這個class的事件 -->
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floating_action_button_coordinator_layout"
         android:layout_width="wrap_content"
