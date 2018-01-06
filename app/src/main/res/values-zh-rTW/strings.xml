@@ -15,6 +15,7 @@
     <string name="all_send">送出</string>
     <string name="all_setting">設定</string>
     <string name="all_installed_apps">安裝應用軟體</string>
+    <string name="all_count_down">倒數計時</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">確定要登出？</string>

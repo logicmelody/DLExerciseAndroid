@@ -23,6 +23,7 @@ import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.ui.animation.AnimationFragment;
 import com.dl.dlexerciseandroid.ui.bitmap.BitmapFragment;
 import com.dl.dlexerciseandroid.ui.chat.main.ChatFragment;
+import com.dl.dlexerciseandroid.ui.countdown.CountDownFragment;
 import com.dl.dlexerciseandroid.ui.customizedview.CustomizedViewFragment;
 import com.dl.dlexerciseandroid.database.debug.AndroidDatabaseManager;
 import com.dl.dlexerciseandroid.dialog.dialogfragment.alert.AlertDialogFragment;
@@ -316,6 +317,10 @@ public class UIController implements View.OnClickListener {
 
                     case R.id.menu_item_left_drawer_stack_overflow:
                         replaceContentFragment(StackOverflowFragment.class, StackOverflowFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_count_down:
+                        replaceContentFragment(CountDownFragment.class, CountDownFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:

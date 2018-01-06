@@ -53,6 +53,7 @@
     <string name="all_rxjava" translatable="false">RxJava</string>
     <string name="all_installed_apps">Installed Apps</string>
     <string name="all_stack_overflow" translatable="false">StackOverflow</string>
+    <string name="all_count_down">Count Down</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">Sure to logout?</string>
