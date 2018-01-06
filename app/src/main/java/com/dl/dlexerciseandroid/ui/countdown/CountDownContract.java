@@ -10,10 +10,10 @@ import com.dl.dlexerciseandroid.ui.BaseView;
 public class CountDownContract {
 
     public interface Presenter extends BasePresenter {
-
+        void startCountDown(int sec);
     }
 
     public interface View extends BaseView<Presenter> {
-
+        void showCountDownDialog(int sec);
     }
 }

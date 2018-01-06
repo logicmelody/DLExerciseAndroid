@@ -138,4 +138,7 @@
     <!-- StackOverflow -->
     <dimen name="height_stack_overflow_item">80dp</dimen>
 
+    <!-- Count Down -->
+    <dimen name="text_size_count_down_text">100dp</dimen>
+
 </resources>

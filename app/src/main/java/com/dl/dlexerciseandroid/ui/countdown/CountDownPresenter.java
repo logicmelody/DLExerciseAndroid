@@ -17,4 +17,9 @@ public class CountDownPresenter implements CountDownContract.Presenter {
     public void start() {
 
     }
+
+    @Override
+    public void startCountDown(int sec) {
+        mView.showCountDownDialog(sec);
+    }
 }

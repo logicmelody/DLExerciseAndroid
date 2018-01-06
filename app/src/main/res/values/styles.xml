@@ -102,4 +102,12 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <!-- 將dialog設定成這個style，可以讓dialog全螢幕 -->
+    <style name="FullScreenDialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+    </style>
+
 </resources>

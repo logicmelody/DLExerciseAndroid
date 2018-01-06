@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.dialog.dialogfragment.countdown.CountDownDialogFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,6 +66,29 @@ public class CountDownFragment extends Fragment implements CountDownContract.Vie
 
     @OnClick(R.id.button_count_down_start)
     public void onClickStartButton() {
-        
+        String s = mEditTextCountDown.getText().toString();
+
+        if (TextUtils.isEmpty(s)) {
+            return;
+        }
+
+        int sec = Integer.decode(s);
+
+        if (sec <= 0) {
+            return;
+        }
+
+        mPresenter.startCountDown(sec);
+    }
+
+    @Override
+    public void showCountDownDialog(int sec) {
+        CountDownDialogFragment countDownDialogFragment = new CountDownDialogFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putInt(CountDownDialogFragment.EXTRA_INT_COUNT_DOWN_SECONDS, sec);
+
+        countDownDialogFragment.setArguments(bundle);
+        countDownDialogFragment.show(getFragmentManager(), CountDownDialogFragment.TAG);
     }
 }

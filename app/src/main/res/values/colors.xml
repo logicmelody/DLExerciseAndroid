@@ -69,4 +69,7 @@
     <!-- Guide -->
     <color name="background_guide_overlay">#CC000000</color>
 
+    <!-- Guide -->
+    <color name="background_count_down_dialog">#99000000</color>
+
 </resources>
