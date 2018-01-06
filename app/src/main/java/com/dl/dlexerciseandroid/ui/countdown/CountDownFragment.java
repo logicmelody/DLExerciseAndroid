@@ -7,18 +7,31 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.dl.dlexerciseandroid.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by logicmelody on 2018/1/6.
  */
 
-public class CountDownFragment extends Fragment {
+public class CountDownFragment extends Fragment implements CountDownContract.View {
 
     public static final String TAG = CountDownFragment.class.getName();
 
     private Context mContext;
+    private CountDownContract.Presenter mPresenter;
+
+    @BindView(R.id.edit_text_count_down)
+    public EditText mEditTextCountDown;
+
+    @BindView(R.id.button_count_down_start)
+    public Button mButtonStart;
 
 
     @Override
@@ -36,10 +49,21 @@ public class CountDownFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ButterKnife.bind(this, getView());
         initialize();
     }
 
     private void initialize() {
+        mPresenter = new CountDownPresenter(this);
+    }
 
+    @Override
+    public void setPresenter(CountDownContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
+
+    @OnClick(R.id.button_count_down_start)
+    public void onClickStartButton() {
+        
     }
 }

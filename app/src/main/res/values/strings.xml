@@ -156,4 +156,7 @@
     <string name="guide_i_know_button_text">I Know</string>
     <string name="guide_show_toast_button_text" translatable="false">Show Toast</string>
 
+    <!-- Count Down -->
+    <string name="count_down_start">Start to count down</string>
+
 </resources>

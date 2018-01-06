@@ -83,4 +83,7 @@
     <!-- Guide -->
     <string name="guide_i_know_button_text">我知道了</string>
 
+    <!-- Count Down -->
+    <string name="count_down_start">開始倒數計時</string>
+
 </resources>
