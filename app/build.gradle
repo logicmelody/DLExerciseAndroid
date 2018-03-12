@@ -91,6 +91,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':dlsdk')
     // For consuming restful web service with Spring

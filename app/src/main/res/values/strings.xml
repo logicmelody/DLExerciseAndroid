@@ -159,4 +159,9 @@
     <!-- Count Down -->
     <string name="count_down_start">Start to count down</string>
 
+    <!-- Constraint Layout -->
+    <string name="constraint_layout_a" translatable="false">A</string>
+    <string name="constraint_layout_b" translatable="false">B</string>
+    <string name="constraint_layout_c" translatable="false">C</string>
+
 </resources>

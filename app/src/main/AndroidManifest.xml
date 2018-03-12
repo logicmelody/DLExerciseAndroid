@@ -164,9 +164,11 @@
         <activity
             android:name=".ui.instagramapi.main.InstagramLoginActivity"
             android:theme="@style/AppThemeWithActionBar.InstagramApi" />
-        <activity android:name=".ui.settings.SettingActivity"
-            android:theme="@style/AppThemeWithActionBar"/>
+        <activity
+            android:name=".ui.settings.SettingActivity"
+            android:theme="@style/AppThemeWithActionBar" />
         <activity android:name=".ui.guide.GuideActivity" />
+        <activity android:name=".ui.constraintlayout.ConstraintLayoutActivity" />
 
         <!--
         用receiver沒有辦法收到來自別的app的shared intent

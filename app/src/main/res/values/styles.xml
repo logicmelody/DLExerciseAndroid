@@ -16,6 +16,7 @@
         <item name="android:windowBackground">@color/all_white</item>
     </style>
 
+    <!-- 這個theme用在使用預設ActionBar的時候 -->
     <style name="AppThemeWithActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

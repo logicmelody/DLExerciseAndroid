@@ -141,4 +141,8 @@
     <!-- Count Down -->
     <dimen name="text_size_count_down_text">100dp</dimen>
 
+    <!-- Constraint Layout -->
+    <dimen name="padding_constraint_layout_text">10dp</dimen>
+    <dimen name="text_size_constraint_layout_text">50dp</dimen>
+
 </resources>
