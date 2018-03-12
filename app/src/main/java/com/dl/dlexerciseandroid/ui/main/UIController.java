@@ -31,6 +31,7 @@ import com.dl.dlexerciseandroid.ui.dlsdk.DLSdkFragment;
 import com.dl.dlexerciseandroid.ui.facebook.FacebookFragment;
 import com.dl.dlexerciseandroid.ui.file.FileFragment;
 import com.dl.dlexerciseandroid.ui.firebase.FirebaseFragment;
+import com.dl.dlexerciseandroid.ui.http.HttpFragment;
 import com.dl.dlexerciseandroid.ui.installedapps.InstalledAppsFragment;
 import com.dl.dlexerciseandroid.ui.intent.IntentFragment;
 import com.dl.dlexerciseandroid.ui.loadimagefrominternet.main.LoadImageFromInternetFragment;
@@ -321,6 +322,10 @@ public class UIController implements View.OnClickListener {
 
                     case R.id.menu_item_left_drawer_count_down:
                         replaceContentFragment(CountDownFragment.class, CountDownFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_http:
+                        replaceContentFragment(HttpFragment.class, HttpFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:

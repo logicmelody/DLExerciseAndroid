@@ -50,6 +50,16 @@ public class HttpUtils {
         return response.body().string();
     }
 
+    public static String run(String url) throws IOException {
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        Response response = sHttpClient.newCall(request).execute();
+
+        return response.body().string();
+    }
+
     public static String postJsonStringFromUrl(String url, Map<String, String> bodyMap) throws IOException {
         Response response = sHttpClient.newCall(postRequest(url, bodyMap)).execute();
 
