@@ -8,8 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by logicmelody on 2018/3/12.
@@ -20,6 +24,9 @@ public class HttpFragment extends Fragment {
     public static final String TAG = HttpFragment.class.getName();
 
     private Context mContext;
+
+    @BindView(R.id.text_view_http_get_url)
+    public TextView mTextViewGetUrl;
 
 
     @Override
@@ -37,6 +44,7 @@ public class HttpFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ButterKnife.bind(this, getView());
         initialize();
     }
 

@@ -17,7 +17,7 @@ import okhttp3.Response;
  */
 public class HttpUtils {
 
-    // okHttp建議只要new出一個實體操作就好
+    // IMPORTANT: okHttp建議只要new出一個實體操作就好
     private static final OkHttpClient sHttpClient = new OkHttpClient();
 
 
@@ -50,7 +50,7 @@ public class HttpUtils {
         return response.body().string();
     }
 
-    public static String run(String url) throws IOException {
+    public static String get(String url) throws IOException {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
