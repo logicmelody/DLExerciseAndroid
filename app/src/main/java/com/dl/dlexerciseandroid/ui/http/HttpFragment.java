@@ -19,11 +19,12 @@ import butterknife.ButterKnife;
  * Created by logicmelody on 2018/3/12.
  */
 
-public class HttpFragment extends Fragment {
+public class HttpFragment extends Fragment implements HttpContract.View {
 
     public static final String TAG = HttpFragment.class.getName();
 
     private Context mContext;
+    private HttpContract.Presenter mPresenter;
 
     @BindView(R.id.text_view_http_get_url)
     public TextView mTextViewGetUrl;
@@ -49,6 +50,11 @@ public class HttpFragment extends Fragment {
     }
 
     private void initialize() {
+        mPresenter = new HttpPresenter(this);
+    }
 
+    @Override
+    public void setPresenter(HttpContract.Presenter presenter) {
+        mPresenter = presenter;
     }
 }
