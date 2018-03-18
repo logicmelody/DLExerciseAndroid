@@ -11,7 +11,10 @@ import com.dl.dlexerciseandroid.R;
  * Created by logicmelody on 2018/3/18.
  */
 
-public class PlayerActivity extends AppCompatActivity {
+public class PlayerActivity extends AppCompatActivity implements PlayerContract.View {
+
+    private PlayerContract.Presenter mPresenter;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
@@ -21,6 +24,11 @@ public class PlayerActivity extends AppCompatActivity {
     }
 
     private void initialize() {
+        mPresenter = new PlayerPresenter(this);
+    }
 
+    @Override
+    public void setPresenter(PlayerContract.Presenter presenter) {
+        mPresenter = presenter;
     }
 }
