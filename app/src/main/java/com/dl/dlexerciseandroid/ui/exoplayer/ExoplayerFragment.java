@@ -17,11 +17,12 @@ import butterknife.ButterKnife;
  * Created by logicmelody on 2018/3/18.
  */
 
-public class ExoplayerFragment extends Fragment {
+public class ExoplayerFragment extends Fragment implements ExoPlayerContract.View {
 
     public static final String TAG = ExoplayerFragment.class.getName();
 
     private Context mContext;
+    private ExoPlayerContract.Presenter mPresenter;
 
 
     @Override
@@ -44,6 +45,11 @@ public class ExoplayerFragment extends Fragment {
     }
 
     private void initialize() {
+        mPresenter = new ExoPlayerPresenter(this);
+    }
 
+    @Override
+    public void setPresenter(ExoPlayerContract.Presenter presenter) {
+        mPresenter = presenter;
     }
 }
