@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.ui.exoplayer;
+package com.dl.dlexerciseandroid.ui.exoplayer.main;
 
 /**
  * Created by logicmelody on 2018/3/18.

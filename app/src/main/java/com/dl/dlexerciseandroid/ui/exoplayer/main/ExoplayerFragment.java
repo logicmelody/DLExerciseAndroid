@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.ui.exoplayer;
+package com.dl.dlexerciseandroid.ui.exoplayer.main;
 
 import android.content.Context;
 import android.os.Bundle;

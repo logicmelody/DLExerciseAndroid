@@ -127,6 +127,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:27.0.2'
     compile 'com.android.support:design:27.0.2'
     compile 'com.github.danylovolokh:list-visibility-utils:0.2.0'
+    // ExoPlayer
+    compile 'com.google.android.exoplayer:exoplayer:2.7.1'
     // Required -- JUnit 4 framework, for 一般的unit tests
     testCompile 'junit:junit:4.12'
     // Optional -- Mockito framework, for 跟Android framework有一點相依性的unit tests

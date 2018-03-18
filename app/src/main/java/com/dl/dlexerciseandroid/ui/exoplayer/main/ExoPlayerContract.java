@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.ui.exoplayer;
+package com.dl.dlexerciseandroid.ui.exoplayer.main;
 
 import com.dl.dlexerciseandroid.ui.BasePresenter;
 import com.dl.dlexerciseandroid.ui.BaseView;
