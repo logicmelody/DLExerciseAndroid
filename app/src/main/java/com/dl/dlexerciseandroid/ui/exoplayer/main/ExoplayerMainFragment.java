@@ -17,12 +17,12 @@ import butterknife.ButterKnife;
  * Created by logicmelody on 2018/3/18.
  */
 
-public class ExoplayerFragment extends Fragment implements ExoPlayerContract.View {
+public class ExoplayerMainFragment extends Fragment implements ExoPlayerMainContract.View {
 
-    public static final String TAG = ExoplayerFragment.class.getName();
+    public static final String TAG = ExoplayerMainFragment.class.getName();
 
     private Context mContext;
-    private ExoPlayerContract.Presenter mPresenter;
+    private ExoPlayerMainContract.Presenter mPresenter;
 
 
     @Override
@@ -34,7 +34,7 @@ public class ExoplayerFragment extends Fragment implements ExoPlayerContract.Vie
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_exoplayer, container, false);
+        return inflater.inflate(R.layout.fragment_exoplayer_main, container, false);
     }
 
     @Override
@@ -45,11 +45,11 @@ public class ExoplayerFragment extends Fragment implements ExoPlayerContract.Vie
     }
 
     private void initialize() {
-        mPresenter = new ExoPlayerPresenter(this);
+        mPresenter = new ExoPlayerMainPresenter(this);
     }
 
     @Override
-    public void setPresenter(ExoPlayerContract.Presenter presenter) {
+    public void setPresenter(ExoPlayerMainContract.Presenter presenter) {
         mPresenter = presenter;
     }
 }
