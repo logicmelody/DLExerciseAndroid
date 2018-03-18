@@ -169,6 +169,9 @@
             android:theme="@style/AppThemeWithActionBar" />
         <activity android:name=".ui.guide.GuideActivity" />
         <activity android:name=".ui.constraintlayout.ConstraintLayoutActivity" />
+        <activity
+            android:name=".ui.exoplayer.player.PlayerActivity"
+            android:theme="@style/AppThemeWithActionBar" />
 
         <!--
         用receiver沒有辦法收到來自別的app的shared intent
