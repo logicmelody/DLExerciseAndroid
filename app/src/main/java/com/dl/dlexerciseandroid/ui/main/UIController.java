@@ -28,6 +28,7 @@ import com.dl.dlexerciseandroid.ui.customizedview.CustomizedViewFragment;
 import com.dl.dlexerciseandroid.database.debug.AndroidDatabaseManager;
 import com.dl.dlexerciseandroid.dialog.dialogfragment.alert.AlertDialogFragment;
 import com.dl.dlexerciseandroid.ui.dlsdk.DLSdkFragment;
+import com.dl.dlexerciseandroid.ui.exoplayer.ExoplayerFragment;
 import com.dl.dlexerciseandroid.ui.facebook.FacebookFragment;
 import com.dl.dlexerciseandroid.ui.file.FileFragment;
 import com.dl.dlexerciseandroid.ui.firebase.FirebaseFragment;
@@ -326,6 +327,10 @@ public class UIController implements View.OnClickListener {
 
                     case R.id.menu_item_left_drawer_http:
                         replaceContentFragment(HttpFragment.class, HttpFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_exoplayer:
+                        replaceContentFragment(ExoplayerFragment.class, ExoplayerFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:
