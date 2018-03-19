@@ -11,7 +11,6 @@ import android.view.View;
 import com.dl.dlexerciseandroid.R;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
-import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -179,7 +178,7 @@ public class PlayerActivity extends AppCompatActivity implements PlayerContract.
 			mPlaybackPosition = mPlayer.getCurrentPosition();
 			mCurrentWindow = mPlayer.getCurrentWindowIndex();
 			mPlayWhenReady = mPlayer.getPlayWhenReady();
-			
+
             mPlayer.removeListener(mComponentListener);
 			mPlayer.release();
 			mPlayer = null;
