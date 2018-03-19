@@ -140,6 +140,12 @@ public class PlayerActivity extends AppCompatActivity implements PlayerContract.
 		return new ExtractorMediaSource.Factory(new DefaultHttpDataSourceFactory(getString(R.string.app_name))).createMediaSource(uri);
 	}
 
+    /**
+     * DASH is a widely used adaptive streaming format.
+     *
+     * @param uri
+     * @return
+     */
     private MediaSource buildDashMediaSource(Uri uri) {
         DataSource.Factory manifestDataSourceFactory = new DefaultHttpDataSourceFactory(getString(R.string.app_name));
         DashChunkSource.Factory dashChunkSourceFactory =
