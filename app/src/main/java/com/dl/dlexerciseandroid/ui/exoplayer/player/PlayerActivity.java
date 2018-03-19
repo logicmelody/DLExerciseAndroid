@@ -1,10 +1,12 @@
 package com.dl.dlexerciseandroid.ui.exoplayer.player;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.dl.dlexerciseandroid.R;
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -38,8 +40,7 @@ public class PlayerActivity extends AppCompatActivity implements PlayerContract.
 
     // Initialize with 0 to start from the beginning of the window
 	// 此則 media 現在播放到什麼位置
-    private int mPlaybackPosition = 0;
-
+    private long mPlaybackPosition = 0;
 
     @BindView(R.id.simple_exo_player_view_exo_player)
     public SimpleExoPlayerView mSimpleExoPlayerView;
@@ -53,15 +54,21 @@ public class PlayerActivity extends AppCompatActivity implements PlayerContract.
         initialize();
     }
 
-    private void initialize() {
+	private void initialize() {
         mPresenter = new PlayerPresenter(this);
-
-        setupPlayer();
-        prepareMedia();
     }
 
+	@Override
+	protected void onStart() {
+		super.onStart();
+		setupPlayer();
+		prepareMedia();
+	}
+
 	private void setupPlayer() {
-    	// Roughly a RenderersFactory creates renderers for timestamp synchronized rendering of video, audio and text (subtitles).
+		hideSystemUi();
+
+		// Roughly a RenderersFactory creates renderers for timestamp synchronized rendering of video, audio and text (subtitles).
 		// The TrackSelector is responsible for selecting from the available audio, video and text tracks
 		// The LoadControl manages buffering of the player.
 		mPlayer = ExoPlayerFactory.newSimpleInstance(new DefaultRenderersFactory(this), new DefaultTrackSelector(), new DefaultLoadControl());
@@ -72,8 +79,41 @@ public class PlayerActivity extends AppCompatActivity implements PlayerContract.
 		mSimpleExoPlayerView.setPlayer(mPlayer);
 	}
 
+	/**
+	 * Have a pure full screen experience
+	 */
+	@SuppressLint("InlinedApi")
+	private void hideSystemUi() {
+		mSimpleExoPlayerView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+				| View.SYSTEM_UI_FLAG_FULLSCREEN
+				| View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+				| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+				| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+				| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		releasePlayer();
+	}
+
+	/**
+	 * 因為我們的 player 在 onStop() 的時候就會被 release 掉，但是 app 可能會被重新開啟，所以我們需要記下現在 media 播到哪的時間
+	 * For some of these codecs it may have only one instance so not releasing it would harm other apps.
+	 */
+	private void releasePlayer() {
+		if (mPlayer != null) {
+			mPlaybackPosition = mPlayer.getCurrentPosition();
+			mCurrentWindow = mPlayer.getCurrentWindowIndex();
+			mPlayWhenReady = mPlayer.getPlayWhenReady();
+			mPlayer.release();
+			mPlayer = null;
+		}
+	}
+
 	private void prepareMedia() {
-		Uri uri = Uri.parse("This is media url");
+		Uri uri = Uri.parse("http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4");
 		MediaSource mediaSource = buildMediaSource(uri);
 
 		mPlayer.prepare(mediaSource, true, false);
