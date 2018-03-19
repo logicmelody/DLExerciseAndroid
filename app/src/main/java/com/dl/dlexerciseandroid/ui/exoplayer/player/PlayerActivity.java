@@ -16,12 +16,14 @@ import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.source.dash.DashChunkSource;
 import com.google.android.exoplayer2.source.dash.DashMediaSource;
 import com.google.android.exoplayer2.source.dash.DefaultDashChunkSource;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
+import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
@@ -76,6 +78,10 @@ public class PlayerActivity extends AppCompatActivity implements PlayerContract.
                     break;
 
                 // The player is not able to immediately play from the current position because not enough data is buffered.
+                // ExoPlayer.EventListener.onPlaybackStateChanged() is called with STATE_BUFFERING.
+                // Entering the buffering state happens naturally once at the very beginning and
+                // after a user requested a seek to a position yet not available (eg. backward seeking).
+                // All other occurrences of STATE_BUFFERING must be considered harmful for QoE.
                 case Player.STATE_BUFFERING:
                     stateString = "ExoPlayer.STATE_BUFFERING -";
                     break;
@@ -103,6 +109,14 @@ public class PlayerActivity extends AppCompatActivity implements PlayerContract.
                 // actually playing media
                 Log.d("danny", "Actually playing media");
             }
+        }
+
+        // ExoPlayer.EventListener.onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections)
+        // informs about track changes.
+        // At least when track selection is downgraded to a lower quality we want to know about it.
+        @Override
+        public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
+            super.onTracksChanged(trackGroups, trackSelections);
         }
     }
 
