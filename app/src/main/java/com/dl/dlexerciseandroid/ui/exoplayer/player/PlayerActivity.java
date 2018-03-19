@@ -5,12 +5,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.dl.dlexerciseandroid.R;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
+import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
@@ -50,9 +53,59 @@ public class PlayerActivity extends AppCompatActivity implements PlayerContract.
 	// 此則 media 現在播放到什麼位置
     private long mPlaybackPosition = 0;
 
+    private ComponentListener mComponentListener;
+
     @BindView(R.id.simple_exo_player_view_exo_player)
     public SimpleExoPlayerView mSimpleExoPlayerView;
 
+
+    private class ComponentListener extends Player.DefaultEventListener {
+
+        // boolean playWhenReady: 負責管 play / pause media
+        // true: playing
+        // false: paused
+        // This corresponds with the method ExoPlayer.setPlayWhenReady(boolean playWhenReady)
+        // 所以之前我們有在 onPlayerStateChanged() 裡面 call 過 ExoPlayer.setPlayWhenReady()，導致無窮迴圈
+        @Override
+        public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+            String stateString;
+
+            switch (playbackState) {
+                // The player has been instantiated but has not being prepared with a MediaSource yet..
+                case Player.STATE_IDLE:
+                    stateString = "ExoPlayer.STATE_IDLE      -";
+                    break;
+
+                // The player is not able to immediately play from the current position because not enough data is buffered.
+                case Player.STATE_BUFFERING:
+                    stateString = "ExoPlayer.STATE_BUFFERING -";
+                    break;
+
+                // The player is able to immediately play from the current position.
+                // This means the player does actually play media when playWhenReady is true.
+                // If it is false the player is paused.
+                case Player.STATE_READY:
+                    stateString = "ExoPlayer.STATE_READY     -";
+                    break;
+
+                // The player has finished playing the media.
+                case Player.STATE_ENDED:
+                    stateString = "ExoPlayer.STATE_ENDED     -";
+                    break;
+
+                default:
+                    stateString = "UNKNOWN_STATE             -";
+                    break;
+            }
+
+            Log.d("danny", "changed state to " + stateString + " playWhenReady: " + playWhenReady);
+
+            if (playWhenReady && playbackState == Player.STATE_READY) {
+                // actually playing media
+                Log.d("danny", "Actually playing media");
+            }
+        }
+    }
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +117,7 @@ public class PlayerActivity extends AppCompatActivity implements PlayerContract.
 
 	private void initialize() {
         mPresenter = new PlayerPresenter(this);
+        mComponentListener = new ComponentListener();
     }
 
 	@Override
@@ -76,22 +130,25 @@ public class PlayerActivity extends AppCompatActivity implements PlayerContract.
 	private void setupPlayer() {
 		hideSystemUi();
 
-        // A factory to create an AdaptiveVideoTrackSelection
-        // 搭配 DefaultBandwidthMeter，可以根據現在的網路狀況和頻寬，來選擇適合的 track 來播放
-        TrackSelection.Factory adaptiveTrackSelectionFactory = new AdaptiveTrackSelection.Factory(BANDWIDTH_METER);
+		if (mPlayer == null) {
+            // A factory to create an AdaptiveVideoTrackSelection
+            // 搭配 DefaultBandwidthMeter，可以根據現在的網路狀況和頻寬，來選擇適合的 track 來播放
+            TrackSelection.Factory adaptiveTrackSelectionFactory = new AdaptiveTrackSelection.Factory(BANDWIDTH_METER);
 
-		// Roughly a RenderersFactory creates renderers for timestamp synchronized rendering of video, audio and text (subtitles).
-		// The TrackSelector is responsible for selecting from the available audio, video and text tracks
-		// The LoadControl manages buffering of the player.
-		mPlayer = ExoPlayerFactory.newSimpleInstance(
-		        new DefaultRenderersFactory(this),
-                new DefaultTrackSelector(adaptiveTrackSelectionFactory),
-                new DefaultLoadControl());
+            // Roughly a RenderersFactory creates renderers for timestamp synchronized rendering of video, audio and text (subtitles).
+            // The TrackSelector is responsible for selecting from the available audio, video and text tracks
+            // The LoadControl manages buffering of the player.
+            mPlayer = ExoPlayerFactory.newSimpleInstance(
+                    new DefaultRenderersFactory(this),
+                    new DefaultTrackSelector(adaptiveTrackSelectionFactory),
+                    new DefaultLoadControl());
 
-		mPlayer.setPlayWhenReady(mPlayWhenReady);
-		mPlayer.seekTo(mCurrentWindow, mPlaybackPosition);
+            mPlayer.setPlayWhenReady(mPlayWhenReady);
+            mPlayer.seekTo(mCurrentWindow, mPlaybackPosition);
+            mPlayer.addListener(mComponentListener);
 
-		mSimpleExoPlayerView.setPlayer(mPlayer);
+            mSimpleExoPlayerView.setPlayer(mPlayer);
+        }
 	}
 
 	/**
@@ -122,6 +179,8 @@ public class PlayerActivity extends AppCompatActivity implements PlayerContract.
 			mPlaybackPosition = mPlayer.getCurrentPosition();
 			mCurrentWindow = mPlayer.getCurrentWindowIndex();
 			mPlayWhenReady = mPlayer.getPlayWhenReady();
+			
+            mPlayer.removeListener(mComponentListener);
 			mPlayer.release();
 			mPlayer = null;
 		}
