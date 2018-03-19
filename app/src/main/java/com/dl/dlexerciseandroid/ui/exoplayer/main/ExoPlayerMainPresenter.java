@@ -17,4 +17,9 @@ public class ExoPlayerMainPresenter implements ExoPlayerMainContract.Presenter {
     public void start() {
 
     }
+
+	@Override
+	public void playTestVideo() {
+		mView.openPlayerActivity();
+	}
 }

@@ -1,6 +1,7 @@
 package com.dl.dlexerciseandroid.ui.exoplayer.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,8 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.ui.exoplayer.player.PlayerActivity;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by logicmelody on 2018/3/18.
@@ -52,4 +55,14 @@ public class ExoplayerMainFragment extends Fragment implements ExoPlayerMainCont
     public void setPresenter(ExoPlayerMainContract.Presenter presenter) {
         mPresenter = presenter;
     }
+
+    @OnClick(R.id.button_exo_player_main_open_player)
+	public void onClickOpenPlayerButton() {
+    	mPresenter.playTestVideo();
+    }
+
+	@Override
+	public void openPlayerActivity() {
+		startActivity(new Intent(mContext, PlayerActivity.class));
+	}
 }

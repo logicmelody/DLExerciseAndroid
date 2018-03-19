@@ -11,9 +11,11 @@ public interface ExoPlayerMainContract {
 
     interface View extends BaseView<ExoPlayerMainContract.Presenter> {
 
+    	void openPlayerActivity();
     }
 
     interface Presenter extends BasePresenter {
 
+    	void playTestVideo();
     }
 }
