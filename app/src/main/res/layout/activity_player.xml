@@ -5,10 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- app:use_controller="false" 可以把 controller UI hide 起來
+         app:show_timeout="0" 可以不讓 controller UI 消失-->
     <com.google.android.exoplayer2.ui.SimpleExoPlayerView
         android:id="@+id/simple_exo_player_view_exo_player"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:show_timeout="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

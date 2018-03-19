@@ -219,6 +219,7 @@ public class PlayerActivity extends AppCompatActivity implements PlayerContract.
      * @return
      */
     private MediaSource buildDashMediaSource(Uri uri) {
+        // DataSource 是專門用來 load 資料的
         DataSource.Factory manifestDataSourceFactory = new DefaultHttpDataSourceFactory(getString(R.string.app_name));
         DashChunkSource.Factory dashChunkSourceFactory =
                 new DefaultDashChunkSource.Factory(new DefaultHttpDataSourceFactory(getString(R.string.app_name), BANDWIDTH_METER));
