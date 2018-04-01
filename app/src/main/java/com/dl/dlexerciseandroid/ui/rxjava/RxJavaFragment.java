@@ -19,6 +19,8 @@ import com.dl.dlexerciseandroid.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -41,10 +43,13 @@ public class RxJavaFragment extends Fragment implements RxJavaContract.View {
     private Context mContext;
     private RxJavaContract.Presenter mPresenter;
 
-    private TextView mLogTextView;
-    private ImageView mIronManImageView;
-
     private StringBuilder mLogStringBuilder;
+
+    @BindView(R.id.text_view_rxjava_log)
+    public TextView mLogTextView;
+
+    @BindView(R.id.image_view_rxjava_iron_man)
+    public ImageView mIronManImageView;
 
 
     @Override
@@ -62,6 +67,7 @@ public class RxJavaFragment extends Fragment implements RxJavaContract.View {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ButterKnife.bind(this, getView());
         mPresenter = new RxJavaPresenter(this);
 
         initialize();
@@ -74,13 +80,6 @@ public class RxJavaFragment extends Fragment implements RxJavaContract.View {
 
     private void initialize() {
         mLogStringBuilder = new StringBuilder();
-
-        findViews();
-    }
-
-    private void findViews() {
-        mLogTextView = (TextView) getView().findViewById(R.id.text_view_rxjava_log);
-        mIronManImageView = (ImageView) getView().findViewById(R.id.image_view_rxjava_iron_man);
     }
 
     private void rxJavaFromArray() {
