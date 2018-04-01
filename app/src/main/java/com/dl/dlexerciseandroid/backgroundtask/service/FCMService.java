@@ -66,6 +66,7 @@ public class FCMService extends FirebaseMessagingService {
         // 用來建造notification的builder
         Notification.Builder builder = new Notification.Builder(this);
         Intent backIntent = new Intent(this, MainActivity.class);
+        backIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent backPendingIntent = PendingIntent.getActivity(this, 0, backIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         // 一個notification一定要有以下三個資訊：
