@@ -32,13 +32,14 @@ import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
-public class RxJavaFragment extends Fragment {
+public class RxJavaFragment extends Fragment implements RxJavaContract.View {
 
     // 以後Fragment的tag name都用此class的name來命名比較方便
     // e.g. MusicPlayerFragment
     public static final String TAG = RxJavaFragment.class.getName();
 
     private Context mContext;
+    private RxJavaContract.Presenter mPresenter;
 
     private TextView mLogTextView;
     private ImageView mIronManImageView;
@@ -61,6 +62,8 @@ public class RxJavaFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mPresenter = new RxJavaPresenter(this);
+
         initialize();
         rxJavaFromArray();
         printHelloWorld();
@@ -401,5 +404,10 @@ public class RxJavaFragment extends Fragment {
 
     private void setLogText() {
         mLogTextView.setText(mLogStringBuilder.toString());
+    }
+
+    @Override
+    public void setPresenter(RxJavaContract.Presenter presenter) {
+        mPresenter = presenter;
     }
 }
