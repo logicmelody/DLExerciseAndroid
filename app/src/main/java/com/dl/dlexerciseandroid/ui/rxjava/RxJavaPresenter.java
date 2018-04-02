@@ -37,6 +37,7 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
 
     }
 
+    // TODO: 需要再處理unsubscribe
     @Override
     public void testFromArray() {
         String[] names = new String[] {"DANNY", "Steven", "D LUFFY", "Kobe"};
