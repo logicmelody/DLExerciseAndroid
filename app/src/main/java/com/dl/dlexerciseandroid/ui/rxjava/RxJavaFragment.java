@@ -71,252 +71,17 @@ public class RxJavaFragment extends Fragment implements RxJavaContract.View {
         mPresenter = new RxJavaPresenter(this);
 
         initialize();
-        rxJavaFromArray();
-        printHelloWorld();
-        rxJavaEmpty();
-        rxJavaFlatMap();
-        loadIronMan();
+
+        mPresenter.testFromArray();
+        mPresenter.testPrintHelloWorld();
+        mPresenter.testEmpty();
+        mPresenter.testFlatMap();
+        mPresenter.testFlatMap();
+        mPresenter.loadIronMan();
     }
 
     private void initialize() {
         mLogStringBuilder = new StringBuilder();
-    }
-
-    private void rxJavaFromArray() {
-        String[] names = new String[] {"DANNY", "Steven", "D LUFFY", "Kobe"};
-
-        // Observable用來產生資料
-        // Emits "Hello World"
-        // 由於RxJava的預設規則，事件的發出和消費都是在同一個thread，只用下面的做法，實作出來的只是一個同一條thread的觀察者模式
-        Observable.fromArray(names)
-
-                // 可以用來過濾資料
-                .filter(new Predicate<String>() {
-                    @Override
-                    public boolean test(@NonNull String s) throws Exception {
-                        return s.startsWith("D");
-                    }
-                })
-
-                // 只取前面兩筆資料
-                .take(2)
-
-                // 取出來的資料重複三次
-                .repeat(3)
-
-                // 消除重複的資料
-                .distinct()
-
-                // 有新的資料，也就是跟之前資料不同的時候，才會發出新的資料
-                .distinctUntilChanged()
-
-                // 每30秒才會更新一次資料，抓取最後一筆資料，take the last
-                //.sample(30, TimeUnit.SECONDS)
-
-                // 每30秒才會更新一次資料，抓取第一筆資料，take the first
-                //.throttleFirst(30, TimeUnit.SECONDS)
-
-                // 可以利用map將原始資料做一次轉換，轉換成我們想要的
-                .map(new Function<String, String>() {
-                    @Override
-                    public String apply(@NonNull String s) throws Exception {
-                        return s.toLowerCase();
-                    }
-                })
-
-                // Subscribe Observer，Observer只需要管拿到data之後要做什麼事情，在這邊就是把log印出來
-                // Observer用來接收Observable產生的資料，Observer有多種callback可以使用
-                // 所有的事件會是存在一個queue中，當queue中的事件全部都執行完畢，或是中間有出現錯誤的時候，
-                // 會call onComplete()跟onError()，onComplete()跟onError()彼此是互斥，只會有一個執行
-                .subscribe(new Observer<String>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-                        showLog("rxJavaFromArray()", "onSubscribe!");
-                    }
-
-                    @Override
-                    public void onNext(@NonNull String s) {
-                        showLog("rxJavaFromArray()", "onNext = " + s);
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        showLog("rxJavaFromArray()", "onError = " + e.toString());
-                        setLogText();
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        showLog("rxJavaFromArray()", "onComplete!");
-                        setLogText();
-                    }
-                });
-    }
-
-    private void printHelloWorld() {
-        // Observable用來產生資料
-        // Emits "Hello World"
-        Observable.create(new ObservableOnSubscribe<String>() {
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<String> subscriber) throws Exception {
-                // 會對應到Observer的callback：onNext(), onComplete(), onError()
-                subscriber.onNext("Hello World");
-                //subscriber.onError(new Throwable());
-                subscriber.onComplete();
-            }
-        })
-                // Observer用來接收Observable產生的資料，Observer有多種callback可以使用
-                // 所有的事件會是存在一個queue中，當queue中的事件全部都執行完畢，或是中間有出現錯誤的時候，
-                // 會call onComplete()跟onError()，onComplete()跟onError()彼此是互斥，只會有一個執行
-                .subscribe(new Observer<String>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-                        showLog("printHelloWorld()", "onSubscribe!");
-                    }
-
-                    @Override
-                    public void onNext(@NonNull String s) {
-                        // Called each time the observable emits data
-                        showLog("printHelloWorld()", "onNext = " + s);
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        // Called when the observable encounters an error
-                        showLog("printHelloWorld()", "onError = " + e.toString());
-                        setLogText();
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        // Called when the observable has no more data to emit
-                        showLog("printHelloWorld()", "onComplete!");
-                        setLogText();
-                    }
-                });
-    }
-
-    private void rxJavaEmpty() {
-        Observable.empty()
-                .subscribe(new Observer<Object>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull Object o) {
-
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
-    private void rxJavaFlatMap() {
-        List<Integer> list = new ArrayList<>();
-
-        for (int i = 0 ; i < 10 ; i++) {
-            list.add(i);
-        }
-
-        Observable.fromArray(list)
-                // 第一階段取得的資料是一個ArrayList包含很多Integer：List<Integer>
-                // 我們利用flatMap()將第一階段的資料轉成另一個Observable包含很多個String：Observable.fromArray(strings.toArray(new String[strings.size()]))
-                .flatMap(new Function<List<Integer>, ObservableSource<String>>() {
-                    @Override
-                    public ObservableSource<String> apply(List<Integer> integers) throws Exception {
-                        List<String> strings = convertIntegerListToStringList(integers);
-
-                        return Observable.fromArray(strings.toArray(new String[strings.size()]));
-                    }
-                })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-
-                // Observer處理的是很多個String
-                .subscribe(new Observer<String>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(String s) {
-                        showLog("rxJavaFlatMap()", "onNext = " + s);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
-
-    private List<String> convertIntegerListToStringList(List<Integer> list) {
-        List<String> result = new ArrayList<>();
-
-        if (list == null || list.size() == 0) {
-            return result;
-        }
-
-        for (int num : list) {
-            result.add(convertIntegerToString(num));
-        }
-
-        return result;
-    }
-
-    private String convertIntegerToString(int num) {
-        if (num <= 0) {
-            return "zero";
-        }
-
-        String result = "";
-
-        switch (num) {
-            case 1:
-                return "one";
-
-            case 2:
-                return "two";
-
-            case 3:
-                return "three";
-
-            case 4:
-                return "four";
-
-            case 5:
-                return "five";
-
-            case 6:
-                return "six";
-
-            case 7:
-                return "seven";
-
-            case 8:
-                return "eight";
-
-            case 9:
-                return "nine";
-        }
-
-        return result;
     }
 
     private void loadIronMan() {
@@ -334,6 +99,7 @@ public class RxJavaFragment extends Fragment implements RxJavaContract.View {
                 subscriber.onComplete();
             }
         })
+                // 跟產生資料的thread是同一個thread
                 .doOnNext(new Consumer<Drawable>() {
                     @Override
                     public void accept(Drawable drawable) throws Exception {
@@ -386,7 +152,8 @@ public class RxJavaFragment extends Fragment implements RxJavaContract.View {
                 });
     }
 
-    private void showLog(String tag, String log) {
+    @Override
+    public void showLog(String tag, String log) {
         String printLog = tag + " " + log;
 
         Log.d("danny", printLog);
@@ -401,8 +168,24 @@ public class RxJavaFragment extends Fragment implements RxJavaContract.View {
         mLogStringBuilder.append(log).append("\n");
     }
 
-    private void setLogText() {
+    @Override
+    public void setLogText() {
         mLogTextView.setText(mLogStringBuilder.toString());
+    }
+
+    @Override
+    public Drawable getIronManDrawable() {
+        return getResources().getDrawable(R.drawable.poster_iron_man);
+    }
+
+    @Override
+    public void setIronManImageView(Drawable drawable) {
+        mIronManImageView.setImageDrawable(drawable);
+    }
+
+    @Override
+    public void showToast(String text) {
+        Toast.makeText(mContext, "Iron Man Error!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
