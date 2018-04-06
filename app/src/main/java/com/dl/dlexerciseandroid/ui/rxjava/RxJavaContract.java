@@ -22,6 +22,8 @@ public interface RxJavaContract {
         void testFlatMap();
 
         void loadIronMan();
+
+        void onDestroy();
     }
 
     interface View extends BaseView<RxJavaContract.Presenter> {

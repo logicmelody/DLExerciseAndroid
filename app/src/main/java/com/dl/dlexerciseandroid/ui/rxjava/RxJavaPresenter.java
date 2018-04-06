@@ -3,6 +3,8 @@ package com.dl.dlexerciseandroid.ui.rxjava;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
+import com.dl.dlexerciseandroid.utility.utils.GeneralUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,12 @@ import io.reactivex.schedulers.Schedulers;
 public class RxJavaPresenter implements RxJavaContract.Presenter {
 
     private RxJavaContract.View mView;
+
+    private Disposable mDisposableTestFromArray;
+    private Disposable mDisposableTestPrintHelloWorld;
+    private Disposable mDisposableTestEmpty;
+    private Disposable mDisposableTestFlatMap;
+    private Disposable mDisposableTestLoadIronMan;
 
 
     public RxJavaPresenter(RxJavaContract.View view) {
@@ -109,6 +117,8 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         mView.showLog("testFromArray()", "onSubscribe!");
+
+                        mDisposableTestFromArray = d;
                     }
 
                     @Override
@@ -165,6 +175,7 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         mView.showLog("testPrintHelloWorld()", "onSubscribe!");
+                        mDisposableTestPrintHelloWorld = d;
                     }
 
                     @Override
@@ -193,7 +204,7 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                 .subscribe(new Observer<Object>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
+                        mDisposableTestEmpty = d;
                     }
 
                     @Override
@@ -253,7 +264,7 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
+                        mDisposableTestFlatMap = d;
                     }
 
                     @Override
@@ -383,6 +394,7 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                         Log.d("danny", "Thread subscribe() = " + Thread.currentThread().getName());
 
                         mView.showLog("loadIronMan()", "onSubscribe!");
+                        mDisposableTestLoadIronMan = d;
                     }
 
                     @Override
@@ -403,5 +415,28 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                         mView.showToast("Iron Man Completed!");
                     }
                 });
+    }
+
+    @Override
+    public void onDestroy() {
+        if (!GeneralUtils.isObserverDisposed(mDisposableTestFromArray)) {
+            mDisposableTestFromArray.dispose();
+        }
+
+        if (!GeneralUtils.isObserverDisposed(mDisposableTestPrintHelloWorld)) {
+            mDisposableTestPrintHelloWorld.dispose();
+        }
+
+        if (!GeneralUtils.isObserverDisposed(mDisposableTestEmpty)) {
+            mDisposableTestEmpty.dispose();
+        }
+
+        if (!GeneralUtils.isObserverDisposed(mDisposableTestFlatMap)) {
+            mDisposableTestFlatMap.dispose();
+        }
+
+        if (!GeneralUtils.isObserverDisposed(mDisposableTestLoadIronMan)) {
+            mDisposableTestLoadIronMan.dispose();
+        }
     }
 }

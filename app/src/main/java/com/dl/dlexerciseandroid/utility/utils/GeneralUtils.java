@@ -21,6 +21,8 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * Created by logicmelody on 2016/3/30.
  */
@@ -130,5 +132,9 @@ public class GeneralUtils {
         view.getLocationOnScreen(pos);
 
         return pos;
+    }
+
+    public static boolean isObserverDisposed(Disposable disposable) {
+        return disposable != null && disposable.isDisposed();
     }
 }

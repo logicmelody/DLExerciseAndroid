@@ -84,6 +84,13 @@ public class RxJavaFragment extends Fragment implements RxJavaContract.View {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        mPresenter.onDestroy();
+    }
+
+    @Override
     public void showLog(String tag, String log) {
         String printLog = tag + " " + log;
 
