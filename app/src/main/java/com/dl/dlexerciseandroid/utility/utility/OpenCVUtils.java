@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.utility.utils;
+package com.dl.dlexerciseandroid.utility.utility;
 
 /**
  * Created by logicmelody on 2017/7/1.

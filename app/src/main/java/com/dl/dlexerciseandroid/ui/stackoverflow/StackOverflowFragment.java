@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.model.stackoverflow.SOAnswersResponse;
 import com.dl.dlexerciseandroid.model.stackoverflow.SOItem;
-import com.dl.dlexerciseandroid.utility.utils.ApiUtils;
+import com.dl.dlexerciseandroid.utility.utility.ApiUtils;
 
 import java.util.List;
 

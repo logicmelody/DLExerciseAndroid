@@ -33,7 +33,7 @@ import com.dl.dlexerciseandroid.backgroundtask.service.MusicService;
 import com.dl.dlexerciseandroid.model.Music;
 import com.dl.dlexerciseandroid.ui.musicplayer.musiccontroller.MusicControlReceiver;
 import com.dl.dlexerciseandroid.ui.musicplayer.musiccontroller.MusicControllerActivity;
-import com.dl.dlexerciseandroid.utility.utils.MusicUtils;
+import com.dl.dlexerciseandroid.utility.utility.MusicUtils;
 
 /**
  * Created by logicmelody on 2016/5/9.

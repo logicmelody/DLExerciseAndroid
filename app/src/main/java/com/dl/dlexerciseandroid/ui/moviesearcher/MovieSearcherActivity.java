@@ -14,8 +14,8 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.utility.utils.HttpUtils;
-import com.dl.dlexerciseandroid.utility.utils.TmdbApiUtils;
+import com.dl.dlexerciseandroid.utility.utility.HttpUtils;
+import com.dl.dlexerciseandroid.utility.utility.TmdbApiUtils;
 
 import java.io.IOException;
 

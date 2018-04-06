@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.dl.dlexerciseandroid.backgroundtask.service.TaskService;
-import com.dl.dlexerciseandroid.utility.utils.DoItLaterUtils;
+import com.dl.dlexerciseandroid.utility.utility.DoItLaterUtils;
 
 /**
  * Created by logicmelody on 2016/4/22.

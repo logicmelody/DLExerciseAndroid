@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.utility.utils.OpenCVUtils;
+import com.dl.dlexerciseandroid.utility.utility.OpenCVUtils;
 
 /**
  * Created by logicmelody on 2017/7/1.

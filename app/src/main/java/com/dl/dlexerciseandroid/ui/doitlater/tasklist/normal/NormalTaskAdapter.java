@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.model.Task;
-import com.dl.dlexerciseandroid.utility.utils.DbUtils;
-import com.dl.dlexerciseandroid.utility.utils.GeneralUtils;
+import com.dl.dlexerciseandroid.utility.utility.DbUtils;
+import com.dl.dlexerciseandroid.utility.utility.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -137,7 +137,7 @@ public class NormalTaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         vh.title.setText(mDataList.get(position).title);
         vh.description.setText(mDataList.get(position).description);
-        vh.time.setText(GeneralUtils.timeToString(mDataList.get(position).time, GeneralUtils.DataFormat.YYYYMMDDHHMM));
+        vh.time.setText(Utils.timeToString(mDataList.get(position).time, Utils.DataFormat.YYYYMMDDHHMM));
 
         // 被swipe的item經由notifyItemChanged()，會執行這裡
         // Show出swipe之後的畫面

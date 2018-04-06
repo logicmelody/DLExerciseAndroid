@@ -10,7 +10,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.utility.utils.InstagramApiUtils;
+import com.dl.dlexerciseandroid.utility.utility.InstagramApiUtils;
 
 public class InstagramLoginActivity extends AppCompatActivity {
 

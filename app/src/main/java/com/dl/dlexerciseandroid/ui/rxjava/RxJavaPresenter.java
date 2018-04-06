@@ -3,7 +3,7 @@ package com.dl.dlexerciseandroid.ui.rxjava;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
-import com.dl.dlexerciseandroid.utility.utils.GeneralUtils;
+import com.dl.dlexerciseandroid.utility.utility.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -419,23 +419,23 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
 
     @Override
     public void onDestroy() {
-        if (!GeneralUtils.isObserverDisposed(mDisposableTestFromArray)) {
+        if (!Utils.isObserverDisposed(mDisposableTestFromArray)) {
             mDisposableTestFromArray.dispose();
         }
 
-        if (!GeneralUtils.isObserverDisposed(mDisposableTestPrintHelloWorld)) {
+        if (!Utils.isObserverDisposed(mDisposableTestPrintHelloWorld)) {
             mDisposableTestPrintHelloWorld.dispose();
         }
 
-        if (!GeneralUtils.isObserverDisposed(mDisposableTestEmpty)) {
+        if (!Utils.isObserverDisposed(mDisposableTestEmpty)) {
             mDisposableTestEmpty.dispose();
         }
 
-        if (!GeneralUtils.isObserverDisposed(mDisposableTestFlatMap)) {
+        if (!Utils.isObserverDisposed(mDisposableTestFlatMap)) {
             mDisposableTestFlatMap.dispose();
         }
 
-        if (!GeneralUtils.isObserverDisposed(mDisposableTestLoadIronMan)) {
+        if (!Utils.isObserverDisposed(mDisposableTestLoadIronMan)) {
             mDisposableTestLoadIronMan.dispose();
         }
     }

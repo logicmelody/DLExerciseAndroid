@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.utility.utils;
+package com.dl.dlexerciseandroid.utility.utility;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.dl.dlexerciseandroid.model.message.Message;
-import com.dl.dlexerciseandroid.utility.utils.DbUtils;
+import com.dl.dlexerciseandroid.utility.utility.DbUtils;
 
 /**
  * Created by logicmelody on 2016/11/13.

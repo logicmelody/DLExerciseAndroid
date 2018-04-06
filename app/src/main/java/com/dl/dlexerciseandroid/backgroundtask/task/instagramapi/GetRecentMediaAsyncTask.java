@@ -6,10 +6,10 @@ import android.os.AsyncTask;
 import com.dl.dlexerciseandroid.model.instagramapi.old.IGImage;
 import com.dl.dlexerciseandroid.model.instagramapi.old.IGRecentMedia;
 import com.dl.dlexerciseandroid.ui.instagramapi.main.InstagramDataCache;
-import com.dl.dlexerciseandroid.utility.utils.HttpUtils;
-import com.dl.dlexerciseandroid.utility.utils.InstagramApiUtils;
-import com.dl.dlexerciseandroid.utility.utils.InstagramApiUtils.EndPointKeys;
-import com.dl.dlexerciseandroid.utility.utils.JsonUtils;
+import com.dl.dlexerciseandroid.utility.utility.HttpUtils;
+import com.dl.dlexerciseandroid.utility.utility.InstagramApiUtils;
+import com.dl.dlexerciseandroid.utility.utility.InstagramApiUtils.EndPointKeys;
+import com.dl.dlexerciseandroid.utility.utility.JsonUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;

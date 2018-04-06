@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.model.PersonData;
 import com.dl.dlexerciseandroid.utility.gtm.ContainerHolderSingleton;
-import com.dl.dlexerciseandroid.utility.utils.GtmUtils;
+import com.dl.dlexerciseandroid.utility.utility.GtmUtils;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.tagmanager.Container;

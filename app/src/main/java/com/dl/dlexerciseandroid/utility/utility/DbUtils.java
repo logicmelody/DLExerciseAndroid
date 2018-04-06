@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.utility.utils;
+package com.dl.dlexerciseandroid.utility.utility;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -47,7 +47,7 @@ public class DbUtils {
         };
 
         context.getContentResolver().delete(DLExerciseContract.Task.CONTENT_URI, selection, selectionArgs);
-        GeneralUtils.showToastInNonUIThread(new Handler(), context, context.getString(R.string.do_it_later_delete_task));
+        Utils.showToastInNonUIThread(new Handler(), context, context.getString(R.string.do_it_later_delete_task));
     }
 
     public static void insertMessage(Context context, Message message) {

@@ -17,7 +17,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.utility.utils.GeneralUtils;
+import com.dl.dlexerciseandroid.utility.utility.Utils;
 
 public class OverlayHoleView extends FrameLayout {
 
@@ -91,7 +91,7 @@ public class OverlayHoleView extends FrameLayout {
     }
 
     private void setHighlightArea() {
-        int[] pos = GeneralUtils.getViewLocationOnScreen(mHighlightView);
+        int[] pos = Utils.getViewLocationOnScreen(mHighlightView);
         mRectF = new RectF(pos[0], pos[1], pos[0] + mHighlightView.getWidth(), pos[1] + mHighlightView.getHeight());
     }
 
@@ -110,7 +110,7 @@ public class OverlayHoleView extends FrameLayout {
     }
 
     private boolean isWithinHighlightView(MotionEvent ev) {
-        int[] pos = GeneralUtils.getViewLocationOnScreen(mHighlightView);
+        int[] pos = Utils.getViewLocationOnScreen(mHighlightView);
 
         return ev.getRawY() >= pos[1] &&
                 ev.getRawY() <= (pos[1] + mHighlightView.getHeight()) &&

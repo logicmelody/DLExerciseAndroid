@@ -10,9 +10,9 @@ import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.ui.doitlater.handleintent.DoItLaterTask;
 import com.dl.dlexerciseandroid.ui.doitlater.handleintent.InHouseDoItLaterTask;
 import com.dl.dlexerciseandroid.ui.doitlater.handleintent.OtherDoItLaterTask;
-import com.dl.dlexerciseandroid.utility.utils.DbUtils;
-import com.dl.dlexerciseandroid.utility.utils.DoItLaterUtils;
-import com.dl.dlexerciseandroid.utility.utils.GeneralUtils;
+import com.dl.dlexerciseandroid.utility.utility.DbUtils;
+import com.dl.dlexerciseandroid.utility.utility.DoItLaterUtils;
+import com.dl.dlexerciseandroid.utility.utility.Utils;
 
 /**
  * Created by logicmelody on 2016/4/22.
@@ -83,7 +83,7 @@ public class TaskService extends IntentService {
         }
 
         DbUtils.insertTask(this, title, description, System.currentTimeMillis());
-        GeneralUtils.showToastInNonUIThread(mHandler, this, getString(R.string.do_it_later_save_task_completed));
+        Utils.showToastInNonUIThread(mHandler, this, getString(R.string.do_it_later_save_task_completed));
     }
 
     private void saveDoItLaterTask(Intent intent) {
@@ -102,10 +102,10 @@ public class TaskService extends IntentService {
             DbUtils.insertDoItLaterTask(this, doItLaterTask.getTitle(), doItLaterTask.getDescription(),
                                         doItLaterTask.getTime(), doItLaterTask.getLaterPackageName(),
                                         doItLaterTask.getLaterCallback());
-            GeneralUtils.showToastInNonUIThread(mHandler, this, getString(R.string.do_it_later_save_task_completed));
+            Utils.showToastInNonUIThread(mHandler, this, getString(R.string.do_it_later_save_task_completed));
 
         } else {
-            GeneralUtils.showToastInNonUIThread(mHandler, this, getString(R.string.do_it_later_save_task_failed));
+            Utils.showToastInNonUIThread(mHandler, this, getString(R.string.do_it_later_save_task_failed));
         }
     }
 }

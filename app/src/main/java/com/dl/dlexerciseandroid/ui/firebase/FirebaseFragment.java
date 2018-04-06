@@ -13,7 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.utility.utils.PreferenceUtils;
+import com.dl.dlexerciseandroid.utility.utility.PreferenceUtils;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 /**

@@ -16,7 +16,7 @@ import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.dialog.activity.AddTaskActivity;
 import com.dl.dlexerciseandroid.ui.doitlater.tasklist.later.LaterTaskFragment;
 import com.dl.dlexerciseandroid.ui.doitlater.tasklist.normal.NormalTaskFragment;
-import com.dl.dlexerciseandroid.utility.utils.FragmentUtils;
+import com.dl.dlexerciseandroid.utility.utility.FragmentUtils;
 
 /**
  * Created by logicmelody on 2016/4/18.

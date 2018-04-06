@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.ui.loadimagefrominternet.imagelist.lru.LruFragment;
 import com.dl.dlexerciseandroid.ui.loadimagefrominternet.imagelist.picasso.PicassoFragment;
-import com.dl.dlexerciseandroid.utility.utils.FragmentUtils;
+import com.dl.dlexerciseandroid.utility.utility.FragmentUtils;
 
 /**
  * Created by logicmelody on 2016/7/12.

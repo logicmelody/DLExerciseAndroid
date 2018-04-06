@@ -8,7 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.dl.dlexerciseandroid.utility.component.PackedString;
-import com.dl.dlexerciseandroid.utility.utils.DoItLaterUtils;
+import com.dl.dlexerciseandroid.utility.utility.DoItLaterUtils;
 
 import java.util.Iterator;
 

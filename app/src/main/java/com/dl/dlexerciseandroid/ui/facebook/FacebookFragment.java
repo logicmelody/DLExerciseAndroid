@@ -13,7 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.utility.utils.FbUtils;
+import com.dl.dlexerciseandroid.utility.utility.FbUtils;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;

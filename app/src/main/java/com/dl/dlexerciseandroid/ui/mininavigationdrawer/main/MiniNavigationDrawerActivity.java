@@ -10,7 +10,7 @@ import com.dl.dlexerciseandroid.ui.mininavigationdrawer.content.BlueFragment;
 import com.dl.dlexerciseandroid.ui.mininavigationdrawer.content.WhiteFragment;
 import com.dl.dlexerciseandroid.ui.mininavigationdrawer.content.YellowFragment;
 import com.dl.dlexerciseandroid.ui.mininavigationdrawer.sidemenu.SideMenuFragment;
-import com.dl.dlexerciseandroid.utility.utils.FragmentUtils;
+import com.dl.dlexerciseandroid.utility.utility.FragmentUtils;
 
 public class MiniNavigationDrawerActivity extends AppCompatActivity implements SideMenuFragment.OnSideMenuListener {
 

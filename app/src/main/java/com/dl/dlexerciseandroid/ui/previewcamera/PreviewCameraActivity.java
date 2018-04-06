@@ -20,7 +20,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.utility.utils.GeneralUtils;
+import com.dl.dlexerciseandroid.utility.utility.Utils;
 
 import java.io.IOException;
 
@@ -232,7 +232,7 @@ public class PreviewCameraActivity extends AppCompatActivity implements
         Log.d("danny", "PreviewCameraActivity: surfaceChanged");
 
         // 預設的camera角度會有點問題，可以利用Google提供的sample method把preview的畫面轉成正確的方向
-        GeneralUtils.setCameraDisplayOrientation(this, mDefaultCameraId, mCamera);
+        Utils.setCameraDisplayOrientation(this, mDefaultCameraId, mCamera);
     }
 
     @Override

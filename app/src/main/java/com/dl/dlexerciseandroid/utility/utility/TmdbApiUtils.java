@@ -1,7 +1,6 @@
-package com.dl.dlexerciseandroid.utility.utils;
+package com.dl.dlexerciseandroid.utility.utility;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Map;

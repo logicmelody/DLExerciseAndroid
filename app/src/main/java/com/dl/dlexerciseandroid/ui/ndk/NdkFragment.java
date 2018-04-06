@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.model.NdkData;
-import com.dl.dlexerciseandroid.utility.utils.NdkUtils;
+import com.dl.dlexerciseandroid.utility.utility.NdkUtils;
 
 /**
  * Created by logicmelody on 2017/7/1.

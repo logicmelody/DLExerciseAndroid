@@ -1,14 +1,9 @@
-package com.dl.dlexerciseandroid.utility.utils;
+package com.dl.dlexerciseandroid.utility.utility;
 
 import android.app.Activity;
 import android.content.Context;
-import android.database.Cursor;
 import android.hardware.Camera;
-import android.net.Uri;
 import android.os.Handler;
-import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.view.Surface;
 import android.view.View;
@@ -18,15 +13,13 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
-import java.util.TimeZone;
 
 import io.reactivex.disposables.Disposable;
 
 /**
  * Created by logicmelody on 2016/3/30.
  */
-public class GeneralUtils {
+public class Utils {
 
     public static final String URI_SPRING_WEB_SERVICE = "http://rest-service.guides.spring.io/greeting";
 

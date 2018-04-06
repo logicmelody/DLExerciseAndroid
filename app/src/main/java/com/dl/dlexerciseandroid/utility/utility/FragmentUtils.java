@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.utility.utils;
+package com.dl.dlexerciseandroid.utility.utility;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

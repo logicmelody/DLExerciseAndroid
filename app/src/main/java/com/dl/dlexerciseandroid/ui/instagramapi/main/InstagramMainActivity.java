@@ -22,8 +22,8 @@ import com.dl.dlexerciseandroid.model.instagramapi.gson.IGRecentMediaResponse;
 import com.dl.dlexerciseandroid.model.instagramapi.gson.IGUser;
 import com.dl.dlexerciseandroid.model.instagramapi.gson.IGUsersSelfResponse;
 import com.dl.dlexerciseandroid.ui.instagramapi.feedview.FeedViewAdapter;
-import com.dl.dlexerciseandroid.utility.utils.ApiUtils;
-import com.dl.dlexerciseandroid.utility.utils.InstagramApiUtils;
+import com.dl.dlexerciseandroid.utility.utility.ApiUtils;
+import com.dl.dlexerciseandroid.utility.utility.InstagramApiUtils;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;

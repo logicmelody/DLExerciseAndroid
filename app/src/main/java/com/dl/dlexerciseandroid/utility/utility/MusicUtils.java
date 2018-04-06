@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.utility.utils;
+package com.dl.dlexerciseandroid.utility.utility;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -50,7 +50,7 @@ public class MusicUtils {
     }
 
     public static boolean isMusicFile(String musicFilePath) {
-        String extension = GeneralUtils.getExtensionFrom(musicFilePath.trim());
+        String extension = Utils.getExtensionFrom(musicFilePath.trim());
 
         Log.d("danny", "Music file path = " + musicFilePath);
         Log.d("danny", "Music file extension = " + extension);

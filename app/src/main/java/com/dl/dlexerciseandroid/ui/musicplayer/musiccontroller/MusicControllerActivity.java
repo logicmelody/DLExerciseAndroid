@@ -21,7 +21,7 @@ import android.widget.TextView;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.backgroundtask.service.MusicService;
 import com.dl.dlexerciseandroid.model.Music;
-import com.dl.dlexerciseandroid.utility.utils.PreferenceUtils;
+import com.dl.dlexerciseandroid.utility.utility.PreferenceUtils;
 
 // 這個class主要用來顯示現在正在播放音樂的一些基本資訊：歌名, 歌手
 // 與service bind完成之後，也可以經由controller的一些button操作MusicService：上一首, 下一首, play, pause, ......

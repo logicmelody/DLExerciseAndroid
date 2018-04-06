@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.utility.utils;
+package com.dl.dlexerciseandroid.utility.utility;
 
 import com.dl.dlexerciseandroid.network.instagramapi.IGAccessTokenApi;
 import com.dl.dlexerciseandroid.network.instagramapi.IGApi;
