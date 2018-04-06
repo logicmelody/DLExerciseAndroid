@@ -14,6 +14,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
@@ -62,7 +63,7 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                 .repeat(3)
 
                 // 消除重複的資料
-                .distinct()
+                //.distinct()
 
                 // 有新的資料，也就是跟之前資料不同的時候，才會發出新的資料
                 .distinctUntilChanged()
@@ -81,6 +82,25 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                     }
                 })
 
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+
+                // 這個會執行在onComplete()或是onError()之前
+                .doOnTerminate(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        mView.showLog("testFromArray()", "doOnTerminate");
+                    }
+                })
+
+                // 這個會執行在onComplete()或是onError()之後
+                .doAfterTerminate(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        mView.showLog("testFromArray()", "doAfterTerminate");
+                    }
+                })
+
                 // Subscribe Observer，Observer只需要管拿到data之後要做什麼事情，在這邊就是把log印出來
                 // Observer用來接收Observable產生的資料，Observer有多種callback可以使用
                 // 所有的事件會是存在一個queue中，當queue中的事件全部都執行完畢，或是中間有出現錯誤的時候，
@@ -88,31 +108,29 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        mView.showLog("rxJavaFromArray()", "onSubscribe!");
+                        mView.showLog("testFromArray()", "onSubscribe!");
                     }
 
                     @Override
                     public void onNext(@NonNull String s) {
-                        mView.showLog("rxJavaFromArray()", "onNext = " + s);
+                        mView.showLog("testFromArray()", "onNext = " + s);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        mView.showLog("rxJavaFromArray()", "onError = " + e.toString());
-                        mView.setLogText();
+                        mView.showLog("testFromArray()", "onError = " + e.toString());
                     }
 
                     @Override
                     public void onComplete() {
-                        mView.showLog("rxJavaFromArray()", "onComplete!");
-                        mView.setLogText();
+                        mView.showLog("testFromArray()", "onComplete!");
                     }
                 });
     }
 
     @Override
     public void testPrintHelloWorld() {
-        // Observable用來產生資料
+        // Observable用來產生資料，如果是用create()的方法，產生資料的方法都要自己處理
         // Emits "Hello World"
         Observable.create(new ObservableOnSubscribe<String>() {
             @Override
@@ -123,33 +141,48 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                 subscriber.onComplete();
             }
         })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+
+                .doOnTerminate(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        mView.showLog("testPrintHelloWorld()", "doOnTerminate");
+                    }
+                })
+
+                .doAfterTerminate(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        mView.showLog("testPrintHelloWorld()", "doAfterTerminate");
+                    }
+                })
+
                 // Observer用來接收Observable產生的資料，Observer有多種callback可以使用
                 // 所有的事件會是存在一個queue中，當queue中的事件全部都執行完畢，或是中間有出現錯誤的時候，
                 // 會call onComplete()跟onError()，onComplete()跟onError()彼此是互斥，只會有一個執行
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        mView.showLog("printHelloWorld()", "onSubscribe!");
+                        mView.showLog("testPrintHelloWorld()", "onSubscribe!");
                     }
 
                     @Override
                     public void onNext(@NonNull String s) {
                         // Called each time the observable emits data
-                        mView.showLog("printHelloWorld()", "onNext = " + s);
+                        mView.showLog("testPrintHelloWorld()", "onNext = " + s);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
                         // Called when the observable encounters an error
-                        mView.showLog("printHelloWorld()", "onError = " + e.toString());
-                        mView.setLogText();
+                        mView.showLog("testPrintHelloWorld()", "onError = " + e.toString());
                     }
 
                     @Override
                     public void onComplete() {
                         // Called when the observable has no more data to emit
-                        mView.showLog("printHelloWorld()", "onComplete!");
-                        mView.setLogText();
+                        mView.showLog("testPrintHelloWorld()", "onComplete!");
                     }
                 });
     }
@@ -202,6 +235,20 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
 
+                .doOnTerminate(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        mView.showLog("testFlatMap()", "doOnTerminate");
+                    }
+                })
+
+                .doAfterTerminate(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        mView.showLog("testFlatMap()", "doAfterTerminate");
+                    }
+                })
+
                 // Observer處理的是很多個String
                 .subscribe(new Observer<String>() {
                     @Override
@@ -211,7 +258,7 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
 
                     @Override
                     public void onNext(String s) {
-                        mView.showLog("rxJavaFlatMap()", "onNext = " + s);
+                        mView.showLog("testFlatMap()", "onNext = " + s);
                     }
 
                     @Override
@@ -221,7 +268,7 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
 
                     @Override
                     public void onComplete() {
-
+                        mView.showLog("testFlatMap()", "onComplete");
                     }
                 });
     }
@@ -315,6 +362,20 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                 // Observer在UI thread執行
                 .observeOn(AndroidSchedulers.mainThread())
 
+                .doOnTerminate(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        mView.showLog("loadIronMan()", "doOnTerminate");
+                    }
+                })
+
+                .doAfterTerminate(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        mView.showLog("loadIronMan()", "doAfterTerminate");
+                    }
+                })
+
                 .subscribe(new Observer<Drawable>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
@@ -333,14 +394,13 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         mView.showLog("loadIronMan()", "onError = " + e.toString());
-                        mView.setLogText();
                         mView.showToast("Iron Man Error!");
                     }
 
                     @Override
                     public void onComplete() {
                         mView.showLog("loadIronMan()", "onComplete!");
-                        mView.setLogText();
+                        mView.showToast("Iron Man Completed!");
                     }
                 });
     }

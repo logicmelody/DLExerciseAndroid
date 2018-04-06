@@ -76,7 +76,6 @@ public class RxJavaFragment extends Fragment implements RxJavaContract.View {
         mPresenter.testPrintHelloWorld();
         mPresenter.testEmpty();
         mPresenter.testFlatMap();
-        mPresenter.testFlatMap();
         mPresenter.loadIronMan();
     }
 
@@ -117,7 +116,7 @@ public class RxJavaFragment extends Fragment implements RxJavaContract.View {
 
     @Override
     public void showToast(String text) {
-        Toast.makeText(mContext, "Iron Man Error!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
     }
 
     @Override
