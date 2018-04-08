@@ -5,6 +5,12 @@
     android:padding="@dimen/padding_all_window"
     android:orientation="vertical" >
 
+    <Button
+        android:id="@+id/button_rxjava_stop_5_sec_toast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stop 5 secs toast"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"

@@ -467,6 +467,13 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
     }
 
     @Override
+    public void stop5SecToast() {
+        if (!Utils.isObserverDisposed(mDisposableTest5SecToast)) {
+            mDisposableTest5SecToast.dispose();
+        }
+    }
+
+    @Override
     public void onDestroy() {
         if (!Utils.isObserverDisposed(mDisposableTest5SecToast)) {
             mDisposableTest5SecToast.dispose();

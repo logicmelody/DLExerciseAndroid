@@ -18,6 +18,7 @@ import com.dl.dlexerciseandroid.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class RxJavaFragment extends Fragment implements RxJavaContract.View {
 
@@ -115,5 +116,10 @@ public class RxJavaFragment extends Fragment implements RxJavaContract.View {
     @Override
     public void setPresenter(RxJavaContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    @OnClick(R.id.button_rxjava_stop_5_sec_toast)
+    public void onClickStop5SecToast() {
+        mPresenter.stop5SecToast();
     }
 }
