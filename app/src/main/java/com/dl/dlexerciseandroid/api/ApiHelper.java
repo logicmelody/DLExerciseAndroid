@@ -1,8 +1,8 @@
-package com.dl.dlexerciseandroid.utility.utility;
+package com.dl.dlexerciseandroid.api;
 
-import com.dl.dlexerciseandroid.network.instagramapi.IGAccessTokenApi;
-import com.dl.dlexerciseandroid.network.instagramapi.IGApi;
-import com.dl.dlexerciseandroid.network.stackoverflow.SOApi;
+import com.dl.dlexerciseandroid.api.instagramapi.IGAccessTokenApi;
+import com.dl.dlexerciseandroid.api.instagramapi.IGApi;
+import com.dl.dlexerciseandroid.api.stackoverflow.SOApi;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by logicmelody on 2017/11/3.
  */
 
-public class ApiUtils {
+public class ApiHelper {
 
     public static SOApi generateSOApi() {
         return generateRetrofit(SOApi.BASE_URL).create(SOApi.class);

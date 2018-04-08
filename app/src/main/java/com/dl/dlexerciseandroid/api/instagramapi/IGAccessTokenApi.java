@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.network.instagramapi;
+package com.dl.dlexerciseandroid.api.instagramapi;
 
 import com.dl.dlexerciseandroid.model.instagramapi.gson.IGAccessTokenResponse;
 

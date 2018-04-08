@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.dl.dlexerciseandroid.R;
 import com.dl.dlexerciseandroid.model.stackoverflow.SOAnswersResponse;
 import com.dl.dlexerciseandroid.model.stackoverflow.SOItem;
-import com.dl.dlexerciseandroid.utility.utility.ApiUtils;
+import com.dl.dlexerciseandroid.api.ApiHelper;
 
 import java.util.List;
 
@@ -79,7 +79,7 @@ public class StackOverflowFragment extends Fragment {
     }
 
     private void loadAnswers() {
-        ApiUtils.generateSOApi().getAnswers()
+        ApiHelper.generateSOApi().getAnswers()
                 .flatMap(new Function<SOAnswersResponse, ObservableSource<SOItem>>() {
                     @Override
                     public ObservableSource<SOItem> apply(SOAnswersResponse soAnswersResponse) throws Exception {

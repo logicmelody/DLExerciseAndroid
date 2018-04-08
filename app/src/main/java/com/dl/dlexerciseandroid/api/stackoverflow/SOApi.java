@@ -1,4 +1,4 @@
-package com.dl.dlexerciseandroid.network.stackoverflow;
+package com.dl.dlexerciseandroid.api.stackoverflow;
 
 import com.dl.dlexerciseandroid.model.stackoverflow.SOAnswersResponse;
 

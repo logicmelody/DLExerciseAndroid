@@ -22,7 +22,7 @@ import com.dl.dlexerciseandroid.model.instagramapi.gson.IGRecentMediaResponse;
 import com.dl.dlexerciseandroid.model.instagramapi.gson.IGUser;
 import com.dl.dlexerciseandroid.model.instagramapi.gson.IGUsersSelfResponse;
 import com.dl.dlexerciseandroid.ui.instagramapi.feedview.FeedViewAdapter;
-import com.dl.dlexerciseandroid.utility.utility.ApiUtils;
+import com.dl.dlexerciseandroid.api.ApiHelper;
 import com.dl.dlexerciseandroid.utility.utility.InstagramApiUtils;
 import com.squareup.picasso.Picasso;
 
@@ -140,7 +140,7 @@ public class InstagramMainActivity extends AppCompatActivity implements View.OnC
         }).flatMap(new Function<String, ObservableSource<IGUsersSelfResponse>>() {
             @Override
             public ObservableSource<IGUsersSelfResponse> apply(String s) throws Exception {
-                return ApiUtils.generateIGApi().getUsersSelf(s);
+                return ApiHelper.generateIGApi().getUsersSelf(s);
             }
 
         }).subscribeOn(Schedulers.io())
@@ -200,7 +200,7 @@ public class InstagramMainActivity extends AppCompatActivity implements View.OnC
             return;
         }
 
-        ApiUtils.generateIGApi()
+        ApiHelper.generateIGApi()
                 .getRecentMediaSelf("self", token, String.valueOf(DEFAULT_RECENT_MEDIA_COUNT))
                 .doOnNext(new Consumer<IGRecentMediaResponse>() {
                     @Override
@@ -312,7 +312,7 @@ public class InstagramMainActivity extends AppCompatActivity implements View.OnC
     }
 
     private void fetchAccessToken(String code) {
-        ApiUtils.generateIGAccessTokenApi()
+        ApiHelper.generateIGAccessTokenApi()
                 .getAccessToken(InstagramApiUtils.getTokenBodyMap(this, code))
                 .doOnNext(new Consumer<IGAccessTokenResponse>() {
                     @Override
