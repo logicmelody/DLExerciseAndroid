@@ -13,6 +13,8 @@ public interface RxJavaContract {
 
     interface Presenter extends BasePresenter {
 
+        void test5SecToast();
+
         void testFromArray();
 
         void testPrintHelloWorld();

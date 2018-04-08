@@ -16,23 +16,8 @@ import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.ObservableSource;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
-import io.reactivex.schedulers.Schedulers;
 
 public class RxJavaFragment extends Fragment implements RxJavaContract.View {
 
@@ -72,6 +57,7 @@ public class RxJavaFragment extends Fragment implements RxJavaContract.View {
 
         initialize();
 
+        mPresenter.test5SecToast();
         mPresenter.testFromArray();
         mPresenter.testPrintHelloWorld();
         mPresenter.testEmpty();

@@ -7,6 +7,7 @@ import com.dl.dlexerciseandroid.utility.utility.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -30,6 +31,7 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
 
     private RxJavaContract.View mView;
 
+    private Disposable mDisposableTest5SecToast;
     private Disposable mDisposableTestFromArray;
     private Disposable mDisposableTestPrintHelloWorld;
     private Disposable mDisposableTestEmpty;
@@ -44,6 +46,53 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
     @Override
     public void start() {
 
+    }
+
+    @Override
+    public void test5SecToast() {
+        // 如果我們想要創造一個Observable每隔5秒鐘就發出一個data，可以使用interval的運算子
+        // 以下的範例，是每隔5秒鐘會發出一個data，但是這個data只有累加的數字而已，如果我們想要做一些其他的事情，
+        // 比如：每隔5秒鐘就呼叫一次API，則需要再串上flatMap產生另外一個Observable
+        // Note: 要注意的事，interval的運算子，會造成這個Observable永遠存在，就算退出app之後，還是會繼續發送data，
+        //       所以記得要用Disposable的dispose()來將Observer跟Observable斷開
+        Observable.interval(5, TimeUnit.SECONDS)
+                .flatMap(new Function<Long, ObservableSource<String>>() {
+                    @Override
+                    public ObservableSource<String> apply(Long aLong) throws Exception {
+                        mView.showLog("test5SecToast()", "Interval count = " + aLong);
+
+                        return Observable.create(new ObservableOnSubscribe<String>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
+                                emitter.onNext("Show interval count = " + aLong);
+                                emitter.onComplete();
+                            }
+                        });
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        mDisposableTest5SecToast = d;
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        mView.showToast(s);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     // TODO: 需要再處理unsubscribe
@@ -419,6 +468,10 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
 
     @Override
     public void onDestroy() {
+        if (!Utils.isObserverDisposed(mDisposableTest5SecToast)) {
+            mDisposableTest5SecToast.dispose();
+        }
+
         if (!Utils.isObserverDisposed(mDisposableTestFromArray)) {
             mDisposableTestFromArray.dispose();
         }
