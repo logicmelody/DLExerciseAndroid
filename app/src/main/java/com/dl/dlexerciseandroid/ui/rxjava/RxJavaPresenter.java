@@ -53,7 +53,7 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
         // 如果我們想要創造一個Observable每隔5秒鐘就發出一個data，可以使用interval的運算子
         // 以下的範例，是每隔5秒鐘會發出一個data，但是這個data只有累加的數字而已，如果我們想要做一些其他的事情，
         // 比如：每隔5秒鐘就呼叫一次API，則需要再串上flatMap產生另外一個Observable
-        // Note: 要注意的事，interval的運算子，會造成這個Observable永遠存在，就算退出app之後，還是會繼續發送data，
+        // Note: 要注意的是，interval的運算子，會造成這個Observable永遠存在，就算退出app之後，還是會繼續發送data，
         //       所以記得要用Disposable的dispose()來將Observer跟Observable斷開
         Observable.interval(5, TimeUnit.SECONDS)
                 .flatMap(new Function<Long, ObservableSource<String>>() {
