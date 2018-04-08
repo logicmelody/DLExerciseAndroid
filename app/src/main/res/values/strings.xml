@@ -52,7 +52,7 @@
     <string name="all_guide" translatable="false">Guide</string>
     <string name="all_rxjava" translatable="false">RxJava</string>
     <string name="all_installed_apps">Installed Apps</string>
-    <string name="all_stack_overflow" translatable="false">StackOverflow</string>
+    <string name="all_stack_overflow" translatable="false">Stack Overflow</string>
     <string name="all_count_down">Count Down</string>
     <string name="all_http" translatable="false">Http</string>
     <string name="all_exoplayer" translatable="false">ExoPlayer</string>

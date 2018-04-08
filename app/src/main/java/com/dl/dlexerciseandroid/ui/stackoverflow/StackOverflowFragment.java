@@ -18,8 +18,6 @@ import com.dl.dlexerciseandroid.model.stackoverflow.SOAnswersResponse;
 import com.dl.dlexerciseandroid.model.stackoverflow.SOItem;
 import com.dl.dlexerciseandroid.api.ApiHelper;
 
-import java.util.List;
-
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
@@ -83,9 +81,7 @@ public class StackOverflowFragment extends Fragment {
                 .flatMap(new Function<SOAnswersResponse, ObservableSource<SOItem>>() {
                     @Override
                     public ObservableSource<SOItem> apply(SOAnswersResponse soAnswersResponse) throws Exception {
-                        List<SOItem> list = soAnswersResponse.getItems();
-
-                        return Observable.fromArray(list.toArray(new SOItem[list.size()]));
+                        return Observable.fromIterable(soAnswersResponse.getItems());
                     }
                 })
                 .subscribeOn(Schedulers.io())
