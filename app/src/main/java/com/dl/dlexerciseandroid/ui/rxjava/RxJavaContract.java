@@ -25,6 +25,8 @@ public interface RxJavaContract {
 
         void loadIronMan();
 
+        void testConcat();
+
         void stop5SecToast();
 
         void onDestroy();

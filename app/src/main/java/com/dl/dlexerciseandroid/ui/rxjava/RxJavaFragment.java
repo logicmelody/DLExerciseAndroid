@@ -63,6 +63,7 @@ public class RxJavaFragment extends Fragment implements RxJavaContract.View {
         mPresenter.testPrintHelloWorld();
         mPresenter.testEmpty();
         mPresenter.testFlatMap();
+        mPresenter.testConcat();
         mPresenter.loadIronMan();
     }
 

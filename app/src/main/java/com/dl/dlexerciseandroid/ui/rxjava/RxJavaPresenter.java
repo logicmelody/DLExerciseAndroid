@@ -37,6 +37,7 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
     private Disposable mDisposableTestEmpty;
     private Disposable mDisposableTestFlatMap;
     private Disposable mDisposableTestLoadIronMan;
+    private Disposable mDisposableTestConcat;
 
 
     public RxJavaPresenter(RxJavaContract.View view) {
@@ -395,7 +396,7 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                 //Thread.sleep(3000);
 
                 // 2. Thread create() = RxCachedThreadScheduler-1
-                Log.d("danny", "Thread create() = " + Thread.currentThread().getName());
+                mView.showLog("loadIronMan()", "Thread create() = " + Thread.currentThread().getName());
 
                 Drawable drawable = mView.getIronManDrawable();
                 subscriber.onNext(drawable);
@@ -406,7 +407,7 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                     @Override
                     public void accept(Drawable drawable) throws Exception {
                         // 3. Thread doOnNext() = RxCachedThreadScheduler-1
-                        Log.d("danny", "Thread doOnNext() = " + Thread.currentThread().getName());
+                        mView.showLog("loadIronMan()", "Thread doOnNext() = " + Thread.currentThread().getName());
 
                         Thread.sleep(3000);
                     }
@@ -462,6 +463,65 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                     public void onComplete() {
                         mView.showLog("loadIronMan()", "onComplete!");
                         mView.showToast("Iron Man Completed!");
+                    }
+                });
+    }
+
+    @Override
+    public void testConcat() {
+        // 組合多個Observable後再一起發送data，發送的順序是按照順序執行
+        // concat(): 組合的Observable <= 4
+        // concatArray(): 組合的Observable > 4
+        Observable.concatArray(
+                Observable.just(1, 2),
+                Observable.just(3, 4),
+                Observable.just(5, 6),
+                Observable.just(7, 8),
+                Observable.just(9, 10))
+
+                // doOnNext()執行的thread會跟observeOn()所設定的thread一樣
+                // 在這邊執行的話，因為還沒有決定observeOn()要執行在哪一條thread，但是已經有設定subscribeOn()的thread，所以
+                // observeOn()的thread會跟subscribeOn()的thread一樣，因此doOnNext()也會執行在跟subscribeOn()一樣的thread
+//                .doOnNext(new Consumer<Integer>() {
+//                    @Override
+//                    public void accept(Integer integer) throws Exception {
+//                        mView.showLog("testConcat()",
+//                                "doOnNext data is " + integer + ", thread in " + Thread.currentThread().getName());
+//                    }
+//                })
+
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+
+                // doOnNext()執行的thread會跟observeOn()所設定的thread一樣
+                // 在這邊執行的話，因為已經決定observeOn()是執行在UI thread，但是已經有設定subscribeOn()的thread，所以
+                // doOnNext()也會執行在跟observeOn()一樣的thread
+                .doOnNext(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        mView.showLog("testConcat()",
+                                "doOnNext data is " + integer + ", thread in " + Thread.currentThread().getName());
+                    }
+                })
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        mDisposableTestConcat = d;
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        mView.showLog("testConcat()", "Current data is " + integer);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        mView.showLog("testConcat()", "onComplete()!");
                     }
                 });
     }
