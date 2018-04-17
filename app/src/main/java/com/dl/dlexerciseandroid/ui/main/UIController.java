@@ -27,6 +27,7 @@ import com.dl.dlexerciseandroid.ui.countdown.CountDownFragment;
 import com.dl.dlexerciseandroid.ui.customizedview.CustomizedViewFragment;
 import com.dl.dlexerciseandroid.database.debug.AndroidDatabaseManager;
 import com.dl.dlexerciseandroid.dialog.dialogfragment.alert.AlertDialogFragment;
+import com.dl.dlexerciseandroid.ui.dialog.DialogTriggerFragment;
 import com.dl.dlexerciseandroid.ui.dlsdk.DLSdkFragment;
 import com.dl.dlexerciseandroid.ui.exoplayer.main.ExoplayerMainFragment;
 import com.dl.dlexerciseandroid.ui.facebook.FacebookFragment;
@@ -331,6 +332,10 @@ public class UIController implements View.OnClickListener {
 
                     case R.id.menu_item_left_drawer_exoplayer:
                         replaceContentFragment(ExoplayerMainFragment.class, ExoplayerMainFragment.TAG);
+                        break;
+
+                    case R.id.menu_item_left_drawer_dialog_trigger:
+                        replaceContentFragment(DialogTriggerFragment.class, DialogTriggerFragment.TAG);
                         break;
 
                     case R.id.menu_item_left_drawer_test:

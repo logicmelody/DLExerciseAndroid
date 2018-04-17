@@ -56,6 +56,7 @@
     <string name="all_count_down">Count Down</string>
     <string name="all_http" translatable="false">Http</string>
     <string name="all_exoplayer" translatable="false">ExoPlayer</string>
+    <string name="all_dialog_trigger" translatable="false">Dialog Trigger</string>
 
     <!-- Left drawer -->
     <string name="left_drawer_header_sure_to_logout">Sure to logout?</string>
