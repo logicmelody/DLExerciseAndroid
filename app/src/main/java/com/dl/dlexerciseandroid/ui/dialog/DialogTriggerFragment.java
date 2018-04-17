@@ -8,9 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
+import com.dl.dlexerciseandroid.dialog.dialogfragment.fullscreen.FullscreenDialogFragment;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -58,6 +58,6 @@ public class DialogTriggerFragment extends Fragment implements DialogTriggerCont
 
     @Override
     public void showFullscreenDialog() {
-        Toast.makeText(mContext, "Fullscreen dialog", Toast.LENGTH_SHORT).show();
+        new FullscreenDialogFragment().show(getFragmentManager(), FullscreenDialogFragment.TAG);
     }
 }
