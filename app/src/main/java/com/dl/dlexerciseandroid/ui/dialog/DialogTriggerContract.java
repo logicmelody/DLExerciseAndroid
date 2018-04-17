@@ -7,9 +7,11 @@ public interface DialogTriggerContract {
 
     interface Presenter extends BasePresenter {
 
+        void openFullscreenDialog();
     }
 
     interface View extends BaseView<DialogTriggerContract.Presenter> {
 
+        void showFullscreenDialog();
     }
 }

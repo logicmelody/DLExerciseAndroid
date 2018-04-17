@@ -13,4 +13,9 @@ public class DialogTriggerPresenter implements DialogTriggerContract.Presenter {
     public void start() {
 
     }
+
+    @Override
+    public void openFullscreenDialog() {
+        mView.showFullscreenDialog();
+    }
 }
