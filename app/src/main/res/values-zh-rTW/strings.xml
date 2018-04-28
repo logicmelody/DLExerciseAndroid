@@ -1,7 +1,5 @@
 <resources>
 
-    <string name="app_name">DLExercise</string>
-
     <!-- All -->
     <string name="all_overview">總覽</string>
     <string name="all_testing">測試</string>

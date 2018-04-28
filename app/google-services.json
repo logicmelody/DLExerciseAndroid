@@ -15,11 +15,63 @@
       },
       "oauth_client": [
         {
+          "client_id": "682672505333-o194fq1fmf08cb3b86mjnm0ditrva173.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dl.dlexerciseandroid",
+            "certificate_hash": "25f0624de0717b932d5eddec105000eee498717c"
+          }
+        },
+        {
           "client_id": "682672505333-4ia4pcj83a7s46c8sfi90itj6bv20uv7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.dl.dlexerciseandroid",
-            "certificate_hash": "AB3EBA551069D177CC20D7409620E4D64D77420B"
+            "certificate_hash": "ab3eba551069d177cc20d7409620e4d64d77420b"
+          }
+        },
+        {
+          "client_id": "682672505333-qh6u39s7mevs1cp76fuctadjfjqe8ujh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhJOcuMgPAVJ4PPus8BVCXQ6F6udwavfg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "682672505333-qh6u39s7mevs1cp76fuctadjfjqe8ujh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682672505333:android:26c3e7cb11c1fb5d",
+        "android_client_info": {
+          "package_name": "com.dl.dlexerciseandroid.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682672505333-obnhlughrnpcro5qlgpqtjvq2csmnle2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dl.dlexerciseandroid.dev",
+            "certificate_hash": "25f0624de0717b932d5eddec105000eee498717c"
           }
         },
         {

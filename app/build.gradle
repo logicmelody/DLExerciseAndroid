@@ -1,11 +1,17 @@
 apply plugin: 'com.android.application'
 
+def final myApplicationId = "com.dl.dlexerciseandroid"
+
 android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
+
+    // 如果要使用productFlavor的功能，Android plugin 3.0.0之後需要declare flavorDimensions
+    flavorDimensions "default"
+
     defaultConfig {
-        applicationId "com.dl.dlexerciseandroid"
-        minSdkVersion 18
+        applicationId myApplicationId
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -25,7 +31,11 @@ android {
             abiFilters "armeabi"
             abiFilters "x86"
         }
+
+        // 如果在 Variant 裡面沒有定義的話，就會使用 defaultConfig 裡面的值，所以記得在 defaultConfig 也要新增！
+        resValue "string", "app_name", "DLExercise"
     }
+
     signingConfigs {
         release {
             storeFile file(System.getenv("KEYSTORE") ?: "logicmelody.keystore")
@@ -34,7 +44,12 @@ android {
             keyPassword System.getenv("KEY_PASSWORD")
         }
     }
+
     buildTypes {
+        debug {
+
+        }
+
         release {
             // 打開Proguard功能
             minifyEnabled false
@@ -50,15 +65,32 @@ android {
         }
     }
 
-    // 我們還可以針對不同的product版本定義不同的proguard rule
-    // Ex: flavor2就接受了三種不同的proguard rules(proguard-android.txt, proguard-rules.pro, flavor2-rules.pro)
-//    productFlavors {
-//        flavor1 {
-//        }
-//        flavor2 {
-//            proguardFile 'flavor2-rules.pro'
-//        }
-//    }
+    productFlavors {
+        dev {
+            applicationId = myApplicationId + ".dev"
+
+            // 會在產出的 resource 裡面新增一組 R.string.app_name 然後內容是這邊設定的值
+            resValue "string", "app_name", "DLExercise Dev"
+
+            // 在BuildConfig中會多出一個static的變數，我們可以利用這個變數來決定要不要顯示用來測試的功能
+            buildConfigField "boolean", "IS_DEV", "true"
+
+            manifestPlaceholders = [
+                    application_id: myApplicationId + ".dev",
+                    app_icon: "@mipmap/ic_launcher_dev"
+            ]
+        }
+
+        prod {
+            buildConfigField "boolean", "IS_DEV", "false"
+            resValue "string", "app_name", "DLExercise"
+
+            manifestPlaceholders = [
+                    application_id: myApplicationId,
+                    app_icon: "@mipmap/ic_launcher"
+            ]
+        }
+    }
 
     // For consuming restful web service with Spring
     packagingOptions {
@@ -98,8 +130,6 @@ dependencies {
     implementation 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
     // For Facebook
     implementation 'com.facebook.android:facebook-android-sdk:4.29.0'
-    // For Google Play Services，版本號碼必須跟Firebase一樣
-    implementation 'com.google.android.gms:play-services-analytics:15.0.0'
     // For using Firebase，版本號碼必須跟Google Play Services一樣
     implementation 'com.google.firebase:firebase-core:15.0.0'
     implementation 'com.google.firebase:firebase-messaging:15.0.0'
