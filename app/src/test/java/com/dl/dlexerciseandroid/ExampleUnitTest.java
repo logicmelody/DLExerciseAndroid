@@ -13,6 +13,15 @@ public class ExampleUnitTest {
 
     @Test
     public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+        // 初始setup
+        int first = 1;
+        int second = 2;
+        int expect = 3;
+
+        // 執行
+        int actual = first + second;
+
+        // 驗證
+        assertEquals(expect, actual);
     }
 }
