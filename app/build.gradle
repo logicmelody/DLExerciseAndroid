@@ -131,8 +131,8 @@ dependencies {
     // For Facebook
     implementation 'com.facebook.android:facebook-android-sdk:4.29.0'
     // For using Firebase，版本號碼必須跟Google Play Services一樣
-    implementation 'com.google.firebase:firebase-core:15.0.0'
-    implementation 'com.google.firebase:firebase-messaging:15.0.0'
+    implementation 'com.google.firebase:firebase-core:15.0.2'
+    implementation 'com.google.firebase:firebase-messaging:15.0.2'
     // For OkHttp
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     // For RxJava
@@ -173,9 +173,9 @@ dependencies {
     // Optional -- UI testing with UI Automator，vXX的版本必須要跟minSdkVersion一致(e.g. 這邊都是18)
     androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.3'
     androidTestImplementation 'com.android.support:support-annotations:27.1.1'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test:rules:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
 // For using Firebase: 這行要加在最後一行
