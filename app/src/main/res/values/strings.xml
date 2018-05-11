@@ -173,5 +173,6 @@
 
     <!-- Dialog Trigger -->
     <string name="button_dialog_trigger_fullscreen_dialog">Fullscreen Dialog</string>
+    <string name="button_dialog_trigger_date_picker_dialog">DatePicker Dialog</string>
 
 </resources>

@@ -10,11 +10,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_dialog_trigger_fullscreen_dialog"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button_dialog_trigger_date_picker_dialog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Fullscreen Dialog"/>
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Fullscreen Dialog" />
+
+    <Button
+        android:id="@+id/button_dialog_trigger_date_picker_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_dialog_trigger_date_picker_dialog"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_dialog_trigger_fullscreen_dialog" />
 
 </android.support.constraint.ConstraintLayout>

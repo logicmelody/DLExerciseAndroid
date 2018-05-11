@@ -8,10 +8,14 @@ public interface DialogTriggerContract {
     interface Presenter extends BasePresenter {
 
         void openFullscreenDialog();
+
+        void openDatePickerDialog();
     }
 
     interface View extends BaseView<DialogTriggerContract.Presenter> {
 
         void showFullscreenDialog();
+
+        void showDatePickerDialog();
     }
 }
