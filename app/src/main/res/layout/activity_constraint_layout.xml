@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dl.dlexerciseandroid.ui.constraintlayout.ConstraintLayoutActivity">
+    tools:context="com.dl.dlexerciseandroid.features.constraintlayout.ConstraintLayoutActivity">
 
     <Button
         android:id="@+id/button_constraint_layout_test"

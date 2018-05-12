@@ -7,12 +7,12 @@ import android.os.Handler;
 import android.text.TextUtils;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.ui.doitlater.handleintent.DoItLaterTask;
-import com.dl.dlexerciseandroid.ui.doitlater.handleintent.InHouseDoItLaterTask;
-import com.dl.dlexerciseandroid.ui.doitlater.handleintent.OtherDoItLaterTask;
-import com.dl.dlexerciseandroid.utility.utility.DbUtils;
-import com.dl.dlexerciseandroid.utility.utility.DoItLaterUtils;
-import com.dl.dlexerciseandroid.utility.utility.Utils;
+import com.dl.dlexerciseandroid.features.doitlater.handleintent.DoItLaterTask;
+import com.dl.dlexerciseandroid.features.doitlater.handleintent.InHouseDoItLaterTask;
+import com.dl.dlexerciseandroid.features.doitlater.handleintent.OtherDoItLaterTask;
+import com.dl.dlexerciseandroid.utils.DbUtils;
+import com.dl.dlexerciseandroid.utils.DoItLaterUtils;
+import com.dl.dlexerciseandroid.utils.Utils;
 
 /**
  * Created by logicmelody on 2016/4/22.

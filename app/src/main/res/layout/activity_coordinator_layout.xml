@@ -73,6 +73,6 @@
         app:fabSize="normal"
         app:layout_anchor="@+id/recycler_view_coordinator_layout_number_list"
         app:layout_anchorGravity="bottom|right"
-        app:layout_behavior="com.dl.dlexerciseandroid.utility.component.FloatingActionButtonBehavior" />
+        app:layout_behavior="com.dl.dlexerciseandroid.widget.FloatingActionButtonBehavior" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -5,7 +5,7 @@
     android:layout_margin="@dimen/margin_instagram_api_feed_item"
     android:orientation="vertical">
 
-    <com.dl.dlexerciseandroid.view.DynamicHeightNetworkImageView
+    <com.dl.dlexerciseandroid.widget.view.DynamicHeightNetworkImageView
         android:id="@+id/image_view_instagram_api_ig_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

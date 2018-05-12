@@ -12,8 +12,8 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.utility.utility.BitmapUtils;
-import com.dl.dlexerciseandroid.utility.utility.HttpUtils;
+import com.dl.dlexerciseandroid.utils.BitmapUtils;
+import com.dl.dlexerciseandroid.utils.HttpUtils;
 
 import java.lang.ref.WeakReference;
 

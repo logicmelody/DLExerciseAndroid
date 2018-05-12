@@ -6,7 +6,7 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.dl.dlexerciseandroid.utility.utility.PreferenceUtils;
+import com.dl.dlexerciseandroid.utils.PreferenceUtils;
 
 import org.hamcrest.MatcherAssert;
 import org.junit.Before;

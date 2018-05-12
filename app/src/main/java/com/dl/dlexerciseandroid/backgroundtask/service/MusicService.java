@@ -18,7 +18,7 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.model.Music;
+import com.dl.dlexerciseandroid.data.model.Music;
 
 import java.util.ArrayList;
 import java.util.List;

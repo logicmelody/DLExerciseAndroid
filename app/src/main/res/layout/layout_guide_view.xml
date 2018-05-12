@@ -7,7 +7,7 @@
      RelativeLayout採用對應的寫法-->
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.dl.dlexerciseandroid.ui.guide.OverlayHoleView
+    <com.dl.dlexerciseandroid.features.guide.OverlayHoleView
         android:id="@+id/overlay_hole_view_guide_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

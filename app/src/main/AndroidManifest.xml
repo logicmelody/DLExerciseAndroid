@@ -36,7 +36,7 @@
 
     <!-- 要把自己定義的Application class在AndroidManifest中進行設定 -->
     <application
-        android:name=".ui.main.MainApplication"
+        android:name=".features.main.MainApplication"
         android:allowBackup="true"
         android:icon="${app_icon}"
         android:label="@string/app_name"
@@ -57,7 +57,7 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".features.main.MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.Drawer">
             <intent-filter>
@@ -66,9 +66,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.coordinatorlayout.CoordinatorLayoutActivity" />
+        <activity android:name=".features.coordinatorlayout.CoordinatorLayoutActivity" />
         <activity
-            android:name=".dialog.activity.AddTaskActivity"
+            android:name=".widget.dialog.activity.AddTaskActivity"
             android:theme="@style/AppDialogTheme.NoActionBar" />
 
         <!-- 此Activity用來接收別的app share過來的intent，一定要用Activity才收的到 -->
@@ -77,7 +77,7 @@
              可以套上@android:style/Theme.NoDisplay，如此一來就可以啟動Activity，但是不會看到任何畫面
         -->
         <activity
-            android:name=".ui.doitlater.share.DoItLaterReceiverActivity"
+            android:name=".features.doitlater.share.DoItLaterReceiverActivity"
             android:theme="@android:style/Theme.NoDisplay">
 
             <!-- 設定接收share intent的filter記得要加action, category, data -->
@@ -97,7 +97,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.intent.ReceiveIntentActivity"
+            android:name=".features.intent.ReceiveIntentActivity"
             android:label="ReceiveIntentActivity">
             <intent-filter>
                 <action android:name="com.dl.dlexerciseandroid.ACTION_RECEIVE_INTENT" />
@@ -125,36 +125,36 @@
 
         <!-- Debug database -->
         <activity
-            android:name=".database.debug.AndroidDatabaseManager"
+            android:name=".data.local.database.debug.AndroidDatabaseManager"
             android:theme="@style/Theme.AppCompat.Light" />
 
-        <activity android:name=".ui.musicplayer.musiccontroller.MusicControllerActivity" />
-        <activity android:name=".ui.moviesearcher.MovieSearcherActivity" />
-        <activity android:name=".ui.espressotest.EspressoTestActivity" />
-        <activity android:name=".ui.mininavigationdrawer.main.MiniNavigationDrawerActivity" />
-        <activity android:name=".ui.bottomnavigationview.BottomNavigationViewActivity" />
-        <activity android:name=".ui.strategypattern.activities.EatActivity" />
-        <activity android:name=".ui.strategypattern.activities.SleepActivity" />
-        <activity android:name=".ui.previewcamera.PreviewCameraActivity" />
+        <activity android:name=".features.musicplayer.musiccontroller.MusicControllerActivity" />
+        <activity android:name=".features.moviesearcher.MovieSearcherActivity" />
+        <activity android:name=".features.espressotest.EspressoTestActivity" />
+        <activity android:name=".features.mininavigationdrawer.main.MiniNavigationDrawerActivity" />
+        <activity android:name=".features.bottomnavigationview.BottomNavigationViewActivity" />
+        <activity android:name=".features.strategypattern.activities.EatActivity" />
+        <activity android:name=".features.strategypattern.activities.SleepActivity" />
+        <activity android:name=".features.previewcamera.PreviewCameraActivity" />
         <activity
-            android:name=".ui.runningman.RunningManActivity"
+            android:name=".features.runningman.RunningManActivity"
             android:theme="@style/AppThemeWithActionBar" />
         <activity
-            android:name=".ui.bubbletext.BubbleTextActivity"
+            android:name=".features.bubbletext.BubbleTextActivity"
             android:theme="@style/AppThemeWithActionBar" />
         <activity
-            android:name=".ui.instagramapi.main.InstagramMainActivity"
+            android:name=".features.instagramapi.main.InstagramMainActivity"
             android:theme="@style/AppThemeWithActionBar.InstagramApi" />
         <activity
-            android:name=".ui.instagramapi.main.InstagramLoginActivity"
+            android:name=".features.instagramapi.main.InstagramLoginActivity"
             android:theme="@style/AppThemeWithActionBar.InstagramApi" />
         <activity
-            android:name=".ui.settings.SettingActivity"
+            android:name=".features.settings.SettingActivity"
             android:theme="@style/AppThemeWithActionBar" />
-        <activity android:name=".ui.guide.GuideActivity" />
-        <activity android:name=".ui.constraintlayout.ConstraintLayoutActivity" />
+        <activity android:name=".features.guide.GuideActivity" />
+        <activity android:name=".features.constraintlayout.ConstraintLayoutActivity" />
         <activity
-            android:name=".ui.exoplayer.player.PlayerActivity"
+            android:name=".features.exoplayer.player.PlayerActivity"
             android:theme="@style/AppThemeWithActionBar" />
 
         <!--
@@ -183,10 +183,10 @@
             android:name=".backgroundtask.service.TmdbApiService"
             android:exported="false" />
         <service
-            android:name=".ui.bubbletext.BubbleTextService"
+            android:name=".features.bubbletext.BubbleTextService"
             android:exported="false" />
         <service
-            android:name=".ui.bubbletext.SaveMessageService"
+            android:name=".features.bubbletext.SaveMessageService"
             android:exported="false" />
         <service android:name=".backgroundtask.service.FCMService">
             <intent-filter>
@@ -195,7 +195,7 @@
         </service>
 
         <provider
-            android:name=".database.provider.DLExerciseContentProvider"
+            android:name=".data.local.database.provider.DLExerciseContentProvider"
             android:authorities="${application_id}.provider"
             android:exported="false"
             android:multiprocess="false"

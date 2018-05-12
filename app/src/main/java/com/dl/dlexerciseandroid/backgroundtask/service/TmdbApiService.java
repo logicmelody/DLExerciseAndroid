@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.dl.dlexerciseandroid.utility.utility.HttpUtils;
-import com.dl.dlexerciseandroid.utility.utility.TmdbApiUtils;
+import com.dl.dlexerciseandroid.utils.HttpUtils;
+import com.dl.dlexerciseandroid.utils.TmdbApiUtils;
 
 import java.io.IOException;
 

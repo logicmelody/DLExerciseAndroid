@@ -45,6 +45,6 @@
         app:layout_anchor="@+id/view_pager_do_it_later_task_list_container"
         app:layout_anchorGravity="bottom|right"
         app:fabSize="normal"
-        app:layout_behavior="com.dl.dlexerciseandroid.utility.component.FloatingActionButtonBehavior"/>
+        app:layout_behavior="com.dl.dlexerciseandroid.widget.FloatingActionButtonBehavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

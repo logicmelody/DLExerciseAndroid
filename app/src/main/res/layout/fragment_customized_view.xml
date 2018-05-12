@@ -12,12 +12,12 @@
         android:padding="@dimen/padding_all_window">
 
         <!-- 要使用customized view的話，必須要用完整的package name -->
-        <com.dl.dlexerciseandroid.view.DurationTextView
+        <com.dl.dlexerciseandroid.widget.view.DurationTextView
             android:id="@+id/duration_text_view_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <com.dl.dlexerciseandroid.view.LineChartView
+        <com.dl.dlexerciseandroid.widget.view.LineChartView
             android:id="@+id/line_chart_view_customized_view_chart"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_customized_view_line_chart_view"
@@ -25,7 +25,7 @@
             android:padding="@dimen/padding_customized_view_line_chart_view"
             android:background="@color/all_gray"/>
 
-        <com.dl.dlexerciseandroid.view.SoundSettingView
+        <com.dl.dlexerciseandroid.widget.view.SoundSettingView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_top_customized_view_between_each_view"
@@ -38,7 +38,7 @@
             android:orientation="vertical"
             android:layout_marginTop="@dimen/margin_top_customized_view_between_each_view">
 
-            <com.dl.dlexerciseandroid.view.ValueSelectorView
+            <com.dl.dlexerciseandroid.widget.view.ValueSelectorView
                 android:id="@+id/value_selector_view_customized_view_selector"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                 android:text="@string/all_update"/>
 
             <!-- 這邊大部分都是使用自己定義的attribute -->
-            <com.dl.dlexerciseandroid.view.ValueBar
+            <com.dl.dlexerciseandroid.widget.view.ValueBar
                 android:id="@+id/value_bar_customized_view_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

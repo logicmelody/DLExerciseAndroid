@@ -8,8 +8,8 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.ui.main.MainActivity;
-import com.dl.dlexerciseandroid.utility.utility.Utils;
+import com.dl.dlexerciseandroid.features.main.MainActivity;
+import com.dl.dlexerciseandroid.utils.Utils;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
