@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.dl.dlexerciseandroid.data.Repository;
 import com.dl.dlexerciseandroid.utils.Utils;
+import com.dl.dlexerciseandroid.widget.schedulers.BaseSchedulerProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +15,9 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by logicmelody on 2018/4/1.
@@ -28,6 +27,7 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
 
     private RxJavaContract.View mView;
     private Repository mRepository;
+    private BaseSchedulerProvider mSchedulerProvider;
 
     private Disposable mDisposableTest5SecToast;
     private Disposable mDisposableTestFromArray;
@@ -38,9 +38,12 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
     private Disposable mDisposableTestConcat;
 
 
-    public RxJavaPresenter(RxJavaContract.View view, Repository repository) {
+    public RxJavaPresenter(@NonNull RxJavaContract.View view,
+                           @NonNull Repository repository,
+                           @NonNull BaseSchedulerProvider schedulerProvider) {
         mView = view;
         mRepository = repository;
+        mSchedulerProvider = schedulerProvider;
     }
 
     @Override
@@ -64,8 +67,8 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                         emitter.onComplete();
                     });
                 })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(mSchedulerProvider.io())
+                .observeOn(mSchedulerProvider.ui())
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -123,8 +126,8 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                 // 可以利用map將原始資料做一次轉換，轉換成我們想要的
                 .map(String::toLowerCase)
 
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(mSchedulerProvider.io())
+                .observeOn(mSchedulerProvider.ui())
 
                 // 這個會執行在onComplete()或是onError()之前
                 .doOnTerminate(() -> mView.showLog("testFromArray()", "doOnTerminate"))
@@ -171,8 +174,8 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
             //subscriber.onError(new Throwable());
             subscriber.onComplete();
         })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(mSchedulerProvider.io())
+                .observeOn(mSchedulerProvider.ui())
 
                 .doOnTerminate(() -> mView.showLog("testPrintHelloWorld()", "doOnTerminate"))
 
@@ -250,8 +253,8 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
 
                     return Observable.fromArray(strings.toArray(new String[strings.size()]));
                 })
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(mSchedulerProvider.computation())
+                .observeOn(mSchedulerProvider.ui())
 
                 .doOnTerminate(() -> mView.showLog("testFlatMap()", "doOnTerminate"))
 
@@ -356,13 +359,13 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
 
                 // 這個Scheduler主要用來執行存取disk的資料或是網路存取資料，不是在UI thread，所以我們可以進行些需要耗費時間的工作，
                 // 甚至可以用Thread.sleep()把工作暫停
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(mSchedulerProvider.io())
 
                 // 這個Scheduler主要用來執行比較需要花時間和大量的運算
                 //.subscribeOn(Schedulers.computation())
 
                 // Observer在UI thread執行
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(mSchedulerProvider.ui())
 
                 .doOnTerminate(() -> mView.showLog("loadIronMan()", "doOnTerminate"))
 
@@ -421,8 +424,8 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
 //                    }
 //                })
 
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(mSchedulerProvider.computation())
+                .observeOn(mSchedulerProvider.ui())
 
                 // doOnNext()執行的thread會跟observeOn()所設定的thread一樣
                 // 在這邊執行的話，因為已經決定observeOn()是執行在UI thread，但是已經有設定subscribeOn()的thread，所以

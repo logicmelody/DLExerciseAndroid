@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dl.dlexerciseandroid.R;
-import com.dl.dlexerciseandroid.data.Injection;
+import com.dl.dlexerciseandroid.Injection;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,7 +67,7 @@ public class RxJavaFragment extends Fragment implements RxJavaContract.View {
     }
 
     private void initialize() {
-        mPresenter = new RxJavaPresenter(this, Injection.provideRepository());
+        mPresenter = new RxJavaPresenter(this, Injection.provideRepository(), Injection.provideSchedulerProvider());
 
         mLogStringBuilder = new StringBuilder();
     }
