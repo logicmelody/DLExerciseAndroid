@@ -3,6 +3,7 @@ package com.dl.dlexerciseandroid.features.rxjava;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
+import com.dl.dlexerciseandroid.data.Repository;
 import com.dl.dlexerciseandroid.utils.Utils;
 
 import java.util.ArrayList;
@@ -10,17 +11,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -30,6 +27,7 @@ import io.reactivex.schedulers.Schedulers;
 public class RxJavaPresenter implements RxJavaContract.Presenter {
 
     private RxJavaContract.View mView;
+    private Repository mRepository;
 
     private Disposable mDisposableTest5SecToast;
     private Disposable mDisposableTestFromArray;
@@ -40,8 +38,9 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
     private Disposable mDisposableTestConcat;
 
 
-    public RxJavaPresenter(RxJavaContract.View view) {
+    public RxJavaPresenter(RxJavaContract.View view, Repository repository) {
         mView = view;
+        mRepository = repository;
     }
 
     @Override
@@ -57,19 +56,13 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
         // Note: 要注意的是，interval的運算子，會造成這個Observable永遠存在，就算退出app之後，還是會繼續發送data，
         //       所以記得要用Disposable的dispose()來將Observer跟Observable斷開
         Observable.interval(5, TimeUnit.SECONDS)
-                .flatMap(new Function<Long, ObservableSource<String>>() {
-                    @Override
-                    public ObservableSource<String> apply(Long aLong) throws Exception {
-                        mView.showLog("test5SecToast()", "Interval count = " + aLong);
+                .flatMap((Function<Long, ObservableSource<String>>) aLong -> {
+                    mView.showLog("test5SecToast()", "Interval count = " + aLong);
 
-                        return Observable.create(new ObservableOnSubscribe<String>() {
-                            @Override
-                            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
-                                emitter.onNext("Show interval count = " + aLong);
-                                emitter.onComplete();
-                            }
-                        });
-                    }
+                    return Observable.create(emitter -> {
+                        emitter.onNext("Show interval count = " + aLong);
+                        emitter.onComplete();
+                    });
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -107,12 +100,7 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
         Observable.fromArray(names)
 
                 // 可以用來過濾資料
-                .filter(new Predicate<String>() {
-                    @Override
-                    public boolean test(@NonNull String s) throws Exception {
-                        return s.startsWith("D");
-                    }
-                })
+                .filter(s -> s.startsWith("D"))
 
                 // 只取前面兩筆資料
                 .take(2)
@@ -133,31 +121,16 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                 //.throttleFirst(30, TimeUnit.SECONDS)
 
                 // 可以利用map將原始資料做一次轉換，轉換成我們想要的
-                .map(new Function<String, String>() {
-                    @Override
-                    public String apply(@NonNull String s) throws Exception {
-                        return s.toLowerCase();
-                    }
-                })
+                .map(String::toLowerCase)
 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
 
                 // 這個會執行在onComplete()或是onError()之前
-                .doOnTerminate(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mView.showLog("testFromArray()", "doOnTerminate");
-                    }
-                })
+                .doOnTerminate(() -> mView.showLog("testFromArray()", "doOnTerminate"))
 
                 // 這個會執行在onComplete()或是onError()之後
-                .doAfterTerminate(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mView.showLog("testFromArray()", "doAfterTerminate");
-                    }
-                })
+                .doAfterTerminate(() -> mView.showLog("testFromArray()", "doAfterTerminate"))
 
                 // Subscribe Observer，Observer只需要管拿到data之後要做什麼事情，在這邊就是把log印出來
                 // Observer用來接收Observable產生的資料，Observer有多種callback可以使用
@@ -192,31 +165,18 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
     public void testPrintHelloWorld() {
         // Observable用來產生資料，如果是用create()的方法，產生資料的方法都要自己處理
         // Emits "Hello World"
-        Observable.create(new ObservableOnSubscribe<String>() {
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<String> subscriber) throws Exception {
-                // 會對應到Observer的callback：onNext(), onComplete(), onError()
-                subscriber.onNext("Hello World");
-                //subscriber.onError(new Throwable());
-                subscriber.onComplete();
-            }
+        Observable.create((ObservableOnSubscribe<String>) subscriber -> {
+            // 會對應到Observer的callback：onNext(), onComplete(), onError()
+            subscriber.onNext("Hello World");
+            //subscriber.onError(new Throwable());
+            subscriber.onComplete();
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
 
-                .doOnTerminate(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mView.showLog("testPrintHelloWorld()", "doOnTerminate");
-                    }
-                })
+                .doOnTerminate(() -> mView.showLog("testPrintHelloWorld()", "doOnTerminate"))
 
-                .doAfterTerminate(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mView.showLog("testPrintHelloWorld()", "doAfterTerminate");
-                    }
-                })
+                .doAfterTerminate(() -> mView.showLog("testPrintHelloWorld()", "doAfterTerminate"))
 
                 // Observer用來接收Observable產生的資料，Observer有多種callback可以使用
                 // 所有的事件會是存在一個queue中，當queue中的事件全部都執行完畢，或是中間有出現錯誤的時候，
@@ -285,30 +245,17 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
         Observable.fromArray(list)
                 // 第一階段取得的資料是一個ArrayList包含很多Integer：List<Integer>
                 // 我們利用flatMap()將第一階段的資料轉成另一個Observable包含很多個String：Observable.fromArray(strings.toArray(new String[strings.size()]))
-                .flatMap(new Function<List<Integer>, ObservableSource<String>>() {
-                    @Override
-                    public ObservableSource<String> apply(List<Integer> integers) throws Exception {
-                        List<String> strings = convertIntegerListToStringList(integers);
+                .flatMap((Function<List<Integer>, ObservableSource<String>>) integers -> {
+                    List<String> strings = convertIntegerListToStringList(integers);
 
-                        return Observable.fromArray(strings.toArray(new String[strings.size()]));
-                    }
+                    return Observable.fromArray(strings.toArray(new String[strings.size()]));
                 })
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
 
-                .doOnTerminate(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mView.showLog("testFlatMap()", "doOnTerminate");
-                    }
-                })
+                .doOnTerminate(() -> mView.showLog("testFlatMap()", "doOnTerminate"))
 
-                .doAfterTerminate(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mView.showLog("testFlatMap()", "doAfterTerminate");
-                    }
-                })
+                .doAfterTerminate(() -> mView.showLog("testFlatMap()", "doAfterTerminate"))
 
                 // Observer處理的是很多個String
                 .subscribe(new Observer<String>() {
@@ -389,28 +336,22 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
 
     @Override
     public void loadIronMan() {
-        Observable.create(new ObservableOnSubscribe<Drawable>() {
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<Drawable> subscriber) throws Exception {
-                // 處理background load image的工作
-                //Thread.sleep(3000);
+        Observable.create((ObservableOnSubscribe<Drawable>) subscriber -> {
+            // 處理background load image的工作
+            //Thread.sleep(3000);
 
-                // 2. Thread create() = RxCachedThreadScheduler-1
-                mView.showLog("loadIronMan()", "Thread create() = " + Thread.currentThread().getName());
+            // 2. Thread create() = RxCachedThreadScheduler-1
+            mView.showLog("loadIronMan()", "Thread create() = " + Thread.currentThread().getName());
 
-                Drawable drawable = mView.getIronManDrawable();
-                subscriber.onNext(drawable);
-                subscriber.onComplete();
-            }
+            Drawable drawable = mView.getIronManDrawable();
+            subscriber.onNext(drawable);
+            subscriber.onComplete();
         })
-                .doOnNext(new Consumer<Drawable>() {
-                    @Override
-                    public void accept(Drawable drawable) throws Exception {
-                        // 3. Thread doOnNext() = RxCachedThreadScheduler-1
-                        mView.showLog("loadIronMan()", "Thread doOnNext() = " + Thread.currentThread().getName());
+                .doOnNext(drawable -> {
+                    // 3. Thread doOnNext() = RxCachedThreadScheduler-1
+                    mView.showLog("loadIronMan()", "Thread doOnNext() = " + Thread.currentThread().getName());
 
-                        Thread.sleep(3000);
-                    }
+                    Thread.sleep(3000);
                 })
 
                 // 這個Scheduler主要用來執行存取disk的資料或是網路存取資料，不是在UI thread，所以我們可以進行些需要耗費時間的工作，
@@ -423,19 +364,9 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                 // Observer在UI thread執行
                 .observeOn(AndroidSchedulers.mainThread())
 
-                .doOnTerminate(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mView.showLog("loadIronMan()", "doOnTerminate");
-                    }
-                })
+                .doOnTerminate(() -> mView.showLog("loadIronMan()", "doOnTerminate"))
 
-                .doAfterTerminate(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mView.showLog("loadIronMan()", "doAfterTerminate");
-                    }
-                })
+                .doAfterTerminate(() -> mView.showLog("loadIronMan()", "doAfterTerminate"))
 
                 .subscribe(new Observer<Drawable>() {
                     @Override
@@ -496,13 +427,8 @@ public class RxJavaPresenter implements RxJavaContract.Presenter {
                 // doOnNext()執行的thread會跟observeOn()所設定的thread一樣
                 // 在這邊執行的話，因為已經決定observeOn()是執行在UI thread，但是已經有設定subscribeOn()的thread，所以
                 // doOnNext()也會執行在跟observeOn()一樣的thread
-                .doOnNext(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) throws Exception {
-                        mView.showLog("testConcat()",
-                                "doOnNext data is " + integer + ", thread in " + Thread.currentThread().getName());
-                    }
-                })
+                .doOnNext(integer -> mView.showLog("testConcat()",
+                        "doOnNext data is " + integer + ", thread in " + Thread.currentThread().getName()))
                 .subscribe(new Observer<Integer>() {
                     @Override
                     public void onSubscribe(Disposable d) {
