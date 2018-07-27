@@ -57,7 +57,6 @@ public class RxJavaFragment extends Fragment implements RxJavaContract.View {
         ButterKnife.bind(this, getView());
         initialize();
 
-        mPresenter.test5SecToast();
         mPresenter.testFromArray();
         mPresenter.testPrintHelloWorld();
         mPresenter.testEmpty();
@@ -118,6 +117,11 @@ public class RxJavaFragment extends Fragment implements RxJavaContract.View {
     @Override
     public void setPresenter(RxJavaContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    @OnClick(R.id.button_rxjava_start_5_sec_toast)
+    public void onClickStart5SecToast() {
+        mPresenter.test5SecToast();
     }
 
     @OnClick(R.id.button_rxjava_stop_5_sec_toast)
