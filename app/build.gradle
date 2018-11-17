@@ -1,16 +1,16 @@
 apply plugin: 'com.android.application'
 
-def final myApplicationId = "com.dl.dlexerciseandroid"
+def final defaultApplicationId = "com.dl.dlexerciseandroid"
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '28.0.3'
 
     // 如果要使用productFlavor的功能，Android plugin 3.0.0之後需要declare flavorDimensions
     flavorDimensions "default"
 
     defaultConfig {
-        applicationId myApplicationId
+        applicationId defaultApplicationId
         minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
@@ -67,7 +67,7 @@ android {
 
     productFlavors {
         dev {
-            applicationId = myApplicationId + ".dev"
+            applicationId = defaultApplicationId + ".dev"
 
             // 會在產出的 resource 裡面新增一組 R.string.app_name 然後內容是這邊設定的值
             resValue "string", "app_name", "DLExercise Dev"
@@ -76,17 +76,18 @@ android {
             buildConfigField "boolean", "IS_DEV", "true"
 
             manifestPlaceholders = [
-                    application_id: myApplicationId + ".dev",
+                    application_id: defaultApplicationId + ".dev",
                     app_icon: "@mipmap/ic_launcher_dev"
             ]
         }
 
         prod {
+            applicationId = defaultApplicationId
             buildConfigField "boolean", "IS_DEV", "false"
             resValue "string", "app_name", "DLExercise"
 
             manifestPlaceholders = [
-                    application_id: myApplicationId,
+                    application_id: defaultApplicationId,
                     app_icon: "@mipmap/ic_launcher"
             ]
         }
